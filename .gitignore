@@ -1,13 +1,13 @@
-# Build artifacts
+# Build
 **/bin/
 **/obj/
 
-# Visual Studio
+# VS
 .vs/
+
+# Logs
+*.log
 
 # User files
 *.user
 *.suo
-
-# Logs
-*.log
