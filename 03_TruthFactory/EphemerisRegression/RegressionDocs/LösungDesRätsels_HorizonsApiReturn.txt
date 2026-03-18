@@ -1,0 +1,65 @@
+
+Dieses Mal hattest Du einen guten Riecher... schau mal.
+
+Zunächst Analyse:
+Die anderen Planeten brechen auch ab. 
+Sie brechen allerdings an einer anderen Stelle ab als Mars. 
+Aber auch wenn ich Jupiter, Saturn, Uranus und Neptun wiederhole: es ist reproduzierbar *an derselben* Stelle.
+
+
+So, nun zur Lösung des Rätsels: wenn ich diesen Request absetze:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+
+erhalte ich folgende Meldung:
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Revised: June 02, 2025                 Mars                            499 / 4
+ 
+ PHYSICAL DATA (updated 2025-Jun-02):
+  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)
+  Mass x10^23 (kg)      =    6.4171       Flattening, f         =  1/169.779
+  Volume (x10^10 km^3)  =   16.318        Equatorial radius (km)=  3396.19
+  Sidereal rot. period  =   24.622962 hr  Sid. rot. rate, rad/s =  0.0000708822 
+  Mean solar day (sol)  =   88775.24415 s Polar gravity m/s^2   =  3.758
+  Core radius (km)      = ~1700           Equ. gravity  m/s^2   =  3.71
+  Geometric Albedo      =    0.150                                              
+
+  GM (km^3/s^2)         = 42828.375662    Mass ratio (Sun/Mars) = 3098703.59
+  GM 1-sigma (km^3/s^2) = +- 0.00028      Mass of atmosphere, kg= ~ 2.5 x 10^16
+  Mean temperature (K)  =  210            Atmos. pressure (bar) =    0.0056 
+  Obliquity to orbit    =   25.19 deg     Max. angular diam.    =  17.9"
+  Mean sidereal orb per =    1.88081578 y Visual mag. V(1,0)    =  -1.52
+  Mean sidereal orb per =  686.98 d       Orbital speed,  km/s  =  24.13
+  Hill's sphere rad. Rp =  319.8          Escape speed, km/s    =   5.027
+                                 Perihelion  Aphelion    Mean
+  Solar Constant (W/m^2)         717         493         589
+  Maximum Planetary IR (W/m^2)   470         315         390
+  Minimum Planetary IR (W/m^2)    30          30          30
+*******************************************************************************
+
+No ephemeris for target "Mars" prior to A.D. 1600-JAN-02 00:00:00.0000 TDB
+--> es gibt keine Daten vor dem 2.1.1600. Und wir starten am 1.1.1600, deshalb wird noch nicht mal Core erzeugt. Von Extreme und Extended ganz zu schweigen!
+
+
+Und Dein Link noch für die anderen äußeren Planeten:
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+-> Response: "No ephemeris for target "Jupiter" prior to A.D. 1600-JAN-11 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+--> Response: "No ephemeris for target "Saturn" prior to A.D. 1749-DEC-31 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+--> Response: "No ephemeris for target "Uranus" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+-> Response: "No ephemeris for target "Neptune" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB"
+
+
+Suche im Netz und beim JPL, welche Zeiträume definiert sind. Wir müssen leider den Mesh für die äußeren Planeten einschränken und müssen herausfinden, auf welchen Bereich.
+
+Was schlägst Du vor?
