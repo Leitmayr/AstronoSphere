@@ -1,0 +1,19 @@
+AstroSim.Ephemerides
+└── VSOP
+    ├── Data
+    │   └── 87A
+    │       ├── VSOP87A_earth.dat
+    │       ├── VSOP87A_mercury.dat
+    │       └── ...
+    │
+    ├── Model
+    │   ├── VsopTerm.cs
+    │   ├── VsopSeries.cs
+    │   ├── VsopCoordinate.cs
+    │   └── VsopPlanet.cs
+    │
+    ├── Parsing
+    │   └── Vsop87Parser.cs
+    │
+    └── Calculation
+        └── VsopCalculator.cs

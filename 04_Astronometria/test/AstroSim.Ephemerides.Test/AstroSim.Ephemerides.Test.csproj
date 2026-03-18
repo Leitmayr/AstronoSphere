@@ -1,0 +1,981 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EphemerisValidation\TestData\Helio\TS-B\**" />
+    <EmbeddedResource Remove="EphemerisValidation\TestData\Helio\TS-B\**" />
+    <None Remove="EphemerisValidation\TestData\Helio\TS-B\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="EphemerisValidation\GeocentricEliptic\GeoEcliptic_DeviationAnalysis_Tests.cs" />
+    <Compile Remove="EphemerisValidation\GeocentricEliptic\GeoNodes_TS_B_DeviationAnalysis_Tests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Planetary\TestData\Mars_Geocentric_2025.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AstroSim.Core\AstroSim.Core.csproj" />
+    <ProjectReference Include="..\..\src\AstroSim.Ephemerides\AstroSim.Ephemerides.csproj" />
+    <ProjectReference Include="..\..\src\AstroSim.Time.Astro\AstroSim.Time.Astro.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Planetary\TestData\Mars_Geocentric_2025.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EphemerisValidation\TestData\Geo\Earth_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Earth_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Earth_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Earth_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Jupiter_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Jupiter_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Jupiter_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Jupiter_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mars_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mars_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mars_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mars_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mercury_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mercury_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mercury_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Mercury_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Neptune_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Neptune_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Neptune_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Neptune_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Saturn_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Saturn_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Saturn_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Saturn_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Earth_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Earth_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Earth_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Earth_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Earth_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Jupiter_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Jupiter_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Jupiter_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Jupiter_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mars_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mars_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mars_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mars_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mercury_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mercury_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mercury_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Mercury_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Saturn_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Saturn_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Saturn_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Saturn_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Venus_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Venus_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Venus_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Json\Venus_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Jupiter_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mars_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Mercury_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Neptune_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Saturn_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Uranus_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L0_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L12_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L18_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L6_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-A\Venus_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Geo_TS-B_V1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Geo_TS-B_V2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Geo_TS-B_V3.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Geo_TS-B_V4_WORX_OHNE_Uran+Nep.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Jupiter_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Jupiter_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Jupiter_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mars_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mars_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mars_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mercury_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mercury_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Mercury_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Neptune_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Neptune_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Neptune_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Saturn_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Saturn_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Saturn_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Uranus_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Uranus_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Uranus_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Venus_TS-B_GeoAscendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Venus_TS-B_GeoDescendingNode_L0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\TS-B\Venus_TS-B_L0_GeoNodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Uranus_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Uranus_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Uranus_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Uranus_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Venus_TS-A_L0_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Venus_TS-A_L12_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Venus_TS-A_L18_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Geo\Venus_TS-A_L6_Level0_Geo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Earth_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Earth_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Earth_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Earth_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Jupiter_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Jupiter_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Jupiter_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Jupiter_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mars_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mars_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mars_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mars_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mercury_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mercury_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mercury_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Mercury_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Neptune_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Neptune_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Neptune_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Neptune_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Saturn_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Saturn_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Saturn_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Saturn_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Earth_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Jupiter_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mars_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Mercury_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Neptune_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Saturn_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Uranus_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L0_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L12_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L18_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L6_L0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\TS-A\Venus_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Uranus_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Uranus_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Uranus_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Uranus_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Venus_TS-A_L0_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Venus_TS-A_L12_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Venus_TS-A_L18_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EphemerisValidation\TestData\Helio\Venus_TS-A_L6_Level0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH-MOON_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH-MOON_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH-PLANETS_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH-PLANETS_VSOP87A_Positions.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\EARTH_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\JUPITER_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\JUPITER_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\JUPITER_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\JUPITER_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MARS_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MARS_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MARS_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MARS_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MERCURY_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MERCURY_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MERCURY_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\MERCURY_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\NEPTUNE_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\NEPTUNE_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\NEPTUNE_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\NEPTUNE_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\SATURN_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\SATURN_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\SATURN_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\SATURN_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\URANUS_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\URANUS_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\URANUS_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\URANUS_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\VENUS_VSOP87A.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\VENUS_VSOP87A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\VENUS_VSOP87A_Positions.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VSOP\Data\VSOP87A\VENUS_VSOP87A_Velocity.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EphemerisValidation\TestData\Geo\TS-B\" />
+    <Folder Include="EphemerisValidation\TimeModel\" />
+  </ItemGroup>
+
+</Project>

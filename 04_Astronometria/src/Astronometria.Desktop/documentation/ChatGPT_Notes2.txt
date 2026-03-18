@@ -1,0 +1,243 @@
+
+
+Startpunkt:
+Projektmappe erstellen -> grün
+Keine Uncommitted Changes
+Alle Tests grün.
+
+----------------------
+
+Status	Code	Datei	Zeile	Spalte	Projekt	Repository	Enthaltender Member	Enthaltender Typ	Art
+	readonly struct AstroTimeUT								
+	MapPoint01 Project(TCoord coord, ObservationSite site, AstroTimeUT time);	C:\Users\Marcu\source\repos\AstroSim.Projection\Projections\IMapProjection.cs	9	64	AstroSim.Projection		Project	IMapProjection	
+	public MapPoint01 Project(EquatorialCoord eq, ObservationSite site, AstroTimeUT time)	C:\Users\Marcu\source\repos\AstroSim.Projection\Projections\PolarEquatorialProjection.cs	24	77	AstroSim.Projection		Project	PolarEquatorialProjection	
+	EquatorialCoord Apply(EquatorialCoord eq, AstroTimeUT time);	C:\Users\Marcu\source\repos\AstroSim.Projection\Transforms\IAstrometricCorrection.cs	8	51	AstroSim.Projection		Apply	IAstrometricCorrection	
+	HorizontalCoord EquToHor(EquatorialCoord eq, AstroTimeUT time, ObservationSite site);	C:\Users\Marcu\source\repos\AstroSim.Projection\Transforms\ICoordinateTransform.cs	9	54	AstroSim.Projection		EquToHor	ICoordinateTransform	
+	EclipticCoord EquToEcl(EquatorialCoord eq, AstroTimeUT time);	C:\Users\Marcu\source\repos\AstroSim.Projection\Transforms\ICoordinateTransform.cs	10	52	AstroSim.Projection		EquToEcl	ICoordinateTransform	
+	EquatorialCoord EclToEqu(EclipticCoord ecl, AstroTimeUT time);	C:\Users\Marcu\source\repos\AstroSim.Projection\Transforms\ICoordinateTransform.cs	11	53	AstroSim.Projection		EclToEqu	ICoordinateTransform	
+	double GetHourAngleHours(AstroTimeUT time, EquatorialCoord eq, ObservationSite site);	C:\Users\Marcu\source\repos\AstroSim.Projection\Transforms\IHourAngleCalculator.cs	12	34	AstroSim.Projection		GetHourAngleHours	IHourAngleCalculator	
+	readonly struct AstroTimeUT								
+	public double GetHourAngleHours(AstroTimeUT time, EquatorialCoord eq, ObservationSite site)	C:\Users\Marcu\source\repos\Astronometria\Adapters\ObsSituationHourAngleCalculator.cs	10	41	Astronometria		GetHourAngleHours	ObsSituationHourAngleCalculator	
+	public static czeit ToCzeit(AstroTimeUT t)	C:\Users\Marcu\source\repos\Astronometria\Adapters\TimeAdapter.cs	7	37	Astronometria		ToCzeit	TimeAdapter	
+	private AstroTimeUT? _timeUT;	C:\Users\Marcu\source\repos\Astronometria\StarMap.cs	26	17	Astronometria			StarMapControl	
+	AstroTimeUT.AstroTimeUT(double)								
+	_timeUT = new AstroTimeUT(myTime.JD); // <-- hier passend zu deiner API	C:\Users\Marcu\source\repos\Astronometria\StarMap.cs	107	27	Astronometria		InitMap	StarMapControl	Konstruktor
+
+
+
+---------------------------------------------
+
+In der Astronometria gibt es zwei Zeit-Domänen: 
+1) die UserTime mit UTC, Zeitzonen und Sommerzeit.
+2) die AstroTime mit TT (später vlt. mit TDC)
+
+Im Moment sind diese Zeitdomänen in einer Klasse AstroTime vermischt. Es soll vermieden werden, dass in der Astro-Domain die UTC verwendet wird und in der User Domain die TT. 
+In der angehängten Datei "DieZeitInDerAstronometria.ppt" ist die grobe Architektur des Programms dargestellt und die beiden Fundamentaldomänen User und Astro. Schau Dir diesen Foliensatz sehr intensiv an!
+
+
+
+Ich habe mir die folgende Architektur überlegt:
+Die PPTX enthält zwei Interface-Klassen in den beiden Domänen. Domänenübergreifend soll nur über das Interface kommuniziert werden. Von User nicht direkt mit der AstroIF Klasse, von Astro nicht mit der UserIF Klasse. Innerhalb ihrer Domäne haben die beiden Interface Klassen als einzige Zugriff auf die "ihre" Zeit. Die einzelnen Klassen innerhalb der Domänen müssen auch durch "ihre" IF-Klassen.
+
+Diese Architektur hat Lücken/Schwächen: wird z.B. in einem Report auf AstroTime Basis eine Zeitreihe mit Koordinaten erzeugt, so muss vor Veröffentlichung als XML eine Umrechnungsmethode ausgeführt werden, ohne dass die bestehende Zeitreihe mit ihren Daten korrumpiert wird. Vermutlich ist etwas wie eine Factory nötig, um die Zeitreihe für die User Domäne zu erzeugen. 
+
+Offene Fragen:
+i)Wo findet die Umrechnung TT -> UTC statt? 
+ii) Was ist die "Vermittlungsgröße": vermutlich JD in UTC hier und JD in TT dort.
+iii) wie kann Delta T in der AstroDomain erzeugt werden, wenn UTC dort nicht bekannt ist, aber Delta_T=f(UTC) ist?
+
+
+Ziel dieses Chats:
+a) eine Architekur zu gestalten, die die beiden Zeitdefinitionen strikt voneinander trennt
+b) die erweiterbar genug ist, dass von TT auf TDC umgestellt werden könnte, wenn das Ephemeridenmodell sich von VSOP auf DE440 ändert
+c) ein Konstrukt zu definieren, das nicht over-engineered ist: ich möchte es auch in 12 Monaten noch verstehen
+d) unsere Definition klar, sauber und ausführlich dokumentieren: alles hängt von der Zeit ab?
+
+Der Chat ist eröffnet, ich freue mich!
+
+
+----------------------------------------------
+
+
+        [Test]
+        public void JDConsistency_J2000()
+        {
+            var t1 = new AstroTime(2000, 1, 1, 12, 0, 0);
+            var t2 = new AstroTime(2451545.0);
+
+            Assert.That(t1.JD_TT, Is.EqualTo(t2.JD_TT).Within(1e-12));
+            Assert.That(
+                t1.JulianMillenniaSinceJ2000(),
+                Is.EqualTo(t2.JulianMillenniaSinceJ2000()).Within(1e-12));
+        }
+		
+		Produktivcode:
+		
+		using System;
+
+namespace AstroSim.Core.Time
+{
+    /// <summary>
+    /// Represents an astronomical time instant.
+    /// Internally supports UT (JD_UT) and TT (JD_TT).
+    /// Designed for deterministic ephemeris calculations (VSOP).
+    /// </summary>
+    public sealed class AstroTime
+    {
+        private const double JD_J2000 = 2451545.0;
+        private const double SecondsPerDay = 86400.0;
+        private const double DaysPerJulianCentury = 36525.0;
+        private const double DaysPerJulianMillennium = 365250.0;
+
+        // --- Public Properties ---
+        public double JD_UT { get; }
+        public double JD_TT { get; }
+
+        // ============================================================
+        // === CONSTRUCTORS ===========================================
+        // ============================================================
+
+        /// <summary>
+        /// Constructs AstroTime from a UTC/UT calendar date.
+        /// </summary>
+        public AstroTime(int year, int month, int day,
+                         int hour, int minute, int second)
+        {
+            double hourDecimal = hour + minute / 60.0 + second / 3600.0;
+
+            JD_UT = GregorianToJulianDate(year, month, day, hourDecimal);
+
+            double deltaT = DeltaT(JD_UT, year);
+
+            JD_TT = JD_UT + deltaT / SecondsPerDay;
+        }
+
+        /// <summary>
+        /// Constructs AstroTime directly from Julian Date in TT.
+        /// Useful for VSOP test data (vsop87.chk).
+        /// </summary>
+        public AstroTime(double jdTT)
+        {
+            JD_TT = jdTT;
+
+            // Optional UT reconstruction (approximate)
+            double approxYear = JulianDateToYear(jdTT);
+            double deltaT = DeltaT(jdTT, (int)Math.Round(approxYear));
+
+            JD_UT = JD_TT - deltaT / SecondsPerDay;
+        }
+
+        // ============================================================
+        // === PUBLIC VSOP HELPERS ===================================
+        // ============================================================
+
+        /// <summary>
+        /// Julian centuries since J2000.0 (TT).
+        /// </summary>
+        public double JulianCenturiesSinceJ2000()
+        {
+            return (JD_TT - JD_J2000) / DaysPerJulianCentury;
+        }
+
+        /// <summary>
+        /// Julian millennia since J2000.0 (TT).
+        /// Required for VSOP87.
+        /// </summary>
+        public double JulianMillenniaSinceJ2000()
+        {
+            return (JD_TT - JD_J2000) / DaysPerJulianMillennium;
+        }
+
+        // ============================================================
+        // === INTERNAL TIME CONVERSION ================================
+        // ============================================================
+
+        private static double GregorianToJulianDate(int year, int month, int day, double hour)
+        {
+            if (month <= 2)
+            {
+                year -= 1;
+                month += 12;
+            }
+
+            int A = (int)Math.Floor(year / 100.0);
+            int B = 2 - A + (int)Math.Floor(A / 4.0);
+
+            double jd =
+                Math.Floor(365.25 * (year + 4716)) +
+                Math.Floor(30.6001 * (month + 1)) +
+                day + hour / 24.0 + B - 1524.5;
+
+            return jd;
+        }
+
+        /// <summary>
+        /// Rough year estimation from Julian Date.
+        /// Only used internally for DeltaT approximation.
+        /// </summary>
+        private static double JulianDateToYear(double jd)
+        {
+            return 2000.0 + (jd - JD_J2000) / 365.25;
+        }
+
+        // ============================================================
+        // === DELTA T =================================================
+        // ============================================================
+
+        /// <summary>
+        /// Computes DeltaT (TT - UT) in seconds.
+        /// Polynomial approximation sufficient for VSOP use.
+        /// </summary>
+        /// /// DeltaT (TT - UT) approximation.
+        /// Sources:
+        /// - Meeus, Astronomical Algorithms, 2nd ed., Chapter 10
+        /// - NASA polynomial expressions (Espenak & Meeus)
+        private static double DeltaT(double jd, int year)
+        {
+            double t = (jd - JD_J2000) / DaysPerJulianCentury;
+            double y = 2000.0 + t * 100.0;
+
+            if (year < 948)
+                return 2177 + 497 * t + 44.1 * t * t;
+
+            if (year < 1600)
+                return 102 + 102 * t + 25.3 * t * t;
+
+            if (year <= 2005)
+            {
+                double u = y - 2000.0;
+                return 63.86 + u * (
+                           0.3345 + u * (
+                          -0.060374 + u * (
+                           0.0017275 + u * (
+                           0.000651814 + u * 0.00002373599))));
+            }
+
+            if (year <= 2050)
+            {
+                double u = y - 2000.0;
+                return 62.92 + 0.32217 * u + 0.005589 * u * u;
+            }
+
+            double v = (year - 1820) / 100.0;
+            return -20 + 32 * v * v;
+        }
+    }
+}
+
+
+
+----------------------------------
+
+Ich habe jetzt nur noch manuelle Tests für Geo-Äquatoriale Koordinaten. Dafür möchte ich gerne die Genauigkeitsschwellen (Tolerances) anpassen.
+
+Lies Dir mal 
+VSOP87A_Position_Tolerance_Derivation.md und
+VSOP87A_Velocity_Tolerance_Derivation.md durch
+
+Wie müssen die Toleranzen für geozentrisch Äquatoriale
+- Positionen
+- Geschwindigkeiten 
+angepasst werden?
+
+Wieviel Bogensekunden Auflösung entspricht das dann für alle Planeten individuell am Himmel?

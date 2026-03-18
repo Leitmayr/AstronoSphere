@@ -1,0 +1,21 @@
+
+	// original data taken from the VizieR V/50/catalog:
+	// https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=V/50/catalog&-out.add=.
+	// further processing in Excel:
+	// - filled empty elements with default values (see documentation in structure starCatalogElement
+	// - added Constellations (short Latin, long Latin, long German)
+	// - calculated comma values for RA and DEC out of h:m:s and d:m:s
+	// - limited Declination values to >-43°
+	// - limited magnitude to values <6.5mag
+	// !!! --> that means only start <6.5mag which can be seen in Southern Germany are represented!!!
+	// - generated short form of Spectral type for simple transformation Spectral Type to color
+	// - added a column with Greek letter
+	// - added a column with Arabian numbering inside constellation
+	// - added " " around every Excel element that will become a string	
+
+
+			//	Full				Name		HD		ADS		VarID		Vmag		ColorInd_BV		SpTypeLong		SpTypeShort		ConstLatShort		ConstLatLong		ConstDeuLong		Nbr		Greek		RAJ2000		DEJ2000		RA_h_double		RA_h		RA_min		RA_sec		RA_Deg_double		VZ		Dec_double		Dec_grad		Dec_min		Dec_sec
+			{   "1"	,	"2"	,	"-"	,	"6"	,	"-1"	,	"-"	,	6.29	,	1.1	,	"gG9"	,	"G9"	,	"Psc"	,	"Pisces"	,	"Fische"	,	"HD6"	,	"-"	,	"00 05 03.8"	,	"-00 30 11"	,	0.08439	,	0	,	5	,	3.8	,	1.26583	,	-1	,	-0.50306	,	0	,	30	,	11	}	,
+			{	"2"	,	"3"	,	"33 Psc"	,	"28"	,	"-1"	,	"Var?"	,	4.61	,	1.04	,	"K0IIIbCN-0.5"	,	"K0"	,	"Psc"	,	"Pisces"	,	"Fische"	,	"33"	,	"-"	,	"00 05 20.1"	,	"-05 42 27"	,	0.08892	,	0	,	5	,	20.1	,	1.33375	,	-1	,	-5.70750	,	-5	,	42	,	27	}	,
+			{	"3"	,	"4"	,	"86 Peg"	,	"87"	,	"-1"	,	"-"	,	5.51	,	0.9	,	"G5III"	,	"G5"	,	"Peg"	,	"Pegasus"	,	"Pegasus"	,	"4"	,	"-"	,	"00 05 42.0"	,	"+13 23 46"	,	0.09500	,	0	,	5	,	42	,	1.42500	,	1	,	13.40	,	13	,	23	,	46	}	,
+			{	"4"	,	"5"	,	"-"	,	"123"	,	"61"	,	"V640 Cas"	,	5.96	,	0.67	,	"G5V"	,	"G5"	,	"Cas"	,	"Cassiopeia"	,	"Cassiopeia"	,	"HD123"	,	"-"	,	"00 06 16.0"	,	"+58 26 12"	,	0.10444	,	0	,	6	,	16	,	1.56667	,	1	,	58.44	,	58	,	26	,	12	}	,

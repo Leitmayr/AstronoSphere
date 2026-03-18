@@ -1,0 +1,46 @@
+{
+  "Planet": "Neptune",
+  "TestSuite": "TS-B",
+  "EventName": "GeoAscendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=899\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=2085-02-07T06:02\nSTEP_SIZE=1H\nSTOP_TIME=2085-02-10T06:02",
+    "RequestHash": "DD91FBA6D56C3C4693FFC88AD63B9E8CD93968C89CDE77FDC53DC3EE0A23A578",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-20T19:44:49.8313801Z"
+  },
+  "Node": {
+    "JulianDate": 2482630.293055556,
+    "Before": {
+      "JulianDate": 2482630.251388889,
+      "X": -19.27644303046231,
+      "Y": 21.7784960509114,
+      "Z": -4.5334769891744E-08,
+      "VX": 0.009083770138378385,
+      "VY": 0.01107101514626873,
+      "VZ": 9.402621648996198E-05
+    },
+    "At": {
+      "JulianDate": 2482630.293055556,
+      "X": -19.27606473944962,
+      "Y": 21.77895751338869,
+      "Z": 3.872097192656575E-06,
+      "VX": 0.009074197473962256,
+      "VY": 0.0110791824383222,
+      "VZ": 9.401048416757402E-05
+    },
+    "After": {
+      "JulianDate": 2482630.334722222,
+      "X": -19.2756868474227,
+      "Y": 21.77941931600392,
+      "Z": 7.788869594923429E-06,
+      "VX": 0.009064618818436182,
+      "VY": 0.01108734176322452,
+      "VZ": 9.399456090636414E-05
+    }
+  }
+}
