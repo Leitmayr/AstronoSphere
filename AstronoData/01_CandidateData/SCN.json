@@ -1,0 +1,31 @@
+{
+  "Event": {
+    "Category": "",
+    "ApproximateJD": ,
+    "Source": "",
+    "Comment": ""
+  },
+  "Core": {
+    "Time": {
+      "StartJD": ,
+      "StopJD": ,
+      "StepDays": ,
+      "TimeScale": ""
+    },
+    "Observer": {
+      "Type": "",
+      "Body": ""
+    },
+    "Targets": [""],
+    "Frame": {
+      "Type": "",
+      "Epoch": ""
+    },
+    "Corrections": {
+      "LightTime": ,
+      "Aberration": ,
+      "Precession": ,
+      "Nutation": 
+    }
+  }
+}

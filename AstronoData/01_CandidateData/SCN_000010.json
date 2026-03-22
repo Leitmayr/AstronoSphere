@@ -1,0 +1,31 @@
+{
+  "Event": {
+    "Category": "Station",
+    "ApproximateJD": 2450566.255,
+    "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36d, p. 254",
+    "Comment": "Station: stress test is change in movement direction = zero crossing of velocity"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2450565.255,
+      "StopJD": 2450567.255,
+      "StepDays": 0.0417,
+      "TimeScale": "TD"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": ["Mars"],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": ,false
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

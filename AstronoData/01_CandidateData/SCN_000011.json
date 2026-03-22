@@ -1,0 +1,31 @@
+{
+  "Event": {
+    "Category": "Western Elongation",
+    "ApproximateJD": 2449314.140,
+    "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36d, p. 254",
+    "Comment": "Station: stress test is change in movement direction = zero crossing of velocity"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2449313.140,
+      "StopJD": 2449315.140,
+      "StepDays": 0.0417,
+      "TimeScale": "TD"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": ["Mercury"],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": ,false
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

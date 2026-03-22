@@ -1,0 +1,31 @@
+{
+  "Event": {
+    "Category": "Quadrant Crossing",
+    "ApproximateJD": 2478084.966,
+    "Source": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Comment": "L18 Crossing: X Coordinate: - to +"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2478083.966,
+      "StopJD": 2478085.966,
+      "StepDays": 0.0417,
+      "TimeScale": "TD"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": ["Jupiter"],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": ,false
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}
