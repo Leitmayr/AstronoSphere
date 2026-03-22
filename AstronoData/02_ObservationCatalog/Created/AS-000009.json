@@ -1,8 +1,41 @@
 ﻿{
   "SchemaVersion": "1.0",
+
   "ScenarioID": "GEO-TDB-2371542.083-2371544.083-0.0417D",
   "CatalogNumber": "AS-000009",
   "CoreHash": "B1558D9D",
+
+  "Author": null,
+
+  "Extensions": "placeholder for future needs",
+
+  "Status": {
+    "maturity": null,
+    "visibility": null
+  },
+
+  "ScenarioType": null,
+  "ScenarioCategory": "Opposition",
+  "EventComment": "Opposition: stress test is Sun - Earth - Planet 180° angle -> 1780-12-17 = three months before Uranus' discovery ",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": null,
+    "NumericalRisk": null,
+    "Validates": []
+  },
+
+  "ScientificPurpose": null,
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Meeus, Astronomical Algorithms, 2nd ed., Exercises, p. 255",
+    "Source": null,
+    "Citation": null
+  },
+
   "Core": {
     "Time": {
       "StartJD": 2371542.083000,
@@ -10,6 +43,7 @@
       "StepDays": 0.041700,
       "TimeScale": "TDB"
     },
+
     "Observer": {
       "Type": "Geocentric",
       "Body": "Earth",
@@ -20,18 +54,70 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
+
     "Targets": [
       "Uranus"
     ],
+
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
+
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
       "Precession": false,
       "Nutation": false
     }
+  },
+
+  "DatasetHeader": {
+    "DatasetID": "GEO-TDB-2371542.083-2371544.083-0.0417D--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": null,
+      "FactoryVersion": null,
+      "Source": null,
+      "ReferenceEphemeris": null,
+      "Mode": null,
+      "EphemType": null,
+      "CorrectionLevel": null,
+      "TimeScale": null
+    },
+
+    "TruthCitation": {
+      "Provider": null,
+      "Source": null,
+      "Citation": null
+    },
+
+    "Provenance": {
+      "ScenarioFactory": null,
+      "TruthFactory": null,
+      "ValidationTarget": {
+        "Software": null,
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
   }
 }
