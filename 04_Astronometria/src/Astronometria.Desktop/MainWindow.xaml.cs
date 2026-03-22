@@ -1,5 +1,5 @@
 ﻿using Astronometria.Adapters;
-using AstroSim.Data.Parsers.BrightStarCatalog;
+using Astronometria.Data.Parsers.BrightStarCatalog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

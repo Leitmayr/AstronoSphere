@@ -130,10 +130,9 @@ public class StarCat
 
 
 
-	public starCatalogElement StarCatalog = new starCatalogElement { "6846", "9110", "-", "225289", "-1" };
+	//public starCatalogElement StarCatalog = new starCatalogElement { "6846", "9110", "-", "225289", "-1" };
 
 	};
 
-	public int[] mama = new int[] { 1, 2, 3 };
-}
+
 

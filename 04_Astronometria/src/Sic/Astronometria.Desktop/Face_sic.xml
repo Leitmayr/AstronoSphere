@@ -1,0 +1,182 @@
+
+        <StackPanel Orientation="Vartical">
+        <!-- #region Top Row -->           
+        <StackPanel x:Name="HT_HorizonalTop" Orientation="Horizontal" >
+            <!-- #region Date -->
+            <StackPanel x:Name="HT_Date" Orientation="Horizontal" >
+                <Border BorderBrush="Gray" BorderThickness="0.5" CornerRadius="5" Padding="10">
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel x:Name="Date_Arrows" HorizontalAlignment="Left" Orientation="Horizontal" Margin="10, 20">
+
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel x:Name="ArrowUp" HorizontalAlignment="Left" Orientation="Vertical">
+                                    <Button  x:Name="PlusDate" Width="30" Height="30" Margin="10, 10" Click="PlusDate" Template="{StaticResource RoundedButtonTemplate}" Content="^" />
+                                </StackPanel>
+
+                                <StackPanel x:Name="ArrowDown" HorizontalAlignment="Left" Orientation="Vertical">
+                                    <Button  x:Name="MinusDate" Width="30" Height="30" Margin="10, 10" Click="MinusDate" Template="{StaticResource RoundedButtonTemplate}" Content="V" />
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10, 0">
+                            <StackPanel>
+                                <Label  Width="250" Margin="5, 0" FontSize="24" Content="-------   Date   -------" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox x:Name="tbDay" Width="50" Height="30" Margin="5,5" Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                        <Label  Width="20"  Height="50" Margin="0" Content="." FontSize="24"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox x:Name="tbMonth" Width="50" Height="30" Margin="5,5" Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                        <Label  Width="20" Height="50" Margin="0" Content="." FontSize="24" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBox x:Name="tbYear" Width="100" Height="30" Margin="5,10"  Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <!-- Toggle Buttons -->
+
+                                <!-- endof Toggle Buttons -->
+
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel HorizontalAlignment="Left">
+                                        <ToggleButton x:Name = "togBut_Day" Content = "TogDay"  Checked = "DayChecked" Unchecked = "DayUnchecked" Margin = "5, 5" 
+                                            Width = "50" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel HorizontalAlignment="Left">
+                                        <ToggleButton x:Name = "togBut_Month" Content = "TogMonth"  Checked = "MonthChecked" Unchecked = "MonthUnchecked" Margin = "25, 5" 
+                                            Width = "50" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel HorizontalAlignment="Left">
+                                        <ToggleButton x:Name = "togBut_Year" Content = "TogYear"  Checked = "YearChecked" Unchecked = "YearUnchecked" Margin = "5, 5" 
+                                            Width = "100" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <!-- #endregion -->
+
+            <!-- region Buttons -->
+            <StackPanel x:Name="HT_Buttons" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Border BorderBrush="Gray" BorderThickness="0.5" CornerRadius="5" Padding="10">
+                    <StackPanel Orientation="Vertical" Margin="0">
+                        <Button  Width="60" Height="30" Margin="20, 10"  Click="Now" Template="{StaticResource RoundedPinkButtonTemplate}" Content="Now"/>
+                        <Button x:Name="Start" Width="60" Height="30" Margin="20, 10" Click="Refresh" HorizontalAlignment="Left" Template="{StaticResource RoundedPinkButtonTemplate}" Background="#FF60D6D3" Content="Refresh"/>
+                        <!-- <Button x:Name="btnClear" Width="50" Height="30" Click="ClearCanvas" Content="Clear" HorizontalAlignment="Left" Margin="75,0,0,0" Background="Red"/> -->
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <!-- endregion -->
+
+            <!-- region Time -->
+            <StackPanel x:Name="HT_Time" >
+                <Border BorderBrush="Gray" BorderThickness="0.5" CornerRadius="5" Padding="10">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10, 0">
+                                <StackPanel>
+                                    <Label  Width="250" Margin="5, 0" FontSize="24" Content="-------   Time   -------" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:Name="tbHour" Width="50" Height="30" Margin="5,5" Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                            <Label  Width="40"  Height="50" Margin="0" Content="h" FontSize="24"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:Name="tbMinute" Width="50" Height="30" Margin="5,5" Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                            <Label  Width="40" Height="50" Margin="0" Content="m" FontSize="24" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:Name="tbSecond" Width="100" Height="30" Margin="5,10"  Template="{StaticResource RoundedTextBoxTemplate}"/>
+                                            <Label  Width="40" Height="50" Margin="0" Content="s" FontSize="24" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    
+                                    
+                                    <!-- Toggle Buttons -->
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel HorizontalAlignment="Left">
+                                            <ToggleButton x:Name = "togBut_Hour" Content = "TogHour"  Checked = "HourChecked" Unchecked = "HourUnchecked" Margin = "5, 5" 
+                                            Width = "50" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                        </StackPanel>
+
+                                        <StackPanel HorizontalAlignment="Left">
+                                            <ToggleButton x:Name = "togBut_Minute" Content = "TogMin"  Checked = "MinuteChecked" Unchecked = "MinuteUnchecked" Margin = "45, 5" 
+                                            Width = "50" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                        </StackPanel>
+
+                                        <StackPanel HorizontalAlignment="Left">
+                                            <ToggleButton x:Name = "togBut_Second" Content = "TogSec"  Checked = "SecondChecked" Unchecked = "SecondUnchecked" Margin = "5, 5" 
+                                            Width = "100" HorizontalAlignment = "Left" Template="{StaticResource RoundedToggleButtonTemplate}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <!-- endof Toggle Buttons -->
+                                    
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                        <!-- Time Arrows -->
+                        <StackPanel x:Name="Time_Arrows" HorizontalAlignment="Left" Orientation="Horizontal" Margin="10, 20">
+
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel x:Name="TimeArrowUp" HorizontalAlignment="Left" Orientation="Vertical">
+                                    <Button  x:Name="PlusTime" Width="30" Height="30" Margin="10, 10" Click="PlusTime" Template="{StaticResource RoundedButtonTemplate}" Content="^" />
+                                </StackPanel>
+
+                                <StackPanel x:Name="TimeArrowDown" HorizontalAlignment="Left" Orientation="Vertical">
+                                    <Button  x:Name="MinusTime" Width="30" Height="30" Margin="10, 10" Click="MinusTime" Template="{StaticResource RoundedButtonTemplate}" Content="V" />
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <!-- endof Time Arrows -->
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <!-- endregion Time -->
+        </StackPanel>
+        <!-- #endregion Top Row -->
+
+
+      </StackPanel>
+
+
+
+        <StackPanel Orientation="Vertical">
+            <!-- #region Main Row -->
+            <StackPanel x:Name="HM_HorizonalMain" Orientation="Vertical" >
+                <StackPanel x:Name="HM_Left" Orientation="Horizontal" >
+                    <Label  Width="250" FontSize="24" Content="-------   Date   -------" HorizontalContentAlignment="Center"/>
+
+                </StackPanel>
+
+                <StackPanel x:Name="HM_Middle" Orientation="Horizontal" >
+
+                </StackPanel>
+
+
+                <StackPanel x:Name="HM_Right" Orientation="Horizontal" >
+
+                </StackPanel>
+            </StackPanel>
+            <!-- #endregion Main Row -->
+        </StackPanel>

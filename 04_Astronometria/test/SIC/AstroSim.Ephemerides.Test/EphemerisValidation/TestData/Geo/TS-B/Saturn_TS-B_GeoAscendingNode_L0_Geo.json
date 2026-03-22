@@ -1,0 +1,46 @@
+{
+  "Planet": "Saturn",
+  "TestSuite": "TS-B",
+  "EventName": "GeoAscendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=699\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=2034-06-22T20:24\nSTEP_SIZE=1H\nSTOP_TIME=2034-06-25T20:24",
+    "RequestHash": "058A724F316C4E856AABED63C4332FD2B35B7CAB009A5373D6F5E93BA4547C07",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-20T19:44:49.8157685Z"
+  },
+  "Node": {
+    "JulianDate": 2464137.891666667,
+    "Before": {
+      "JulianDate": 2464137.85,
+      "X": -3.663830991719624,
+      "Y": 9.30718221127083,
+      "Z": -1.343048160202251E-07,
+      "VX": -0.02232193856646305,
+      "VY": -0.002918376516517513,
+      "VZ": 0.0002556232315966931
+    },
+    "At": {
+      "JulianDate": 2464137.891666667,
+      "X": -3.664761059055689,
+      "Y": 9.307060361377275,
+      "Z": 1.051654285730199E-05,
+      "VX": -0.02232129224283801,
+      "VY": -0.002930418187771017,
+      "VZ": 0.0002556174364962501
+    },
+    "After": {
+      "JulianDate": 2464137.933333333,
+      "X": -3.665691099296459,
+      "Y": 9.30693800977068,
+      "Z": 2.116714656805005E-05,
+      "VX": -0.02232063799421223,
+      "VY": -0.002942458742959166,
+      "VZ": 0.0002556115221110239
+    }
+  }
+}

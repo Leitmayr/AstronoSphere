@@ -1,4 +1,4 @@
-﻿using AstroSim.Core.Time;
+﻿using Astronometria.Core.Time;
 
 namespace Astronometria.Adapters
 {

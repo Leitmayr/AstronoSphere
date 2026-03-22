@@ -1,4 +1,4 @@
-﻿using AstroSim.Core.Coordinates;
+﻿using Astronometria.Core.Coordinates;
 
 namespace Astronometria
 {

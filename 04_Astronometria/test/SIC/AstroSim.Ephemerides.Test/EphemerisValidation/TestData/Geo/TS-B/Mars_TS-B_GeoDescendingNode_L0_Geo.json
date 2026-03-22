@@ -1,0 +1,46 @@
+{
+  "Planet": "Mars",
+  "TestSuite": "TS-B",
+  "EventName": "GeoDescendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=499\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=2025-09-22T07:24\nSTEP_SIZE=1H\nSTOP_TIME=2025-09-25T07:24",
+    "RequestHash": "C64B7ACB41AB26168A53467703A726D5662E45199105C7C6EADC130735805A65",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-20T19:44:49.807925Z"
+  },
+  "Node": {
+    "JulianDate": 2460942.35,
+    "Before": {
+      "JulianDate": 2460942.308333333,
+      "X": -2.011358553496431,
+      "Y": -1.191545723083401,
+      "Z": 2.835771269863591E-08,
+      "VX": 0.0116479874833071,
+      "VY": -0.02503627848367256,
+      "VZ": -0.0004386948272808157
+    },
+    "At": {
+      "JulianDate": 2460942.35,
+      "X": -2.010872895050638,
+      "Y": -1.192588816709372,
+      "Z": -1.82505246079466E-05,
+      "VX": 0.01166361770667686,
+      "VY": -0.0250322137801504,
+      "VZ": -0.0004386915085307932
+    },
+    "After": {
+      "JulianDate": 2460942.391666667,
+      "X": -2.010386585371638,
+      "Y": -1.193631740749789,
+      "Z": -3.652926668819188E-05,
+      "VX": 0.01167924667483078,
+      "VY": -0.02502813837578509,
+      "VZ": -0.0004386880953651936
+    }
+  }
+}

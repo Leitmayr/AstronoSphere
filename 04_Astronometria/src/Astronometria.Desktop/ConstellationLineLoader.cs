@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AstroSim.Data.Parsers.Constellations;
+using Astronometria.Data.Parsers.Constellations;
 
 namespace Astronometria
 {

@@ -1,7 +1,7 @@
-﻿using AstroSim.Core.Coordinates;
-using AstroSim.Core.Site;
-using AstroSim.Core.Time;
-using AstroSim.Projection.Transforms;
+﻿using Astronometria.Core.Coordinates;
+using Astronometria.Core.Site;
+using Astronometria.Core.Time;
+using Astronometria.Projection.Transforms;
 
 namespace Astronometria.Adapters
 {

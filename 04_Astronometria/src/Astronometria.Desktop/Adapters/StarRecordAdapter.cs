@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AstroSim.Data.Models;
+using Astronometria.Data.Models;
 
 namespace Astronometria.Adapters
 {

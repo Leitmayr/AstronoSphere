@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Diagnostics;
-using AstroSim.Projection.Viewport;
-using AstroSim.Core.Coordinates;
+using Astronometria.Projection.Viewport;
+using Astronometria.Core.Coordinates;
 using System.Windows; // für Point
-using AstroSim.Core.Site;
-using AstroSim.Core.Time;
-using AstroSim.Projection.Projections;
+using Astronometria.Core.Site;
+using Astronometria.Core.Time;
+using Astronometria.Projection.Projections;
 using Astronometria.Adapters;
 
 namespace Astronometria
@@ -303,7 +303,7 @@ namespace Astronometria
 
                 // Map01 -> PixelPoint -> WPF Point
                 var px = MapToPixel.Map01ToPixel(
-                    new AstroSim.Core.Coordinates.MapPoint01(star._posGnomCart.X, star._posGnomCart.Y),
+                    new Astronometria.Core.Coordinates.MapPoint01(star._posGnomCart.X, star._posGnomCart.Y),
                     Viewport);
 
                 Point tempPoint = new Point(px.X, px.Y);

@@ -1,0 +1,46 @@
+{
+  "Planet": "Uranus",
+  "TestSuite": "TS-B",
+  "EventName": "GeoDescendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=799\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=2068-12-11T08:43\nSTEP_SIZE=1H\nSTOP_TIME=2068-12-14T08:43",
+    "RequestHash": "E565F01E97F519510B1770F2E432BDF8D385F2F75578AD82C6EED30F724D8104",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-20T19:44:49.8287087Z"
+  },
+  "Node": {
+    "JulianDate": 2476728.404861111,
+    "Before": {
+      "JulianDate": 2476728.363194444,
+      "X": -5.385817343057727,
+      "Y": -19.27883436271872,
+      "Z": 3.520139299807993E-08,
+      "VX": 0.02100956557527385,
+      "VY": -0.003980608873672163,
+      "VZ": -5.312815423184437E-05
+    },
+    "At": {
+      "JulianDate": 2476728.404861111,
+      "X": -5.384941900405575,
+      "Y": -19.27899996032338,
+      "Z": -2.178341224576503E-06,
+      "VX": 0.02101168028206354,
+      "VY": -0.003968075827695067,
+      "VZ": -5.312202614094795E-05
+    },
+    "After": {
+      "JulianDate": 2476728.446527778,
+      "X": -5.384066369821957,
+      "Y": -19.27916503567747,
+      "Z": -4.391645451256185E-06,
+      "VX": 0.02101378627180327,
+      "VY": -0.003955540844803208,
+      "VZ": -5.311671372154969E-05
+    }
+  }
+}

@@ -1,0 +1,163 @@
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"Astronometria.Ephemerides.Test" ist keine Attributklasse.
+"NodeEvent" ist ein mehrdeutiger Verweis zwischen "EphemerisRegression.Domain.NodeEvent" und "EphemerisRegression.Event.NodeEvent".
+"NodeEvent" ist ein mehrdeutiger Verweis zwischen "EphemerisRegression.Domain.NodeEvent" und "EphemerisRegression.Event.NodeEvent".
+Der Typ- oder Namespacename "Category" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Category" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "CategoryAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "CategoryAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "NUnit" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUp" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "OneTimeSetUpAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "Test" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCase" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseData" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseData" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseData" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseData" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSource" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSource" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSource" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSource" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSourceAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSourceAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSourceAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestCaseSourceAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixture" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Der Typ- oder Namespacename "TestFixtureAttribute" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).
+Typ- oder Namespacedefinition oder Dateiende erwartet.

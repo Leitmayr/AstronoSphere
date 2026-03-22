@@ -1,0 +1,45 @@
+<Solution>
+  <Folder Name="/01_MeeusScenarioFactory/" />
+  <Folder Name="/01_MeeusScenarioFactory/src/">
+    <Project Path="01_MeeusScenarioFactory/src/MeeusScenarioFactory.csproj" />
+  </Folder>
+  <Folder Name="/02_ScenarioHeaderGenerator/" />
+  <Folder Name="/02_ScenarioHeaderGenerator/src/">
+    <Project Path="02_ScenarioHeaderGenerator/src/ScenarioHeaderGenerator.csproj" />
+  </Folder>
+  <Folder Name="/03_TruthFactory/" />
+  <Folder Name="/03_TruthFactory/src/">
+    <Project Path="03_TruthFactory/src/EphemerisFactory/EphemerisFactory.csproj" Id="2d0ace0a-cef4-47f0-b00d-9559ede25a1e" />
+  </Folder>
+  <Folder Name="/04_Astronometria/" />
+  <Folder Name="/04_Astronometria/src/">
+    <Project Path="04_Astronometria/src/Astronometria.Desktop/Astronometria.Desktop.csproj" Id="8edd55b3-8a61-4aa1-9b47-d19788102f58" />
+  </Folder>
+  <Folder Name="/05_AnalysisTool/" />
+  <Folder Name="/05_AnalysisTool/src/">
+    <Project Path="05_AnalysisTool/src/AnalysisTool.csproj" />
+  </Folder>
+  <Folder Name="/06_AstronoMeasurement/" />
+  <Folder Name="/06_AstronoMeasurement/src/">
+    <Project Path="06_AstronoMeasurement/src/AstronoMeasurement.csproj" />
+  </Folder>
+  <Folder Name="/AstronoData/" />
+  <Folder Name="/AstronoData/00_Meta/" />
+  <Folder Name="/AstronoData/00_Meta/DatasetDefinitions/" />
+  <Folder Name="/AstronoData/00_Meta/Manifest/" />
+  <Folder Name="/AstronoData/00_Meta/Provenance/" />
+  <Folder Name="/AstronoData/00_Meta/Standards/" />
+  <Folder Name="/AstronoData/01_CandidateData/" />
+  <Folder Name="/AstronoData/02_ObservationCatalog/" />
+  <Folder Name="/AstronoData/03_ReferenceData/" />
+  <Folder Name="/AstronoData/03_ReferenceData/Released/" />
+  <Folder Name="/AstronoData/03_ReferenceData/Runs/" />
+  <Folder Name="/AstronoData/03_ReferenceData/Runs/LastRun/" />
+  <Folder Name="/AstronoData/03_ReferenceData/Runs/Run/" />
+  <Folder Name="/AstronoData/04_EngineData/" />
+  <Folder Name="/AstronoData/04_EngineData/Released/" />
+  <Folder Name="/AstronoData/04_EngineData/Runs/" />
+  <Folder Name="/AstronoData/05_AnalysisData/" />
+  <Folder Name="/AstronoData/05_AnalysisData/Released/" />
+  <Folder Name="/AstronoData/05_AnalysisData/Runs/" />
+</Solution>
