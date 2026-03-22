@@ -30,7 +30,37 @@
   <Folder Name="/AstronoData/00_Meta/Provenance/" />
   <Folder Name="/AstronoData/00_Meta/Standards/" />
   <Folder Name="/AstronoData/01_CandidateData/" />
+  <Folder Name="/AstronoData/01_CandidateData/Created/" />
+  <Folder Name="/AstronoData/01_CandidateData/Released/">
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000001.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000002.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000003.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000004.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000005.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000006.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000007.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000008.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000009.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000010.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000011.json" />
+    <File Path="AstronoData/01_CandidateData/Created/SCN_000012.json" />
+  </Folder>
   <Folder Name="/AstronoData/02_ObservationCatalog/" />
+  <Folder Name="/AstronoData/02_ObservationCatalog/Created/">
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000001.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000002.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000003.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000004.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000005.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000006.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000007.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000008.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000009.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000010.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000011.json" />
+    <File Path="AstronoData/02_ObservationCatalog/Created/AS-000012.json" />
+  </Folder>
+  <Folder Name="/AstronoData/02_ObservationCatalog/Released/" />
   <Folder Name="/AstronoData/03_ReferenceData/" />
   <Folder Name="/AstronoData/03_ReferenceData/Released/" />
   <Folder Name="/AstronoData/03_ReferenceData/Runs/" />

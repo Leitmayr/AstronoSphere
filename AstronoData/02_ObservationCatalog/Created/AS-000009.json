@@ -1,0 +1,37 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ScenarioID": "GEO-TDB-2371542.083-2371544.083-0.0417D",
+  "CatalogNumber": "AS-000009",
+  "CoreHash": "B1558D9D",
+  "Core": {
+    "Time": {
+      "StartJD": 2371542.083000,
+      "StopJD": 2371544.083000,
+      "StepDays": 0.041700,
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+    "Targets": [
+      "Uranus"
+    ],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

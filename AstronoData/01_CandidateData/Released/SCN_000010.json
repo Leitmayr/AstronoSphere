@@ -10,20 +10,22 @@
       "StartJD": 2450565.255,
       "StopJD": 2450567.255,
       "StepDays": 0.0417,
-      "TimeScale": "TD"
+      "TimeScale": "TDB"
     },
     "Observer": {
       "Type": "Geocentric",
       "Body": "Earth"
     },
-    "Targets": ["Mars"],
+    "Targets": [
+	  "Mars"
+	],
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
     "Corrections": {
       "LightTime": false,
-      "Aberration": ,false
+      "Aberration": false,
       "Precession": false,
       "Nutation": false
     }

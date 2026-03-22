@@ -16,14 +16,16 @@
       "Type": "Geocentric",
       "Body": "Earth"
     },
-    "Targets": ["Uranus"],
+    "Targets": [
+	  "Uranus"
+	],
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
     "Corrections": {
       "LightTime": false,
-      "Aberration": ,false
+      "Aberration": false,
       "Precession": false,
       "Nutation": false
     }

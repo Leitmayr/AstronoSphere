@@ -1,0 +1,37 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ScenarioID": "GEO-TDB-2450565.255-2450567.255-0.0417D",
+  "CatalogNumber": "AS-000010",
+  "CoreHash": "F063BE08",
+  "Core": {
+    "Time": {
+      "StartJD": 2450565.255000,
+      "StopJD": 2450567.255000,
+      "StepDays": 0.041700,
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+    "Targets": [
+      "Mars"
+    ],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

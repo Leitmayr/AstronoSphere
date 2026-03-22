@@ -1,0 +1,37 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ScenarioID": "HELIO-TDB-2478083.966-2478085.966-0.0417D",
+  "CatalogNumber": "AS-000008",
+  "CoreHash": "4F22F84E",
+  "Core": {
+    "Time": {
+      "StartJD": 2478083.966000,
+      "StopJD": 2478085.966000,
+      "StepDays": 0.041700,
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+    "Targets": [
+      "Jupiter"
+    ],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

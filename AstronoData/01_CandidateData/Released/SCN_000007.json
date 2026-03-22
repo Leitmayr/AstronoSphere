@@ -10,20 +10,22 @@
       "StartJD": 2464144.392,
       "StopJD": 2464146.392,
       "StepDays": 0.0417,
-      "TimeScale": "TD"
+      "TimeScale": "TDB"
     },
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun"
     },
-    "Targets": ["Jupiter"],
+    "Targets": [
+	  "Jupiter"
+	],
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
     "Corrections": {
       "LightTime": false,
-      "Aberration": ,false
+      "Aberration": false,
       "Precession": false,
       "Nutation": false
     }

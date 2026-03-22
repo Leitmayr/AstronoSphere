@@ -1,0 +1,37 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ScenarioID": "GEO-TDB-2449313.14-2449315.14-0.0417D",
+  "CatalogNumber": "AS-000011",
+  "CoreHash": "40F6333D",
+  "Core": {
+    "Time": {
+      "StartJD": 2449313.140000,
+      "StopJD": 2449315.140000,
+      "StepDays": 0.041700,
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+    "Targets": [
+      "Mercury"
+    ],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}
