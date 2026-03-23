@@ -103,6 +103,18 @@ namespace EphemerisFactory.Core
 
             sb.Replace("\"Mode\": null", $"\"Mode\": \"{mode}\"");
 
+
+            // Requests[]
+            string requestsBlock =
+                $"\"Requests\": [{{\"CanonicalRequest\": \"{Escape(canonical)}\", \"RequestHash\": \"{hash}\", \"HorizonsUrl\": null}}]";
+
+            sb = ReplaceFullLine(sb, "Requests", requestsBlock);
+
+            // EpochHash
+            var epochHash = HashCalculator.ComputeSha256(hash);
+
+            sb = ReplaceFullLine(sb, "EpochHash", $"\"EpochHash\": \"{epochHash}\"");
+
             return sb.ToString();
         }
 
