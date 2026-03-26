@@ -1,9 +1,9 @@
-{
+﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "HELIO-TDB-2443872.704-2443874.704-0.0417D",
+  "ScenarioID": "HELIO-TDB-2443872.704-2443874.704-1H",
   "CatalogNumber": "AS-000003",
-  "CoreHash": "87B6731A",
+  "CoreHash": "C66DB3FB",
 
   "Author": "Marcus Hiemer",
 
@@ -41,7 +41,7 @@
     "Time": {
       "StartJD": 2443872.704000,
       "StopJD": 2443874.704000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -74,13 +74,13 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "HELIO-TDB-2443872.704-2443874.704-0.0417D--EPH-HORIZONS-DE440",
+    "DatasetID": "HELIO-TDB-2443872.704-2443874.704-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
-      "CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2443874.704",
-      "RequestHash": "C08518C73335B0B1D8C73E541228809B314B6F213DBBB345CC7706AFC4D10949",
-    "EpochHash": "F4B52AED13F36F99DE1AD79A5901811CBB5537B0FE14041BF0775A04008E1589",
-    "Requests": [{"CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2443874.704", "RequestHash": "C08518C73335B0B1D8C73E541228809B314B6F213DBBB345CC7706AFC4D10949", "HorizonsUrl": null}],
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },

@@ -1,9 +1,9 @@
 ﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "HELIO-TDB-2463529.456-2463531.456-0.0417D",
+  "ScenarioID": "HELIO-TDB-2463529.456-2463531.456-1H",
   "CatalogNumber": "AS-000004",
-  "CoreHash": "8C1341EE",
+  "CoreHash": "CC0B20B9",
 
   "Author": null,
 
@@ -16,7 +16,7 @@
 
   "ScenarioType": null,
   "ScenarioCategory": "Aphelion",
-  "EventComment": "d/dt Delta/R has zero crossing in Heliocentric Coordinates",
+  "EventComment": "d/dt Delta R has zero crossing in Heliocentric Coordinates",
 
   "Description": null,
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2463529.456000,
       "StopJD": 2463531.456000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,7 +73,7 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "HELIO-TDB-2463529.456-2463531.456-0.0417D--EPH-PLACEHOLDER",
+    "DatasetID": "HELIO-TDB-2463529.456-2463531.456-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
       "CanonicalRequest": null,

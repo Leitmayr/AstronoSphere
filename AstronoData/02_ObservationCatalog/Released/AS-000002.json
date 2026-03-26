@@ -1,9 +1,9 @@
-{
+﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "GEO-TDB-2497436.903-2497438.903-0.0417D",
+  "ScenarioID": "GEO-TDB-2497436.903-2497438.903-1H",
   "CatalogNumber": "AS-000002",
-  "CoreHash": "A0DD43C3",
+  "CoreHash": "45062CC5",
 
   "Author": "Marcus Hiemer",
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2497436.903000,
       "StopJD": 2497438.903000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,13 +73,13 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "GEO-TDB-2497436.903-2497438.903-0.0417D--EPH-HORIZONS-DE440",
+    "DatasetID": "GEO-TDB-2497436.903-2497438.903-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
-      "CanonicalRequest": "CENTER=500@399\nCOMMAND=699\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2497436.903\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2497438.903",
-      "RequestHash": "816459E8C1D66E214C27A3A37CEB7CEDC5F3C385EFA590CECAA0CF7431AB8B96",
-    "EpochHash": "C7B9064803FD7F4F0996D8A0D4DB36A00DDA2C9BAAC5886A8CA61B6CA3478FD5",
-    "Requests": [{"CanonicalRequest": "CENTER=500@399\nCOMMAND=699\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2497436.903\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2497438.903", "RequestHash": "816459E8C1D66E214C27A3A37CEB7CEDC5F3C385EFA590CECAA0CF7431AB8B96", "HorizonsUrl": null}],
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
@@ -100,7 +100,7 @@
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
-	
+
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",

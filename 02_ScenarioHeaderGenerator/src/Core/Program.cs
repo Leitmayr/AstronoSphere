@@ -31,7 +31,7 @@ namespace ScenarioHeaderGenerator.Core
         static void Main(string[] args)
         {
             Console.WriteLine("=== Scenario Header Generator (SHG) ===");
-
+            
             try
             {
                 // 1. Load candidates

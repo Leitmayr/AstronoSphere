@@ -17,7 +17,7 @@ namespace ScenarioHeaderGenerator
             var origin = MapOrigin(core.Observer.Type);
             var time = core.Time;
 
-            return $"{origin}-{time.TimeScale}-{Format(time.StartJD)}-{Format(time.StopJD)}-{Format(time.StepDays)}D";
+            return $"{origin}-{time.TimeScale}-{Format(time.StartJD)}-{Format(time.StopJD)}-{time.StepDays}";
         }
 
         private static string MapOrigin(string type)

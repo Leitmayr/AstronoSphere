@@ -1,0 +1,14 @@
+Da stimmt manches noch nicht: ich poste folgende Files
+a) AS-000001.json -> released Ausgangsszenario
+b) GEO-TDB-2449296.644-2449298.644-1H_L0.json -> das müsste das zugehörige File sein
+
+(A) Speicherort
+1) Du schreibst nach 03_ReferenceData\Run. In der Spec steht aber 03_ReferenceData\Runs\Run
+2) Du schreibst in einen Unterordner TS-L0: tust Du das zu Debug-Zwecken oder soll das die finale Lösung sein. Wenn ja: wir hatten uns für eine flache Struktur entschieden, die alle nötigen Infos im Header des Files 
+
+(B) Datenfile
+1) Praktisch die komplette Szenario-Information fehlt
+2) Nach TruthMetadata wird kaum mehr was geschrieben
+3) das File enthält keine Daten. Offenbar wurden von Horizons gar keine Daten geholt. Oder hattest Du das erst später geplant?
+4) der Dateiname des Ergebnisfiles ist sehr kryptisch: GEO-TDB-2449296.644-2449298.644-1H_L0.json
+-> Scane alle hochgeladenen Dokumente im Projekt, ob es eine Dateinamens-Nomenklatur gibt.

@@ -49,7 +49,7 @@ namespace ScenarioHeaderGenerator.ScenarioCandidates
     {
         public double StartJD { get; set; }
         public double StopJD { get; set; }
-        public double StepDays { get; set; }
+        public string StepDays { get; set; }
         public string TimeScale { get; set; }
     }
 

@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: ScenarioHeaderGenerator.cs
-// STATUS: FINAL (Full Scenario + DatasetHeader Skeleton)
+// STATUS: UPDATED (StepDays as string, passt 1:1 durch)
 // ============================================================
 
 using AstronoData.ScenarioCandidates;
@@ -131,7 +131,10 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine("    \"Time\": {");
             sb.AppendLine($"      \"StartJD\": {F(core.Time.StartJD)},");
             sb.AppendLine($"      \"StopJD\": {F(core.Time.StopJD)},");
-            sb.AppendLine($"      \"StepDays\": {F(core.Time.StepDays)},");
+
+            // 🔥 WICHTIG: StepDays ist jetzt STRING → 1:1 durchreichen
+            sb.AppendLine($"      \"StepDays\": \"{core.Time.StepDays}\",");
+
             sb.AppendLine($"      \"TimeScale\": \"{core.Time.TimeScale}\"");
             sb.AppendLine("    },");
 

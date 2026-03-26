@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "Conjunction",
+    "ApproximateJD": 2497437.903,
+    "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36b, p. 252",
+    "Comment": "d/dt Delta/R has zero crossing in Geocentric Coordinates"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2497436.903,
+      "StopJD": 2497438.903,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+	  "Saturn"
+	],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

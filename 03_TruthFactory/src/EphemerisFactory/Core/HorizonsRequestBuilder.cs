@@ -1,45 +1,53 @@
-﻿// ============================================================
-// FILE: HorizonsRequestBuilder.cs
-// STATUS: NEW
-// ============================================================
-
-using EphemerisRegression.Api;
+﻿using EphemerisRegression.Api;
 using System;
 using System.Globalization;
+using System.Text.Json;
 
 namespace EphemerisFactory.Core
 {
     public static class HorizonsRequestBuilder
     {
-        public static HorizonsApiRequest Build(dynamic scenario)
+        public static HorizonsApiRequest Build(JsonElement root)
         {
-            var core = scenario.Core;
+            var core = root.GetProperty("Core");
 
-            var target = core.Targets[0];
-            int command = PlanetMapper.ToCommand(target);
+            var observer = core.GetProperty("Observer");
+            var time = core.GetProperty("Time");
+            var targets = core.GetProperty("Targets");
 
-            string center = core.Observer.Type switch
+            var targetName = targets[0].GetString()!;
+            int command = PlanetMapper.ToCommand(targetName);
+
+            string observerType = observer.GetProperty("Type").GetString()!;
+
+            string center = observerType switch
             {
                 "Heliocentric" => "@10",
                 "Geocentric" => "500@399",
-                _ => throw new Exception($"Unsupported observer type: {core.Observer.Type}")
+                _ => throw new Exception($"Unsupported observer type: {observerType}")
             };
+
+            double start = time.GetProperty("StartJD").GetDouble();
+            double stop = time.GetProperty("StopJD").GetDouble();
+
+            // 🔥 NEU: Step ist STRING (z.B. "1H")
+            string step = time.GetProperty("StepDays").GetString()!;
 
             return new HorizonsApiRequest
             {
                 Command = command,
                 Center = center,
+                StartTime = $"JD{F(start)}",
+                StopTime = $"JD{F(stop)}",
 
-                StartTime = $"JD{F(core.Time.StartJD)}",
-                StopTime = $"JD{F(core.Time.StopJD)}",
-
-                StepSize = $"{F(core.Time.StepDays)}D",
+                // 🔥 WICHTIG: kein "D" anhängen mehr!
+                StepSize = step,
 
                 RefPlane = "ECLIPTIC",
                 RefSystem = "ICRF",
                 OutputUnits = "AU-D",
                 EphemType = "VECTORS",
-                CsvFormat = "NO"
+                CsvFormat = "YES"
             };
         }
 

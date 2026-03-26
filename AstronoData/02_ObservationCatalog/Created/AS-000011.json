@@ -1,9 +1,9 @@
 ﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "GEO-TDB-2449313.14-2449315.14-0.0417D",
+  "ScenarioID": "GEO-TDB-2449313.14-2449315.14-1H",
   "CatalogNumber": "AS-000011",
-  "CoreHash": "40F6333D",
+  "CoreHash": "C6B22695",
 
   "Author": null,
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2449313.140000,
       "StopJD": 2449315.140000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,7 +73,7 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "GEO-TDB-2449313.14-2449315.14-0.0417D--EPH-PLACEHOLDER",
+    "DatasetID": "GEO-TDB-2449313.14-2449315.14-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
       "CanonicalRequest": null,

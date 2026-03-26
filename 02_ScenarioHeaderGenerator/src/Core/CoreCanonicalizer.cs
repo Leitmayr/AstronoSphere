@@ -25,7 +25,7 @@ namespace ScenarioHeaderGenerator
             sb.Append("\"Time\":{");
             sb.Append($"\"StartJD\":{F(core.Time.StartJD)},");
             sb.Append($"\"StopJD\":{F(core.Time.StopJD)},");
-            sb.Append($"\"StepDays\":{F(core.Time.StepDays)},");
+            sb.Append($"\"StepDays\":\"{core.Time.StepDays}\",");
             sb.Append($"\"TimeScale\":\"{core.Time.TimeScale}\"");
             sb.Append("},");
 

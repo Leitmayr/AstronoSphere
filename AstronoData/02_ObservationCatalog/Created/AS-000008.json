@@ -1,9 +1,9 @@
 ﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "HELIO-TDB-2478083.966-2478085.966-0.0417D",
+  "ScenarioID": "HELIO-TDB-2478083.966-2478085.966-1H",
   "CatalogNumber": "AS-000008",
-  "CoreHash": "4F22F84E",
+  "CoreHash": "74330075",
 
   "Author": null,
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2478083.966000,
       "StopJD": 2478085.966000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,7 +73,7 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "HELIO-TDB-2478083.966-2478085.966-0.0417D--EPH-PLACEHOLDER",
+    "DatasetID": "HELIO-TDB-2478083.966-2478085.966-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
       "CanonicalRequest": null,

@@ -1,124 +1,85 @@
-﻿using EphemerisRegression.Domain;
-using EphemerisRegression.Infrastructure;
-using EphemerisRegression.Parsing;
-using EphemerisRegression.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
+using System.Globalization;
 
-namespace EphemerisRegression.Export
+namespace EphemerisFactory.Core
 {
-    public sealed class MeshDataL0JsonExportRunner
+    public static class HorizonsStateParser
     {
-        public async Task RunAsync(
-            string planetName,
-            string epochName,
-            IEnumerable<string> rawChunkPaths,
-            IEnumerable<MeshRequestInfo> requestInfos,
-            string engineVersion = "1.1.0")
+        public static List<StateVector> Parse(string raw)
         {
-            if (rawChunkPaths == null) throw new ArgumentNullException(nameof(rawChunkPaths));
-            if (requestInfos == null) throw new ArgumentNullException(nameof(requestInfos));
+            var result = new List<StateVector>();
 
-            var chunkList = rawChunkPaths.Where(p => !string.IsNullOrWhiteSpace(p)).ToList();
-            var infoList = requestInfos.ToList();
+            var lines = raw.Split('\n');
 
-            var solutionRoot = ProjectPathResolver.GetSolutionRoot();
+            bool inData = false;
 
-            string jsonDir = Path.Combine(
-                solutionRoot,
-                "EphemerisRegression",
-                "Horizons",
-                "Mesh",
-                "Helio",
-                "L0",
-                "Json");
+            double jd = 0;
+            double x = 0, y = 0, z = 0;
+            double vx = 0, vy = 0, vz = 0;
 
-            Directory.CreateDirectory(jsonDir);
-
-            var allVectors = new List<StateVector>();
-
-            if (chunkList.Count > 0)
+            foreach (var line in lines)
             {
-                if (chunkList.Count != infoList.Count)
-                    throw new InvalidOperationException(
-                        $"rawChunkPaths ({chunkList.Count}) and requestInfos ({infoList.Count}) must have same length.");
+                var l = line.Trim();
 
-                var parser = new HorizonsVectorParser();
-
-                foreach (var rawPath in chunkList)
+                if (l.StartsWith("$$SOE"))
                 {
-                    if (!File.Exists(rawPath))
-                        throw new FileNotFoundException($"RAW file not found: {rawPath}");
+                    inData = true;
+                    continue;
+                }
 
-                    var rawContent = await File.ReadAllTextAsync(rawPath);
-                    var vectors = parser.Parse(rawContent);
+                if (l.StartsWith("$$EOE"))
+                    break;
 
-                    allVectors.AddRange(vectors);
+                if (!inData)
+                    continue;
+
+                // JD
+                if (l.Contains("=") && l.StartsWith("2"))
+                {
+                    var jdStr = l.Split('=')[0].Trim();
+                    jd = double.Parse(jdStr, CultureInfo.InvariantCulture);
+                }
+                // Position
+                else if (l.StartsWith("X ="))
+                {
+                    var parts = l.Replace("=", "")
+                                 .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                    x = double.Parse(parts[1], CultureInfo.InvariantCulture);
+                    y = double.Parse(parts[3], CultureInfo.InvariantCulture);
+                    z = double.Parse(parts[5], CultureInfo.InvariantCulture);
+                }
+                // Velocity → vollständiger Datensatz
+                else if (l.StartsWith("VX"))
+                {
+                    var parts = l.Replace("=", "")
+                                 .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                    vx = double.Parse(parts[1], CultureInfo.InvariantCulture);
+                    vy = double.Parse(parts[3], CultureInfo.InvariantCulture);
+                    vz = double.Parse(parts[5], CultureInfo.InvariantCulture);
+
+                    result.Add(new StateVector
+                    {
+                        JD = jd,
+                        Position = new Vector3
+                        {
+                            X = x,
+                            Y = y,
+                            Z = z
+                        },
+                        Velocity = new Vector3
+                        {
+                            X = vx,
+                            Y = vy,
+                            Z = vz
+                        }
+                    });
                 }
             }
 
-            string epochHash = HashCalculator.ComputeSha256(
-                string.Join("\n", infoList.Select(i => i.RequestHash)));
-
-            var jsonModel = new MeshEpochReferenceJson
-            {
-                Planet = planetName,
-                TestSuite = "TS-D",
-                Epoch = epochName,
-                CorrectionLevel = "L0",
-                Mode = "HELIO",
-                Metadata = new MeshEpochMetadata
-                {
-                    EngineVersion = engineVersion,
-                    GeneratedAtUtc = DateTime.UtcNow,
-                    EpochHash = epochHash,
-                    Requests = infoList
-                },
-                StateVectors = allVectors
-            };
-
-            string fileName = $"{planetName}_TS-D_L0_{epochName}.json";
-            string jsonPath = Path.Combine(jsonDir, fileName);
-
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-
-            var json = JsonSerializer.Serialize(jsonModel, options);
-            await File.WriteAllTextAsync(jsonPath, json);
-
-            Console.WriteLine($"Saved JSON: {Path.GetFileName(jsonPath)}");
+            return result;
         }
-
-        private sealed class MeshEpochReferenceJson
-        {
-            public string Planet { get; set; } = "";
-            public string TestSuite { get; set; } = "";
-            public string Epoch { get; set; } = "";
-            public string CorrectionLevel { get; set; } = "";
-            public string Mode { get; set; } = "";
-            public MeshEpochMetadata Metadata { get; set; } = new();
-            public List<StateVector> StateVectors { get; set; } = new();
-        }
-
-        private sealed class MeshEpochMetadata
-        {
-            public string EngineVersion { get; set; } = "";
-            public DateTime GeneratedAtUtc { get; set; }
-            public string EpochHash { get; set; } = "";
-            public List<MeshRequestInfo> Requests { get; set; } = new();
-        }
-    }
-
-    public sealed class MeshRequestInfo
-    {
-        public string CanonicalRequest { get; set; } = "";
-        public string RequestHash { get; set; } = "";
-        public string HorizonsUrl { get; set; } = "";
     }
 }

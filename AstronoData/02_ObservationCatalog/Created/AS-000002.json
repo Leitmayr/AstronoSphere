@@ -1,9 +1,9 @@
 ﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "GEO-TDB-2497436.903-2497438.903-0.0417D",
+  "ScenarioID": "GEO-TDB-2497436.903-2497438.903-1H",
   "CatalogNumber": "AS-000002",
-  "CoreHash": "A0DD43C3",
+  "CoreHash": "45062CC5",
 
   "Author": null,
 
@@ -16,7 +16,7 @@
 
   "ScenarioType": null,
   "ScenarioCategory": "Conjunction",
-  "EventComment": "d/dt Delta/R has zero crossing in Geocentric Coordinates",
+  "EventComment": "d/dt Delta R has zero crossing in Geocentric Coordinates",
 
   "Description": null,
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2497436.903000,
       "StopJD": 2497438.903000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,7 +73,7 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "GEO-TDB-2497436.903-2497438.903-0.0417D--EPH-PLACEHOLDER",
+    "DatasetID": "GEO-TDB-2497436.903-2497438.903-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
       "CanonicalRequest": null,

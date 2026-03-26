@@ -1,9 +1,9 @@
-{
+﻿{
   "SchemaVersion": "1.0",
 
-  "ScenarioID": "GEO-TDB-2449296.644-2449298.644-0.0417D",
+  "ScenarioID": "GEO-TDB-2449296.644-2449298.644-1H",
   "CatalogNumber": "AS-000001",
-  "CoreHash": "3CC90C84",
+  "CoreHash": "1A116D30",
 
   "Author": "Marcus Hiemer",
 
@@ -40,7 +40,7 @@
     "Time": {
       "StartJD": 2449296.644000,
       "StopJD": 2449298.644000,
-      "StepDays": 0.041700,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
 
@@ -73,13 +73,13 @@
   },
 
   "DatasetHeader": {
-    "DatasetID": "GEO-TDB-2449296.644-2449298.644-0.0417D--EPH-HORIZONS-DE440",
+    "DatasetID": "GEO-TDB-2449296.644-2449298.644-1H--EPH-PLACEHOLDER",
 
     "TruthMetadata": {
-      "CanonicalRequest": "CENTER=500@399\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2449296.644\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2449298.644",
-      "RequestHash": "9E4453F5AF0DA8E0C1BFBF9959F861D3E9B40A015D1826C61A9D6B05C50705D8",
-    "EpochHash": "D6A6BC12642CA53696E8FD42112F8F9888F8A41A8CC72696004D4CC32B48886D",
-    "Requests": [{"CanonicalRequest": "CENTER=500@399\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2449296.644\nSTEP_SIZE=0.0417D\nSTOP_TIME=JD2449298.644", "RequestHash": "9E4453F5AF0DA8E0C1BFBF9959F861D3E9B40A015D1826C61A9D6B05C50705D8", "HorizonsUrl": null}],
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },

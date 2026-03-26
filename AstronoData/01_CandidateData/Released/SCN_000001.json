@@ -3,13 +3,13 @@
     "Category": "Inferior Conjunction",
     "ApproximateJD": 2449297.644,
     "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36a, p. 252",
-    "Comment": "d/dt Delta/R has zero crossing in Geocentric Coordinates"
+    "Comment": "d/dt Delta R has zero crossing in Geocentric Coordinates"
   },
   "Core": {
     "Time": {
       "StartJD": 2449296.644,
       "StopJD": 2449298.644,
-      "StepDays": 0.0417,
+      "StepDays": "1H",
       "TimeScale": "TDB"
     },
     "Observer": {
