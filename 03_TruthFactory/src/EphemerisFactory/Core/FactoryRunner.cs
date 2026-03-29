@@ -1,5 +1,14 @@
-﻿using EphemerisRegression.Infrastructure;
+﻿// ============================================================
+// FILE: 03_TruthFactory/src/EphemerisFactory/Core/FactoryRunner.cs
+// STATUS: ÄNDERUNG (gitkeep handling)
+// ============================================================
+
+using AstronoMeasurement.Builder;
+using AstronoMeasurement.Defaults;
+using AstronoMeasurement.Keys;
+using EphemerisRegression.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -10,28 +19,49 @@ namespace EphemerisFactory.Core
         private readonly string _inputFolder =
             AstronoSpherePaths.GetObservationCatalogReleasedFolder();
 
-        private readonly string _outputFolder =
+        private readonly string _runFolder =
             Path.Combine(
                 AstronoSpherePaths.GetAstronoDataRoot(),
                 "03_ReferenceData",
                 "Runs",
-                "Run"
-            );
+                "Run");
+
+        private readonly string _lastRunFolder =
+            Path.Combine(
+                AstronoSpherePaths.GetAstronoDataRoot(),
+                "03_ReferenceData",
+                "Runs",
+                "LastRun");
 
         public void Run()
         {
             Console.WriteLine("=== EphemerisFactory v1 ===");
-            Console.WriteLine("=== EphemerisFactory L0 ===");
+            Console.WriteLine("EphemerisFactory started...");
 
-            Directory.CreateDirectory(_outputFolder);
+            Directory.CreateDirectory(_runFolder);
+            Directory.CreateDirectory(_lastRunFolder);
+
+            // ============================================================
+            // 1) RESET: Run → LastRun
+            // ============================================================
+
+            ResetRunFolder();
 
             var files = Directory.GetFiles(_inputFolder, "*.json");
 
             Console.WriteLine($"Scenarios found: {files.Length}");
 
+            var definitions = MeasurementDefaults.GetDefault();
+            var measurementBuilder = new MeasurementBuilder();
+            List<MeasurementKey> measurements = measurementBuilder.Build(definitions);
+
+            var measurement = measurements[0];
+            var level = measurement.Level;
+
             foreach (var file in files)
             {
                 var json = File.ReadAllText(file);
+
                 using var doc = JsonDocument.Parse(json);
                 var root = doc.RootElement;
 
@@ -40,10 +70,6 @@ namespace EphemerisFactory.Core
                 var scenarioId = root.GetProperty("ScenarioID").GetString()!;
 
                 Console.WriteLine($"Processing: {scenarioId}");
-
-                // =====================================================
-                // REQUEST BUILD
-                // =====================================================
 
                 var request = HorizonsRequestBuilder.Build(root);
 
@@ -55,55 +81,83 @@ namespace EphemerisFactory.Core
 
                 var url = BuildUrl(canonical);
 
-                // =====================================================
-                // HORIZONS CALL
-                // =====================================================
-
                 var client = new HorizonsApiClient();
-
                 var raw = client.ExecuteAsync(request).Result;
 
+                var csvFile = Path.Combine(_runFolder, $"{scenarioId}_{level}.csv");
+                var jsonFile = Path.Combine(_runFolder, $"{scenarioId}_{level}.json");
 
-                Console.WriteLine("----- RAW DEBUG START -----");
-
-                // erste 30 Zeilen anzeigen
-                var lines = raw.Split('\n');
-
-                for (int i = 0; i < Math.Min(30, lines.Length); i++)
-                {
-                    Console.WriteLine(lines[i]);
-                }
-
-                Console.WriteLine("----- RAW DEBUG END -----");
-
-                // CSV speichern
-                var csvFile = Path.Combine(_outputFolder, $"{scenarioId}_L0.csv");
                 File.WriteAllText(csvFile, raw);
 
-                // Dataset bauen (JETZT MIT DATA!)
                 var dataset = DatasetBuilder.Build(
                     json,
                     canonical,
                     hash,
                     epochHash,
-                    "L0",
+                    level,
                     url,
-                    raw
-                );
+                    raw);
 
-                var jsonFile = Path.Combine(_outputFolder, $"{scenarioId}_L0.json");
                 File.WriteAllText(jsonFile, dataset);
 
-                Console.WriteLine($"  → written: {Path.GetFileName(jsonFile)}");
-                Console.WriteLine($"  → raw: {Path.GetFileName(csvFile)}");
+                Console.WriteLine($"  -> written: {Path.GetFileName(jsonFile)}");
             }
 
             Console.WriteLine("Factory completed successfully.");
         }
 
-        // =====================================================
+        // ============================================================
+        // RESET LOGIC (gitkeep FIX)
+        // ============================================================
+
+        private void ResetRunFolder()
+        {
+            Console.WriteLine("Resetting Run folder...");
+
+            var runFiles = Directory.GetFiles(_runFolder);
+
+            int moved = 0;
+
+            foreach (var file in runFiles)
+            {
+                var fileName = Path.GetFileName(file);
+
+                // 🔥 FIX: .gitkeep ignorieren
+                if (fileName.Equals(".gitkeep", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                var target = Path.Combine(_lastRunFolder, fileName);
+
+                File.Copy(file, target, overwrite: true);
+                moved++;
+            }
+
+            if (moved == 0)
+            {
+                Console.WriteLine("Run folder empty → nothing to move.");
+            }
+            else
+            {
+                Console.WriteLine($"Moved {moved} files to LastRun.");
+            }
+
+            // 🔥 Run leeren (ohne .gitkeep)
+            foreach (var file in runFiles)
+            {
+                var fileName = Path.GetFileName(file);
+
+                if (fileName.Equals(".gitkeep", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                File.Delete(file);
+            }
+
+            Console.WriteLine("Run folder cleared.");
+        }
+
+        // ============================================================
         // VALIDATION
-        // =====================================================
+        // ============================================================
 
         private static void ValidateStatus(JsonElement root, string file)
         {
@@ -116,9 +170,9 @@ namespace EphemerisFactory.Core
                 throw new Exception($"Scenario not released: {file}");
         }
 
-        // =====================================================
+        // ============================================================
         // URL BUILDER
-        // =====================================================
+        // ============================================================
 
         private static string BuildUrl(string canonical)
         {

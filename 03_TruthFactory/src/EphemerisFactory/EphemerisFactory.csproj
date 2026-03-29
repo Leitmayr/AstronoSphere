@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Core\DatasetHeaderBuilder.cs" />
     <Compile Remove="Export\MeshDataL0JsonExportRunner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\06_AstronoMeasurement\src\AstronoMeasurement.csproj" />
   </ItemGroup>
 
 </Project>

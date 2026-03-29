@@ -1,4 +1,9 @@
-﻿using System;
+﻿// ============================================================
+// FILE: 03_TruthFactory/src/EphemerisFactory/Core/DatasetBuilder.cs
+// STATUS: ÄNDERUNG
+// ============================================================
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -45,6 +50,8 @@ namespace EphemerisFactory.Core
 
             ReplaceDatasetId(sb, level);
 
+            InsertMeasurementBlock(sb, level);
+
             ReplaceIfNull(sb, "CanonicalRequest",
                 $"\"CanonicalRequest\": \"{Escape(canonical)}\"");
 
@@ -86,13 +93,13 @@ namespace EphemerisFactory.Core
                     continue;
 
                 result.Add(new StateVector(
-                    row[0], // JulianDate
-                    row[1], // X
-                    row[2], // Y
-                    row[3], // Z
-                    row[4], // VX
-                    row[5], // VY
-                    row[6]  // VZ
+                    row[0],
+                    row[1],
+                    row[2],
+                    row[3],
+                    row[4],
+                    row[5],
+                    row[6]
                 ));
             }
 
@@ -140,7 +147,7 @@ $@"{{
         }
 
         // =====================================================
-        // DATASET ID
+        // DATASET ID (JETZT MIT VEC)
         // =====================================================
 
         private static void ReplaceDatasetId(StringBuilder sb, string level)
@@ -149,8 +156,38 @@ $@"{{
 
             content = content.Replace(
                 "--EPH-PLACEHOLDER",
-                $"--EPH-HORIZONS-DE440-{level}",
+                $"--EPH-HORIZONS-DE440-{level}-VEC",
                 StringComparison.Ordinal);
+
+            sb.Clear();
+            sb.Append(content);
+        }
+
+        // =====================================================
+        // MEASUREMENT BLOCK (NEU, NULL-SAFE)
+        // =====================================================
+
+        private static void InsertMeasurementBlock(StringBuilder sb, string level)
+        {
+            var content = sb.ToString();
+
+            // bereits vorhanden → nichts tun
+            if (content.Contains("\"Measurement\":", StringComparison.Ordinal))
+                return;
+
+            var measurementBlock =
+$@"""Measurement"": {{
+    ""Level"": ""{level}"",
+    ""Type"": ""VEC""
+  }},";
+
+            int idx = content.IndexOf("\"DatasetHeader\":", StringComparison.Ordinal);
+            if (idx < 0)
+                return;
+
+            int insertPos = content.IndexOf("{", idx) + 1;
+
+            content = content.Insert(insertPos, "\n  " + measurementBlock + "\n");
 
             sb.Clear();
             sb.Append(content);

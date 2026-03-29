@@ -1,4 +1,9 @@
-﻿using EphemerisRegression.Api;
+﻿// ============================================================
+// FILE: 03_TruthFactory/src/EphemerisFactory/Core/HorizonsRequestBuilder.cs
+// STATUS: ÄNDERUNG
+// ============================================================
+
+using EphemerisRegression.Api;
 using System;
 using System.Globalization;
 using System.Text.Json;
@@ -30,8 +35,22 @@ namespace EphemerisFactory.Core
             double start = time.GetProperty("StartJD").GetDouble();
             double stop = time.GetProperty("StopJD").GetDouble();
 
-            // 🔥 NEU: Step ist STRING (z.B. "1H")
+            // Step ist STRING (z.B. "1H")
             string step = time.GetProperty("StepDays").GetString()!;
+
+            // =====================================================
+            // M1: Measurement (KISS)
+            // =====================================================
+
+            string level = "L0";
+            string type = "VEC";
+
+            string ephemType = HorizonsMapping.GetEphemType(level, type);
+            string? vectCorr = HorizonsMapping.GetVectorCorrection(level);
+
+            // =====================================================
+            // REQUEST BUILD
+            // =====================================================
 
             return new HorizonsApiRequest
             {
@@ -39,15 +58,13 @@ namespace EphemerisFactory.Core
                 Center = center,
                 StartTime = $"JD{F(start)}",
                 StopTime = $"JD{F(stop)}",
-
-                // 🔥 WICHTIG: kein "D" anhängen mehr!
                 StepSize = step,
-
                 RefPlane = "ECLIPTIC",
                 RefSystem = "ICRF",
                 OutputUnits = "AU-D",
-                EphemType = "VECTORS",
-                CsvFormat = "YES"
+                EphemType = ephemType,
+                CsvFormat = "YES",
+                VectorCorrection = vectCorr
             };
         }
 

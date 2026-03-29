@@ -5,7 +5,12 @@
     "CatalogNumber": "AS-000001"
   },
 "DatasetHeader": {
-    "DatasetID": "GEO-TDB-2449296.644-2449298.644-1H--EPH-HORIZONS-DE440-L0",
+  "Measurement": {
+    "Level": "L0",
+    "Type": "VEC"
+  },
+
+    "DatasetID": "GEO-TDB-2449296.644-2449298.644-1H--EPH-HORIZONS-DE440-L0-VEC",
 
     "TruthMetadata": {
       "CanonicalRequest": "CENTER=500@399\nCOMMAND=199\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2449296.644\nSTEP_SIZE=1H\nSTOP_TIME=JD2449298.644",
@@ -25,6 +30,7 @@
       "EphemType": "VECTORS",
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
+      
     },
 
     "TruthCitation": {

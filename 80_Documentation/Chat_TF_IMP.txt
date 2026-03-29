@@ -12,3 +12,175 @@ b) GEO-TDB-2449296.644-2449298.644-1H_L0.json -> das müsste das zugehörige Fil
 3) das File enthält keine Daten. Offenbar wurden von Horizons gar keine Daten geholt. Oder hattest Du das erst später geplant?
 4) der Dateiname des Ergebnisfiles ist sehr kryptisch: GEO-TDB-2449296.644-2449298.644-1H_L0.json
 -> Scane alle hochgeladenen Dokumente im Projekt, ob es eine Dateinamens-Nomenklatur gibt.
+Ich fände etwas in der Form "Mercury-InferiorConjunction-GEO-TDB-2449296.644-L0.json" besser lesbar. Das ist wichtig für das Testdata-Design in Astronometria. 
+Findest Du eine Vorgabe in den Dokumenten und wenn nein: wie ist Deine Meinung zum Dateinamen?
+
+
+------------------
+
+
+Ich habe zwei Files gepostet.
+a) AS-000001.json -> released Ausgangsszenario
+b) GEO-TDB-2449296.644-2449298.644-1H_L0.json -> das neu erzeugte zugehörige File sein
+
+Zwei Probleme: 
+1) Du fügst den DatasetHeader einfach hinten an. Hast Dich wahrscheinlich nicht getraut, die bestehenden Fehler zu füllen. Zu Recht, denn
+2) (und da kriege ich schon wieder Blutdruck!): Du hast Dir wieder irgendwelche Werte für die Felder 
+FactoryMetadata
+TruthCitation
+Provenance
+überlegt, die nicht zu meinen vor-ausgefüllten passen.
+
+Zu 2) wir hatten gestern vereinbart, dass Du keine ausgefüllten Fehler überschreibst. Setze das im nächsten Code konsequent um!
+
+Ich erinnere Dich daran, dass Du das gestern nicht hingekriegt hast und wir einen Rollback auf den letzten Stand machen mussten. Ich hoffe, das passiert heute nicht wieder.
+
+-------------------
+
+
+Zwei Fragen:
+
+1) Kann ich den alten DatasetHeaderBuilder.cs löschen? Wir haben ja nur noch den DatasetBuilder.cs
+2) Dieser Chat ist so langsam, es ist kaum auszuhalten. Wir sind auch super ineffektiv, weil alles ewig dauert. Wann ziehen wir alles in einen neuen, schnellen Chat um?
+
+
+--------------------
+
+Fast gut: 
+Header korrekt geschrieben -> ok
+Metadaten korrekt geschrieben -> ok
+SzenarioHeader korrekt geschrieben -> ok
+
+Nur noch eine Sache nok:
+1) DatasetID falsch: 
+GEO-TDB-2449296.644-2449298.644-1H--EPH-PLACEHOLDER
+erwartet: 
+GEO-TDB-2449296.644-2449298.644-1H--EPH-HORIZONS-DE440
+
+Danach weiter mit den anderen Themen.
+
+Die Regel "nur Null Felder beschreiben" braucht hier eine Ausnahme: das bestehende DatasetID Feld muss erweitert werden.
+
+--------------------
+
+Du musst mir auf die Konsole für jeden Request bei Horizons den URL schreiben, den Du dorthin schickst. Ich probiere dann manuell im Portal den URL aus und helfe Dir so  mit dem Debuggen. Kannst Du den URL beim nächsten Mal auf die Konsole schreiben?
+Du musst zwischen aufeinanderfolgenen Horizons Calls einen Timeout einfügen, sagen wir 500ms. Ich habe Dir auch noch den HorizonsApiClient aus EphemerisRegression angehängt, vielleicht hilft das ja?
+
+--------------------
+
+Sieht (fast) topp aus!
+
+1) je drei csv und json Files werden erzeugt -> ok
+2) Dateien werden nach Runs/Run geschrieben -> ok
+3) Konsolenausgabe zur Verifikation klappt -> ok
+4) mit Konsolen URL manuelles csv erzeugt -> ok
+5) manuelles File == von Dir erzeugtes File -> ok
+6) StepSize = 1 hour -> ok
+7) Beginn 5.11.93, 3:27, Ende 7.11.93, 3:27 -> ok
+
+Einziger unerwarteter Punkt: Datenstruktur im json. Die habe ich aber vermutlich noch gar nicht spezifiziert.
+Im Anhang die bestehende json-Filestruktur aus ER im Mesh-Modus (TS-D), der ist dem was wir hier tun am ähnlichsten.
+Ich würde die json-Ausgabe daran orientieren.
+Kannst Du das File bitte prüfen und checken, ob es auch in der neuen EF Sinn macht, dieses Format für die Daten zu verwenden (unseren Header behalten wir selbstverständlich bei!)
+
+----------------------
+
+
+{
+  "ScenarioRef": {
+  "ScenarioID": "...",
+  "CoreHash": "...",
+  "CatalogNumber": "AS-000001"
+  }
+ 
+  "DatasetHeader": { ... },
+
+  "Data": [ 
+	{
+	"JD": double,
+	"Position": { "X": ..., "Y": ..., "Z": ... },
+	"Velocity": { "VX": ..., "VY": ..., "VZ": ... }
+	}
+  ]
+}
+
+------------------------
+
+
+1) csv-file vorher und nachher unterscheiden sich nur im Datum der Anfrage -> ok
+
+2) json file:
+a) Szenario-Header ist weg bis auf 
+  "ScenarioID": "...",
+  "CoreHash": "...",
+  "CatalogNumber": "AS-000001"
+-> das ist ok
+
+b) Dataset Header:
+- FactoryMetadata
+- TruthCitation
+- Provenance
+- EngineCitation
+sind jetzt wieder weg (Seufz) -> nok: alle Dataset-relevanten Metadaten müssen im File bleiben, nicht nur die ID
+
+- L0 als Suffix zur DatasetID hinzugefügt -> sehr gut!
+- "TruthProviderUrl" wieder eigenmächtig durch "HorizonsUrl" ersetzt. -> nok: Warum, frage ich mich? Ohne Not! Das musste ich gestern schon korrigieren.
+
+c) Data
+- Data field ist leer
+
+Im Anhang das erzeugte File und das lastFile (*_alt)
+
+-----------
+
+
+Gut:
+DatasetHeader nun vollständig und korrekt.
+
+Zwei Dinge fallen jedoch auf:
+
+1) ScenarioHeader: wir hatten das hier definiert:
+{
+  "ScenarioRef": {
+  "ScenarioID": "...",
+  "CoreHash": "...",
+  "CatalogNumber": "AS-000001"
+  }
+Nun hast Du doch den Core mit rein geplottet - das ist gegen die Spec - bitte keinen Core.
+
+2) immer noch keine Daten vorhanden
+
+
+------------------
+
+Analysieren. Wir hängen jetzt schon zu lange an diesem CSV-Parser/json-Exporter. Können wir nicht Debug-Code einfügen, mit dem wir das Problem eingrenzen können?
+Im Anhang ein CSV aus der bestehenden ER. Du kannst ja mal vergleichen, ob es anders ist als das von Dir erzeugte.
+
+------------------
+
+Ganz ehrlich, dieser Chat ist viel zu groß. Das ist eine Zumutung. Ich warte ewig auf Antworten und selbst eine simple Kopieraktion dauert Sekunden. Ich muss in einen anderen Chat, Kontext hin oder her. Das geht so nicht weiter. 
+
+---
+
+Gib mir kurz die Regel zum Erzeugen der Files (Mercury-InferiorConjunction..).  Nicht das Beispiel, die Aufbauregel
+
+
+--------------
+
+Dateiaufbauregel: <PrimaryTarget>-<ScenarioCategory>-<ObserverMode>-<TimeScale>-<StartJD>-<Level>.json
+
+Komponenten
+PrimaryTarget     = erstes Element aus Targets[]
+ScenarioCategory  = Event.Category (ohne Leerzeichen)
+ObserverMode      = GEO | HELIO
+TimeScale         = z.B. TDB
+StartJD           = Core.Time.StartJD (format: 0.###)
+Level             = L0…L5
+
+Regeln
+- keine Leerzeichen → CamelCase oder entfernen
+- keine Sonderzeichen
+- deterministisch aus Scenario ableiten
+- KEIN StopJD im Namen
+
+Ich schlage morgen einen zentralen Filenamebuilder dazu vor. 
