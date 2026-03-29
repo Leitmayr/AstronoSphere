@@ -1,0 +1,184 @@
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\00_AstronoPipe\scripts> .\run-pipeline.ps1
+============================================
+ AstronoSphere Pipeline Run
+============================================
+
+Step 1: Rotate Run -> LastRun
+
+Step 2: Run EphemerisFactory
+
+C:\Program Files\dotnet\sdk\10.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+C:\Program Files\dotnet\sdk\10.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+C:\Program Files\dotnet\sdk\10.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\03_TruthFactory\src\EphemerisFactory\Domain\NodeReferenceData.cs(20,28): warning CS8618: Non-Nullable-Eigenschaft „Before“ muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Fügen Sie ggf. den „erforderlichen“ Modifizierer hinzu, oder deklarieren Sie den Eigenschaft als NULL-Werte zulassend.
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\03_TruthFactory\src\EphemerisFactory\Domain\NodeReferenceData.cs(21,28): warning CS8618: Non-Nullable-Eigenschaft „After“ muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Fügen Sie ggf. den „erforderlichen“ Modifizierer hinzu, oder deklarieren Sie den Eigenschaft als NULL-Werte zulassend.
+=== EphemerisFactory v1 ===
+=== EphemerisFactory v1 ===
+EphemerisFactory started...
+Resetting Run folder...
+Moved 24 files to LastRun.
+Run folder cleared.
+Scenarios found: 12
+Processing: GEO-TDB-2449296.644-2449298.644-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=199&CENTER=500%40399&START_TIME=JD2449296.644&STOP_TIME=JD2449298.644&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2449296.644-2449298.644-1H_L0.json
+Processing: GEO-TDB-2497436.903-2497438.903-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=500%40399&START_TIME=JD2497436.903&STOP_TIME=JD2497438.903&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2497436.903-2497438.903-1H_L0.json
+Processing: HELIO-TDB-2443872.704-2443874.704-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: HELIO-TDB-2443872.704-2443874.704-1H_L0.json
+Processing: HELIO-TDB-2463529.456-2463531.456-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&CENTER=%4010&START_TIME=JD2463529.456&STOP_TIME=JD2463531.456&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: HELIO-TDB-2463529.456-2463531.456-1H_L0.json
+Processing: HELIO-TDB-2443840.917-2443842.917-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443840.917&STOP_TIME=JD2443842.917&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: HELIO-TDB-2443840.917-2443842.917-1H_L0.json
+Processing: GEO-TDB-2513055.657-2513057.657-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&CENTER=500%40399&START_TIME=JD2513055.657&STOP_TIME=JD2513057.657&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2513055.657-2513057.657-1H_L0.json
+Processing: HELIO-TDB-2464144.392-2464146.392-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2464144.392&STOP_TIME=JD2464146.392&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: HELIO-TDB-2464144.392-2464146.392-1H_L0.json
+Processing: HELIO-TDB-2478083.966-2478085.966-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2478083.966&STOP_TIME=JD2478085.966&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: HELIO-TDB-2478083.966-2478085.966-1H_L0.json
+Processing: GEO-TDB-2371542.083-2371544.083-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&CENTER=500%40399&START_TIME=JD2371542.083&STOP_TIME=JD2371544.083&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2371542.083-2371544.083-1H_L0.json
+Processing: GEO-TDB-2450565.255-2450567.255-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&CENTER=500%40399&START_TIME=JD2450565.255&STOP_TIME=JD2450567.255&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2450565.255-2450567.255-1H_L0.json
+Processing: GEO-TDB-2449313.14-2449315.14-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=199&CENTER=500%40399&START_TIME=JD2449313.14&STOP_TIME=JD2449315.14&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TDB-2449313.14-2449315.14-1H_L0.json
+Processing: GEO-TD-2460895.978-2460897.978-1H
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&CENTER=500%40399&START_TIME=JD2460895.978&STOP_TIME=JD2460897.978&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+  -> written: GEO-TD-2460895.978-2460897.978-1H_L0.json
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...
+
+Step 3: Compare Run vs LastRun
+
+============================================
+COMPARE Run vs LastRun
+============================================
+Workspace: C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere
+
+[OK]      GEO-TD-2460895.978-2460897.978-1H_L0.json
+[OK]      GEO-TDB-2371542.083-2371544.083-1H_L0.json
+[OK]      GEO-TDB-2449296.644-2449298.644-1H_L0.json
+[OK]      GEO-TDB-2449313.14-2449315.14-1H_L0.json
+[OK]      GEO-TDB-2450565.255-2450567.255-1H_L0.json
+[OK]      GEO-TDB-2497436.903-2497438.903-1H_L0.json
+[OK]      GEO-TDB-2513055.657-2513057.657-1H_L0.json
+[OK]      HELIO-TDB-2443840.917-2443842.917-1H_L0.json
+[OK]      HELIO-TDB-2443872.704-2443874.704-1H_L0.json
+[OK]      HELIO-TDB-2463529.456-2463531.456-1H_L0.json
+[OK]      HELIO-TDB-2464144.392-2464146.392-1H_L0.json
+[OK]      HELIO-TDB-2478083.966-2478085.966-1H_L0.json
+
+============================================
+RESULT
+============================================
+Total   : 12
+OK      : 12
+DIFF    : 0
+MISSING : 0
+
+SUCCESS: ALL FILES IDENTICAL
+
+Step 4: Compare Run vs Released
+
+============================================
+COMPARE Run vs Released (Baseline)
+============================================
+Workspace: C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere
+
+[OK]      GEO-TD-2460895.978-2460897.978-1H_L0.json
+[OK]      GEO-TDB-2371542.083-2371544.083-1H_L0.json
+[OK]      GEO-TDB-2449296.644-2449298.644-1H_L0.json
+[OK]      GEO-TDB-2449313.14-2449315.14-1H_L0.json
+[OK]      GEO-TDB-2450565.255-2450567.255-1H_L0.json
+[OK]      GEO-TDB-2497436.903-2497438.903-1H_L0.json
+[OK]      GEO-TDB-2513055.657-2513057.657-1H_L0.json
+[OK]      HELIO-TDB-2443840.917-2443842.917-1H_L0.json
+[OK]      HELIO-TDB-2443872.704-2443874.704-1H_L0.json
+[OK]      HELIO-TDB-2463529.456-2463531.456-1H_L0.json
+[OK]      HELIO-TDB-2464144.392-2464146.392-1H_L0.json
+[OK]      HELIO-TDB-2478083.966-2478085.966-1H_L0.json
+
+============================================
+RESULT
+============================================
+Total   : 12
+OK      : 12
+DIFF    : 0
+MISSING : 0
+
+SUCCESS: RUN MATCHES RELEASED BASELINE
+
+============================================
+ PIPELINE SUCCESS
+============================================
