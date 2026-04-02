@@ -1,0 +1,106 @@
+{
+  "SchemaVersion": "1.0",
+  "ScenarioID": "GEO-TDB-2461257.624-2461259.624-1H",
+  "CatalogNumber": "AS-000066",
+  "CoreHash": "D488689D",
+  "Core": {
+    "Time": {
+      "StartJD": 2461257.6243055561,
+      "StopJD": 2461259.6243055561,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+    "Targets": [
+      "Venus"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  },
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "GeoEqDescendingNode",
+  "EventComment": "Geocentric equatorial declination crossing + to - (validated via Z sign change)",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet constellation. Planet is changing from above to below of the equatorial plane as seen from earth",
+    "NumericalRisk": "Sign transistion of Z_Helio, Velocity determination at changing sign",
+    "Validates": [
+      "Velocity stability",
+      "Division by zero",
+      "Effects of Light Time Calculation",
+      "Earth Subtraction"
+    ]
+  },
+  "ScientificPurpose": "Sign change in declination: planet changes from above to below the celestial equator",
+  "Priority": null,
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+  },
+  "DatasetHeader": {
+    "DatasetID": "GEO-TD-2461257.62430556-2461259.62430556-1H--EPH-PLACEHOLDER",
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "GEO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-27. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+  }
+}

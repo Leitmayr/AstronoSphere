@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: 03_TruthFactory/src/EphemerisFactory/Core/DatasetBuilder.cs
-// STATUS: ÄNDERUNG
+// STATUS: GEÄNDERT (RC3 – JSON Precision Loss Fix)
 // ============================================================
 
 using System;
@@ -147,7 +147,7 @@ $@"{{
         }
 
         // =====================================================
-        // DATASET ID (JETZT MIT VEC)
+        // DATASET ID
         // =====================================================
 
         private static void ReplaceDatasetId(StringBuilder sb, string level)
@@ -164,14 +164,13 @@ $@"{{
         }
 
         // =====================================================
-        // MEASUREMENT BLOCK (NEU, NULL-SAFE)
+        // MEASUREMENT BLOCK
         // =====================================================
 
         private static void InsertMeasurementBlock(StringBuilder sb, string level)
         {
             var content = sb.ToString();
 
-            // bereits vorhanden → nichts tun
             if (content.Contains("\"Measurement\":", StringComparison.Ordinal))
                 return;
 
@@ -258,7 +257,7 @@ $@"""Measurement"": {{
         // =====================================================
 
         private static string F(double v) =>
-            v.ToString("0.########", CultureInfo.InvariantCulture);
+            v.ToString("G17", CultureInfo.InvariantCulture);
 
         private static string Escape(string s) =>
             s.Replace("\\", "\\\\")

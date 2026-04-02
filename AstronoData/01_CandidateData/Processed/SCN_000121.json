@@ -1,0 +1,35 @@
+{
+  "Event": {
+    "Category": "MeshValidation",
+    "ApproximateJD": 2524593.500000,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "CoreZone 2200-2300, Step30D"
+  },
+  "Core": {
+    "Time": {
+	"StartJD": 2524593.500000,
+    "StopJD": 2561103.500000,
+    "StepDays": "30D",
+    "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": [
+	  "Mercury"
+	],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}
+
+

@@ -1,49 +1,15 @@
-﻿{
+{
   "SchemaVersion": "1.0",
-
   "ScenarioID": "HELIO-TDB-2463529.456-2463531.456-1H",
   "CatalogNumber": "AS-000004",
-  "CoreHash": "CC0B20B9",
-
-  "Author": "Marcus Hiemer",
-
-  "Extensions": "based on book of Jean Meeus, see citation below",
-
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Aphelion",
-  "EventComment": "d/dt Delta R has zero crossing in Heliocentric Coordinates",
-
-  "Description": null,
-
-  "Rationale": {
-    "Phenomenon": "special planet constellation: maximum distance from sun", 
-    "NumericalRisk": "Sign transition of dR/dt (Distance)",
-    "Validates": ["Velocity Stability"]
-  },
-
-  "ScientificPurpose": "Frequent event occuring >1 time per planet revolution. Base scenario for distant oppositions.",
-
-  "Priority": "1",
-
-  "ScenarioCitation": {
-    "Author": "Jean Meeus",
-    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
-    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 38b, p. 270"
-  },
-
+  "CoreHash": "4D7F9EA5",
   "Core": {
     "Time": {
-      "StartJD": 2463529.456000,
-      "StopJD": 2463531.456000,
+      "StartJD": 2463529.4559999998,
+      "StopJD": 2463531.4559999998,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
-
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun",
@@ -54,16 +20,13 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
-
     "Targets": [
       "Mars"
     ],
-
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
-
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -71,10 +34,32 @@
       "Nutation": false
     }
   },
-
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Aphelion",
+  "EventComment": "d/dt Delta R has zero crossing in Heliocentric Coordinates",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet constellation: maximum distance from sun",
+    "NumericalRisk": "Sign transition of dR/dt (Distance)",
+    "Validates": [
+      "Velocity Stability"
+    ]
+  },
+  "ScientificPurpose": "Frequent event occuring >1 time per planet revolution. Base scenario for distant oppositions.",
+  "Priority": "1",
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 38b, p. 270"
+  },
   "DatasetHeader": {
     "DatasetID": "HELIO-TDB-2463529.456-2463531.456-1H--EPH-PLACEHOLDER",
-
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -83,7 +68,6 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
-
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -94,13 +78,11 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
-
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
-
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -111,13 +93,11 @@
         "GitTag": null
       }
     },
-
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
-
     "ValidationFingerprint": null
   }
 }

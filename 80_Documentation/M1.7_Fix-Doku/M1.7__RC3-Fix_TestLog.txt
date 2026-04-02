@@ -1,0 +1,230 @@
+Testplan (aus Doku):
+
+## RC3 – JSON Precision
+
+* 2 RD-Files
+
+Checks:
+
+* CSV vs JSON Konsistenz
+* keine unnötige Rundung
+
+
+
+---
+
+
+Nomenklatur:
+json alt: altes Referenzfile aus EphemerisRegression
+json gestern: letztes Referenzfile (fehlerhaft) mit Bug
+json neu: neues Referenzfile - Erwartung: Bug fixed
+
+
+Testdurchführung nach Plan:
+
+Testdaten:
+TS-A #1: AS-000015
+TS-B #2: AS-000057
+TS-C #3: AS-000072
+
+
+Ebene 1:
+
+TS-A #1: AS-000015
+
+CSV alt/CSV neu: minimal abweichende Zeitdaten zwischen alt/gestern/neu -> akzeptabel
+
+Json alt: geringe Auflösung
+Json neu: hohe Auflösung (erwartet) ok
+ScenarioID: 3 digits -> ok
+Header Daten: nicht verändert -> ok
+Request und Epoch Hashes: verändert -> erwartet: ok
+
+CSV/Json Vergleich:
+
+CSV: 
+2486286.004861110, A.D. 2095-Feb-12 12:06:59.9999,  2.008356421989345E+01, -3.756950006036669E-03, -2.598940006941288E-01, -3.366123937802104E-05,  3.754792603417880E-03,  1.452087272667984E-05,  1.160027070251933E-01,  2.008524609709462E+01, -3.454864905392686E-05,
+
+Json:
+  {
+    "JD": 2486286.0048611099,
+    "Position": { "X": 20.08356421989345, "Y": -0.0037569500060366692, "Z": -0.25989400069412882 },
+    "Velocity": { "X": -3.3661239378021042E-05, "Y": 0.0037547926034178802, "Z": 1.452087272667984E-05 }
+  },
+  
+-> exakt derselbe Zeitpunkt, exakt dieselben Daten!
+
+
+TS-B #2: AS-000057
+
+
+CSV alt/CSV neu: minimal abweichende Zeitdaten zwischen alt/gestern/neu -> akzeptabel
+
+
+Json alt: geringe Auflösung
+Json neu: hohe Auflösung (erwartet) ok
+ScenarioID: 3 digits, TDB korrigiert -> ok
+Header Daten: nicht verändert -> ok
+Request und Epoch Hashes: verändert -> erwartet: ok
+
+CSV/Json Vergleich:
+
+CSV: 
+2461245.803472220, A.D. 2026-Jul-24 07:16:59.9998,  4.400692639431801E-01,  1.979599134783740E+00, -4.447235669331571E-04, -2.448150694125315E-02,  1.556257945252807E-03,  4.639359937129826E-04,  1.171230958742304E-02,  2.027923541281346E+00, -3.793534630178153E-03,
+
+Json:
+  {
+    "JD": 2461245.80347222,
+    "Position": { "X": 0.44006926394318008, "Y": 1.9795991347837401, "Z": -0.00044472356693315711 },
+    "Velocity": { "X": -0.024481506941253148, "Y": 0.0015562579452528069, "Z": 0.00046393599371298262 }
+  },
+  
+-> exakt derselbe Zeitpunkt, exakt dieselben Daten!
+
+
+TS-C #3: AS-000072
+
+
+CSV alt/CSV neu: minimal abweichende Zeitdaten zwischen alt/gestern/neu -> akzeptabel
+
+
+Json alt: geringe Auflösung
+Json neu: hohe Auflösung (erwartet) ok
+ScenarioID: 3 digits, TDB korrigiert -> ok
+Header Daten: nicht verändert -> ok
+Request und Epoch Hashes: verändert -> erwartet: ok
+
+
+CSV/Json Vergleich:
+
+
+Manueller Call von Horizons:
+2459845.640277780, A.D. 2022-Sep-23 03:22:00.0002,  3.943307006813120E+00,  2.891465852069912E-01,  3.546287819350374E-03, -2.785516009254865E-04, -8.476317866397080E-03, -3.698015062161122E-03,  2.283579510016158E-02,  3.953895354441694E+00, -9.009917441681897E-04,
+
+Run:
+2459845.640277780, A.D. 2022-Sep-23 03:22:00.0002,  3.943307006813120E+00,  2.891465852069912E-01,  3.546287819350374E-03, -2.785516009254865E-04, -8.476317866397080E-03, -3.698015062161122E-03,  2.283579510016158E-02,  3.953895354441694E+00, -9.009917441681897E-04,
+
+LastRun:
+2459845.640277780, A.D. 2022-Sep-23 03:22:00.0002,  3.943307006813120E+00,  2.891465852069912E-01,  3.546287819350374E-03, -2.785516009254865E-04, -8.476317866397080E-03, -3.698015062161122E-03,  2.283579510016158E-02,  3.953895354441694E+00, -9.009917441681897E-04,
+
+Json:
+  {
+    "JD": 2459845.6402777801,
+    "Position": { "X": 3.9433070068131202, "Y": 0.28914658520699121, "Z": 0.003546287819350374 },
+    "Velocity": { "X": -0.00027855160092548649, "Y": -0.0084763178663970797, "Z": -0.003698015062161122 }
+  },
+
+Verdächtig große Abweichung in Y und vor allem in Z? Wo kommt das her???
+
+
+Ebene 2:
+
+TS-A #1: AS-000015
+
+Datensatz von früher:
+   {
+      "JulianDate": 2486287.004861111,
+      "X": 20.08353021010194,
+      "Y": -2.172163339030143E-06,
+      "Z": -0.259879511591773,
+      "VX": -3.440227904722586E-05,
+      "VY": 0.003754773964083242,
+      "VZ": 1.446762100265417E-05
+    },
+
+Datensatz heute bei gleicher Zeit:
+  {
+    "JD": 2486287.0048611099,
+    "Position": { "X": 20.08353021010198, "Y": -2.1721676907466151E-06, "Z": -0.25987951159178968 },
+    "Velocity": { "X": -3.4402279046246613E-05, "Y": 0.003754773964083222, "Z": 1.446762100261108E-05 }
+  },
+  
+-> ok im Rahmen der Zeitgenauigkeit
+
+
+TS-B #2: AS-000057
+
+Datensatz von früher:
+    "At": {
+      "JulianDate": 2461246.803472222,
+      "X": 0.4156180061995537,
+      "Y": 1.980981854913969,
+      "Z": 1.929799450492421E-05,
+      "VX": -0.02442017860818085,
+      "VY": 0.001209493210032942,
+      "VZ": 0.0004640990832191232
+    },
+
+
+Datensatz heute bei gleicher Zeit:
+  {
+    "JD": 2461246.80347222,
+    "Position": { "X": 0.41561800625609119, "Y": 1.9809818549111691, "Z": 1.9297993430650739E-05 },
+    "Velocity": { "X": -0.024420178608328579, "Y": 0.0012094932108336069, "Z": 0.00046409908321880098 }
+  },
+
+JD hat nur 8 Stellen, früher 9. Zu diskutieren.
+Zustandsvektor -> ok im Rahmen der Zeitgenauigkeit
+
+Generell: neues File hat unterschiedliche Genauigkeiten für JD. Unschön. Beispiel-Ausschnitt:
+
+  {
+    "JD": 2461246.67847222,
+    "Position": { "X": 0.41867102551081148, "Y": 1.9808279658556409, "Z": -3.8713292209299882E-05 },
+    "Velocity": { "X": -0.024428116574995429, "Y": 0.001252736564559039, "Z": 0.00046408136312888929 }
+  },
+  {
+    "JD": 2461246.720138886,
+    "Position": { "X": 0.417653242236037, "Y": 1.9808798628321911, "Z": -1.937644369333103E-05 },
+    "Velocity": { "X": -0.024425479181101599, "Y": 0.001238318854149755, "Z": 0.00046408735205554343 }
+  },
+  {
+    "JD": 2461246.761805553,
+    "Position": { "X": 0.41663556903176591, "Y": 1.9809311591387879, "Z": -3.9347336347036039E-08 },
+    "Velocity": { "X": -0.02442283319163057, "Y": 0.0012239044053932739, "Z": 0.00046409325939613852 }
+  },
+  {
+    "JD": 2461246.80347222,
+    "Position": { "X": 0.41561800625609119, "Y": 1.9809818549111691, "Z": 1.9297993430650739E-05 },
+    "Velocity": { "X": -0.024420178608328579, "Y": 0.0012094932108336069, "Z": 0.00046409908321880098 }
+  },
+
+
+TS-C #3: AS-000072
+
+Datensatz von früher:
+    "At": {
+      "JulianDate": 2459846.640277778,
+      "X": 3.943170601231,
+      "Y": 0.2806701805598933,
+      "Z": -0.0001516661578826529,
+      "VX": 5.050289612866818E-06,
+      "VY": -0.008475584025936433,
+      "VZ": -0.003697506973473093
+    },
+
+Datensatz heute bei gleicher Zeit:
+    "JD": 2459846.6402777801,
+    "Position": { "X": 3.943170601231011, "Y": 0.2806701805402706, "Z": -0.00015166616644311481 },
+    "Velocity": { "X": 5.0502902656326738E-06, "Y": -0.0084755840259311977, "Z": -0.0036975069734705361 }
+  },
+
+früher: Horizons API-Call mit UTC, jetzt mit JD -> erklärt Abweichungen
+JD hat nur 8 Stellen, früher 9. Zu diskutieren.
+Zustandsvektor -> ok im Rahmen der Zeitgenauigkeit
+
+
+Generell:
+Ausgabe in Run in Ordnung, alter Inhalt wird in LastRun übertragen.
+
+Frage an Dich:
+Die Abweichungen im Zustandsvektor: sind diese plausibel zu den minimalen Abweichungen im JD? Wie hoch ist das maximale Delta jeder Koordinaten und Geschwindigkeit von korrespondiernden Vorher/Nachher Daten?
+
+
+
+URL in Konsole:
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=500%40399&START_TIME=JD2459845.64027778&STOP_TIME=JD2459847.64027778&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+URL im Json:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&input=CENTER%3D500%40399%0ACOMMAND%3D599%0ACSV_FORMAT%3DYES%0AEPHEM_TYPE%3DVECTORS%0AOBJ_DATA%3DNO%0AOUT_UNITS%3DAU-D%0AREF_PLANE%3DFRAME%0AREF_SYSTEM%3DICRF%0ASTART_TIME%3DJD2459845.64027778%0ASTEP_SIZE%3D1H%0ASTOP_TIME%3DJD2459847.64027778

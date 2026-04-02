@@ -1,49 +1,15 @@
-﻿{
+{
   "SchemaVersion": "1.0",
-
   "ScenarioID": "HELIO-TDB-2443840.917-2443842.917-1H",
   "CatalogNumber": "AS-000005",
-  "CoreHash": "D04713C5",
-
-  "Author": "Marcus Hiemer",
-
-  "Extensions": "based on book of Jean Meeus, see citation below",
-
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Ascending Node",
-  "EventComment": "Stress test in heliocentric ecliptical coordinates: zero crossing of Z - to +",
-
-  "Description": null,
-
-  "Rationale": {
-    "Phenomenon": "special planet constellation when planet is crossing the eclipical plane",
-    "NumericalRisk": "Sign transistion of Z_Helio, Velocity determination at changing sign",
-    "Validates": ["Velocity stability", "Division by zero", "Effects of Light Time Calculation"]
-  },
-
-  "ScientificPurpose": "Frequent event occuring at least one time per year for Venus. For Saturn interesting because the view on the ring system changes from Top to Bottom view",
-
-  "Priority": "1",
-
-  "ScenarioCitation": {
-      "Author": "Jean Meeus",
-      "Source": "Book: ISBN (2nd Edition): 978-0943396613",
-      "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell,  Ex. 39c, p. 278"
-  },
-
+  "CoreHash": "AEBBED35",
   "Core": {
     "Time": {
-      "StartJD": 2443840.917000,
-      "StopJD": 2443842.917000,
+      "StartJD": 2443840.9169999999,
+      "StopJD": 2443842.9169999999,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
-
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun",
@@ -54,16 +20,13 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
-
     "Targets": [
       "Venus"
     ],
-
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
-
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -71,10 +34,34 @@
       "Nutation": false
     }
   },
-
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Ascending Node",
+  "EventComment": "Stress test in heliocentric ecliptical coordinates: zero crossing of Z - to +",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet constellation when planet is crossing the eclipical plane",
+    "NumericalRisk": "Sign transistion of Z_Helio, Velocity determination at changing sign",
+    "Validates": [
+      "Velocity stability",
+      "Division by zero",
+      "Effects of Light Time Calculation"
+    ]
+  },
+  "ScientificPurpose": "Frequent event occuring at least one time per year for Venus. For Saturn interesting because the view on the ring system changes from Top to Bottom view",
+  "Priority": "1",
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell,  Ex. 39c, p. 278"
+  },
   "DatasetHeader": {
     "DatasetID": "HELIO-TDB-2443840.917-2443842.917-1H--EPH-PLACEHOLDER",
-
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -83,24 +70,21 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
-
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
       "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
       "ReferenceEphemeris": "DE440",
       "Mode": "HELIO",
-      "EphemType": "VECTORS",     
-      "CorrectionLevel": "L0",      
-      "TimeScale": "TDB"   
-      },
-
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
-
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -111,13 +95,11 @@
         "GitTag": null
       }
     },
-
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
-
     "ValidationFingerprint": null
   }
 }

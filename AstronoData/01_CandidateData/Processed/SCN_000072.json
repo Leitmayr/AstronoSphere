@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "GeoEqDescendingNode",
+    "ApproximateJD": 2459846.640277778,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "Geocentric equatorial declination crossing + to - (validated via Z sign change)"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2459845.640277778,
+      "StopJD": 2459847.640277778,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+      "Jupiter"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

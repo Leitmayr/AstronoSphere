@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: 03_TruthFactory/src/EphemerisFactory/Core/HorizonsRequestBuilder.cs
-// STATUS: ÄNDERUNG
+// STATUS: GEÄNDERT (RC5 – Frame Mapping Fix)
 // ============================================================
 
 using EphemerisRegression.Api;
@@ -19,6 +19,7 @@ namespace EphemerisFactory.Core
             var observer = core.GetProperty("Observer");
             var time = core.GetProperty("Time");
             var targets = core.GetProperty("Targets");
+            var frame = core.GetProperty("Frame");
 
             var targetName = targets[0].GetString()!;
             int command = PlanetMapper.ToCommand(targetName);
@@ -35,8 +36,21 @@ namespace EphemerisFactory.Core
             double start = time.GetProperty("StartJD").GetDouble();
             double stop = time.GetProperty("StopJD").GetDouble();
 
-            // Step ist STRING (z.B. "1H")
             string step = time.GetProperty("StepDays").GetString()!;
+
+            // =====================================================
+            // RC5 FIX: Frame Mapping
+            // =====================================================
+
+            string frameType = frame.GetProperty("Type").GetString()!;
+
+            string refPlane = frameType switch
+            {
+                "GeoEcliptic" => "ECLIPTIC",
+                "HelioEcliptic" => "ECLIPTIC",
+                "GeoEquatorial" => "FRAME",
+                _ => throw new Exception($"Unsupported frame type: {frameType}")
+            };
 
             // =====================================================
             // M1: Measurement (KISS)
@@ -59,7 +73,7 @@ namespace EphemerisFactory.Core
                 StartTime = $"JD{F(start)}",
                 StopTime = $"JD{F(stop)}",
                 StepSize = step,
-                RefPlane = "ECLIPTIC",
+                RefPlane = refPlane, // 🔥 FIX
                 RefSystem = "ICRF",
                 OutputUnits = "AU-D",
                 EphemType = ephemType,

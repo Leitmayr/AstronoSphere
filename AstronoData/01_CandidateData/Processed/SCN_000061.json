@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "GeoEqAscendingNode",
+    "ApproximateJD": 2461129.365972222,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "Geocentric equatorial declination crossing - to + (validated via Z sign change)"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2461128.365972222,
+      "StopJD": 2461130.365972222,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+      "Saturn"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

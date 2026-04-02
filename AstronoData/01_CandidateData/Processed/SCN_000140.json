@@ -1,0 +1,35 @@
+{
+  "Event": {
+    "Category": "MeshValidation",
+    "ApproximateJD": 2597641.500000,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "CoreZone 2400-2500, Step30D"
+  },
+  "Core": {
+    "Time": {
+	"StartJD": 2597641.500000,
+    "StopJD": 2634151.500000,
+    "StepDays": "30D",
+    "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": [
+	  "Mars"
+	],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}
+
+
