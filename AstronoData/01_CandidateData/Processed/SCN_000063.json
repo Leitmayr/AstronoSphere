@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "GeoEqAscendingNode",
+    "ApproximateJD": 2461150.053472222,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "Geocentric equatorial declination crossing - to + (validated via Z sign change)"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2461149.053472222,
+      "StopJD": 2461151.053472222,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+      "Mercury"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

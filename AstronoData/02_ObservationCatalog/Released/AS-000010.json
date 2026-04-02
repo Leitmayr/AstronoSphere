@@ -1,49 +1,15 @@
-﻿{
+{
   "SchemaVersion": "1.0",
-
   "ScenarioID": "GEO-TDB-2450565.255-2450567.255-1H",
   "CatalogNumber": "AS-000010",
-  "CoreHash": "E9E880EB",
-
-  "Author": "Marcus Hiemer",
-
-  "Extensions": "based on book of Jean Meeus, see citation below",
-
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Station",
-  "EventComment": "Station: stress test is change in movement direction = zero crossing of velocity",
-
-  "Description": null,
-
-  "Rationale": {
-    "Phenomenon": "special planet constellation occurring during 'overtake' of earth",
-    "NumericalRisk": "Sign transition of the apparent velocity of the planet",
-    "Validates": ["VelocityStability"]
-  },
-
-  "ScientificPurpose": "Event occuring at the beginning and at the end of the opposition phase",
-
-  "Priority": "1",
-
-  "ScenarioCitation": {
-    "Author": "Jean Meeus",
-    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
-    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 36d, p. 254"
-  },
-
+  "CoreHash": "DA7F4C1E",
   "Core": {
     "Time": {
-      "StartJD": 2450565.255000,
-      "StopJD": 2450567.255000,
+      "StartJD": 2450565.2549999999,
+      "StopJD": 2450567.2549999999,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
-
     "Observer": {
       "Type": "Geocentric",
       "Body": "Earth",
@@ -54,16 +20,13 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
-
     "Targets": [
       "Mars"
     ],
-
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
-
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -71,10 +34,32 @@
       "Nutation": false
     }
   },
-
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Station",
+  "EventComment": "Station: stress test is change in movement direction = zero crossing of velocity",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet constellation occurring during 'overtake' of earth",
+    "NumericalRisk": "Sign transition of the apparent velocity of the planet",
+    "Validates": [
+      "VelocityStability"
+    ]
+  },
+  "ScientificPurpose": "Event occuring at the beginning and at the end of the opposition phase",
+  "Priority": "1",
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 36d, p. 254"
+  },
   "DatasetHeader": {
     "DatasetID": "GEO-TDB-2450565.255-2450567.255-1H--EPH-PLACEHOLDER",
-
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -83,7 +68,6 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
-
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -94,13 +78,11 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
-
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
-
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -111,13 +93,11 @@
         "GitTag": null
       }
     },
-
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
-
     "ValidationFingerprint": null
   }
 }

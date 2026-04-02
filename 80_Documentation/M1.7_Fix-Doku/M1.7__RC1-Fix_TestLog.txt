@@ -1,0 +1,195 @@
+Testplan (aus Doku):
+
+## RC1 – Scenario Precision
+
+* 2 TS-A
+* 2 TS-B
+
+Checks:
+
+1) wiederholter Run: in Created keine doppelten Files
+2) StartJD/StopJD ≥ 9 Stellen
+3) ScenarioID korrekt trunciert
+4) Run/LastRun - Hash und ScenarioID unverändert
+
+
+---
+
+Testdurchführung nach Plan:
+
+Testdaten:
+TS-A #1: AS-000003
+TS-A #2: AS-000023
+
+TS-B #1: AS-000046
+TS-B #2: AS-000054
+
+
+
+1) wiederholter Run: in Created keine doppelten Files
+
+die vorhandenen 144 Files in Created werden durch 144 Files ersetzt, keine Dubletten. Unterschieden durch das Änderungsdatum.
+
+2) StartJD/StopJD ≥ 9 Stellen
+
+TS-A #1: AS-000003
+alt:
+      "StartJD": 2443872.704000,
+      "StopJD": 2443874.704000,
+	  
+	       "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+	  
+
+neu:
+      "StartJD": 2443872.7039999999,
+      "StopJD": 2443874.7039999999,
+	  
+	          "Lat": 0,
+        "Lon": 0,
+        "Elevation": 0,
+
+Start/Stop:
+-> Genauigkeit 10 Zeichen, nicht gerundet sondern abgeschnitten. ok.
+
+
+TS-A #2: AS-000023
+alt:
+      "StartJD": 2463504.088194,
+      "StopJD": 2463506.088194,
+neu:
+      "StartJD": 2463504.0881944438,
+      "StopJD": 2463506.0881944438,
+	  
+Start/Stop:
+-> Genauigkeit 10 Zeichen, abgeschnitten. ok.
+
+TS-B #1: AS-000046
+alt:      
+	  "StartJD": 2476727.404861,
+      "StopJD": 2476729.404861,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+
+
+neu:
+      "StartJD": 2476727.4048611112,
+      "StopJD": 2476729.4048611112,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+
+Start/Stop:
+-> Genauigkeit 10 Zeichen, abgeschnitten. ok.
+-> Time Scale korrekt im Core
+
+
+TS-B #2: AS-000054
+alt:
+      "StartJD": 2464136.891667,
+      "StopJD": 2464138.891667,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+
+neu:
+    "Time": {
+      "StartJD": 2464136.8916666671,
+      "StopJD": 2464138.8916666671,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+
+Start/Stop:
+-> Genauigkeit 10 Zeichen, abgeschnitten. ok.
+-> Time Scale korrekt im Core
+
+2a) Location
+
+TS-A #1: AS-000003
+alt:
+	  
+	  "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+	  
+
+neu:
+      "Location": {
+        "Lat": 0,
+        "Lon": 0,
+        "Elevation": 0,
+
+Lat/Long/Elevation: Genauigkeit abgschnitten: früher definiert auf 6 Zeichen, jetzt nicht deterministisch: nok.
+
+Lat/Long/Elevation AS-000023: Genauigkeit abgschnitten: früher definiert auf 6 Zeichen, jetzt nicht deterministisch: nok.
+Lat/Long/Elevation AS-000046: Genauigkeit abgschnitten: früher definiert auf 6 Zeichen, jetzt nicht deterministisch: nok.
+Lat/Long/Elevation AS-000054: Genauigkeit abgschnitten: früher definiert auf 6 Zeichen, jetzt nicht deterministisch: nok.
+
+
+
+
+3) ScenarioID korrekt trunciert
+
+
+TS-A #1: AS-000003
+alt:   "ScenarioID": "HELIO-TDB-2443872.704-2443874.704-1H",
+neu:   "ScenarioID": "HELIO-TDB-2443872.704-2443874.704-1H",
+
+-> drei Zeichen vorher und nachher. Vorher damit nicht deterministisch (siehe AS-000023, dort 8  Zeichen)
+
+TS-A #2: AS-000023
+alt:  "ScenarioID": "HELIO-TDB-2463504.08819444-2463506.08819444-1H",
+neu:  "ScenarioID": "HELIO-TDB-2463504.088-2463506.088-1H",
+
+-> drei Zeichen nacher. Vorher damit nicht deterministisch (siehe AS-000003, dort 3  Zeichen)
+-> CoreHash unterschiedlich: ok
+-> Time Domain nun korrekt: vorher TD, jetzt TDB
+
+TS-B #1: AS-000046
+alt:   "ScenarioID": "GEO-TD-2476727.40486111-2476729.40486111-1H",
+neu:   "ScenarioID": "GEO-TDB-2476727.404-2476729.404-1H",
+
+-> drei Zeichen nacher. Vorher damit nicht deterministisch (siehe AS-000003, dort 3  Zeichen)
+-> CoreHash unterschiedlich: ok
+-> Time Domain nun korrekt: vorher TD, jetzt TDB
+
+
+TS-B #2: AS-000054
+alt:  "ScenarioID": "GEO-TD-2464136.89166667-2464138.89166667-1H",
+neu:  "ScenarioID": "GEO-TDB-2464136.891-2464138.891-1H",
+
+-> drei Zeichen nacher. Vorher damit nicht deterministisch (siehe AS-000003, dort 3  Zeichen)
+-> CoreHash unterschiedlich: ok
+-> Time Domain nun korrekt: vorher TD, jetzt TDB
+
+4) Run/LastRun - Hash und ScenarioID unverändert
+
+TS-A #1: AS-000003: Run/LastRun binär identisch
+TS-A #2: AS-000023: Run/LastRun binär identisch
+
+TS-B #1: AS-000046: Run/LastRun binär identisch
+TS-B #2: AS-000054: Run/LastRun binär identisch
+
+Ergebnis:
+ScenarioID ok
+CoreHash geändert ok
+Start/Stop Werte 10 Zeichen, trunkiert ok
+TimeDomain angepasst ok
+Run/LastRun binär identisch ok
+Created bei Mehrfachlauf idempotent ok
+
+Nicht ok: Genauigkeit bei Long/Lat/Elevation in Location -> muss gefixt werden.
+
+
+Ergebnis der Nachbesserung:
+TS-A #1: AS-000003: Run/LastRun identisch, außer genau sechs Stellen Präzision in Long/Lat/Elev
+TS-A #2: AS-000023: Run/LastRun identisch, außer genau sechs Stellen Präzision in Long/Lat/Elev
+
+TS-B #1: AS-000046: Run/LastRun identisch, außer genau sechs Stellen Präzision in Long/Lat/Elev
+TS-B #2: AS-000054: Run/LastRun identisch, außer genau sechs Stellen Präzision in Long/Lat/Elev
+
+Darüber hinaus: Idempotenz noch einmal nachgewiesen.
+
+==> Summasummarum: RC1 vollständig abgestellt. Well done!
+

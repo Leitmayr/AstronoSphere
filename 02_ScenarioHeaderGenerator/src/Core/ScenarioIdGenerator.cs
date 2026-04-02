@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: ScenarioIdGenerator.cs
-// STATUS: UPDATE
+// STATUS: UPDATE (RC1 – Scenario Precision: truncate JD)
 // ============================================================
 
 using AstronoData.ScenarioCandidates;
@@ -17,7 +17,7 @@ namespace ScenarioHeaderGenerator
             var origin = MapOrigin(core.Observer.Type);
             var time = core.Time;
 
-            return $"{origin}-{time.TimeScale}-{Format(time.StartJD)}-{Format(time.StopJD)}-{time.StepDays}";
+            return $"{origin}-{time.TimeScale}-{FormatJD(time.StartJD)}-{FormatJD(time.StopJD)}-{time.StepDays}";
         }
 
         private static string MapOrigin(string type)
@@ -31,9 +31,14 @@ namespace ScenarioHeaderGenerator
             };
         }
 
-        private static string Format(double value)
+        // ============================================================
+        // RC1 – JD FORMAT (TRUNCATE, NOT ROUND)
+        // ============================================================
+
+        private static string FormatJD(double value)
         {
-            return value.ToString("0.########", CultureInfo.InvariantCulture);
+            var truncated = Math.Truncate(value * 1000.0) / 1000.0;
+            return truncated.ToString("0.000", CultureInfo.InvariantCulture);
         }
     }
 }

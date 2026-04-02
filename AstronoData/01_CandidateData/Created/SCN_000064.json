@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "GeoEqAscendingNode",
+    "ApproximateJD": 2461143.763194445,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "Geocentric equatorial declination crossing - to + (validated via Z sign change)"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2461142.763194445,
+      "StopJD": 2461144.763194445,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+      "Mars"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

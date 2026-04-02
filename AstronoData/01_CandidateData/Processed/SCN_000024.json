@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "Quadrant Crossing",
+    "ApproximateJD": 2475687.520833333,
+    "Source": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Comment": "L6 Crossing: X Coordinate: + to -"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2475686.520833333,
+      "StopJD": 2475688.520833333,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": [
+	  "Neptune"
+	],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

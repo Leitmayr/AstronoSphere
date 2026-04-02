@@ -1,0 +1,82 @@
+Testplan (aus Doku):
+
+## RC6 – Validity Domain
+
+* 2 gültige Szenarien
+* 2 ungültige Szenarien
+
+Checks:
+* gültig → normaler Run
+* ungültig → skip + logging
+
+Testdurchführung nach Plan:
+
+Test Datensätze: 
+AS-000077 (invalid) *
+AS-000076 (partially invalid at the beginning)**
+AS-000094 (valid)***
+AS-000125 (partially invalid at the end)****
+
+*invalid bedeutet, keiner der Prüfwerte im Testbereich ist durch den Gültigkeitsbereich von Horizons abgedeckt
+**partially invalid at the beginning bedeutet, dass der Testbereich zu Beginn außerhalb des Gültigkeitsbereichs von Horizons liegt
+***valid bedeutet, alle Prüfwerte im Testbereich sind durch den Gültigkeitsbereich von Horizons abgedeckt
+****partially invalid at the end bedeutet, dass der Testbereich am Ende außerhalb des Gültigkeitsbereichs von Horizons liegt
+
+Nomenklatur:
+json alt: altes Referenzfile aus EphemerisRegression
+json gestern: letztes Referenzfile (fehlerhaft) mit Bug
+json neu: neues Referenzfile - Erwartung: Bug fixed
+
+
+Ebene1:
+
+AS-000094 (valid)
+json gestern und json neu sind binär identisch
+-> keine Regression -> ok
+
+AS-000076 (partially invalid at the beginning)
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-TD-2305447.5-2341957.5-30D
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...
+
+--> Log at Console, no file written. -> ok
+
+AS-000125 (partially invalid at the beginning)
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2524593.5&STOP_TIME=JD2561103.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-TD-2524593.5-2561103.5-30D
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...
+
+--> Log at Console, no file written. -> ok
+
+
+AS-000077 (invalid)
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-TD-2305447.5-2341957.5-30D
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...
+
+--> Log at Console, no file written. -> ok
+
+
+
+ERGEBNIS: Tests sind passed. Wir notieren: wenn ein Wert des Datensatzes außerhalb der Definition liegt, wird kein File erzeugt. Das gilt für ungültige Werte am Anfang oder am Ende des Untersuchungsbreichs. Das Verhalten ist damit deterministisch: "wenn irgendein Wert des Testbereichs nicht von Horizons abgedeckt ist, wird kein Datensatz erzeugt.

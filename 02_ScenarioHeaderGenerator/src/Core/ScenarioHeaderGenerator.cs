@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: ScenarioHeaderGenerator.cs
-// STATUS: UPDATED (StepDays as string, passt 1:1 durch)
+// STATUS: UPDATED (RC1 – Full Precision Core + G17)
 // ============================================================
 
 using AstronoData.ScenarioCandidates;
@@ -8,6 +8,7 @@ using ScenarioHeaderGenerator.ScenarioCandidates;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 namespace ScenarioHeaderGenerator
 {
@@ -80,10 +81,7 @@ namespace ScenarioHeaderGenerator
 
             sb.AppendLine("{");
 
-            // =====================================================
             // HEADER
-            // =====================================================
-
             sb.AppendLine("  \"SchemaVersion\": \"1.0\",");
             sb.AppendLine();
             sb.AppendLine($"  \"ScenarioID\": \"{scenarioId}\",");
@@ -121,20 +119,14 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine("    \"Citation\": null");
             sb.AppendLine("  },");
 
-            // =====================================================
             // CORE
-            // =====================================================
-
             sb.AppendLine();
             sb.AppendLine("  \"Core\": {");
 
             sb.AppendLine("    \"Time\": {");
             sb.AppendLine($"      \"StartJD\": {F(core.Time.StartJD)},");
             sb.AppendLine($"      \"StopJD\": {F(core.Time.StopJD)},");
-
-            // 🔥 WICHTIG: StepDays ist jetzt STRING → 1:1 durchreichen
             sb.AppendLine($"      \"StepDays\": \"{core.Time.StepDays}\",");
-
             sb.AppendLine($"      \"TimeScale\": \"{core.Time.TimeScale}\"");
             sb.AppendLine("    },");
 
@@ -144,9 +136,9 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine($"      \"Body\": \"{core.Observer.Body}\",");
 
             sb.AppendLine("      \"Location\": {");
-            sb.AppendLine($"        \"Lat\": {F(core.Observer.Location.Lat)},");
-            sb.AppendLine($"        \"Lon\": {F(core.Observer.Location.Lon)},");
-            sb.AppendLine($"        \"Elevation\": {F(core.Observer.Location.Elevation ?? 0.0)},");
+            sb.AppendLine($"        \"Lat\": {F6(core.Observer.Location.Lat)},");
+            sb.AppendLine($"        \"Lon\": {F6(core.Observer.Location.Lon)},");
+            sb.AppendLine($"        \"Elevation\": {F6(core.Observer.Location.Elevation ?? 0.0)},");
             sb.AppendLine($"        \"SiteName\": \"{core.Observer.Location.SiteName}\"");
             sb.AppendLine("      }");
 
@@ -177,16 +169,11 @@ namespace ScenarioHeaderGenerator
 
             sb.AppendLine("  },");
 
-            // =====================================================
-            // DATASET HEADER (Skeleton)
-            // =====================================================
-
+            // DATASET HEADER (unchanged)
             sb.AppendLine();
             sb.AppendLine("  \"DatasetHeader\": {");
-
             sb.AppendLine($"    \"DatasetID\": \"{scenarioId}--EPH-PLACEHOLDER\",");
             sb.AppendLine();
-
             sb.AppendLine("    \"TruthMetadata\": {");
             sb.AppendLine("      \"CanonicalRequest\": null,");
             sb.AppendLine("      \"RequestHash\": null,");
@@ -195,7 +182,6 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine("      \"TruthProviderUrl\": null,");
             sb.AppendLine("      \"GeneratedAtUtc\": null");
             sb.AppendLine("    },");
-
             sb.AppendLine();
             sb.AppendLine("    \"FactoryMetadata\": {");
             sb.AppendLine("      \"FactoryName\": null,");
@@ -207,14 +193,12 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine("      \"CorrectionLevel\": null,");
             sb.AppendLine("      \"TimeScale\": null");
             sb.AppendLine("    },");
-
             sb.AppendLine();
             sb.AppendLine("    \"TruthCitation\": {");
             sb.AppendLine("      \"Provider\": null,");
             sb.AppendLine("      \"Source\": null,");
             sb.AppendLine("      \"Citation\": null");
             sb.AppendLine("    },");
-
             sb.AppendLine();
             sb.AppendLine("    \"Provenance\": {");
             sb.AppendLine("      \"ScenarioFactory\": null,");
@@ -226,17 +210,14 @@ namespace ScenarioHeaderGenerator
             sb.AppendLine("        \"GitTag\": null");
             sb.AppendLine("      }");
             sb.AppendLine("    },");
-
             sb.AppendLine();
             sb.AppendLine("    \"EngineCitation\": {");
             sb.AppendLine("      \"Author\": null,");
             sb.AppendLine("      \"Software\": null,");
             sb.AppendLine("      \"Citation\": null");
             sb.AppendLine("    },");
-
             sb.AppendLine();
             sb.AppendLine("    \"ValidationFingerprint\": null");
-
             sb.AppendLine("  }");
 
             sb.AppendLine("}");
@@ -249,11 +230,14 @@ namespace ScenarioHeaderGenerator
         // =========================================================
 
         private static string F(double v) =>
-            v.ToString("0.000000", System.Globalization.CultureInfo.InvariantCulture);
+            v.ToString("G17", CultureInfo.InvariantCulture);
 
         private static string Bool(bool b) => b ? "true" : "false";
 
         private static string Escape(string s) =>
             s?.Replace("\"", "\\\"") ?? "";
+
+        private static string F6(double v) =>
+            v.ToString("0.000000", CultureInfo.InvariantCulture);
     }
 }

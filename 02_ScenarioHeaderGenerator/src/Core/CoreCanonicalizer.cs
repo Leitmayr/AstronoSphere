@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: CoreCanonicalizer.cs
-// STATUS: NEW
+// STATUS: UPDATED (RC1 – G17 precision sync)
 // ============================================================
 
 using AstronoData.ScenarioCandidates;
@@ -13,7 +13,7 @@ namespace ScenarioHeaderGenerator
     public static class CoreCanonicalizer
     {
         private static string F(double v) =>
-            v.ToString("0.000000", CultureInfo.InvariantCulture);
+            v.ToString("G17", CultureInfo.InvariantCulture);
 
         public static string ToCanonicalJson(CoreDefinition core)
         {

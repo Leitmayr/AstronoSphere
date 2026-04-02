@@ -1,49 +1,15 @@
-﻿{
+{
   "SchemaVersion": "1.0",
-
   "ScenarioID": "GEO-TDB-2497436.903-2497438.903-1H",
   "CatalogNumber": "AS-000002",
-  "CoreHash": "45062CC5",
-
-  "Author": "Marcus Hiemer",
-
-  "Extensions": "based on book of Jean Meeus, see citation below",
-
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Conjunction",
-  "EventComment": "d/dt Delta R has zero crossing in Geocentric Coordinates",
-
-  "Description": null,
-
-  "Rationale": {
-    "Phenomenon": "special planet conjunctions: outer planet maximum distance to Earth",
-    "NumericalRisk": "1. Sign Transition of Delta R, 2. Angle (planet-sun-earth) is 180° ",
-    "Validates": ["VelocityStability", "Trigonometric edge case sin(180°) or cos(180°)"]
-  },
-
-  "ScientificPurpose": "frequent event every 1-2 years, invisibility of outer planet",
-
-  "Priority": "1",
-
-  "ScenarioCitation": {
-    "Author": "Jean Meeus",
-    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
-    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 36b, p. 252"
-  },
-
+  "CoreHash": "D23757D1",
   "Core": {
     "Time": {
-      "StartJD": 2497436.903000,
-      "StopJD": 2497438.903000,
+      "StartJD": 2497436.9029999999,
+      "StopJD": 2497438.9029999999,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
-
     "Observer": {
       "Type": "Geocentric",
       "Body": "Earth",
@@ -54,16 +20,13 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
-
     "Targets": [
       "Saturn"
     ],
-
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
-
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -71,10 +34,33 @@
       "Nutation": false
     }
   },
-
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Conjunction",
+  "EventComment": "d/dt Delta R has zero crossing in Geocentric Coordinates",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet conjunctions: outer planet maximum distance to Earth",
+    "NumericalRisk": "1. Sign Transition of Delta R, 2. Angle (planet-sun-earth) is 180° ",
+    "Validates": [
+      "VelocityStability",
+      "Trigonometric edge case sin(180°) or cos(180°)"
+    ]
+  },
+  "ScientificPurpose": "frequent event every 1-2 years, invisibility of outer planet",
+  "Priority": "1",
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 36b, p. 252"
+  },
   "DatasetHeader": {
     "DatasetID": "GEO-TDB-2497436.903-2497438.903-1H--EPH-PLACEHOLDER",
-
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -83,7 +69,6 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
-
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -94,13 +79,11 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
-
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
-
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -111,13 +94,11 @@
         "GitTag": null
       }
     },
-
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
-
     "ValidationFingerprint": null
   }
 }

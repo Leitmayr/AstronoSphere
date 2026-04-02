@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "GeoEqDescendingNode",
+    "ApproximateJD": 2461258.624305556,
+    "Source": "Marcus Hiemer, AstronoSphere",
+    "Comment": "Geocentric equatorial declination crossing + to - (validated via Z sign change)"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2461257.624305556,
+      "StopJD": 2461259.624305556,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+      "Venus"
+    ],
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

@@ -1,0 +1,123 @@
+﻿{
+  "SchemaVersion": "1.0",
+
+  "ScenarioID": "HELIO-TDB-2460876.188-2460878.188-1H",
+  "CatalogNumber": "AS-000017",
+  "CoreHash": "5446AE8C",
+
+  "Author": null,
+
+  "Extensions": "placeholder for future needs",
+
+  "Status": {
+    "maturity": null,
+    "visibility": null
+  },
+
+  "ScenarioType": null,
+  "ScenarioCategory": "Quadrant Crossing",
+  "EventComment": "L0 Crossing: Y Coordinate: - to +",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": null,
+    "NumericalRisk": null,
+    "Validates": []
+  },
+
+  "ScientificPurpose": null,
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": null,
+    "Citation": null
+  },
+
+  "Core": {
+    "Time": {
+      "StartJD": 2460876.1888888888,
+      "StopJD": 2460878.1888888888,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+
+    "Targets": [
+      "Neptune"
+    ],
+
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  },
+
+  "DatasetHeader": {
+    "DatasetID": "HELIO-TDB-2460876.188-2460878.188-1H--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": null,
+      "FactoryVersion": null,
+      "Source": null,
+      "ReferenceEphemeris": null,
+      "Mode": null,
+      "EphemType": null,
+      "CorrectionLevel": null,
+      "TimeScale": null
+    },
+
+    "TruthCitation": {
+      "Provider": null,
+      "Source": null,
+      "Citation": null
+    },
+
+    "Provenance": {
+      "ScenarioFactory": null,
+      "TruthFactory": null,
+      "ValidationTarget": {
+        "Software": null,
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
+  }
+}

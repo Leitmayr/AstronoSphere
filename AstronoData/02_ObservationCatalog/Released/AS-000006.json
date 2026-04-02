@@ -1,49 +1,15 @@
-﻿{
+{
   "SchemaVersion": "1.0",
-
   "ScenarioID": "GEO-TDB-2513055.657-2513057.657-1H",
   "CatalogNumber": "AS-000006",
-  "CoreHash": "1DD55B14",
-
-  "Author": "Marcus Hiemer",
-
-  "Extensions": "based on book of Jean Meeus, see citation below",
-
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Descending Node",
-  "EventComment": "Stress test in geocentric ecliptical coordinates: zero crossing of Z + to -. Particularly important for Neptune: light time component",
-
-  "Description": null,
-
-  "Rationale": {
-    "Phenomenon": "special planet conjunction. Planet is changing from above to below the ecliptical plane as seen from earth",
-    "NumericalRisk": "Sign transistion of Z_Helio, Velocity determination at changing sign",
-    "Validates": ["Velocity stability", "Division by zero", "Effects of Light Time Calculation", "Earth Subtraction"]
-  },
-
-  "ScientificPurpose": "Rare event for Uranus, happening only one time per revolution, that is, every ~80 years. the planet has crossed the plane before ligth time reaches the earth. - the effect is particularly interesting for Neptune because of its distance.",
-
-  "Priority": "1",
-
-  "ScenarioCitation": {
-    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
-    "Source": "https://github.com/Leitmayr/AstronoSphere",
-    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
-  },
-
+  "CoreHash": "62D318DE",
   "Core": {
     "Time": {
-      "StartJD": 2513055.657000,
-      "StopJD": 2513057.657000,
+      "StartJD": 2513055.6570000001,
+      "StopJD": 2513057.6570000001,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
-
     "Observer": {
       "Type": "Geocentric",
       "Body": "Earth",
@@ -54,16 +20,13 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
-
     "Targets": [
       "Neptune"
     ],
-
     "Frame": {
       "Type": "GeoEcliptic",
       "Epoch": "J2000"
     },
-
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -71,10 +34,35 @@
       "Nutation": false
     }
   },
-
+  "Author": "Marcus Hiemer",
+  "Extensions": "based on book of Jean Meeus, see citation below",
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Descending Node",
+  "EventComment": "Stress test in geocentric ecliptical coordinates: zero crossing of Z + to -. Particularly important for Neptune: light time component",
+  "Description": null,
+  "Rationale": {
+    "Phenomenon": "special planet conjunction. Planet is changing from above to below the ecliptical plane as seen from earth",
+    "NumericalRisk": "Sign transistion of Z_Helio, Velocity determination at changing sign",
+    "Validates": [
+      "Velocity stability",
+      "Division by zero",
+      "Effects of Light Time Calculation",
+      "Earth Subtraction"
+    ]
+  },
+  "ScientificPurpose": "Rare event for Uranus, happening only one time per revolution, that is, every ~80 years. the planet has crossed the plane before ligth time reaches the earth. - the effect is particularly interesting for Neptune because of its distance.",
+  "Priority": "1",
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+  },
   "DatasetHeader": {
     "DatasetID": "GEO-TDB-2513055.657-2513057.657-1H--EPH-PLACEHOLDER",
-
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -83,7 +71,6 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
-
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -94,13 +81,11 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
-
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-27. https://ssd.jpl.nasa.gov/horizons/"
     },
-
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -111,13 +96,11 @@
         "GitTag": null
       }
     },
-
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
-
     "ValidationFingerprint": null
   }
 }

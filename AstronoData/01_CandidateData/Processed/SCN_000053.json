@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "Ascending Node",
+    "ApproximateJD": 2462301.592361111,
+    "Source": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Comment": "Stress test in geocentric ecliptical coordinates: zero crossing of Z - to +."
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2462300.592361111,
+      "StopJD": 2462302.592361111,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "Targets": [
+	  "Uranus"
+	],
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

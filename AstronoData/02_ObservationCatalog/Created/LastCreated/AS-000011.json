@@ -1,0 +1,123 @@
+﻿{
+  "SchemaVersion": "1.0",
+
+  "ScenarioID": "GEO-TDB-2449313.140-2449315.140-1H",
+  "CatalogNumber": "AS-000011",
+  "CoreHash": "D0C9BBF9",
+
+  "Author": null,
+
+  "Extensions": "placeholder for future needs",
+
+  "Status": {
+    "maturity": null,
+    "visibility": null
+  },
+
+  "ScenarioType": null,
+  "ScenarioCategory": "Western Elongation",
+  "EventComment": "Station: stress test is change in movement direction = zero crossing of velocity",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": null,
+    "NumericalRisk": null,
+    "Validates": []
+  },
+
+  "ScientificPurpose": null,
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36d, p. 254",
+    "Source": null,
+    "Citation": null
+  },
+
+  "Core": {
+    "Time": {
+      "StartJD": 2449313.1400000001,
+      "StopJD": 2449315.1400000001,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+
+    "Targets": [
+      "Mercury"
+    ],
+
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    },
+
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  },
+
+  "DatasetHeader": {
+    "DatasetID": "GEO-TDB-2449313.140-2449315.140-1H--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": null,
+      "FactoryVersion": null,
+      "Source": null,
+      "ReferenceEphemeris": null,
+      "Mode": null,
+      "EphemType": null,
+      "CorrectionLevel": null,
+      "TimeScale": null
+    },
+
+    "TruthCitation": {
+      "Provider": null,
+      "Source": null,
+      "Citation": null
+    },
+
+    "Provenance": {
+      "ScenarioFactory": null,
+      "TruthFactory": null,
+      "ValidationTarget": {
+        "Software": null,
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
+  }
+}

@@ -1,0 +1,123 @@
+﻿{
+  "SchemaVersion": "1.0",
+
+  "ScenarioID": "HELIO-TDB-2305447.500-2341957.500-30D",
+  "CatalogNumber": "AS-000080",
+  "CoreHash": "859982B2",
+
+  "Author": null,
+
+  "Extensions": "placeholder for future needs",
+
+  "Status": {
+    "maturity": null,
+    "visibility": null
+  },
+
+  "ScenarioType": null,
+  "ScenarioCategory": "MeshValidation",
+  "EventComment": "CoreZone 1600-1700, Step30D",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": null,
+    "NumericalRisk": null,
+    "Validates": []
+  },
+
+  "ScientificPurpose": null,
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere",
+    "Source": null,
+    "Citation": null
+  },
+
+  "Core": {
+    "Time": {
+      "StartJD": 2305447.5,
+      "StopJD": 2341957.5,
+      "StepDays": "30D",
+      "TimeScale": "TDB"
+    },
+
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+
+    "Targets": [
+      "Mercury"
+    ],
+
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  },
+
+  "DatasetHeader": {
+    "DatasetID": "HELIO-TDB-2305447.500-2341957.500-30D--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": null,
+      "FactoryVersion": null,
+      "Source": null,
+      "ReferenceEphemeris": null,
+      "Mode": null,
+      "EphemType": null,
+      "CorrectionLevel": null,
+      "TimeScale": null
+    },
+
+    "TruthCitation": {
+      "Provider": null,
+      "Source": null,
+      "Citation": null
+    },
+
+    "Provenance": {
+      "ScenarioFactory": null,
+      "TruthFactory": null,
+      "ValidationTarget": {
+        "Software": null,
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
+  }
+}

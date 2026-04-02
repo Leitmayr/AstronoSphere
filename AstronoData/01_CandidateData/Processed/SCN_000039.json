@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "Quadrant Crossing",
+    "ApproximateJD": 2468862.845138889,
+    "Source": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Comment": "L18 Crossing: X Coordinate: - to +"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2468861.845138889,
+      "StopJD": 2468863.845138889,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": [
+	  "Saturn"
+	],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

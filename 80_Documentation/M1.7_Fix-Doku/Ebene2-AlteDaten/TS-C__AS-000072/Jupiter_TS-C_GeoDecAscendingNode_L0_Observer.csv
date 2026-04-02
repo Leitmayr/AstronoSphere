@@ -1,0 +1,156 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+
+*******************************************************************************
+Ephemeris / API_USER Mon Mar  2 11:20:29 2026 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: Jupiter (599)                   {source: jup365_merged}
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: GEOCENTRIC
+*******************************************************************************
+Start time      : A.D. 2023-Jan-14 04:48:00.0000 TT      
+Stop  time      : A.D. 2023-Jan-16 04:48:00.0000 TT      
+Step-size       : 60 minutes
+*******************************************************************************
+Target pole/equ : IAU_JUPITER                     {West-longitude positive}
+Target radii    : 71492.0, 71492.0, 66854.0 km    {Equator_a, b, pole_c}       
+Center geodetic : 0.0, 0.0, -6378.137             {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.137, 6378.137, 6356.752 km {Equator_a, b, pole_c}       
+Target primary  : Sun
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun                             {source: jup365_merged}
+Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Atmos refraction: NO (AIRLESS)
+RA format       : DEG
+Time format     : JD  
+Calendar mode   : Mixed Julian/Gregorian
+EOP file        : eop.260227.p260526                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-FEB-27. PREDICTS-> 2026-MAY-25
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*******************************************************************************
+Date_________JDTT     R.A.___(ICRF)___DEC
+*****************************************
+$$SOE
+2459958.700000000       2.95714  -0.06556
+2459958.741666667       2.96293  -0.06289
+2459958.783333333       2.96872  -0.06022
+2459958.825000000       2.97452  -0.05754
+2459958.866666667       2.98032  -0.05487
+2459958.908333333       2.98613  -0.05219
+2459958.950000000       2.99194  -0.04951
+2459958.991666667       2.99775  -0.04683
+2459959.033333333       3.00356  -0.04415
+2459959.075000000       3.00938  -0.04147
+2459959.116666667       3.01520  -0.03878
+2459959.158333333       3.02103  -0.03610
+2459959.200000000       3.02686  -0.03341
+2459959.241666667       3.03269  -0.03072
+2459959.283333333       3.03853  -0.02803
+2459959.325000000       3.04437  -0.02534
+2459959.366666667       3.05022  -0.02264
+2459959.408333333       3.05606  -0.01995
+2459959.450000000       3.06192  -0.01725
+2459959.491666667       3.06777  -0.01455
+2459959.533333333       3.07363  -0.01185
+2459959.575000000       3.07949  -0.00915
+2459959.616666667       3.08536  -0.00645
+2459959.658333333       3.09123  -0.00375
+2459959.700000000       3.09710  -0.00104
+2459959.741666667       3.10298   0.00167
+2459959.783333333       3.10886   0.00437
+2459959.825000000       3.11474   0.00708
+2459959.866666667       3.12063   0.00979
+2459959.908333333       3.12652   0.01251
+2459959.950000000       3.13241   0.01522
+2459959.991666667       3.13831   0.01794
+2459960.033333333       3.14421   0.02065
+2459960.075000000       3.15012   0.02337
+2459960.116666667       3.15603   0.02609
+2459960.158333333       3.16194   0.02881
+2459960.200000000       3.16785   0.03154
+2459960.241666667       3.17377   0.03426
+2459960.283333333       3.17970   0.03699
+2459960.325000000       3.18562   0.03971
+2459960.366666667       3.19155   0.04244
+2459960.408333333       3.19749   0.04517
+2459960.450000000       3.20342   0.04790
+2459960.491666667       3.20936   0.05063
+2459960.533333333       3.21531   0.05337
+2459960.575000000       3.22125   0.05610
+2459960.616666667       3.22720   0.05884
+2459960.658333333       3.23316   0.06158
+2459960.700000000       3.23912   0.06432
+$$EOE
+*******************************************************************************
+Column meaning:
+ 
+TIME
+
+  Terrestrial Time ("TT") output was requested. This continuous timescale
+is the relativistic proper time of a clock at rest on the Earth's geoid (at
+"mean sea level"), but defined for a specified gravitational time dilation,
+so a coordinate time. It is appropriate for observations and measurements
+from the surface of the Earth.
+
+  TT runs at a uniform rate of one SI second per second and is independent of
+irregularities in Earth's rotation. It is a theoretical ideal, approximated
+(with a constant offset of 32.184 seconds) by the measured International Atomic
+Time (TAI) after 1955.  TT is the relativistic successor to the now deprecated
+non-relativistic Ephemeris Time (ET).
+
+  The TT scale requested here is a time-scale conversion from internal
+Barycentric Dynamical Time (TDB) and differs periodically from TDB with an
+amplitude less than 2 ms for several thousand years centered on present.
+The time-scale conversion for Earth is used regardless of observer location
+within the solar system, although clock rates may differ due to the local
+gravity field.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+ 'R.A.___(ICRF)___DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in decimal degrees,  ddd.fffff{ffff}
+         DEC in decimal degrees,  sdd.fffff{ffff}
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Author      : Jon.D.Giorgini@jpl.nasa.gov
+
+*******************************************************************************

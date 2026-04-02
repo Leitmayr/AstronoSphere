@@ -1,0 +1,125 @@
+﻿{
+  "SchemaVersion": "1.0",
+
+  "ScenarioID": "GEO-TDB-2449296.644-2449298.644-1H",
+  "CatalogNumber": "AS-000001",
+  "CoreHash": "54204C1F",
+
+ "Core": {
+	"Time": {
+	  "StartJD": 2449296.6439999999,
+	  "StopJD": 2449298.6439999999,
+	  "StepDays": "1H",
+	  "TimeScale": "TDB"
+	},
+
+	"Observer": {
+	  "Type": "Geocentric",
+	  "Body": "Earth",
+	  "Location": {
+		"Lat": 0.000000,
+		"Lon": 0.000000,
+		"Elevation": 0.000000,
+		"SiteName": "CenterOfObservingBody"
+	  }
+	},
+
+	"Targets": [
+	  "Mercury"
+	],
+
+	"Frame": {
+	  "Type": "GeoEcliptic",
+	  "Epoch": "J2000"
+	},
+
+	"Corrections": {
+	  "LightTime": false,
+	  "Aberration": false,
+	  "Precession": false,
+	  "Nutation": false
+	}
+  },
+
+  "Author": null,
+
+  "Extensions": "placeholder for future needs",
+
+  "Status": {
+    "maturity": null,
+    "visibility": null
+  },
+
+  "ScenarioType": null,
+  "ScenarioCategory": "Inferior Conjunction",
+  "EventComment": "d/dt Delta/R has zero crossing in Geocentric Coordinates",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": null,
+    "NumericalRisk": null,
+    "Validates": []
+  },
+
+  "ScientificPurpose": null,
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 36a, p. 252",
+    "Source": null,
+    "Citation": null
+  },
+
+ 
+
+  "DatasetHeader": {
+    "DatasetID": "GEO-TDB-2449296.644-2449298.644-1H--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": null,
+      "FactoryVersion": null,
+      "Source": null,
+      "ReferenceEphemeris": null,
+      "Mode": null,
+      "EphemType": null,
+      "CorrectionLevel": null,
+      "TimeScale": null
+    },
+
+    "TruthCitation": {
+      "Provider": null,
+      "Source": null,
+      "Citation": null
+    },
+
+    "Provenance": {
+      "ScenarioFactory": null,
+      "TruthFactory": null,
+      "ValidationTarget": {
+        "Software": null,
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
+  }
+}

@@ -1,0 +1,124 @@
+﻿{
+  "SchemaVersion": "1.0",
+
+  "ScenarioID": "HELIO-TDB-2460868.19791667-2460870.19791667-1H",
+  "CatalogNumber": "AS-000014",
+  "CoreHash": "7C9D977C",
+
+  "Author": "Marcus Hiemer",
+
+  "Extensions": "based on book of Jean Meeus, see citation below",
+
+
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Quadrant Crossing",
+  "EventComment": "L0 Crossing: Y Coordinate: - to +",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": "Planet passing the 0° (=0 h) line in heliocentric ecliptical coordinates",
+    "NumericalRisk": "core scenario for numerical stability - Heliocentric Longitude 'overflow' 359.99° -> 0.01°",
+    "Validates": ["Wrap in Longitude", "Velocity Stability", "Sign Change of y-Coordinate"]
+  },
+
+  "ScientificPurpose": "planet passes 0 h mark",
+
+  "Priority": "1",
+
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+  },
+
+  "Core": {
+    "Time": {
+      "StartJD": 2460868.197917,
+      "StopJD": 2460870.197917,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun",
+      "Location": {
+        "Lat": 0.000000,
+        "Lon": 0.000000,
+        "Elevation": 0.000000,
+        "SiteName": "CenterOfObservingBody"
+      }
+    },
+
+    "Targets": [
+      "Venus"
+    ],
+
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  },
+
+  "DatasetHeader": {
+    "DatasetID": "HELIO-TDB-2460868.19791667-2460870.19791667-1H--EPH-PLACEHOLDER",
+
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "HELIO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+
+    "ValidationFingerprint": null
+  }
+}
