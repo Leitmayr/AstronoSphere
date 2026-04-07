@@ -1,0 +1,235 @@
+Benenne diesen Chat AS_META_Culture-Process-Plan!
+
+Inhalt des Chats:
+
+1) Strukturelle Themen festlegen
+- Naming der Komponenten für AstronoSphere festlegen
+- Ordnertsrukturen definieren (-> Diskussionbasis: ReferenceData_Domain_Provider_Structure_Future_Freeze_Draft.md)
+- Prozess glatt ziehen (-> Diskussionsbasis: 24_ScenarioCreation_V1.1.pptx)
+- Refactoring des ScenarioHeaders (z.B. BodyClass einführen in Core für "Planet", "PlanetSystem", "Sun", "Moon", "Asteroids", "Comets", "Satellites", ...)  und Validation (-> Basis: SzenarioDatasetHeaderChange_B2B_Migration.md)
+- Refactoring des DatasetHeaders: FactoryMetadata müssen Teil des Dataset-Hashs werden, falls noch nicht der Fall
+- VS Projekte refactorn
+
+Die Diskussion in diesem Chat soll einen Punkt nach dem anderen klären:
+Naming -> Ordner -> Prozess -> SzenarioHeader -> DatasetHeader -> VS Projekte
+
+
+2) Abgleich bestehende Planung mit Elementen aus 1
+- Projektplan an die Entscheidungen aus 1) anpassen
+- Basis: das md-File im Anhang (AstronoSphere_Optimized_ProjectPlan.md)
+
+
+Ziele des Chats:
+zu 1) Entscheidung: Welchen Teil implementieren wir in M1.9? Was wir nicht in M1.9 machen - wann wäre der richtige Milestone?
+zu 2) Saubere Planung von 1.9 (Detail) für die kommenden x Wochen
+3) md-files auf Download Links zur Dokumentation des Chats
+4) Motivation für die nächsten Wochen erzeugen
+
+
+Bemerkung: 
+Berücksichtige, dass Dokumente aus der Projekt-Doku nicht mehr aktuell sind. Keine Annahmen auf dem Inhalt der Dokumente treffen, falls diese im Widerspruch mit den Inhalten dieses Chats sind.
+
+
+
+Du hattest Recht mit der "Astrono"-Inflation. Wie wäre es, wenn wir nur Tools mit Astrono-Wortstamm wählen und die Daten gemäß ihrer Bedeutung im AstronoSphere Kontext?
+
+Daten:
+01_Seeds
+02_Experiments (oder Scenario? - Experiment passt besser zum Wissenschaftscharakter)
+03_References (oder GroundTruth?)
+04_Simulations
+05_AnalysisReports
+
+-> Frage: Singular oder Plural?
+
+Tools: 
+MSF -> AstronoLab: erzeugt Candidates
+SHG -> AstronoBuilder: macht aus einen Draft/Candidate ein Experiment
+TF -> AstronoTruth; AstronoTruth::Horizons (der doppelte Doppelpunkt: was meinst Du? Instanz von...): erzeugt die Reference
+Anstronometria: erzeugt Simulationsergebnisse
+Astronolysis: erzeugt AnalysisReports und DraftCandiates oder Seeds (hier gefällt mir der Begriff, der ist vielschichtig passend: die Saat für künftige Analysen wird gestreut, gleichzeitig der Beginn der Pipeline, auch die Landwirtschaftsanalogie am Beginn eines neuen Pflanzzyklus bis zur Ernte ist sehr passend
+
+
+
+AstronoBuilder
+AnalysisReports
+
+AstronoStamper
+05_Results
+
+
+03_GroundTruth/
+  Ephemeris/
+	Horizons/
+		Run/	  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		LastRun/  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		Baseline/ -> dauerhaft
+	Miriade/
+		Run/	  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		LastRun/  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		Baseline/ -> dauerhaft
+
+  OrbitalElements/
+	ProviderHierfür
+		Run/	  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		LastRun/  -> mindestens während der Entwicklung: darüber hinaus, was meinst Du?
+		Baseline/ -> dauerhaft
+
+
+01_: wir brauchen eine Eingangsstufe für Meeus Datensätze oder Feedback aus Astronolosys. Auch für den Re-Import bestehender Szenarion für die Umwandlung in das neue Schema.
+02_: brauchen wir created? Wo schreibt AstronoCert rein? In Created oder in Released? Der Unterschied war früher wegen des Reviews der Szenarien. Jetzt nicht mehr nötig. Ergo: Released reicht.
+
+
+1) Baseline: wie häufig denkst Du ändert sich das im Betrieb? Wann ändert es sich, sobald alles stabil ist? Nur wenn DE440 -> DE441 z.B. also total selten?
+2) Run/LastRun dauerhaft: freeze
+3) Provider ist Pflicht: freee
+4) Ephemeris als Domain: freeze für M1.9
+5) 03_GroundTruth/ als Name: freeze
+
+= <SzenarioID>--<Domain3CharAbbreviation>-<Provider>-<RefEphemeris>-<CorrectionLevel>-<EphemType>
+
+CoreID: 
+definitiv auch Provider! In Astronolysis möchte ich nachvollziehen können, mit welchem Provider ich das Measurement ausgeführt habe.
+
+Dein Vorschlag: 
+HELIO-TDB-2451545-2451546-0.01D__EPH__VEC__L0__HORIZONS-> Ich würde in der folgenden Art mit "-" separieren, "__" lediglich zwischen Scenario und Data.
+
+Reihenfolge etwas anders:
+HELIO-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0
+
+EPH: Dreibuchstabenkürzel
+{
+EPH = Ephemeris
+ORE = OrbitalElements
+...
+}
+
+Filename: Veto!
+Ich möchte eher etwas, das den Experimentcharakter beinhaltet und das auch dem menschlichen Betrachter hilft:
+
+<BC>_<Body>_<CategoryAbbreviation>_ScenarioID_DatesetID
+
+BC: BodyClass
+Planet
+PlanetSystem (für JupiterMoon Experimente, für Saturnring-Öffnungs Experimente)
+Comet
+Star
+Asteroid
+Sun (e.g. Planetentransite, Sonnenfinsternisse)
+Moon (e.g. Sternbedeckungen, Mondfinsternisse)
+
+Body: 
+BC Planet {
+Mercury
+Venus
+...
+Neptune
+}
+
+oder
+
+BC_Asteroid 
+{
+Ceres
+Juno
+Vesta
+---
+}
+
+CategoryAbbreviation: 
+ANO: Ascending Node
+APH: Aphelion
+CON: Conjunction
+DNO: Descending Node
+INC: Inferior Conjunction
+MCRE: MeshValidation
+OPP: Opposition
+PER: Perihelion
+QCR: Quadrant Crossing
+STA: Station
+GWE: Greatest Western Elongation
+GEE: Greatest Eastern Elongation
+MDP: Miscellenous Data Point
+
+INC: Inferior Conjunction
+
+
+Die ScenarioID würde ich noch etwas überarbeiten. Das können wir später machen. Aber aus meiner Sicht muss die BodyClass ebenfalls in den Core-Header hinein und ein Teil des Core-Hashes werden.
+
+Jetzt liegt eine Meckervorlage vor. Lass uns diskutieren!
+
+----------
+
+Dein Vorschlag ist super. So machen wir das: [Human readable]__[Scenario]__[Dataset]
+Planet-Mercury-INC__HELIO-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+Allerdings GROSSBUCHSTABEN.
+
+Aber: mir gefällt die ScenarioID nicht mehr so. Ich würde z.B. nur JDStart rein machen und nicht beides Start/Stop. Das kürzt schon deutlich ab. Fraglich eher, ob "EPOCH" mit rein sollte - J2000.
+Also eher dann statt
+HELIO-TDB-2451545-2451546-1H
+HELIO-J2000_TDB-2451545.000-1H
+
+Damit wird das Beispiel zu:
+Planet-Mercury-INC__HELIO-J2000_TDB-2451545.000-1H__EPH-HORIZONS-VEC-L0.json
+
+Finale Version:
+Planet-Mercury-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+
+-------
+
+
+Du schlägst oben vor für die ID: 
+<ANALYSIS-TYPE>-<DOMAIN>-<SCOPE> 
+und für den Filename 
+<HUMAN>__<SCOPE>__<ANALYSIS>.json.
+
+Für den Header sagst Du:
+{
+  "Scope": {
+    "Body": "Mars",
+    "Category": "OPP",
+    "TimeRange": "1900-2000"
+  },
+
+  "GroundTruthProviders": [
+    "HORIZONS",
+    "MIRIADE"
+  ],
+
+  "Simulations": [
+    "ASTRONOMETRIA-MEEUS-VEC-L0",
+    "ASTRONOMETRIA-VSOP87-VEC-L0"
+  ],
+
+  "AnalysisType": "ENGINE_COMPARISON"
+}
+
+Was hältst Du von:
+a) Header: <SCOPE>_<ANALYSISTYPE> --> der Rest über Deinen (sehr guten!) Header
+b) Filenmae: <SCOPE>_<ANALYSISTYPE>.json --> der Rest über Deinen (sehr guten!) Header
+
+Wichtig: entweder
+a) der menschliche Anwender extrahiert aus den Ergebnissen EdgeCases ODER
+b) die Analyse stellt weitere Ergebnisse bereit und generiert direkt SeedCandidates für den Beginn der Pipeline
+
+
+-----------
+
+
+Das passt für mich semantisch nicht.
+
+1) AstronoLab schreibt niemals in den ObservationCatalog (der jetzt übrigens "Experiments" heißt). Es gibt eine paar eiserne Regeln: 
+a1) AstronoLab schreibt nur in Seeds
+a2) in Candidates darf außer AstronoLab noch MSF und Astronolysis schreiben
+b1) AstronoCert schreibt in Experiments und in Seeds
+b2) niemand sonst schreibt in Experiments
+c1) AstronoTruth schreibt in GroundTruth
+c2) niemand sonst schreibt in Experiments
+d1) Astronometria (oder andere Engines) schreiben in Simulations
+d2) niemand sonst schreibt in Simulations
+e1) Astronolysis schreibt in Results und in Seeds
+e2) niemand sonst schreibt in Results
+
+2) AstronoLab 
+a) liest seine Daten aus einer "Inbox". Diese Inbox kann befüllt werden vom Meeus Tool oder von Astronolysis oder von anderen manuellen Tools.
+b) schreibt seine Daten in eine "Outbox", die von AstronoCert eingelesen wird. AstronoCert verschiebt die 

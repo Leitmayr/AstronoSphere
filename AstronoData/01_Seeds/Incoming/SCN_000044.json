@@ -1,0 +1,50 @@
+﻿{
+  "GeneratedSeeds":  [
+    {
+      "SeedCandidate":  {
+        "Event":  {
+          "Category":  "Quadrant Crossing",
+          "Qualifier":  "L18 Crossing: X Coordinate: - to +",
+          "Description":  2460847.980555556
+        },
+        "Core":  {
+          "Time":  {
+            "StartJD":  2460846.980555556,
+            "StopJD":  2460848.980555556,
+            "Step":  "1H",
+            "TimeScale":  "TDB"
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",
+            "Body":  "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",
+            "Targets":  [
+              "Earth"
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",
+            "Epoch":  "J2000"
+          }
+        },
+        "Metadata":  {
+          "Author":  "Scenario Merger",
+          "Priority":  1,
+          "Status":  {
+            "Maturity":  "Released",
+            "Visibility":  "Private"
+          }
+        },
+        "Notes":  "Scenario Merger: Generated automatically from 144 existing scenarios."
+      },
+      "SeedOrigin":  {
+        "ResultID":  "144-EXISTING-SCENARIOS_SCENARIO-TRANSFER",
+        "Reason":  "Merge of scenario candidates to seeds",
+        "Trigger":  "M1.9 Data Model Transfer",
+        "CreatedAtUtc":  "2026-04-05T17:05:00Z"
+      }
+    }
+  ]
+}

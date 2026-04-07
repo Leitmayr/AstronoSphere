@@ -1,0 +1,89 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2463529-2463531-1H",
+  "CatalogNumber": "AS-000004",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2463529.456000,
+      "StopJD": 2463531.456000,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Mars"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Aphelion",
+    "Qualifier": "d/dt Delta/R has zero crossing in Heliocentric Coordinates",
+    "Description": 2463530.456000
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios.",
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 38b, p. 270"
+  },
+  "DatasetHeader": {
+    "DatasetID": "HELIO-TDB-2463529.456-2463531.456-1H--EPH-PLACEHOLDER",
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "HELIO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+  }
+}

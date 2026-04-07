@@ -1,0 +1,50 @@
+﻿{
+  "GeneratedSeeds":  [
+    {
+      "SeedCandidate":  {
+        "Event":  {
+          "Category":  "MeshValidation",
+          "Qualifier":  "CoreZone 2400-2500, Step30D",
+          "Description":  2597641.500000
+        },
+        "Core":  {
+          "Time":  {
+            "StartJD":  2597641.500000,
+            "StopJD":  2634151.500000,
+            "Step":  "30D",
+            "TimeScale":  "TDB"
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",
+            "Body":  "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",
+            "Targets":  [
+              "Neptune"
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",
+            "Epoch":  "J2000"
+          }
+        },
+        "Metadata":  {
+          "Author":  "Scenario Merger",
+          "Priority":  1,
+          "Status":  {
+            "Maturity":  "Released",
+            "Visibility":  "Private"
+          }
+        },
+        "Notes":  "Scenario Merger: Generated automatically from 144 existing scenarios."
+      },
+      "SeedOrigin":  {
+        "ResultID":  "144-EXISTING-SCENARIOS_SCENARIO-TRANSFER",
+        "Reason":  "Merge of scenario candidates to seeds",
+        "Trigger":  "M1.9 Data Model Transfer",
+        "CreatedAtUtc":  "2026-04-05T17:05:00Z"
+      }
+    }
+  ]
+}

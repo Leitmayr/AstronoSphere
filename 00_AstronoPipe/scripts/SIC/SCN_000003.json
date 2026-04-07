@@ -1,0 +1,33 @@
+{
+  "Event": {
+    "Category": "Perihelion",
+    "ApproximateJD": 2443873.704,
+    "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 38a, p. 270",
+    "Comment": "d/dt Delta/R has zero crossing in Heliocentric Coordinates"
+  },
+  "Core": {
+    "Time": {
+      "StartJD": 2443872.704,
+      "StopJD": 2443874.704,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "Targets": [
+	  "Venus"
+	],
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+    "Corrections": {
+      "LightTime": false,
+      "Aberration": false,
+      "Precession": false,
+      "Nutation": false
+    }
+  }
+}

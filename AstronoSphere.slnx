@@ -1,15 +1,20 @@
 <Solution>
   <Folder Name="/00_AstronoPipe/" />
   <Folder Name="/00_AstronoPipe/Scripts/">
+    <File Path="00_AstronoPipe/scripts/compare-01-core-migration-step.ps1" />
+    <File Path="00_AstronoPipe/scripts/compare-02-dataset-integrity.ps1" />
     <File Path="00_AstronoPipe/scripts/compare-run-lastRun.ps1" />
     <File Path="00_AstronoPipe/scripts/run-pipeline.ps1" />
+    <File Path="00_AstronoPipe/scripts/scenario-merger-step1.ps1" />
+    <File Path="00_AstronoPipe/scripts/scenario-merger-step2.ps1" />
+    <File Path="00_AstronoPipe/scripts/scenario-merger-step2_1.ps1" />
   </Folder>
   <Folder Name="/00_AstronoPipe/tools/">
     <Project Path="00_AstronoPipe/tools/ScenarioHeaderMerger/ScenarioHeaderMerger.csproj" Id="78d0dd5f-b63d-4999-9793-151dffee87f9" />
   </Folder>
-  <Folder Name="/01_MeeusScenarioFactory/" />
-  <Folder Name="/01_MeeusScenarioFactory/src/">
-    <Project Path="01_MeeusScenarioFactory/src/MeeusScenarioFactory.csproj" />
+  <Folder Name="/01_AstronoLab/" />
+  <Folder Name="/01_AstronoLab/src/">
+    <Project Path="01_AstronoLab/src/AstronoLab/AstronoLab.csproj" Id="3ec62cf7-b1a9-4a7c-b98f-179abb5896c1" />
   </Folder>
   <Folder Name="/02_ScenarioHeaderGenerator/" />
   <Folder Name="/02_ScenarioHeaderGenerator/src/">
