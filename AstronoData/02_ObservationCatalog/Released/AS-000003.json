@@ -1,15 +1,50 @@
-{
+﻿{
   "SchemaVersion": "1.0",
+
   "ScenarioID": "HELIO-TDB-2443872.704-2443874.704-1H",
   "CatalogNumber": "AS-000003",
-  "CoreHash": "6A62F226",
+  "CoreHash": "C66DB3FB",
+
+  "Author": "Marcus Hiemer",
+
+  "Extensions": "based on book of Jean Meeus, see citation below",
+
+
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Perihelion",
+  "EventComment": "d/dt Delta R has zero crossing in Heliocentric Coordinates",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": "special planet constellation: minimum distance planet - sun",
+    "NumericalRisk": "1. Sign Transition Delta R",
+    "Validates": ["DistanceStability"]
+  },
+
+  "ScientificPurpose": "basis for a close opposition scenario for outer planets",
+
+  "Priority": "1",
+
+  "ScenarioCitation": {
+    "Author": "Jean Meeus",
+    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
+    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 38a, p. 270"
+  },
+
   "Core": {
     "Time": {
-      "StartJD": 2443872.7039999999,
-      "StopJD": 2443874.7039999999,
+      "StartJD": 2443872.704000,
+      "StopJD": 2443874.704000,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
+
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun",
@@ -20,13 +55,16 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
+
     "Targets": [
       "Venus"
     ],
+
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
+
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -34,32 +72,10 @@
       "Nutation": false
     }
   },
-  "Author": "Marcus Hiemer",
-  "Extensions": "based on book of Jean Meeus, see citation below",
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Perihelion",
-  "EventComment": "d/dt Delta R has zero crossing in Heliocentric Coordinates",
-  "Description": null,
-  "Rationale": {
-    "Phenomenon": "special planet constellation: minimum distance planet - sun",
-    "NumericalRisk": "1. Sign Transition Delta R",
-    "Validates": [
-      "DistanceStability"
-    ]
-  },
-  "ScientificPurpose": "basis for a close opposition scenario for outer planets",
-  "Priority": "1",
-  "ScenarioCitation": {
-    "Author": "Jean Meeus",
-    "Source": "Book: ISBN (2nd Edition): 978-0943396613",
-    "Citation": "Meeus, J. (1998). Astronomical Algorithms (2nd ed.). Richmond, VA: Willmann-Bell, Ex. 38a, p. 270"
-  },
+
   "DatasetHeader": {
     "DatasetID": "HELIO-TDB-2443872.704-2443874.704-1H--EPH-PLACEHOLDER",
+
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -68,6 +84,7 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
+
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -78,11 +95,13 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
+
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
+
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -93,11 +112,13 @@
         "GitTag": null
       }
     },
+
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
+
     "ValidationFingerprint": null
   }
 }

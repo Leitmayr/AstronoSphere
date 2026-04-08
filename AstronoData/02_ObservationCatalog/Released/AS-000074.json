@@ -1,15 +1,49 @@
-{
+﻿{
   "SchemaVersion": "1.0",
-  "ScenarioID": "HELIO-TDB-2305447.500-2341957.500-30D",
+
+  "ScenarioID": "HELIO-TD-2305447.5-2341957.5-30D",
   "CatalogNumber": "AS-000074",
-  "CoreHash": "81A5EA08",
+  "CoreHash": "78D25DFE",
+
+  "Author": "Marcus Hiemer",
+
+  "Extensions": "based on book of Jean Meeus, see citation below",
+
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+
+  "ScenarioType": "ModelCoverage",
+  "ScenarioCategory": "MeshValidation",
+  "EventComment": "CoreZone 1600-1700, Step30D",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": "Helioecliptical data for one whole century",
+    "NumericalRisk": "Model stability",
+    "Validates": ["Model stability", "Model Coverage especially at the borders of the model definition"]
+  },
+
+  "ScientificPurpose": "Generates a mesh over time to analyze model accuracy statistically as a funtion of time",
+
+  "Priority": null,
+
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+},
+
   "Core": {
     "Time": {
-      "StartJD": 2305447.5,
-      "StopJD": 2341957.5,
+      "StartJD": 2305447.500000,
+      "StopJD": 2341957.500000,
       "StepDays": "30D",
-      "TimeScale": "TDB"
+      "TimeScale": "TD"
     },
+
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun",
@@ -20,13 +54,16 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
+
     "Targets": [
       "Earth"
     ],
+
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
+
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -34,33 +71,10 @@
       "Nutation": false
     }
   },
-  "Author": "Marcus Hiemer",
-  "Extensions": "based on book of Jean Meeus, see citation below",
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-  "ScenarioType": "ModelCoverage",
-  "ScenarioCategory": "MeshValidation",
-  "EventComment": "CoreZone 1600-1700, Step30D",
-  "Description": null,
-  "Rationale": {
-    "Phenomenon": "Helioecliptical data for one whole century",
-    "NumericalRisk": "Model stability",
-    "Validates": [
-      "Model stability",
-      "Model Coverage especially at the borders of the model definition"
-    ]
-  },
-  "ScientificPurpose": "Generates a mesh over time to analyze model accuracy statistically as a funtion of time",
-  "Priority": null,
-  "ScenarioCitation": {
-    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
-    "Source": "https://github.com/Leitmayr/AstronoSphere",
-    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
-  },
+
   "DatasetHeader": {
     "DatasetID": "HELIO-TD-2305447.5-2341957.5-30D--EPH-PLACEHOLDER",
+
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -69,6 +83,7 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
+
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -79,11 +94,13 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
+
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-27. https://ssd.jpl.nasa.gov/horizons/"
     },
+
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -94,11 +111,13 @@
         "GitTag": null
       }
     },
+
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
+
     "ValidationFingerprint": null
   }
 }

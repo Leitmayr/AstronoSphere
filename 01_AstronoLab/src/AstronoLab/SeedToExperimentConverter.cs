@@ -152,8 +152,7 @@ namespace AstronoLab
                     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 };
 
-                options.Converters.Add(new FixedDoubleConverter());
-
+                
                 var jsonOut = JsonSerializer.Serialize(experiment, options);
 
                 // --- FORCE 2 SPACE + CRLF ---
@@ -190,17 +189,17 @@ namespace AstronoLab
         }
     }
 
-    // --- DOUBLE FORMAT FIX (6 DECIMALS, NO STRING BREAKAGE) ---
-    public class FixedDoubleConverter : JsonConverter<double>
-    {
-        public override double Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return reader.GetDouble();
-        }
+//    // --- DOUBLE FORMAT FIX (6 DECIMALS, NO STRING BREAKAGE) ---
+//    public class FixedDoubleConverter : JsonConverter<double>
+//    {
+//        public override double Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+//        {
+//            return reader.GetDouble();
+//        }
 
-        public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
-        {
-            writer.WriteRawValue(value.ToString("0.000000", CultureInfo.InvariantCulture));
-        }
-    }
+//        public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
+//        {
+//            writer.WriteRawValue(value.ToString("0.000000", CultureInfo.InvariantCulture));
+//        }
+//    }
 }

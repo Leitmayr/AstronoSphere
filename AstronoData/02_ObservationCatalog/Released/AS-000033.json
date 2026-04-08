@@ -1,15 +1,49 @@
-{
+﻿{
   "SchemaVersion": "1.0",
-  "ScenarioID": "HELIO-TDB-2460835.712-2460837.712-1H",
+
+  "ScenarioID": "HELIO-TDB-2460835.7125-2460837.7125-1H",
   "CatalogNumber": "AS-000033",
-  "CoreHash": "50274B3E",
+  "CoreHash": "FAD08C7A",
+
+  "Author": "Marcus Hiemer",
+
+  "Extensions": "based on book of Jean Meeus, see citation below",
+
+  "Status": {
+    "maturity": "released",
+    "visibility": "private"
+  },
+
+  "ScenarioType": "NumericalEdgeCase",
+  "ScenarioCategory": "Quadrant Crossing",
+  "EventComment": "L12 Crossing: Y Coordinate: + to -",
+
+  "Description": null,
+
+  "Rationale": {
+    "Phenomenon": "Planet passing the 180° (=12 h) line in heliocentric ecliptical coordinates",
+    "NumericalRisk": "trigonometric edge case for sin(*), cos(*), tan(*)",
+    "Validates": ["Velocity Stability", "Sign Change of y-Coordinate"]
+  },
+
+  "ScientificPurpose": "planet passes 12 h mark",
+
+  "Priority": "1",
+
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+  },
+
   "Core": {
     "Time": {
-      "StartJD": 2460835.7124999999,
-      "StopJD": 2460837.7124999999,
+      "StartJD": 2460835.712500,
+      "StopJD": 2460837.712500,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },
+
     "Observer": {
       "Type": "Heliocentric",
       "Body": "Sun",
@@ -20,13 +54,16 @@
         "SiteName": "CenterOfObservingBody"
       }
     },
+
     "Targets": [
       "Mars"
     ],
+
     "Frame": {
       "Type": "HelioEcliptic",
       "Epoch": "J2000"
     },
+
     "Corrections": {
       "LightTime": false,
       "Aberration": false,
@@ -34,33 +71,10 @@
       "Nutation": false
     }
   },
-  "Author": "Marcus Hiemer",
-  "Extensions": "based on book of Jean Meeus, see citation below",
-  "Status": {
-    "maturity": "released",
-    "visibility": "private"
-  },
-  "ScenarioType": "NumericalEdgeCase",
-  "ScenarioCategory": "Quadrant Crossing",
-  "EventComment": "L12 Crossing: Y Coordinate: + to -",
-  "Description": null,
-  "Rationale": {
-    "Phenomenon": "Planet passing the 180° (=12 h) line in heliocentric ecliptical coordinates",
-    "NumericalRisk": "trigonometric edge case for sin(*), cos(*), tan(*)",
-    "Validates": [
-      "Velocity Stability",
-      "Sign Change of y-Coordinate"
-    ]
-  },
-  "ScientificPurpose": "planet passes 12 h mark",
-  "Priority": "1",
-  "ScenarioCitation": {
-    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
-    "Source": "https://github.com/Leitmayr/AstronoSphere",
-    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
-  },
+
   "DatasetHeader": {
     "DatasetID": "HELIO-TDB-2460835.7125-2460837.7125-1H--EPH-PLACEHOLDER",
+
     "TruthMetadata": {
       "CanonicalRequest": null,
       "RequestHash": null,
@@ -69,6 +83,7 @@
       "TruthProviderUrl": null,
       "GeneratedAtUtc": null
     },
+
     "FactoryMetadata": {
       "FactoryName": "EphemerisFactory",
       "FactoryVersion": "1.0.0",
@@ -79,11 +94,13 @@
       "CorrectionLevel": "L0",
       "TimeScale": "TDB"
     },
+
     "TruthCitation": {
       "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
       "Source": "https://ssd.jpl.nasa.gov/horizons/",
       "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
     },
+
     "Provenance": {
       "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
       "TruthFactory": "HorizonsTruthFactory",
@@ -94,11 +111,13 @@
         "GitTag": null
       }
     },
+
     "EngineCitation": {
       "Author": null,
       "Software": null,
       "Citation": null
     },
+
     "ValidationFingerprint": null
   }
 }

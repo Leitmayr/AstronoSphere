@@ -16,9 +16,9 @@
   <Folder Name="/01_AstronoLab/src/">
     <Project Path="01_AstronoLab/src/AstronoLab/AstronoLab.csproj" Id="3ec62cf7-b1a9-4a7c-b98f-179abb5896c1" />
   </Folder>
-  <Folder Name="/02_ScenarioHeaderGenerator/" />
-  <Folder Name="/02_ScenarioHeaderGenerator/src/">
-    <Project Path="02_ScenarioHeaderGenerator/src/ScenarioHeaderGenerator.csproj" />
+  <Folder Name="/02_AstronoCert/" />
+  <Folder Name="/02_AstronoCert/src/">
+    <Project Path="02_AstronoCert/src/AstronoCert.csproj" />
   </Folder>
   <Folder Name="/03_TruthFactory/" />
   <Folder Name="/03_TruthFactory/src/">
@@ -35,6 +35,14 @@
   <Folder Name="/06_AstronoMeasurement/" />
   <Folder Name="/06_AstronoMeasurement/src/">
     <Project Path="06_AstronoMeasurement/src/AstronoMeasurement.csproj" />
+  </Folder>
+  <Folder Name="/10_AstronoData.Contracts/" />
+  <Folder Name="/10_AstronoData.Contracts/src/">
+    <Project Path="10_AstronoData.Contracts/src/AstronoData.Contracts/AstronoData.Contracts.csproj" Id="7f37510d-5d0f-4eff-a9a4-4f5a56295f43" />
+  </Folder>
+  <Folder Name="/11_Astronodata.IO/" />
+  <Folder Name="/99_Contracts.TestConsole/">
+    <Project Path="99_Contrats.TestConsole/Contracts.TestConsole/Contracts.TestConsole.csproj" Id="72f700a3-0a1c-4a26-9323-369df62098dc" />
   </Folder>
   <Folder Name="/AstronoData/" />
   <Folder Name="/AstronoData/00_Meta/" />
