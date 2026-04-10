@@ -38,8 +38,8 @@
 
   "Core": {
     "Time": {
-      "StartJD": 2463504.088194,
-      "StopJD": 2463506.088194,
+      "StartJD": 2463504.088194444,
+      "StopJD": 2463506.088194444,
       "StepDays": "1H",
       "TimeScale": "TDB"
     },

@@ -1,19 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <OutputType>Exe</OutputType>
+
+    <!-- 🔥 WICHTIG: Default Compile deaktivieren -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Core\DatasetHeaderBuilder.cs" />
-    <Compile Remove="Export\MeshDataL0JsonExportRunner.cs" />
-  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- 🔹 EXPLIZITE SOURCES (NUR DAS WAS DU WILLST)               -->
+  <!-- ========================================================= -->
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\06_AstronoMeasurement\src\AstronoMeasurement.csproj" />
+    <!-- Program -->
+    <Compile Include="Program.cs" />
+
+    <!-- Core -->
+    <Compile Include="Core\**\*.cs" />
+
+    <!-- Domain -->
+    <Compile Include="Domain\**\*.cs" />
   </ItemGroup>
 
 </Project>

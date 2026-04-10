@@ -1,11 +1,10 @@
 ﻿// ============================================================
 // FILE: 03_TruthFactory/src/EphemerisFactory/Core/HorizonsRequestBuilder.cs
-// STATUS: GEÄNDERT (RC5 – Frame Mapping Fix)
+// STATUS: UPDATE (CRITICAL FIX – Preserve JD Precision, no double conversion)
 // ============================================================
 
 using EphemerisRegression.Api;
 using System;
-using System.Globalization;
 using System.Text.Json;
 
 namespace EphemerisFactory.Core
@@ -33,8 +32,13 @@ namespace EphemerisFactory.Core
                 _ => throw new Exception($"Unsupported observer type: {observerType}")
             };
 
-            double start = time.GetProperty("StartJD").GetDouble();
-            double stop = time.GetProperty("StopJD").GetDouble();
+            // =====================================================
+            // 🔥 CRITICAL FIX: DO NOT PARSE TO DOUBLE
+            // Preserve exact precision from JSON
+            // =====================================================
+
+            string start = time.GetProperty("StartJD").GetRawText();
+            string stop = time.GetProperty("StopJD").GetRawText();
 
             string step = time.GetProperty("StepDays").GetString()!;
 
@@ -70,10 +74,13 @@ namespace EphemerisFactory.Core
             {
                 Command = command,
                 Center = center,
-                StartTime = $"JD{F(start)}",
-                StopTime = $"JD{F(stop)}",
+
+                // 🔥 EXACT STRING PRESERVATION
+                StartTime = $"JD{start}",
+                StopTime = $"JD{stop}",
+
                 StepSize = step,
-                RefPlane = refPlane, // 🔥 FIX
+                RefPlane = refPlane,
                 RefSystem = "ICRF",
                 OutputUnits = "AU-D",
                 EphemType = ephemType,
@@ -81,8 +88,5 @@ namespace EphemerisFactory.Core
                 VectorCorrection = vectCorr
             };
         }
-
-        private static string F(double v) =>
-            v.ToString("0.########", CultureInfo.InvariantCulture);
     }
 }

@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: Program.cs
-// STATUS: UPDATE
+// STATUS: UPDATE (Single Run Support)
 // ============================================================
 
 using System;
@@ -16,8 +16,25 @@ namespace EphemerisFactory
 
             try
             {
+                string? experimentId = ParseArgument(args, "--experiment");
+                string? numericId = ParseArgument(args, "--id");
+
                 var runner = new FactoryRunner();
-                runner.Run();
+
+                if (!string.IsNullOrWhiteSpace(experimentId))
+                {
+                    Console.WriteLine($"Running single experiment: {experimentId}");
+                    runner.RunSingle(experimentId);
+                }
+                else if (!string.IsNullOrWhiteSpace(numericId))
+                {
+                    Console.WriteLine($"Running single experiment (numeric): {numericId}");
+                    runner.RunSingleByNumber(int.Parse(numericId));
+                }
+                else
+                {
+                    runner.Run();
+                }
 
                 Console.WriteLine("Factory completed successfully.");
             }
@@ -29,6 +46,16 @@ namespace EphemerisFactory
 
             Console.WriteLine("Press any key to exit...");
             //Console.ReadKey();
+        }
+
+        private static string? ParseArgument(string[] args, string key)
+        {
+            for (int i = 0; i < args.Length - 1; i++)
+            {
+                if (args[i].Equals(key, StringComparison.OrdinalIgnoreCase))
+                    return args[i + 1];
+            }
+            return null;
         }
     }
 }
