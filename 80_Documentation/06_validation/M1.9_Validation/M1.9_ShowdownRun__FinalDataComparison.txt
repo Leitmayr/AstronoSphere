@@ -1,0 +1,324 @@
+Dataset 3: 
+
+
+1) 01_Seeds/Incoming
+
+{
+  "GeneratedSeeds":  [
+    {
+      "SeedCandidate":  {
+        "Event":  {
+          "Category":  "Perihelion",
+          "Qualifier":  "d/dt Delta/R has zero crossing in Heliocentric Coordinates",
+          "Description":  2443873.704
+        },
+        "Core":  {
+          "Time":  {
+            "StartJD":  2443872.704,
+            "StopJD":  2443874.704,
+            "Step":  "1H",
+            "TimeScale":  "TDB"
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",
+            "Body":  "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",
+            "Targets":  [
+              "Venus"
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",
+            "Epoch":  "J2000"
+          }
+        },
+        "Metadata":  {
+          "Author":  "Scenario Merger",
+          "Priority":  1,
+          "Status":  {
+            "Maturity":  "Released",
+            "Visibility":  "Private"
+          }
+        },
+        "Notes":  "Scenario Merger: Generated automatically from 144 existing scenarios."
+      },
+      "SeedOrigin":  {
+        "ResultID":  "144-EXISTING-SCENARIOS_SCENARIO-TRANSFER",
+        "Reason":  "Merge of scenario candidates to seeds",
+        "Trigger":  "M1.9 Data Model Transfer",
+        "CreatedAtUtc":  "2026-04-05T17:05:00Z"
+      }
+    }
+  ]
+}
+
+2) 01_Seeds/Prepared bzw. Seeds/Processed
+
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+  "CatalogNumber": "AS-000003",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2443872.704,
+      "StopJD": 2443874.704,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Venus"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Perihelion",
+    "Qualifier": "d/dt Delta/R has zero crossing in Heliocentric Coordinates",
+    "Description": "2443873.704"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}
+
+3) 02_Experiments/Released
+
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+  "CatalogNumber": "AS-000003",
+  "CoreHash": "5FEF9D98",
+  "Core": {
+    "Time": {
+      "StartJD": 2443872.704,
+      "StopJD": 2443874.704,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Venus"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Perihelion",
+    "Qualifier": "d/dt Delta/R has zero crossing in Heliocentric Coordinates",
+    "Description": "2443873.704"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}
+
+4) 03_GrundTruth/Run
+
+{
+  "ExperimentRef": {
+    "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+    "CoreHash": "5FEF9D98",
+    "CatalogNumber": "AS-000003"
+  },
+  "DatasetHeader": {
+    "Measurement": {
+      "Level": "L0",
+      "Type": "VEC"
+    },
+    "DatasetID": "HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0",
+    "TruthMetadata": {
+      "CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704",
+      "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+      "EpochHash": "36F68135221BF53399E7D083A2CD5FE8200AF69A00B00E15A8A87037B795CF6E",
+      "Requests": [
+        {
+          "CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704",
+          "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+          "HorizonsUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D"
+        }
+      ],
+      "TruthProviderUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D",
+      "GeneratedAtUtc": null
+    },
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "HELIO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+  },
+  "Data": [
+    {
+      "JD": 2443872.704000000,
+      "Position": {"X":-0.46020483076110952,"Y":0.55064887128325191,"Z":0.034066017275032709},
+      "Velocity": {"X":-0.015590682365638261,"Y":-0.013079472531876531,"Z":0.00072219412213830436}
+    },
+    {
+      "JD": 2443872.745666667,
+      "Position": {"X":-0.46085412360236139,"Y":0.55010351196900875,"Z":0.034096085092839817},
+      "Velocity": {"X":-0.01557537041483085,"Y":-0.01309777153167788,"Z":0.00072106096586836493}
+    },
+
+...
+
+    {
+      "JD": 2443874.662333333,
+      "Position": {"X":-0.4900170179444272,"Y":0.5242056250247269,"Z":0.035427480119815113},
+      "Velocity": {"X":-0.014848041846287409,"Y":-0.01391950850265339,"Z":0.00066788141666816248}
+    },
+    {
+      "JD": 2443874.704000000,
+      "Position": {"X":-0.49063534678798182,"Y":0.5236252825367318,"Z":0.035455283965725358},
+      "Velocity": {"X":-0.01483173921977936,"Y":-0.01393692770320506,"Z":0.00066670303308876994}
+    }
+  ]
+}
+
+
+4) 03_GroundTruth/LastRun
+
+{
+  "ExperimentRef": {
+    "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+    "CoreHash": "5FEF9D98",
+    "CatalogNumber": "AS-000003"
+  },
+  "DatasetHeader": {
+    "Measurement": {
+      "Level": "L0",
+      "Type": "VEC"
+    },
+    "DatasetID": "HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0",
+    "TruthMetadata": {
+      "CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704",
+      "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+      "EpochHash": "36F68135221BF53399E7D083A2CD5FE8200AF69A00B00E15A8A87037B795CF6E",
+      "Requests": [
+        {
+          "CanonicalRequest": "CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704",
+          "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+          "HorizonsUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D"
+        }
+      ],
+      "TruthProviderUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D",
+      "GeneratedAtUtc": null
+    },
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "HELIO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+  },
+  "Data": [
+    {
+      "JD": 2443872.704000000,
+      "Position": {"X":-0.46020483076110952,"Y":0.55064887128325191,"Z":0.034066017275032709},
+      "Velocity": {"X":-0.015590682365638261,"Y":-0.013079472531876531,"Z":0.00072219412213830436}
+    },
+    {
+      "JD": 2443872.745666667,
+      "Position": {"X":-0.46085412360236139,"Y":0.55010351196900875,"Z":0.034096085092839817},
+      "Velocity": {"X":-0.01557537041483085,"Y":-0.01309777153167788,"Z":0.00072106096586836493}
+    },
+
+...
+
+
+    {
+      "JD": 2443874.662333333,
+      "Position": {"X":-0.4900170179444272,"Y":0.5242056250247269,"Z":0.035427480119815113},
+      "Velocity": {"X":-0.014848041846287409,"Y":-0.01391950850265339,"Z":0.00066788141666816248}
+    },
+    {
+      "JD": 2443874.704000000,
+      "Position": {"X":-0.49063534678798182,"Y":0.5236252825367318,"Z":0.035455283965725358},
+      "Velocity": {"X":-0.01483173921977936,"Y":-0.01393692770320506,"Z":0.00066670303308876994}
+    }
+  ]
+}
+
+
+

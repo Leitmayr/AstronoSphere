@@ -1,0 +1,61 @@
+Showdown Tests:
+
+For Dataset3
+
+Test1: Seeds Incoming 01_Seeds/Incoming - note down the following
+- Filename SCN_*.json
+- Incoming Folder: content ok - 142 elemente vorhanden
+- Precision: 3 digits
+
+After AstronoLab Run:
+
+Test2: 01_Seeds/Prepared
+- Filename: ok
+- Folder: right folder: ok - 142 elemente vorhanden: ok
+- Header: ok
+- Core Precision: 3 digits - ok
+- No DatasetHeader: yes - ok
+
+After AstronoCert Run:
+
+Test3: 01_Seeds Processed
+- all files copied to this folder: yes - 142 elemente vorhanden: ok
+- Filename: ok
+- Folder: ok
+- Header ok
+- Core Precision 3 digits - ok
+- No DatasetHeader: yes - ok
+
+Test4: 02_Experiments/Released
+- all files copied to this folder: yes
+- Filename: ok
+- Folder: ok
+- Header ok. Sonderzeichen ok (checked mit Datensatz 23)
+- Core Precision ok 3 digits - ok
+- No DatasetHeader: yes - ok
+- CoreHash 8 characters - ok
+
+After AstronoTruth Run:
+
+Test5: 03_GroundTruth/Run
+- Filename: ok: \03_GroundTruth\Ephemeris\Horizons\Run\PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json
+- Folder: ok: \03_GroundTruth\Ephemeris\Horizons\Run\PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json
+- Data kopiert von Run mach  LastRun? LastRun Time Stamp 13-04-2026 20:50...20:52 -> 13-04-2026 20:58...21:00 yes correct: ok
+- Header ok
+- Horizons URL: ok - liefert identische Daten wie die im Datenblock des json Files
+- CoreHash identical to Experiment? yes: ok
+- RequestHash ok - yes, checke with https://emn178.github.io/online-tools/sha256.html: ok
+- Data:
+	a) json
+	- Format ok
+	- JD Precision ok: 3 digits mit 6 schließenden Nullen - ok
+	- Position Precision: 18 digits - ok
+	- Velocity Precision: 18 digits  - ok
+- Run == LastRun?
+	- Run: 15.04.2026 19:18
+	- LastRun: 13.04.2026 20:58 
+	- json: DS 3 files sind identisch zwischen Run und LastRun
+	
+	b) CSV: DS 3 files sind identisch bis auf den Zeitstempel der Horizons Anfrage
+	
+==> Ergebnis: alle Tests bestanden. M1.9 erreicht.

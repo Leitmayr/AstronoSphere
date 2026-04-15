@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2524593-2561103-30D",
+  "CatalogNumber": "AS-000126",
+  "CoreHash": "9C4D625D",
+  "Core": {
+    "Time": {
+      "StartJD": 2524593.5,
+      "StopJD": 2561103.5,
+      "Step": "30D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Saturn"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "MeshValidation",
+    "Qualifier": "CoreZone 2200-2300, Step30D",
+    "Description": "2524593.500000"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

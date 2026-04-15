@@ -1,0 +1,42 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2460691-2460693-1H",
+  "CatalogNumber": "AS-000052",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2460691.359027778,
+      "StopJD": 2460693.359027778,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Venus"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Ascending Node",
+    "Qualifier": "Stress test in geocentric ecliptical coordinates: zero crossing of Z - to +.",
+    "Description": "2460692.359027778"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "GEO-J2000-TDB-2371542-2371544-1H",
+  "CatalogNumber": "AS-000009",
+  "CoreHash": "A939E89D",
+  "Core": {
+    "Time": {
+      "StartJD": 2371542.083,
+      "StopJD": 2371544.083,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Uranus"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Opposition",
+    "Qualifier": "Opposition: stress test is Sun - Earth - Planet 180Â° angle -> 1780-12-17 = three months before Uranus' discovery ",
+    "Description": "2371543.083"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

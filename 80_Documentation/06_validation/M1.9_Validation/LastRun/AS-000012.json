@@ -1,0 +1,89 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "GEO-TDB-2460895.978-2460897.978-1H",
+  "CatalogNumber": "AS-000012",
+  "CoreHash": "1A66918E086852F7C981BDB5073D77BAD2A1085BC1B2FEC34F4A09B34D6699E9",
+  "Core": {
+    "Time": {
+      "StartJD": 2460895.978,
+      "StopJD": 2460897.978,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Uranus"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Descending Node",
+    "Qualifier": "Stress test in geocentric ecliptical coordinates: zero crossing of Z \u002B to -.  Particularly important for Uranus: light time component",
+    "Description": 2460896.978
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios.",
+  "ScenarioCitation": {
+    "Author": "Marcus Hiemer, AstronoSphere, Event Finder Tool in Ephemeris Regression",
+    "Source": "https://github.com/Leitmayr/AstronoSphere",
+    "Citation": "Hiemer, M. (2026). AstronoSphere - an astronomical validation suite"
+  },
+  "DatasetHeader": {
+    "DatasetID": "GEO-TDB-2460895.978-2460897.978-1H--EPH-PLACEHOLDER",
+    "TruthMetadata": {
+      "CanonicalRequest": null,
+      "RequestHash": null,
+      "EpochHash": null,
+      "Requests": null,
+      "TruthProviderUrl": null,
+      "GeneratedAtUtc": null
+    },
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "GEO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+  }
+}

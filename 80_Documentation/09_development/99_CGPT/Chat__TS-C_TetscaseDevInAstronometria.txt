@@ -1,0 +1,102 @@
+
+Antworten auf Deine Fragen:
+- im Moment ist TS-C nur ein Node Test: numerische Genauigkeit um z = 0. Könnte später evtl. erweitert werden
+- wir verwenden Geo, arbeiten nur in GeoÄquatorial
+
+Weitere Infos:
+- RA/DEC ist in der Pipeline noch nicht umgesetzt: Tests vorbereiten, aber als "nicht ausführen" markieren
+- Vx, Vy, Vz ist in der Pipeline noch nicht umgesetzt: Tests vorbereiten, aber als "nicht ausführen" markieren
+
+
+Rückfragen: 
+- wofür brauchst Du r, wenn es nur um Nodes geht?
+- wofür machst Du Event Handling?
+- sonst noch Infos/Sourcen nötig?
+
+Jason File für Neptune Vector Daten:
+
+{
+  "Planet": "Neptune",
+  "TestSuite": "TS-C",
+  "EventName": "GeoDecAscendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=899\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=2026-05-05T03:43\nSTEP_SIZE=1H\nSTOP_TIME=2026-05-07T03:43",
+    "RequestHash": "BC5F4F8A1078E73FEEBBA78B47CEF613D2BF0E3D955F691C30192ABF4831ABC4",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO-DEC",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-03-02T19:21:11.3418992Z"
+  },
+  "Node": {
+    "JulianDate": 2461166.696527778,
+    "Before": {
+      "JulianDate": 2461166.654861111,
+      "X": 30.56909121937891,
+      "Y": 1.777275761274477,
+      "Z": -1.003040166275744E-06,
+      "VX": -0.01206161795356094,
+      "VY": 0.0140860234368321,
+      "VZ": 0.006039263508152366
+    },
+    "At": {
+      "JulianDate": 2461166.696527778,
+      "X": 30.56858847422724,
+      "Y": 1.777862515720255,
+      "Z": 0.0002505624732642681,
+      "VX": -0.01207014824505685,
+      "VY": 0.0140781890996608,
+      "VZ": 0.006035880621062706
+    },
+    "After": {
+      "JulianDate": 2461166.738194444,
+      "X": 30.56808537378192,
+      "Y": 1.778448943627591,
+      "Z": 0.0005019869684316638,
+      "VX": -0.01207867205012139,
+      "VY": 0.01407034958853901,
+      "VZ": 0.006032494627053354
+    }
+  }
+}
+
+
+Passendes Jason File für Neptune Observer Daten:
+
+{
+  "Planet": "Neptune",
+  "TestSuite": "TS-C",
+  "EventName": "GeoDecAscendingNode",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "ANG_FORMAT=DEG\nCAL_FORMAT=JD\nCENTER=500@399\nCOMMAND=899\nCSV_FORMAT=NO\nEPHEM_TYPE=OBSERVER\nOBJ_DATA=NO\nQUANTITIES=1\nSTART_TIME=2026-05-05T03:43\nSTEP_SIZE=1H\nSTOP_TIME=2026-05-07T03:43\nTIME_TYPE=TT",
+    "RequestHash": "C7140AFB02AF124D963367867022DAD2C65CDB785A092CEC00FA1CC26264CFF2",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.0.0",
+    "CorrectionLevel": "L0",
+    "Mode": "GEO-DEC",
+    "EphemType": "OBSERVER",
+    "GeneratedAtUtc": "2026-03-02T19:21:11.3433822Z"
+  },
+  "Node": {
+    "JulianDate": 2461166.696527778,
+    "Before": {
+      "JulianDate": 2461166.654861111,
+      "Ra": 3.32644,
+      "Dec": -0.0004
+    },
+    "At": {
+      "JulianDate": 2461166.696527778,
+      "Ra": 3.32759,
+      "Dec": 7E-05
+    },
+    "After": {
+      "JulianDate": 2461166.738194444,
+      "Ra": 3.32874,
+      "Dec": 0.00054
+    }
+  }
+}
+

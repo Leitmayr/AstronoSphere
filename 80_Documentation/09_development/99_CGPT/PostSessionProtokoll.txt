@@ -1,0 +1,72 @@
+Bonus: 3 Kennzahlen, die wirklich zählen
+
+Wenn Du nur drei Dinge tracken willst:
+a) Scope-Drift pro Session
+b) Regression-Fehler durch Architekturänderung
+c) Chat-Nachrichten bis Freeze
+
+
+
+1) Meta-Daten
+Datum:
+Session-Typ: [Architecture | Implementation | Validation | Meta]
+Level: [L0–L5]
+Dauer (realistisch geschätzt):
+Chat-Länge (Nachrichten grob):
+Build-Status: [grün / rot / offen]
+
+2) Zielklarheit
+War das Ziel klar definiert? [1–5]
+Wurde das Ziel erreicht? [Ja / Teilweise / Nein]
+Gab es Scope-Drift? [Nein / leicht / stark]
+
+Optional kurzer Satz:
+
+Das eigentliche Ziel war…
+
+3️) Technische Qualität
+Architektur-Konsistenz eingehalten? [Ja/Nein]
+Freeze-Verletzung? [Nein/Ja → welche?]
+Regression grün geblieben? [Ja/Nein]
+Wissenschaftlich sauber argumentiert? [1–5]
+
+4️) KI-Nutzung Qualität
+
+Hier wird es interessant.
+
+War die KI eher:
+[ ] Code-Schreiber
+[ ] Denkpartner
+[ ] Strukturgeber
+[ ] Kritischer Prüfer
+
+Habe ich aktiv geführt? [1–5]
+Habe ich präzise gefragt? [1–5]
+Gab es unnötige Wiederholungen? [Ja/Nein]
+
+Reflexionssatz:
+
+Die stärkste Stelle der KI heute war…
+
+Die schwächste Stelle war…
+
+5️) Erkenntnisgewinn
+Was habe ich neu verstanden?
+(Architektur / Physik / Numerik / Prozess)
+
+Nur 1–3 Bulletpoints.
+
+6️) Effizienz-Analyse
+Tempo heute: [langsam / normal / schnell]
+Blocker:
+- technisch?
+- konzeptionell?
+- Chat-Länge?
+
+Hätte man diese Session in 70% der Zeit schaffen können? [Ja/Nein]
+Warum?
+
+7️) Nächster klarer Schritt
+Nächste Session:
+Konkretes Ziel:
+Was darf NICHT passieren?

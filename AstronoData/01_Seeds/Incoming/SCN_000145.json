@@ -1,0 +1,50 @@
+﻿{
+  "GeneratedSeeds":  [
+    {
+      "SeedCandidate":  {
+        "Event":  {
+          "Category":  "Quadrant Crossing",
+          "Qualifier":  "L12 Crossing: Y Coordinate: + to -",
+          "Description":  "2460836.7125"
+        },
+        "Core":  {
+          "Time":  {
+            "StartJD":  2460835.7125,
+            "StopJD":  2460837.7125,
+            "Step":  "1H",
+            "TimeScale":  "TDB"
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",
+            "Body":  "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",
+            "Targets":  [
+              "Mars"
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",
+            "Epoch":  "J2000"
+          }
+        },
+        "Metadata":  {
+          "Author":  "Scenario Merger",
+          "Priority":  1,
+          "Status":  {
+            "Maturity":  "Released",
+            "Visibility":  "Private"
+          }
+        },
+        "Notes":  "Generated manually: replaces false Dataset #34 from initial data base (dublette with #35 - Jupiter)."
+      },
+      "SeedOrigin":  {
+        "ResultID":  "MANUAL CRATION BY M. HIEMER TO REPLACE FALSE #34 FROM 144-EXISTING-SCENARIOS",
+        "Reason":  "Replacement of #34",
+        "Trigger":  "Assert from M1.9 Data Model Testing",
+        "CreatedAtUtc":  "2026-04-13T08:15:00Z"
+      }
+    }
+  ]
+}

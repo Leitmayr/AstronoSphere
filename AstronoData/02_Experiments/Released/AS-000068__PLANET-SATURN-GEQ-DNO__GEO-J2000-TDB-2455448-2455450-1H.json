@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "GEO-J2000-TDB-2455448-2455450-1H",
+  "CatalogNumber": "AS-000068",
+  "CoreHash": "32DD5709",
+  "Core": {
+    "Time": {
+      "StartJD": 2455448.34375,
+      "StopJD": 2455450.34375,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Saturn"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "GeoEqDescendingNode",
+    "Qualifier": "Geocentric equatorial declination crossing + to - (validated via Z sign change)",
+    "Description": "2455449.343750"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

@@ -1,0 +1,82 @@
+Okay, ich bin bereit: beginnen wir mit dem ScenarioMerger Step1: die neuen Seeds aus den alten SCNs + BodyClass + Footer erzeugen für die GoldenSamples
+
+SCN_000003.json	
+SCN_000015.json	
+SCN_000023.json	
+SCN_000046.json	
+SCN_000054.json	
+SCN_000057.json	
+SCN_000072.json.  
+
+Bist Du bereit? 
+Im Anhang die Spec für die Kreise 1, 2, 3: welche wir werden die "New-Elements" in Seed durch "Old-Elements" aus SCN*.json erzeugt (SCN2SeedConversion.txt)
+
+Bitte lesen und Rückmeldung, ob klar.
+
+
+---------------
+
+
+Golden Samples:
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000003.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000015.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000023.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000046.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000054.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000057.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000072.json"
+.\scenario-merger-step1.ps1 -inputFiles ".\SCN_000100.json"
+
+-------------------
+
+Ich habe noch Klärungsbedarf:
+
+1) war nicht eigentlich der Plan, nun zunächst ScenarioMerger Teil 2 laufen zu lassen. Dieser erzeugt Experimente. Danach lesen wir die neuen Seeds ein und erzeugen die Experimente aus Astronolab und wir machen einen Binärvergleich, ob AstronoLab das richtige erzeugt? War da nicht so?
+2) Ich gebe Dir die neue Seeds 15 und das alte Szenario 15: erzeuge das neue Experiment 15, wie Du es Dir denkst. Ich checke dann, ob Dein Verständnis korrekt ist
+
+--------------------
+
+
+Sieht schon mal nicht schlecht aus. Was gut ist:
+a) ScenarioID -> ExperimentID
+b) Du hast den CoreTime korrekt aus Seed übernommen, obwohl AS eine leicht andere Zeit hat. Gut: Seed ist die Wahrheit!
+c) Du hast Location rausgeworfen - perfekt: Seed ist die Wahrheit!
+d) Du hast ObservedObject und BodyClass aus Seed übernommen: perfekt: Seed ist die Wahrheit!
+e) Du hast Corrections rausgeworfen - perfekt: Seed ist die Wahrheit!
+
+
+Ein Sache müssen wir klären:
+A) Deine Meinung: sollte Seed Origin ins Experiment oder ist das eine Meta-Info für den Maintainer zur Bewertung des Experiments in Astronolab
+
+Folgende Dinge musst Du noch ergänzen:
+1) ScenarioCitation 1-1 aus AS* Kopieren und zwar zwischen "Notes" und "DatasetHeader":
+  "ScenarioCitation": {
+    "Author": "<ToDo: Wert aus AS*>",
+    "Source": "<ToDo: Wert aus AS*>",
+    "Citation": "<ToDo: Wert aus AS*>"
+  },
+2) CoreHash fehlt in Deinem toBE-jason -> ich weiß, der stimmt nich mehr, aber ich möchte den falschen CoreHash später in AstronoCert einfach überschreiben lassen. CoreHash bitte  zwischen "CatalogNumber" udn "Core"
+3) DatasetHeader vollständig übernehmen aus AS*, nicht nur die DatasetID
+
+Anhang: AS-000015-toBe.json (Dein Vorschlag) und die bestehende AS-000015.json als Referenz.
+So weit d'accord? Deine Meinung zu A) noch bitte und Rückfragen, falls von Dir offen.
+
+
+Und letzte Frage: die 144 Seeds jetzt alle schon erzeugen, bevor wir die Experimente machen oder erst am Schluss?
+-----
+
+.\scenario-merger-step2.ps1 `
+    -inputFiles `
+    ".\SCN_000015_seed.json"
+	
+.\scenario-merger-step2.ps1 `
+    -inputFiles `
+    ".\SCN_000003_seed.json",
+    ".\SCN_000015_seed.json",
+    ".\SCN_000023_seed.json",
+    ".\SCN_000046_seed.json",
+    ".\SCN_000054_seed.json",
+    ".\SCN_000057_seed.json",
+    ".\SCN_000072_seed.json",
+	".\SCN_000100_seed.json"
+

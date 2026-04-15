@@ -1,0 +1,63 @@
+Zur Abwechslung habe ich auch mal geplant: von heute an
+
+
+TEIL I: DIE KOMPLETTE CHAIN IN BETRIEB NEHMEN	
+
+Woche 1: 144 Szenarien laufen
+- Tag1: Testplan schreiben (-> Excel zum Abhaken)
+- Tag2: Testdurchführung: B2B Holy 12; TS-A: Fehler sammeln
+- Tag3: Testdurchführung: TS-B und TS-C: Fehler sammeln
+- Tag4: Testdurchführung: TS-D: Fehler sammeln; Planung Fehlerbehebung (TS-A bis TS-D)
+- Tag5+6: Fehlerbehebung, Stabilisierung
+Milestone: Pipeline läuft mit 144 Szenarien stabil
+
+--> erreicht am 3.4.2026 nach fünf Tagen.
+
+Woche2-4: Strukturelle Änderungen
+- Dateinamen fixen
+- Prozessvorbereitungen schaffen: 24_ScenarioCreation
+- Szenarien "deprecation", die außerhalb von Horizons Gültigkeit liegen
+- Simples Candiate Tool zur Szenarioerzeugung: 
+	+ GUI basiert 
+	+ kann bestehende Seznarien einlesen
+	+ erzeugt keine DatasetID und DatasetHeader
+- SHG nur noch "Factory" für ScenarioID, CoreHash und CatalogNumber Generation
+- TF erzeugt DatasetHeader
+- Measurement an TF anbinden
+- L1 und L2 Truth Data erzeugen
+
+--> Plan: 18.4.
+
+Woche4-7: Anbindung an Engine; Testfälle grün
+
+--> Plan: 8.5.
+
+Woche8-9: Anbinung an Analysetool: VSOP Auswertung wie ursprünglich, nun in neuer Architektur und mit Provenance Chain evaluated
+
+--> Plan: 22.5.
+
+Woche9-10: Meeus Scenario Factory erzeugt Szenarien (C++ Tool nach C# übersetzen und reanimieren)
+
+--> Plan: 15.6.
+
+
+
+TEIL II: DIE EPHEMERIDENKETTE IN ASTRONOMETRIA MIT ORTHOGONALER FRAME- UND CORRECTION-CHAIN
+Woche10-13: L1, L2, L2+ implementieren und Testen mit den Referenzdaten aus TEIL I
+
+--> Plan: 15.7. 
+
+Danach Entscheidungspunkt:
+a) erste Astronometria Release: BSC und Planeten visualisieren in Polarprojekten, Horizontalprojektion und Merkatorprojektion
+b) Anbindung weiterer Truth Factories und Entwicklung von AstronoSphere in Richtung OpenSource SW
+
+Aktuell Tendenz zu a) ;-)
+
+Was meinst Du?
+
+----------------
+
+
+Das hier sind meine Ideen und Dein Chat-Kumpel aus dem Parallel-Chat hat ein paar Erweiterungen genannt, die in das angehängte md-file geflossen sind:
+
+Features Pipeline läuft durch | Test mit Holy12 -> B2B Alle Files verarbeitet Run gleich wie früher LastRun Daten von früher Released identisch Pro Batch: | TS-A, TS-B, TS-C, TS-D: A-C: „Mitteldatensatz“ von Horizons identisch wie früher mit EphemerisRegression -> B2B früheres System RequestHash Vergleichen mit früher: identisch -> Call identisch CSV Dateien bei mehrfach-Run identisch bis auf Zeitstempel? TS-D: Startwert aus Horizons identisch wie früher? -> API-Call ok Anzahl Datensätze insgesamt für Core gleich? -> Step on, gleiche Mesh-Dichte Ts-A bis -D: jeweils für einen Planeten pro Kategorie (z.B. TS-C Mars für Descending, Jupiter für Ascending): wenn Fehler -> Wiederholung mit anderen Planeten zur Mister-Identifizierung

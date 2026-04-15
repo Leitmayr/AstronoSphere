@@ -1,0 +1,163 @@
+<!DOCTYPE html><html><head>
+      <title>03_AstronSphere__WorkflowDescription</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Marcu\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.21\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="1-astronosphere-eco-system">1. AstronoSphere Eco System </h1>
+<p>This document describes the main logical components, work products and data storage inside the AstronoSphere Eco System (AES).<br>
+Central part is the AstronoData component which stores the data of the system in various Data Bases.<br>
+This document also describes the work flow during the AES.</p>
+<h1 id="2-meeusscenariofactory">2. MeeusScenarioFactory </h1>
+<p>The MeeusScenarioFactory implements various of the approximation algorithms for some of the interesting scenario categories. The algorithms provided by Meeus are rough estimators for astronomical events (see Appendix A.1).<br>
+A scenario designer decides which scenarios are supposed to be created by the MeeusScanarioFactors. These rough estimates are considered not more than ScenarioCandidates for the ObservationCatalog.</p>
+<p>Like the MeeusScenarioFactory, other Scenario-Generatos can provide such candidates.</p>
+<p>These Scenario generators provide the <strong>data</strong> for the scenario (e.g. Julian Date of a dedicated event for which the EphemerisFactory is supposed to determine the reference data).<br>
+Note that the Scenario generators do not implement any part of the scenario header.</p>
+<h1 id="3-scenario-candidates">3. Scenario Candidates </h1>
+<p>Scenario candidates are stored in AstronoData.<br>
+Task to do: specify data format for ScenarioCandidates.</p>
+<h1 id="4-scenario-selection-step">4. Scenario Selection Step </h1>
+<p>ScenarioCandidates are being reviewed by the Maintainer of the ObservationCatalog. He not only maintains the Catalog itself but also the Governance of theScenario generation.<br>
+If a candidate gets approval for the catalog, the maintainer fills out thefirst part of the header of the scenario.<br>
+That means, in this step, the <strong>data</strong> provided by the ScenarioGenerators is extended include the first portion of the <strong>header</strong> as well.<br>
+Things to be filled out in the Scenario Selection Step by the Maintainer:</p>
+<ol>
+<li>Scenario Name</li>
+<li>Status.Maturity: released</li>
+<li>Status.Visibility: Private, Public</li>
+<li>ScenarioType</li>
+<li>ScenarioCategory</li>
+<li>EventComment</li>
+<li>Description</li>
+<li>Rationale</li>
+<li>Scientific Purpose</li>
+<li>Author</li>
+<li>Extensions</li>
+</ol>
+<h1 id="5-scenariogenerator">5. ScenarioGenerator </h1>
+<p>The ScenarioGenerator is another tool which eventually completes the header definition:</p>
+<ol>
+<li>SchemaVersion</li>
+<li>ScenarioID</li>
+<li>CatalogNumber</li>
+<li>CoreHash</li>
+</ol>
+<h1 id="51-input">5.1 Input </h1>
+<p>Reviewed Scenario Candidates which require completion of the ScenarioHeader.</p>
+<h2 id="52-logic">5.2 Logic </h2>
+<h3 id="521-catalognumber">5.2.1 CatalogNumber </h3>
+<p>The catalog number is defined as N = (max(existing CatalogNumber) of elements in the ObservationCatalog. That means, every new scenario stored in the ObservationCatalog increments N.<br>
+The catalog number shall have a prefix "AS-".<br>
+The second part has six digits including leading zeros. It contains the catalog number and it is (N+1). Say (N+1) is 492. Then the second part shall be 000492. The three leading zeros are completing the six digits of the second part.<br>
+The resultsing CatalogNumber therefore is: AS-<leadingzeros>&lt;N+1)&gt;</leadingzeros></p>
+<h3 id="522-corehash">5.2.2 CoreHash </h3>
+<p>The Core Hash is calculted as specified in the leading document 02_AstronoSphere_ScenarioDefinition_v1.2.md.</p>
+<h1 id="53-output">5.3 Output </h1>
+<p>New complete and released Scenario  (ID xy).</p>
+<h1 id="6-observationcatalog">6. ObservationCatalog </h1>
+<h1 id="61-input">6.1 Input </h1>
+<p>New released scenario  (ID xy)</p>
+<h1 id="62-logic">6.2 Logic </h1>
+<p>The ScenarioHeaderGenerator shall be the one and only instance which can add new scenarios to the ObservationCatalog. For other components of AstronoSphere, write access shall be denied.</p>
+<p>The ObservationCatalog contains the released Scenarios. That implies, all required fields in the Scenario definition (header and data) are filled reasonably. The number of elements in the ObservationCatalog is (N+1), e.g. 492 as described in the example in Section 5.1.</p>
+<h1 id="output">Output </h1>
+<p>Released scenario  (ID xy)</p>
+<h1 id="7-truthfactories">7. TruthFactories </h1>
+<h1 id="71-input">7.1 Input </h1>
+<p>Released scenario (ID xy)</p>
+<h1 id="72-logic">7.2 Logic </h1>
+<p>TruthFactories need an additional layer to import secnarios. The import layer shall reject scenarios, which are not in Status.Maturity == release. The Truth factories derive all necessary information from the scenario header and data and determine the reference data from the external source they are connected to.</p>
+<p>To do: implement import layer and resulting runner</p>
+<h1 id="73-output">7.3 Output </h1>
+<p>Released Reference Data corresponding to input (ID xy)</p>
+<h1 id="8-factoryreferencedata">8. FactoryReferenceData </h1>
+<h1 id="81-input">8.1 Input </h1>
+<h1 id="82-logic">8.2 Logic </h1>
+<p>Every TruthFactory stores its data in the FactoryReferenceData storage.<br>
+Every TruthFactory writes their current data in a sub folder called "Run".<br>
+A compare tool can be used for regression and compare the data in "Run" with the data in "LastRun". Only if the data are consistent, the data shall be made available to the next stage of the chain.<br>
+"Making available" is done by the Maintainer of the data base.</p>
+<h1 id="83-output">8.3 Output </h1>
+<p>Released ReferenceData (ID xy)</p>
+<h1 id="9-astronometria">9. Astronometria </h1>
+<h1 id="91-input">9.1 Input </h1>
+<ul>
+<li>released Scenario (ID xy)</li>
+<li>released ReferenceData (ID xy)</li>
+</ul>
+<h1 id="92-logic">9.2 Logic </h1>
+<p>Astronometria is the Engine of AstroSphere. Its Testing Stack picks released ScenarioData (e.g. ID xy), runs the Astronometria algorithms and calculates Astronometria Data (ID xy). Internally, it validates if the delta between its calculated AstronometriaData and the FactoryReferenceData is within the tolerances of the scenario. This is the regression part of Astronometria.<br>
+Moreover, it stores its Run data in Astronometria Data.</p>
+<h1 id="93-output">9.3 Output </h1>
+<p>Astronometria Simulation Data (ID xy)</p>
+<h1 id="10-astronometria-data">10. Astronometria Data </h1>
+<h1 id="101-input">10.1 Input </h1>
+<p>Astronometria Simulation Data (ID xy)</p>
+<h1 id="102-logic">10.2 Logic </h1>
+<p>Astronometria stores its Data in the AstronometriaData storage.<br>
+Astronometria wriths its current data in a sub folder called "Run".<br>
+A compare tool can be used for regression and compare the data in "Run" with the data in "LastRun". Only if the data are consistent, the data shall be made available to the next stage of the chain.<br>
+"Making available" is done by the Maintainer of the data base.</p>
+<h1 id="103-output">10.3 Output </h1>
+<p>Released AstronometriaData (ID xy)</p>
+<h1 id="11-analysis-tool">11. Analysis Tool </h1>
+<h1 id="input">Input </h1>
+<p>Released AstronometriaData (ID xy)<br>
+Released ReferenceData (ID xy)</p>
+<h1 id="logic">Logic </h1>
+<p>Based on the Data from Astronmetria and the factory reference data, an Analysis Tool (e.g. based on Python, potentially even extrnal) may conduct statistical analysis (diff, mean, 95Perc, trend, ...) and create a dedicated analysis report for a given scenario (ID xy).</p>
+<h1 id="output-1">Output </h1>
+<p>Analysis Report (ID xy)</p>
+<h1 id="12-self-extending-path">12. Self extending path </h1>
+<p>The Maintainer may review the analysis reports and determine interesing cases for new simulation scenarios. This final step may push new edge case scenario creation.</p>
+<h1 id="appendix">Appendix </h1>
+<h2 id="a1-scenario-categories">A.1 Scenario Categories </h2>
+<p>This is a list of scenario categories interesting for astronomical computation. The list is not exhaustive.</p>
+<ol>
+<li>Opposition</li>
+<li>Conjunction</li>
+<li>Inferior Conjunction</li>
+<li>Greatest Elongation</li>
+<li>Perihelion</li>
+<li>Aphelion</li>
+<li>Node Crossing</li>
+<li>Quadrant Crossing</li>
+<li>Stationary Point</li>
+<li>Zenith Crossing</li>
+<li>Horizon Crossing</li>
+<li>Maximum Phase Angle</li>
+<li>Eclipse Geometry</li>
+</ol>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

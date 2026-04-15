@@ -1,0 +1,77 @@
+
+Jetzt hör Dir doch erst mal an, was ich eigentlich will...
+
+WICHTIGE Klarstellung: die Pipeline wird nicht an BeyondCompare angepasst sondern BeyondCompare wird an Pipeline angepasst. Wenn das nicht geht ist es das falsche Tool.
+
+BeyondCompare Tests:
+Hinweis: BC soll Daten mit demselben Namen vergleichen, die in unterschiedlichen Verzeichnissen liegen. Also ein File 
+
+AS-000023.json in 02_Experiments/Released wird mit einem AS-000023.json in 02_Experiments/LastRun verglichen
+...
+AS-000046.json in 02_Experiments/Released wird mit einem AS-000046.json in 02_Experiments/LastRun verglichen
+etc.
+
+------------------------
+Use Case1: 
+Erzeugung einer neuen 01_Seed/Prepared/Dataset23
+Vergleich mit einer alten 01_Seed/Processed/Dataset23
+
+Unterschied: der DatasetHeader Block im neuen File fehlt. Block ist am Ende des Files.
+
+Aufgabe für BeyondCompare: 
+- Vergleiche die Dokumente 
+- tu das sehr genau bis zum alten DatasetHeader
+- ignoriere, dass der DatasetHeader im neuen File fehlt
+- gib eine Passed/Not Passed Meldung an der Konsole zurück
+- für späteren Batch-Run: Information, für welches File "not passed"
+
+------------------------
+Use Case2: (gleiche Aufgabe, jedoch andere Daten)
+Erzeugung einer neuen 02_Experiments/Released
+Vergleich mit einer alten 02_Experiments/LastRun
+
+Aufgabe für BeyondCompare: 
+- Vergleiche die Dokumente 
+- tu das sehr genau bis zum alten DatasetHeader
+- ignoriere, dass der DatasetHeader im neuen File fehlt
+- gib eine Passed/Not Passed Meldung an der Konsole zurück
+- für späteren Batch-Run: Information, für welches File "not passed"
+
+------------------------
+Use Case3: 
+Erzeugung einer neuen 03_GroundTruth/.../Run
+Vergleich mit einer alten 03_GroundTruth/.../LastRun
+
+Die Dateien unterscheiden sich wie folgt:
+- am Beginn des Files steht ein DatasetHeader, der unterschiedlich sein darf. 
+- ab einer bestimmten Zeile beginnt der Datenblock
+
+Aufgabe für BeyondCompare: 
+- Vergleiche die Dokumente 
+- ignoriere alle Abweichungen bis zum Datenblock
+- für den gesamten Datenblock: Prüfe auf binär identisch
+- gib eine Passed/Not Passed Meldung an der Konsole zurück
+- für späteren Batch-Run: Information, für welches File "not passed"
+
+------------------------
+Use Case4: Produktivmodus - neu erzeugte Files sollen identisch zu bereits erzeugten Files sein
+Erzeugung einer neuen 03_GroundTruth/.../Run
+Vergleich mit einer alten 03_GroundTruth/.../LastRun
+
+
+Aufgabe für BeyondCompare: 
+- Vergleiche die Dokumente auf binär identisch
+- gib eine Passed/Not Passed Meldung an der Konsole zurück
+- für späteren Batch-Run: Information, für welches File "not passed"
+
+
+================
+
+Ich möchte keine Datenvorverarbeitung, weil ich sonst prüfen muss, ob Du die Daten korrekt vorverarbetiet hast (Test 1) und ob BeyondCompare sie korrekt vergleicht (Test2)
+Ich möchte Tests auf Originaldateien und ich sehe keinen Grund, warum wir das über RegEx oder Ignore Regeln das nicht mit dem Tool hinbekommen, es ist schließlich "so mächtig".
+
+Du schlägst mir sogar doppeltes Preprocessing vor - noch eine Teststufe mehr. Das geht nicht.
+
+Ich schlage vor, dass ich Dir zwei Daten vorbereite aus UseCase 2 und Du erstellst dann ein Script.  Aber nur, wenn Du mir nicht komplett abraten solltest. Falls wir das mit dem Tool und ohne Datenvorverarbeitung nicht hinbekommen arbeite ich mich selbst in das Tool ein und ggf. fliegt es raus.
+
+Hinweis: ich denke darüber nach, BC zu kaufen und möchte die Möglichkeiten auch checken.

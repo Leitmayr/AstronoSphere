@@ -1,0 +1,1293 @@
+<!DOCTYPE html><html><head>
+      <title>CORE_AstronoSphere_Pipeline_DataModel_V1.1</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Marcu\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.22\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="astronosphere-data-model">Astronosphere Data Model </h1>
+<h1 id="i-overview-m19">I. Overview (M1.9) </h1>
+<h2 id="example-experiment">Example Experiment </h2>
+<p>Planet Mercury – Inferior Conjunction (INC)<br>
+HELIO / J2000 / TDB<br>
+JD 2451545–2451546, Step 1H</p>
+<hr>
+<h2 id="1-astronolab">1. AstronoLab </h2>
+<h3 id="input">Input </h3>
+<p>01_Seeds/Incoming/</p>
+<p>Example file name:<br>
+SCN_xxxxxx.json</p>
+<h3 id="function">Function </h3>
+<p>Processes Seeds into structurally valid ExperimentCandidates (without certification)</p>
+<h3 id="output">Output </h3>
+<p>01_Seeds/Prepared/</p>
+<p>Example:<br>
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H.json</p>
+<hr>
+<h2 id="2-astronocert">2. AstronoCert </h2>
+<h3 id="input-1">Input </h3>
+<p>01_Seeds/Prepared/</p>
+<h3 id="function-1">Function </h3>
+<p>Certifies ExperimentCandidates into official Experiments and assigns CatalogNumber</p>
+<h3 id="output-1">Output </h3>
+<p>02_Experiments/Released/<br>
+01_Seeds/Processed/</p>
+<p>Example:<br>
+AS-000123__PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H.json</p>
+<hr>
+<h2 id="3-astronotruth-horizons">3. AstronoTruth (Horizons) </h2>
+<h3 id="input-2">Input </h3>
+<p>02_Experiments/Released/</p>
+<h3 id="function-2">Function </h3>
+<p>Generates GroundTruth data (Ephemeris)</p>
+<h3 id="output-2">Output </h3>
+<p>03_GroundTruth/Ephemeris/Horizons/Run/</p>
+<p>Example:<br>
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json</p>
+<hr>
+<h2 id="4-astronometria">4. Astronometria </h2>
+<h3 id="input-3">Input </h3>
+<ul>
+<li>Experiments: 02_Experiments/Released/</li>
+<li>implicit Measurement (Instrument + Level)</li>
+</ul>
+<h3 id="function-3">Function </h3>
+<p>Simulates Experiments with configurable model accuracy</p>
+<h3 id="output-3">Output </h3>
+<p>04_Simulations/Astronometria/Baseline/</p>
+<p>Examples:<br>
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json<br>
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-VSOP87-VEC-L0.json</p>
+<hr>
+<h2 id="5-astronolysis">5. Astronolysis </h2>
+<h3 id="input-4">Input </h3>
+<p>02_Experiments/Released/<br>
+03_GroundTruth/...<br>
+04_Simulations/...</p>
+<h3 id="function-4">Function </h3>
+<p>Analyzes deviations and generates new Seeds</p>
+<h3 id="output-4">Output </h3>
+<p>05_Results/<br>
+01_Seeds/Incoming/</p>
+<p>Example Result:<br>
+MERCURY-INC-2000_ENGINE-COMPARISON.json</p>
+<p>Generated Seed:<br>
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H.json</p>
+<hr>
+<h2 id="pipeline-flow">Pipeline Flow </h2>
+<p>Seeds/Incoming<br>
+→ AstronoLab<br>
+→ Seeds/Prepared<br>
+→ AstronoCert<br>
+→ Experiments/Released<br>
+→ GroundTruth<br>
+→ Simulations<br>
+→ Astronolysis<br>
+→ Results + new Seeds</p>
+<p>Measurement is implicit in DatasetID and SimulationID</p>
+<hr>
+<h2 id="core-principle">Core Principle </h2>
+<p>AstronoSphere forms a closed scientific loop:</p>
+<p>Seed → Experiment → Measurement → Simulation → Analysis → new Seed</p>
+<h1 id="ii-astronosphere--seeds-folder-structure-freeze-m19">II. AstronoSphere – Seeds Folder Structure Freeze (M1.9) </h1>
+<h2 id="1-purpose">1. Purpose </h2>
+<p>This document defines the final folder structure and semantics for <strong>Seeds</strong>.</p>
+<p>Seeds represent the <strong>starting point of the scientific pipeline</strong>.</p>
+<p>They are:</p>
+<ul>
+<li>experiment candidates</li>
+<li>generated or curated</li>
+<li>not yet certified as Experiments</li>
+</ul>
+<hr>
+<h2 id="2-core-principle">2. Core Principle </h2>
+<blockquote>
+<p>Seeds are first-class citizens and represent potential experiments.</p>
+</blockquote>
+<p>They must:</p>
+<ul>
+<li>be compatible with Experiment structure</li>
+<li>be ingestible by AstronoLab without transformation</li>
+<li>remain traceable throughout the pipeline</li>
+</ul>
+<hr>
+<h2 id="3-folder-structure">3. Folder Structure </h2>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>01_Seeds/
+  Incoming/
+  Prepared/
+  Processed/
+</code></pre><hr>
+<h2 id="4-semantic-definition">4. Semantic Definition </h2>
+<h3 id="41-incoming">4.1 Incoming </h3>
+<p>Incoming contains all newly created Seeds.</p>
+<p>Sources:</p>
+<ul>
+<li>Astronolysis (automated generation)</li>
+<li>Meeus Tool</li>
+<li>manual creation</li>
+</ul>
+<p>Characteristics:</p>
+<ul>
+<li>unprocessed</li>
+<li>not reviewed</li>
+<li>not validated</li>
+</ul>
+<hr>
+<h3 id="42-prepared">4.2 Prepared </h3>
+<p>Prepared contains Seeds processed by AstronoLab.</p>
+<p>Characteristics:</p>
+<ul>
+<li>structurally validated</li>
+<li>enriched with required metadata</li>
+<li>ready for certification</li>
+</ul>
+<p>Important:</p>
+<ul>
+<li>NOT yet official</li>
+<li>NOT yet part of Experiments</li>
+</ul>
+<hr>
+<h3 id="43-processed">4.3 Processed </h3>
+<p>Processed contains Seeds that have been handled by AstronoCert.</p>
+<p>Characteristics:</p>
+<ul>
+<li>already certified into Experiments</li>
+<li>no longer part of active pipeline</li>
+<li>kept for traceability</li>
+</ul>
+<hr>
+<h2 id="5-tool-responsibilities">5. Tool Responsibilities </h2>
+<h3 id="astronolab">AstronoLab </h3>
+<ul>
+<li>reads: Incoming</li>
+<li>writes: Prepared</li>
+</ul>
+<p>AstronoLab MUST NOT write to:</p>
+<ul>
+<li>Experiments</li>
+<li>GroundTruth</li>
+<li>Simulations</li>
+<li>Results</li>
+</ul>
+<hr>
+<h3 id="astronocert">AstronoCert </h3>
+<ul>
+<li>reads: Prepared</li>
+<li>writes:
+<ul>
+<li>Experiments/Released</li>
+<li>Processed</li>
+</ul>
+</li>
+</ul>
+<p>AstronoCert is the ONLY component allowed to create Experiments.</p>
+<hr>
+<h3 id="astronolysis">Astronolysis </h3>
+<ul>
+<li>writes: Incoming</li>
+<li>optionally reads: Experiments, GroundTruth, Simulations</li>
+</ul>
+<p>Astronolysis may generate Seeds automatically based on analysis.</p>
+<hr>
+<h2 id="6-design-rationale">6. Design Rationale </h2>
+<h3 id="61-state-based-model">6.1 State-based model </h3>
+<p>Folders represent <strong>state transitions</strong>, not tools.</p>
+<p>Incoming → Prepared → Processed</p>
+<p>This ensures:</p>
+<ul>
+<li>clarity</li>
+<li>determinism</li>
+<li>auditability</li>
+</ul>
+<hr>
+<h3 id="62-separation-of-concerns">6.2 Separation of concerns </h3>
+<ul>
+<li>Creation (Seeds) is separated from certification (Experiments)</li>
+<li>No tool bypasses AstronoCert</li>
+</ul>
+<hr>
+<h3 id="63-scientific-workflow-alignment">6.3 Scientific workflow alignment </h3>
+<p>The structure follows a natural lifecycle:</p>
+<p>Seed → Preparation → Certification → Experiment</p>
+<p>This reflects a scientific process:</p>
+<ul>
+<li>idea generation</li>
+<li>refinement</li>
+<li>validation</li>
+</ul>
+<hr>
+<h2 id="7-explicit-rules">7. Explicit Rules </h2>
+<ul>
+<li>Seeds MUST NOT be written directly to Experiments</li>
+<li>Only AstronoCert may create Experiments</li>
+<li>Seeds MUST be structurally identical to ExperimentCandidate</li>
+<li>No transformation step between Seeds and Experiment ingestion</li>
+</ul>
+<hr>
+<h2 id="8-naming-consistency">8. Naming Consistency </h2>
+<p>Seeds use the same structure as ExperimentCandidate:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"Event"</span><span class="token operator">:</span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"Core"</span><span class="token operator">:</span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"Metadata"</span><span class="token operator">:</span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h2 id="9-freeze-decision-m19">9. Freeze Decision (M1.9) </h2>
+<ul>
+<li>Seeds folder structure frozen</li>
+<li>Naming (Incoming / Prepared / Processed) frozen</li>
+<li>Tool responsibilities frozen</li>
+<li>Pipeline transitions frozen</li>
+</ul>
+<h1 id="iii-astronosphere--experiments--astronocert-freeze-m19">III. AstronoSphere – Experiments &amp; AstronoCert Freeze (M1.9) </h1>
+<h2 id="1-purpose-1">1. Purpose </h2>
+<p>This document defines:</p>
+<ul>
+<li>the role of AstronoCert</li>
+<li>the structure of Experiments</li>
+<li>the naming convention of Experiment files</li>
+</ul>
+<p>Experiments represent <strong>certified physical experiments</strong>.</p>
+<hr>
+<h2 id="2-core-principle-1">2. Core Principle </h2>
+<blockquote>
+<p>An Experiment is a certified experiment.</p>
+</blockquote>
+<p>It is:</p>
+<ul>
+<li>immutable</li>
+<li>uniquely identified</li>
+<li>officially part of the scientific catalog</li>
+</ul>
+<hr>
+<h2 id="3-astronocert-responsibilities">3. AstronoCert Responsibilities </h2>
+<p>AstronoCert is the ONLY component allowed to create Experiments.</p>
+<h3 id="reads">Reads </h3>
+<ul>
+<li>01_Seeds/Prepared</li>
+</ul>
+<h3 id="writes">Writes </h3>
+<ul>
+<li>02_Experiments/Released</li>
+<li>01_Seeds/Processed (move)</li>
+</ul>
+<h3 id="rules">Rules </h3>
+<ul>
+<li>MUST NOT write to GroundTruth, Simulations, Results</li>
+<li>MUST assign CatalogNumber</li>
+<li>MUST preserve experiment integrity (CoreHash unchanged)</li>
+</ul>
+<hr>
+<h2 id="4-folder-structure">4. Folder Structure </h2>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>02_Experiments/
+  Released/
+</code></pre><p>No Created folder exists.</p>
+<p>Certification is the final step before persistence.</p>
+<hr>
+<h2 id="5-experiment-identity">5. Experiment Identity </h2>
+<p>Each Experiment contains:</p>
+<ul>
+<li>ExperimentID (content-derived)</li>
+<li>CoreHash (content integrity)</li>
+<li>CatalogNumber (assigned identity)</li>
+</ul>
+<hr>
+<h2 id="6-file-naming-frozen">6. File Naming (FROZEN) </h2>
+<h3 id="format">Format </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>&lt;CATALOGNUMBER&gt;__&lt;HUMAN&gt;__&lt;EXPERIMENT&gt;.json
+</code></pre><h3 id="example">Example </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>AS-000123__PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H.json
+</code></pre><hr>
+<h2 id="7-naming-components">7. Naming Components </h2>
+<h3 id="71-catalognumber-prefix">7.1 CatalogNumber (Prefix) </h3>
+<ul>
+<li>format: AS-XXXXXX</li>
+<li>primary identifier</li>
+<li>ensures:
+<ul>
+<li>stable referencing</li>
+<li>natural sorting</li>
+<li>human workflow compatibility</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="72-human-readable-part">7.2 Human Readable Part </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>&lt;BODYCLASS&gt;-&lt;BODY&gt;-&lt;CATEGORY&gt;
+</code></pre><p>Example:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>PLANET-MERCURY-INC
+</code></pre><p>Purpose:</p>
+<ul>
+<li>fast recognition</li>
+<li>browsing support</li>
+</ul>
+<hr>
+<h3 id="73-experiment-part">7.3 Experiment Part </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>HELIO-J2000-TDB-2451545-2451546-1H
+</code></pre><p>Derived from Experiment Core.</p>
+<p>Ensures:</p>
+<ul>
+<li>uniqueness</li>
+<li>traceability</li>
+</ul>
+<hr>
+<h2 id="8-design-rationale">8. Design Rationale </h2>
+<h3 id="81-id-first-design">8.1 ID-first design </h3>
+<p>CatalogNumber is the leading element.</p>
+<p>This supports:</p>
+<ul>
+<li>referencing ("AS-000123")</li>
+<li>scientific workflows</li>
+<li>stable identity independent of naming changes</li>
+</ul>
+<hr>
+<h3 id="82-human-readability">8.2 Human readability </h3>
+<p>The HUMAN section allows:</p>
+<ul>
+<li>quick navigation</li>
+<li>intuitive understanding</li>
+</ul>
+<hr>
+<h3 id="83-no-redundancy-in-hash">8.3 No redundancy in hash </h3>
+<p>CoreHash is NOT part of filename.</p>
+<p>It remains in header only.</p>
+<hr>
+<h3 id="84-uppercase-convention">8.4 Uppercase convention </h3>
+<p>All filenames MUST be uppercase.</p>
+<p>Ensures:</p>
+<ul>
+<li>consistency</li>
+<li>cross-platform stability</li>
+</ul>
+<hr>
+<h2 id="9-immutability-rule">9. Immutability Rule </h2>
+<p>Once created:</p>
+<ul>
+<li>Experiment MUST NOT be modified</li>
+<li>any change → new CatalogNumber</li>
+</ul>
+<hr>
+<h2 id="10-freeze-decision-m19">10. Freeze Decision (M1.9) </h2>
+<ul>
+<li>AstronoCert role frozen</li>
+<li>Experiments structure frozen</li>
+<li>Folder structure frozen</li>
+<li>Naming convention frozen</li>
+<li>ID-first principle frozen</li>
+</ul>
+<h1 id="iv-astronosphere-groundtruth-and-naming-freeze--m19">IV. AstronoSphere GroundTruth and Naming Freeze – M1.9 </h1>
+<h2 id="status">Status </h2>
+<p><strong>Version:</strong> 1.0<br>
+<strong>Status:</strong> Freeze Candidate<br>
+<strong>Scope:</strong> AstronoSphere / AstronoData / GroundTruth / Dataset Naming / Experiment Naming<br>
+<strong>Milestone:</strong> M1.9</p>
+<hr>
+<h2 id="1-purpose-2">1. Purpose </h2>
+<p>This document defines the <strong>frozen naming and storage conventions</strong> for the M1.9 stage of AstronoSphere, with particular focus on:</p>
+<ul>
+<li>GroundTruth folder structure</li>
+<li>Experiment identity</li>
+<li>Dataset identity</li>
+<li>Human-readable file naming</li>
+<li>separation of semantic responsibilities between folders, headers, and file names</li>
+</ul>
+<p>This document is intentionally detailed, because these conventions are not cosmetic.<br>
+They directly affect:</p>
+<ul>
+<li>determinism</li>
+<li>scientific traceability</li>
+<li>developer ergonomics</li>
+<li>long-term maintainability</li>
+<li>future extensibility of GroundTruth domains and providers</li>
+<li>consistency of validation workflows in Astronometria and Astronolysis</li>
+</ul>
+<p>The goal of this freeze is to establish a system that is:</p>
+<ul>
+<li>scientifically meaningful</li>
+<li>operationally simple</li>
+<li>easy to browse</li>
+<li>easy to filter</li>
+<li>stable over time</li>
+<li>compatible with future extension without requiring premature complexity now</li>
+</ul>
+<hr>
+<h2 id="2-architectural-context">2. Architectural Context </h2>
+<p>AstronoSphere distinguishes between two different categories of naming:</p>
+<h3 id="21-tool-naming">2.1 Tool naming </h3>
+<p>Tools follow the <strong>Astrono</strong>* brand logic.</p>
+<p>Examples:</p>
+<ul>
+<li>AstronoLab</li>
+<li>AstronoCert</li>
+<li>AstronoTruth</li>
+<li>Astronometria</li>
+<li>Astronolysis</li>
+</ul>
+<p>This naming is part of the ecosystem identity and is intentionally brand-driven.</p>
+<h3 id="22-data-naming">2.2 Data naming </h3>
+<p>Data structures are <strong>not branded</strong>, but named by semantic meaning.</p>
+<p>Examples:</p>
+<ul>
+<li>Seeds</li>
+<li>Experiments</li>
+<li>GroundTruth</li>
+<li>Simulations</li>
+<li>Results</li>
+</ul>
+<p>This decision ensures that data remains scientifically interpretable and is not over-coupled to current implementation choices.</p>
+<p>The naming philosophy therefore is:</p>
+<blockquote>
+<p>Tools express brand.<br>
+Data expresses meaning.</p>
+</blockquote>
+<p>This distinction is foundational for the entire system and is intentionally preserved in the GroundTruth design.</p>
+<hr>
+<h2 id="3-data-area-overview">3. Data Area Overview </h2>
+<p>The agreed data structure for AstronoSphere M1.9 is:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>01_Seeds
+02_Experiments
+03_GroundTruth
+04_Simulations
+05_Results
+</code></pre><p>Plural form is used for top-level folders because folders contain collections.<br>
+GroundTruth is an exception, since the word implies that there is only one truth.</p>
+<p>Singular form is used for individual entities, such as:</p>
+<ul>
+<li>Seed</li>
+<li>Experiment</li>
+<li>Simulation</li>
+<li>Result</li>
+</ul>
+<p>This folder naming is part of the frozen system vocabulary.</p>
+<hr>
+<h2 id="4-why-groundtruth-is-the-critical-data-area">4. Why GroundTruth is the Critical Data Area </h2>
+<p>GroundTruth is the central scientific reference layer of the validation system.</p>
+<p>It is the point where:</p>
+<ul>
+<li>physical experiment definitions from Experiments</li>
+<li>external scientific measurements from truth providers</li>
+<li>measurement semantics from AstronoMeasurement</li>
+<li>deterministic storage rules</li>
+</ul>
+<p>all converge.</p>
+<p>GroundTruth is therefore more sensitive than the other data areas.</p>
+<p>A bad GroundTruth structure would cause:</p>
+<ul>
+<li>confusion in provider comparison</li>
+<li>poor traceability in Astronolysis</li>
+<li>brittle folder hierarchies</li>
+<li>excessive clicking through the tree</li>
+<li>duplicate representation of information</li>
+<li>future migration pain</li>
+</ul>
+<p>For this reason, GroundTruth required deliberate discussion and is treated as a dedicated freeze topic.</p>
+<hr>
+<h2 id="5-groundtruth-folder-structure--final-decision">5. GroundTruth Folder Structure – Final Decision </h2>
+<p>The final GroundTruth structure for M1.9 is:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>03_GroundTruth/
+
+  Ephemeris/
+    Horizons/
+      Run/
+      LastRun/
+      Baseline/
+
+    Miriade/
+      Run/
+      LastRun/
+      Baseline/
+
+  OrbitalElements/
+    &lt;Provider&gt;/
+      Run/
+      LastRun/
+      Baseline/
+</code></pre><p>For M1.9, only the <strong>Ephemeris</strong> domain is active and frozen.<br>
+The OrbitalElements branch is shown as a forward-compatible structural pattern.</p>
+<hr>
+<h2 id="6-rationale-for-the-groundtruth-folder-structure">6. Rationale for the GroundTruth Folder Structure </h2>
+<h3 id="61-domain-first">6.1 Domain first </h3>
+<p>GroundTruth is structured <strong>domain-first</strong>.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>03_GroundTruth/
+  Ephemeris/
+    Horizons/
+</code></pre><p>This means the top-level split inside GroundTruth is not by provider, but by the scientific kind of truth being measured.</p>
+<p>This was chosen for three reasons.</p>
+<h4 id="611-scientific-reason">6.1.1 Scientific reason </h4>
+<p>Different GroundTruth domains represent fundamentally different kinds of measurements.</p>
+<p>For example:</p>
+<ul>
+<li>Ephemeris truth</li>
+<li>Orbital elements truth</li>
+</ul>
+<p>These are not merely variants of the same data source.<br>
+They represent different scientific objects and must therefore be separated at the top level.</p>
+<p>The structure of AstronoSphere must remain scientifically organized, not provider-organized.</p>
+<h4 id="612-architectural-reason">6.1.2 Architectural reason </h4>
+<p>Factories are domain-centered.</p>
+<p>Examples:</p>
+<ul>
+<li>AstronoTruth for ephemeris truth</li>
+<li>future domain-specific truth tooling for orbital elements</li>
+</ul>
+<p>A domain-first layout supports a clean mapping between code responsibility and storage responsibility.</p>
+<h4 id="613-extensibility-reason">6.1.3 Extensibility reason </h4>
+<p>A single domain can later support multiple providers.</p>
+<p>Example:</p>
+<ul>
+<li>Ephemeris / Horizons</li>
+<li>Ephemeris / Miriade</li>
+</ul>
+<p>That enables direct comparison of providers within the same measurement class.</p>
+<hr>
+<h3 id="62-provider-second">6.2 Provider second </h3>
+<p>Inside a domain, provider folders are mandatory.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>Ephemeris/
+  Horizons/
+  Miriade/
+</code></pre><p>This is a frozen decision.</p>
+<h4 id="rationale">Rationale </h4>
+<p>Provider must remain explicit because:</p>
+<ul>
+<li>Astronolysis must be able to trace which provider produced a dataset</li>
+<li>provider comparison is a core scientific use case</li>
+<li>users must be able to quickly see coverage gaps between providers</li>
+<li>mixed provider data in one shared Run folder would be confusing and dangerous</li>
+</ul>
+<p>The provider dimension is therefore considered stable enough to justify a folder level.</p>
+<hr>
+<h3 id="63-why-the-structure-stays-shallow">6.3 Why the structure stays shallow </h3>
+<p>The structure intentionally stops after:</p>
+<ul>
+<li>Domain</li>
+<li>Provider</li>
+<li>Run / LastRun / Baseline</li>
+</ul>
+<p>The following dimensions are <strong>not represented as folders</strong>:</p>
+<ul>
+<li>Experiment</li>
+<li>experimentID</li>
+<li>Measurement level (L0, L1, ...)</li>
+<li>Instrument (VEC, RADEC, ...)</li>
+<li>model identifiers such as DE440</li>
+<li>body names</li>
+<li>event category</li>
+<li>frame details</li>
+</ul>
+<p>This was a deliberate KISS decision.</p>
+<h4 id="rationale-1">Rationale </h4>
+<p>All of the above already exist in the dataset header and can be surfaced in the file name.<br>
+Introducing them as nested folder levels would create:</p>
+<ul>
+<li>too much clicking through the tree</li>
+<li>unnecessary structural rigidity</li>
+<li>duplicated information</li>
+<li>migration problems when future levels, instruments, or models are added</li>
+</ul>
+<p>The system therefore follows this principle:</p>
+<blockquote>
+<p>Stable scientific axes belong in folders.<br>
+Variable measurement metadata belongs in headers.<br>
+Human navigation support belongs in the file name.</p>
+</blockquote>
+<p>This is one of the most important design decisions of this freeze.</p>
+<hr>
+<h2 id="7-run--lastrun--baseline--final-decision">7. Run / LastRun / Baseline – Final Decision </h2>
+<p>Each provider contains:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>Run/
+LastRun/
+Baseline/
+</code></pre><p>This is not considered temporary development scaffolding.<br>
+It is part of the permanent operational design.</p>
+<h3 id="71-run">7.1 Run </h3>
+<p>Run contains the current output of the latest GroundTruth generation.</p>
+<p>Purpose:</p>
+<ul>
+<li>active processing output</li>
+<li>current regression candidate</li>
+<li>current comparison input</li>
+</ul>
+<h3 id="72-lastrun">7.2 LastRun </h3>
+<p>LastRun contains the previous Run state.</p>
+<p>Purpose:</p>
+<ul>
+<li>deterministic run-to-run comparison</li>
+<li>immediate regression visibility</li>
+<li>debugging support</li>
+</ul>
+<h3 id="73-baseline">7.3 Baseline </h3>
+<p>Baseline stores scientifically accepted reference states.</p>
+<p>Purpose:</p>
+<ul>
+<li>long-term frozen comparison anchors</li>
+<li>release-aligned scientific states</li>
+<li>reference points for future regressions</li>
+</ul>
+<hr>
+<h2 id="8-rationale-for-keeping-run--lastrun-permanently">8. Rationale for Keeping Run / LastRun Permanently </h2>
+<p>The decision was made to keep Run and LastRun permanently, not only during development.</p>
+<h3 id="why-this-matters">Why this matters </h3>
+<p>AstronoSphere is built around deterministic scientific validation.</p>
+<p>Immediate comparison between Run and LastRun is not a temporary convenience.<br>
+It is one of the core operational expressions of determinism.</p>
+<p>Removing Run / LastRun after "stabilization" would actually weaken the architecture.</p>
+<p>The permanent pattern therefore is:</p>
+<ul>
+<li>Run = current state</li>
+<li>LastRun = previous state</li>
+<li>Baseline = accepted long-term reference state</li>
+</ul>
+<p>This structure gives the project both:</p>
+<ul>
+<li>day-to-day regression visibility</li>
+<li>long-range scientific reproducibility</li>
+</ul>
+<hr>
+<h2 id="9-baseline-versioning">9. Baseline Versioning </h2>
+<p>Baseline changes are expected to be rare.</p>
+<p>Typical triggers are:</p>
+<ul>
+<li>a deliberate provider model change (for example DE440 → DE441)</li>
+<li>a meaningful scientific correction</li>
+<li>a consciously accepted new validated system state</li>
+</ul>
+<p>For normal operation, baseline changes should be infrequent and deliberate.</p>
+<p>Because of that, baseline versioning is conceptually supported but operationally light.<br>
+The folder may later contain named frozen states if required.</p>
+<p>The important freeze decision is:</p>
+<blockquote>
+<p>Baseline represents durable, accepted scientific states and must never be casually overwritten.</p>
+</blockquote>
+<hr>
+<h2 id="10-why-model-identifiers-like-de440-are-not-folder-levels">10. Why Model Identifiers Like DE440 Are Not Folder Levels </h2>
+<p>A specific discussion point was whether provider-specific model identifiers such as DE440 should appear in the folder path.</p>
+<p>This was rejected.</p>
+<h3 id="rationale-2">Rationale </h3>
+<p>DE440 is:</p>
+<ul>
+<li>highly specific to certain providers</li>
+<li>metadata, not a top-level structural axis</li>
+<li>already captured in the dataset header</li>
+<li>not important enough to justify another persistent navigation layer</li>
+</ul>
+<p>Putting DE440 into the path would produce unnecessary depth without improving the main workflows.</p>
+<p>The chosen design instead keeps model information in the dataset header, where it belongs.</p>
+<p>This is consistent with the broader design principle:</p>
+<blockquote>
+<p>The file system should express stable operational classification, not every metadata field.</p>
+</blockquote>
+<hr>
+<h2 id="11-measurement-levels-l0-l1---final-decision">11. Measurement Levels (L0, L1, ...) – Final Decision </h2>
+<p>Measurement levels such as L0, L1, L2, ... are <strong>not</strong> folder levels.</p>
+<p>They remain in the dataset header and appear in the DatasetID.</p>
+<p>This is a frozen decision.</p>
+<h3 id="rationale-3">Rationale </h3>
+<p>L0, L1, L2 are not domains and not providers.<br>
+They are part of the measurement definition.</p>
+<p>Putting them into folders would:</p>
+<ul>
+<li>overfit the structure to the current level model</li>
+<li>create a brittle hierarchy</li>
+<li>require future migration as levels evolve</li>
+<li>duplicate information already present in the dataset identity</li>
+</ul>
+<p>Therefore:</p>
+<ul>
+<li>folders remain stable</li>
+<li>levels remain part of the dataset description</li>
+</ul>
+<p>This keeps the GroundTruth structure compact and future-proof.</p>
+<hr>
+<h2 id="12-experimentid--final-decision">12. ExperimentID – Final Decision </h2>
+<p>A revised ExperimentID was agreed.</p>
+<h3 id="final-format">Final format </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>&lt;ORIGIN&gt;-&lt;EPOCH&gt;-&lt;TIMESCALE&gt;-&lt;STARTJD&gt;-&lt;STOPJD&gt;-&lt;STEP&gt;
+</code></pre><p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>HELIO-J2000-TDB-2451545-2451546-1H
+</code></pre><p>This replaces earlier ideas that used more verbose or less balanced forms.</p>
+<hr>
+<h2 id="13-rationale-for-the-experimentid-format">13. Rationale for the ExperimentID Format </h2>
+<h3 id="131-why-start-and-stop-are-both-included">13.1 Why Start and Stop are both included </h3>
+<p>A proposal was considered to shorten the ExperimentID by keeping only the start time and step size.</p>
+<p>This was rejected.</p>
+<h4 id="reason">Reason </h4>
+<p>Without StopJD, the time span of the experiment is not uniquely represented.</p>
+<p>The ExperimentID would then no longer fully identify the temporal extent of the experiment.</p>
+<p>That would be especially problematic because AstronoCert should not need hidden logic to reconstruct missing duration information.</p>
+<p>Including StartJD and StopJD preserves:</p>
+<ul>
+<li>completeness</li>
+<li>determinism</li>
+<li>transparency</li>
+</ul>
+<p>and avoids adding inference logic to the certification step.</p>
+<hr>
+<h3 id="132-why-epoch-is-included">13.2 Why Epoch is included </h3>
+<p>Epoch is explicitly part of the ExperimentID.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>HELIO-J2000-TDB-...
+</code></pre><p>This is an important refinement.</p>
+<h4 id="reason-1">Reason </h4>
+<p>A frame without epoch is incomplete for practical scientific identity.<br>
+J2000 and of-date representations are not interchangeable.</p>
+<p>Including the epoch keeps the ExperimentID more explicit and more future-safe.</p>
+<hr>
+<h3 id="133-why-hyphens-are-used-inside-the-experimentid">13.3 Why hyphens are used inside the ExperimentID </h3>
+<p>The ExperimentID uses hyphens consistently.</p>
+<p>Reason:</p>
+<ul>
+<li>good readability</li>
+<li>robust parsing</li>
+<li>internal consistency with the DatasetID style</li>
+</ul>
+<p>Underscores are not used inside the ExperimentID.</p>
+<hr>
+<h2 id="14-datasetid--final-decision">14. DatasetID – Final Decision </h2>
+<p>The DatasetID format is:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>&lt;ExperimentID&gt;__&lt;DOMAINABBR&gt;-&lt;PROVIDER&gt;-&lt;INSTRUMENT&gt;-&lt;LEVEL&gt;
+</code></pre><p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0
+</code></pre><p>This is a frozen decision.</p>
+<hr>
+<h2 id="15-rationale-for-the-datasetid-format">15. Rationale for the DatasetID Format </h2>
+<h3 id="151-double-underscore-as-block-separator">15.1 Double underscore as block separator </h3>
+<p>A key design decision was to use:</p>
+<ul>
+<li><code>__</code> between Experiment and Dataset parts</li>
+<li><code>-</code> inside each part</li>
+</ul>
+<p>This creates a very strong visual and semantic separation.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>[Experiment]__[Dataset]
+</code></pre><p>This is preferable to one uniform separator because it clearly distinguishes:</p>
+<ul>
+<li>experiment identity</li>
+<li>measurement identity</li>
+</ul>
+<p>The double underscore is therefore not stylistic decoration.<br>
+It is a semantic boundary marker.</p>
+<hr>
+<h3 id="152-why-provider-is-part-of-datasetid">15.2 Why provider is part of DatasetID </h3>
+<p>Provider is part of the DatasetID by explicit decision.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>EPH-HORIZONS-VEC-L0
+</code></pre><p>This is important because provider identity is scientifically relevant in Astronolysis.</p>
+<p>Without provider in the DatasetID, it would be harder to answer questions such as:</p>
+<ul>
+<li>Which provider produced this GroundTruth?</li>
+<li>Is this dataset comparable to a Miriade dataset of the same experiment?</li>
+<li>Which provider was used for this measurement chain?</li>
+</ul>
+<p>Provider therefore belongs to dataset identity, not merely to folder structure or secondary metadata.</p>
+<p>This was one of the most important naming decisions in the discussion.</p>
+<hr>
+<h3 id="153-why-the-order-is-domain--provider--instrument--level">15.3 Why the order is Domain → Provider → Instrument → Level </h3>
+<p>This order was chosen because it expresses the semantic hierarchy of the measurement:</p>
+<ol>
+<li>What truth domain is measured?</li>
+<li>Which provider supplies the truth?</li>
+<li>Which instrument / measurement form is used?</li>
+<li>Which correction level applies?</li>
+</ol>
+<p>This is clearer than other permutations because it moves from broader scientific class to more specific measurement interpretation.</p>
+<hr>
+<h3 id="154-why-model-identifiers-are-not-part-of-datasetid-in-m19">15.4 Why model identifiers are not part of DatasetID in M1.9 </h3>
+<p>Model identifiers such as DE440 are important metadata but are not included in the DatasetID at M1.9.</p>
+<p>Reason:</p>
+<ul>
+<li>they are provider-specific details</li>
+<li>they change rarely</li>
+<li>they would lengthen IDs considerably</li>
+<li>they already exist in the dataset header</li>
+</ul>
+<p>This keeps the DatasetID readable while preserving the full scientific traceability in metadata.</p>
+<hr>
+<h3 id="155-domain-abbreviations">15.5 Domain abbreviations </h3>
+<p>Domain abbreviations are frozen as compact three-letter identifiers.</p>
+<p>Examples:</p>
+<ul>
+<li>EPH = Ephemeris</li>
+<li>ORE = OrbitalElements</li>
+</ul>
+<p>The purpose of abbreviations is to keep the DatasetID compact while preserving domain clarity.</p>
+<hr>
+<h2 id="16-human-readable-file-name--final-decision">16. Human-Readable File Name – Final Decision </h2>
+<p>The final file naming pattern is:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>&lt;HumanReadable&gt;__&lt;ExperimentID&gt;__&lt;DatasetID&gt;.json
+</code></pre><p>Where:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>&lt;HumanReadable&gt; = &lt;BODYCLASS&gt;-&lt;BODY&gt;-&lt;CATEGORYABBR&gt;
+</code></pre><p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+</code></pre><p>Uppercase is used for consistency and visual robustness.</p>
+<hr>
+<h2 id="17-rationale-for-the-human-readable-prefix">17. Rationale for the Human-Readable Prefix </h2>
+<p>The human-readable prefix is intentionally separate from both ExperimentID and DatasetID.</p>
+<p>It exists to support human browsing and debugging.</p>
+<h3 id="why-this-was-needed">Why this was needed </h3>
+<p>Purely technical IDs are deterministic and precise, but they are not always immediately helpful for a human browsing a folder.</p>
+<p>The project therefore explicitly adds a human-readable block at the beginning of the file name.</p>
+<p>That gives quick access to the experiment meaning before parsing the rest of the name.</p>
+<p>This is especially useful when browsing directories during debugging or comparing provider coverage.</p>
+<hr>
+<h3 id="171-bodyclass">17.1 BodyClass </h3>
+<p>BodyClass is included because it helps classify the nature of the experiment quickly.</p>
+<p>Examples:</p>
+<ul>
+<li>PLANET</li>
+<li>PLANETSYSTEM</li>
+<li>COMET</li>
+<li>STAR</li>
+<li>ASTEROID</li>
+<li>SUN</li>
+<li>MOON</li>
+</ul>
+<p>This adds real semantic value and is not merely cosmetic.</p>
+<p>A key additional architectural insight from the discussion was:</p>
+<blockquote>
+<p>BodyClass should become part of the Experiment Core and therefore part of the CoreHash.</p>
+</blockquote>
+<p>This is important because BodyClass contributes to the experiment identity and should not remain only a filename decoration.</p>
+<hr>
+<h3 id="172-body">17.2 Body </h3>
+<p>Body names provide direct scientific readability.</p>
+<p>Example:</p>
+<ul>
+<li>MERCURY</li>
+<li>CERES</li>
+<li>SUN</li>
+</ul>
+<p>That makes folder browsing and mental indexing much easier.</p>
+<hr>
+<h3 id="173-category-abbreviation">17.3 Category abbreviation </h3>
+<p>Category abbreviations summarize the experiment phenomenon.</p>
+<p>Examples include:</p>
+<ul>
+<li>ANO = Ascending Node</li>
+<li>APH = Aphelion</li>
+<li>CON = Conjunction</li>
+<li>DNO = Descending Node</li>
+<li>INC = Inferior Conjunction</li>
+<li>MCRE = MeshValidation</li>
+<li>OPP = Opposition</li>
+<li>PER = Perihelion</li>
+<li>QCR = Quadrant Crossing</li>
+<li>STA = Station</li>
+<li>GWE = Greatest Western Elongation</li>
+<li>GEE = Greatest Eastern Elongation</li>
+<li>MDP = Miscellaneous Data Point</li>
+</ul>
+<p>These abbreviations allow a compact but meaningful event classification directly in the file name.</p>
+<hr>
+<h2 id="18-why-the-file-name-uses-three-semantic-blocks">18. Why the File Name Uses Three Semantic Blocks </h2>
+<p>The final file name design can be understood as:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>[Human Meaning]__[Experiment Definition]__[Measurement Definition]
+</code></pre><p>This is one of the strongest conceptual outcomes of the naming work.</p>
+<h3 id="block-1--human-meaning">Block 1 – Human meaning </h3>
+<p>This tells a human reader what kind of experiment this file represents.</p>
+<h3 id="block-2--experiment-definition">Block 2 – Experiment definition </h3>
+<p>This captures the physical experiment identity.</p>
+<h3 id="block-3--measurement-definition">Block 3 – Measurement definition </h3>
+<p>This captures how the truth was measured.</p>
+<p>This tripartite structure is powerful because it avoids confusion between:</p>
+<ul>
+<li>the meaning of the experiment</li>
+<li>the definition of the experiment</li>
+<li>the definition of the measurement</li>
+</ul>
+<p>The system therefore remains semantically orthogonal while still being browseable.</p>
+<hr>
+<h2 id="19-why-helio-and-vec-are-not-redundant">19. Why HELIO and VEC Are Not Redundant </h2>
+<p>A final important clarification concerned the relationship between items such as:</p>
+<ul>
+<li>HELIO in the ExperimentID</li>
+<li>VEC in the DatasetID</li>
+</ul>
+<p>At first glance, they may seem similar, but they are not redundant.</p>
+<h3 id="helio">HELIO </h3>
+<p>HELIO describes the physical observation context or Experiment origin.</p>
+<p>It answers:</p>
+<ul>
+<li>Where is the experiment anchored?</li>
+<li>What is the observation origin / physical context?</li>
+</ul>
+<h3 id="vec">VEC </h3>
+<p>VEC describes the instrument / measurement form.</p>
+<p>It answers:</p>
+<ul>
+<li>What is being measured?</li>
+<li>In what representation is the result stored?</li>
+</ul>
+<p>These are orthogonal dimensions.</p>
+<p>For example, the same Experiment origin could later be associated with different instruments, and the same instrument can be used with different origins.</p>
+<p>Therefore:</p>
+<blockquote>
+<p>ExperimentID expresses physical experiment identity.<br>
+DatasetID expresses measurement identity.</p>
+</blockquote>
+<p>This separation is intentional and should not be collapsed.</p>
+<hr>
+<h2 id="20-uppercase-convention">20. Uppercase Convention </h2>
+<p>The final file naming examples are written in uppercase.</p>
+<p>Example:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+</code></pre><p>Uppercase was preferred because it offers:</p>
+<ul>
+<li>stronger visual uniformity</li>
+<li>easier browsing</li>
+<li>fewer case inconsistencies in practice</li>
+</ul>
+<p>The extension remains <code>.json</code>.</p>
+<hr>
+<h2 id="21-summary-of-frozen-decisions">21. Summary of Frozen Decisions </h2>
+<h3 id="211-groundtruth-folder-structure">21.1 GroundTruth folder structure </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>03_GroundTruth/
+  Ephemeris/
+    Horizons/
+      Run/
+      LastRun/
+      Baseline/
+    Miriade/
+      Run/
+      LastRun/
+      Baseline/
+</code></pre><h3 id="212-experimentid">21.2 ExperimentID </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>HELIO-J2000-TDB-2451545-2451546-1H
+</code></pre><h3 id="213-datasetid">21.3 DatasetID </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0
+</code></pre><h3 id="214-file-name">21.4 File name </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+</code></pre><h3 id="215-structural-principles">21.5 Structural principles </h3>
+<ul>
+<li>domain-first</li>
+<li>provider-second</li>
+<li>shallow folders</li>
+<li>measurement metadata in header</li>
+<li>provider mandatory</li>
+<li>Run / LastRun / Baseline permanent</li>
+<li>no L0 / L1 folders</li>
+<li>no DE440 folders</li>
+<li>human-readable prefix added intentionally</li>
+<li>BodyClass should become part of Experiment Core</li>
+</ul>
+<hr>
+<h2 id="22-final-architectural-interpretation">22. Final Architectural Interpretation </h2>
+<p>The frozen system can be summarized as:</p>
+<ul>
+<li>folders classify stable operational spaces</li>
+<li>headers store detailed scientific metadata</li>
+<li>file names support human work and quick orientation</li>
+<li>IDs remain deterministic and semantically separated</li>
+</ul>
+<p>This design achieves a balance between:</p>
+<ul>
+<li>KISS</li>
+<li>scientific rigor</li>
+<li>usability</li>
+<li>future extensibility</li>
+</ul>
+<p>It is intentionally neither purely filesystem-driven nor purely metadata-driven.<br>
+Instead, it assigns the right responsibility to each layer.</p>
+<p>That balance is the core achievement of this freeze.</p>
+<hr>
+<h1 id="v-astronosphere--simulations--naming-freeze-m19-v2">V. AstronoSphere – Simulations &amp; Naming Freeze (M1.9 v2) </h1>
+<h2 id="1-purpose-3">1. Purpose </h2>
+<p>This document defines the <strong>Simulation layer</strong> of AstronoSphere.</p>
+<p>Simulations represent computed results of experiments defined in the ObservationCatalog.</p>
+<p>They are generated by:</p>
+<ul>
+<li>Astronometria (primary engine)</li>
+<li>future engines (e.g., Miriade)</li>
+</ul>
+<hr>
+<h2 id="2-core-principle-2">2. Core Principle </h2>
+<p>Simulations MUST mirror GroundTruth structure.</p>
+<p>Goal:</p>
+<ul>
+<li>Direct comparability</li>
+<li>Deterministic validation</li>
+<li>Scientific reproducibility</li>
+</ul>
+<hr>
+<h2 id="3-folder-structure-freeze">3. Folder Structure (Freeze) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>AstronoData/
+  04_Simulations/
+    Ephemeris/
+      Astronometria/
+        Run/
+        LastRun/
+        Baseline/
+</code></pre><hr>
+<h2 id="4-run--lastrun--baseline">4. Run / LastRun / Baseline </h2>
+<p>Run = current execution<br>
+LastRun = previous snapshot<br>
+Baseline = scientific reference (Git baseline)</p>
+<hr>
+<h2 id="5-conceptual-model">5. Conceptual Model </h2>
+<p>Simulation is defined by:</p>
+<ul>
+<li>Experiment (experiment)</li>
+<li>Measurement (instrument + level)</li>
+<li>Engine configuration (how computed)</li>
+</ul>
+<hr>
+<h2 id="6-simulationid-freeze">6. SimulationID (Freeze) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>&lt;ENGINE&gt;-&lt;ENGINECONFIG&gt;-&lt;INSTRUMENT&gt;-&lt;LEVEL&gt;
+</code></pre><p>Examples:</p>
+<p>ASTRONOMETRIA-MEEUS-VEC-L0<br>
+ASTRONOMETRIA-VSOP87-VEC-L0</p>
+<hr>
+<h2 id="7-rules">7. Rules </h2>
+<p>MUST include:</p>
+<ul>
+<li>Engine</li>
+<li>EngineConfig</li>
+<li>Instrument</li>
+<li>Level</li>
+</ul>
+<p>MUST NOT include:</p>
+<ul>
+<li>Frame</li>
+<li>TimeScale</li>
+<li>Epoch</li>
+<li>Target</li>
+</ul>
+<hr>
+<h2 id="8-filename">8. Filename </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>&lt;HUMAN&gt;__&lt;EXPERIMENT&gt;__&lt;SIMULATION&gt;.json
+</code></pre><p>Example:</p>
+<p>PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json</p>
+<hr>
+<h2 id="9-key-principle">9. Key Principle </h2>
+<p>SimulationID contains only parameters that affect computation.</p>
+<hr>
+<h2 id="10-freeze-m19">10. Freeze (M1.9) </h2>
+<ul>
+<li>Structure frozen</li>
+<li>SimulationID frozen</li>
+<li>EngineConfig mandatory</li>
+</ul>
+<h1 id="vi-astronosphere--results-astronolysis-freeze-m19">VI. AstronoSphere – Results (Astronolysis) Freeze (M1.9) </h1>
+<h2 id="1-purpose-4">1. Purpose </h2>
+<p>Results represent the output of Astronolysis.</p>
+<p>They:</p>
+<ul>
+<li>evaluate multiple Experiments, GroundTruth datasets and Simulations</li>
+<li>produce scientific insights</li>
+<li>generate new Seeds for the next pipeline cycle</li>
+</ul>
+<hr>
+<h2 id="2-core-principle-3">2. Core Principle </h2>
+<blockquote>
+<p>Results describe ANALYSIS, not measurement or simulation.</p>
+</blockquote>
+<p>They operate on:</p>
+<ul>
+<li>multiple Experiments</li>
+<li>multiple GroundTruth datasets</li>
+<li>multiple Simulations</li>
+</ul>
+<hr>
+<h2 id="3-naming">3. Naming </h2>
+<h3 id="file-name">File Name </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>&lt;SCOPE&gt;_&lt;ANALYSISTYPE&gt;.json
+</code></pre><p>Example:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>MARS-OPP-1900-2000_ENGINE-COMPARISON.json
+</code></pre><hr>
+<h2 id="4-header-structure">4. Header Structure </h2>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"Scope"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"Body"</span><span class="token operator">:</span> <span class="token string">"Mars"</span><span class="token punctuation">,</span>
+    <span class="token property">"Category"</span><span class="token operator">:</span> <span class="token string">"OPP"</span><span class="token punctuation">,</span>
+    <span class="token property">"TimeRange"</span><span class="token operator">:</span> <span class="token string">"1900-2000"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"AnalysisType"</span><span class="token operator">:</span> <span class="token string">"ENGINE_COMPARISON"</span><span class="token punctuation">,</span>
+
+  <span class="token property">"GroundTruthProviders"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"HORIZONS"</span><span class="token punctuation">,</span>
+    <span class="token string">"MIRIADE"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Simulations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"ASTRONOMETRIA-MEEUS-VEC-L0"</span><span class="token punctuation">,</span>
+    <span class="token string">"ASTRONOMETRIA-VSOP87-VEC-L0"</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h2 id="5-snapshot--reproducibility">5. Snapshot &amp; Reproducibility </h2>
+<h3 id="51-snapshot-structure">5.1 Snapshot Structure </h3>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"Snapshot"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"Experiments"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">"ExperimentID"</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>  <span class="token property">"CoreHash"</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>  <span class="token property">"CatalogNumber"</span><span class="token operator">:</span> <span class="token string">"AS-XXXXXX"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"GroundTruth"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">"GroundTruthID"</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+        <span class="token property">"Hash"</span><span class="token operator">:</span> <span class="token string">"..."</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"Simulations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">"SimulationID"</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+        <span class="token property">"Hash"</span><span class="token operator">:</span> <span class="token string">"..."</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"SnapshotHash"</span><span class="token operator">:</span> <span class="token string">"..."</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Note: "Experiments" should be written in one line to save space.</p>
+<hr>
+<h3 id="52-canonicalization-rule">5.2 Canonicalization Rule </h3>
+<p>SnapshotHash is computed as:</p>
+<ul>
+<li>collect all referenced elements</li>
+<li>sort alphabetically</li>
+<li>canonicalize structure</li>
+<li>apply SHA256</li>
+</ul>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SnapshotHash = SHA256(canonical(sorted(input)))
+</code></pre><p>This is identical to:</p>
+<ul>
+<li>Experiment CoreHash</li>
+<li>Dataset Hashing</li>
+</ul>
+<hr>
+<h2 id="6-results-body">6. Results Body </h2>
+<p>Result content is intentionally <strong>not frozen</strong>.</p>
+<p>Only top-level structure is defined:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"Results"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"Statistics"</span><span class="token operator">:</span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"Distributions"</span><span class="token operator">:</span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"Outliers"</span><span class="token operator">:</span> <span class="token punctuation">[</span> ... <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h2 id="7-generated-seeds">7. Generated Seeds </h2>
+<h3 id="71-structure-frozen">7.1 Structure (FROZEN) </h3>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"GeneratedSeeds"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"SeedCandidate"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"Event"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">"Category"</span><span class="token operator">:</span> <span class="token string">"QCR"</span><span class="token punctuation">,</span>
+          <span class="token property">"Qualifier"</span><span class="token operator">:</span> <span class="token string">"L18"</span><span class="token punctuation">,</span>
+          <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"X coordinate sign change (- to +)"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"Core"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">"Time"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"StartJD"</span><span class="token operator">:</span> <span class="token number">2478083.966</span><span class="token punctuation">,</span>
+            <span class="token property">"StopJD"</span><span class="token operator">:</span> <span class="token number">2478085.966</span><span class="token punctuation">,</span>
+            <span class="token property">"Step"</span><span class="token operator">:</span> <span class="token string">"1H"</span><span class="token punctuation">,</span>
+            <span class="token property">"TimeScale"</span><span class="token operator">:</span> <span class="token string">"TDB"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"Observer"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"Type"</span><span class="token operator">:</span> <span class="token string">"Heliocentric"</span><span class="token punctuation">,</span>
+            <span class="token property">"Body"</span><span class="token operator">:</span> <span class="token string">"Sun"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"ObservedObject"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"BodyClass"</span><span class="token operator">:</span> <span class="token string">"Planet"</span><span class="token punctuation">,</span>
+            <span class="token property">"Targets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"Jupiter"</span><span class="token punctuation">]</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"Frame"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"Type"</span><span class="token operator">:</span> <span class="token string">"HelioEcliptic"</span><span class="token punctuation">,</span>
+            <span class="token property">"Epoch"</span><span class="token operator">:</span> <span class="token string">"J2000"</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"Metadata"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">"Author"</span><span class="token operator">:</span> <span class="token string">"Astronolysis"</span><span class="token punctuation">,</span>
+          <span class="token property">"Priority"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+          <span class="token property">"Status"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"Maturity"</span><span class="token operator">:</span> <span class="token string">"Draft"</span><span class="token punctuation">,</span>
+            <span class="token property">"Visibility"</span><span class="token operator">:</span> <span class="token string">"Private"</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"Notes"</span><span class="token operator">:</span> <span class="token string">"Generated automatically from residual peak detection."</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"SeedOrigin"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"ResultID"</span><span class="token operator">:</span> <span class="token string">"MARS-OPP-1900-2000_ENGINE-COMPARISON"</span><span class="token punctuation">,</span>
+        <span class="token property">"Reason"</span><span class="token operator">:</span> <span class="token string">"High residual near opposition cluster"</span><span class="token punctuation">,</span>
+        <span class="token property">"Trigger"</span><span class="token operator">:</span> <span class="token string">"ResidualPeak"</span><span class="token punctuation">,</span>
+        <span class="token property">"CreatedAtUtc"</span><span class="token operator">:</span> <span class="token string">"2026-04-03T21:15:00Z"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h3 id="72-design-rules">7.2 Design Rules </h3>
+<ul>
+<li>SeedCandidate MUST be valid ExperimentCandidate</li>
+<li>no transformation required for AstronoLab</li>
+<li>SeedOrigin MUST NOT influence Core or Hash</li>
+</ul>
+<hr>
+<h2 id="8-analysistype">8. AnalysisType </h2>
+<p>AnalysisType is an open taxonomy.</p>
+<p>Examples:</p>
+<ul>
+<li>ENGINE_COMPARISON</li>
+<li>PROVIDER_COMPARISON</li>
+<li>VALIDATION_RUN</li>
+<li>EDGE_DETECTION</li>
+</ul>
+<hr>
+<h2 id="9-tool-responsibilities">9. Tool Responsibilities </h2>
+<h3 id="astronolysis-1">Astronolysis </h3>
+<ul>
+<li>writes Results</li>
+<li>writes Seeds (Incoming)</li>
+<li>reads:
+<ul>
+<li>Experiments</li>
+<li>GroundTruth</li>
+<li>Simulations</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="10-freeze-decision-m19-1">10. Freeze Decision (M1.9) </h2>
+<ul>
+<li>Snapshot model frozen</li>
+<li>Canonicalization frozen</li>
+<li>Seed output format frozen</li>
+<li>Naming frozen</li>
+<li>AnalysisType open</li>
+<li>Result body open</li>
+</ul>
+<p>End of Document</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

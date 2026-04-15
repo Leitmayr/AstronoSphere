@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "GEO-J2000-TDB-2461142-2461144-1H",
+  "CatalogNumber": "AS-000064",
+  "CoreHash": "D12C9F60",
+  "Core": {
+    "Time": {
+      "StartJD": 2461142.763194445,
+      "StopJD": 2461144.763194445,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Mars"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "GeoEqAscendingNode",
+    "Qualifier": "Geocentric equatorial declination crossing - to + (validated via Z sign change)",
+    "Description": "2461143.763194445"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

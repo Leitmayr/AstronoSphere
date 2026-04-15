@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "GEO-J2000-TDB-2461149-2461151-1H",
+  "CatalogNumber": "AS-000063",
+  "CoreHash": "6CFC3D1E",
+  "Core": {
+    "Time": {
+      "StartJD": 2461149.053472222,
+      "StopJD": 2461151.053472222,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Geocentric",
+      "Body": "Earth"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Mercury"
+      ]
+    },
+    "Frame": {
+      "Type": "GeoEquatorial",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "GeoEqAscendingNode",
+    "Qualifier": "Geocentric equatorial declination crossing - to + (validated via Z sign change)",
+    "Description": "2461150.053472222"
+  },
+  "Metadata": {
+    "Author": "Scenario Merger",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Scenario Merger: Generated automatically from 144 existing scenarios."
+}

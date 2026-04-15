@@ -1,0 +1,145 @@
+Testplan (aus Doku):
+
+## RC5 – Frame Mapping
+* 2–3 TS-C Szenarien
+
+Checks:
+* REF_PLANE korrekt
+* Zustand plausibel verändert
+
+
+Testdurchführung nach Plan:
+
+Test Datensätze: 
+AS-000072 (Szenario von gestern)
+AS-000066 
+AS-000063 
+
+
+Nomenklatur:
+json alt: altes Referenzfile aus EphemerisRegression
+json gestern: letztes Referenzfile (fehlerhaft) mit Bug
+json neu: neues Referenzfile - Erwartung: Bug fixed
+
+
+Ebene1:
+
+Vergleich Json gestern/neu bzgl. Canonical
+
+AS-000063:
+
+Json alt:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=2026-04-18T12:17\nSTEP_SIZE=1H\nSTOP_TIME=2026-04-20T12:17",
+
+
+Json gestern: 
+-> war kein Testfall gestern: keine Referenzdaten
+
+Json heute:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=199\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=JD2461149.053472\nSTEP_SIZE=1H\nSTOP_TIME=JD2461151.053472",
+
+
+AS-000066:
+Json alt:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=299\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=2026-08-05T01:59\nSTEP_SIZE=1H\nSTOP_TIME=2026-08-07T01:59",
+
+Json gestern: 
+-> war kein Testfall gestern: keine Referenzdaten
+
+Json heute:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=JD2461257.624306\nSTEP_SIZE=1H\nSTOP_TIME=JD2461259.624306",
+
+-> Ecliptic geändert in Frame. Call wie "alt" (aber mit JD-Format: korrekt)
+
+
+
+AS-000072:
+
+Json alt:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=599\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=2022-09-23T02:22\nSTEP_SIZE=1H\nSTOP_TIME=2022-09-25T02:22",
+
+
+Json gestern:       
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=599\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2459845.640278\nSTEP_SIZE=1H\nSTOP_TIME=JD2459847.640278",
+
+Json heute:
+"CanonicalRequest": "CENTER=500@399\nCOMMAND=599\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=JD2459845.640278\nSTEP_SIZE=1H\nSTOP_TIME=JD2459847.640278",
+
+-> Ecliptic geändert in Frame. Call wie "alt" (aber mit JD-Format: korrekt)
+
+
+Ebene2:
+Vergleich
+
+AS-000063: Zustandsvektor
+2461150.053472
+
+alt:
+    "At": {
+      "JulianDate": 2461150.053472222,
+      "X": 1.100378069130402,
+      "Y": 0.1287864940011466,
+      "Z": 0.0004930405756857603,
+      "VX": 0.01038344036008503,
+      "VY": 0.02858998753764145,
+      "VZ": 0.01196207464209871
+    },
+
+neu:
+  {
+    "JD": 2461150.053472,
+    "Position": { "X": 1.10037807, "Y": 0.12878649, "Z": 0.00049304 },
+    "Velocity": { "X": 0.01038344, "Y": 0.02858999, "Z": 0.01196207 }
+  },
+  
+Daten neu und alt sind im Rahmen der Rundung identisch. Test passed, Bug fixed.
+
+
+AS-000066: Zustandsvektor
+2461258.624306
+
+alt:
+    "At": {
+      "JulianDate": 2461258.624305556,
+      "X": -0.7589589579821427,
+      "Y": 0.01533983065340303,
+      "Z": -0.0002675254814846237,
+      "VX": 0.007772222182202137,
+      "VY": -0.01197840688087015,
+      "VZ": -0.006478346816770356
+    },
+
+neu:
+  {
+    "JD": 2461258.624306,
+    "Position": { "X": -0.75895895, "Y": 0.01533983, "Z": -0.00026753 },
+    "Velocity": { "X": 0.00777222, "Y": -0.01197841, "Z": -0.00647835 }
+  },
+
+Daten neu und alt sind im Rahmen der Rundung identisch. Test passed, Bug fixed.
+
+
+AS-000072: Zustandsvektor
+2459846.640278
+
+
+alt:
+    "At": {
+      "JulianDate": 2459846.640277778,
+      "X": 3.943170601231,
+      "Y": 0.2806701805598933,
+      "Z": -0.0001516661578826529,
+      "VX": 5.050289612866818E-06,
+      "VY": -0.008475584025936433,
+      "VZ": -0.003697506973473093
+    },
+
+neu:
+   {
+    "JD": 2459846.640278,
+    "Position": { "X": 3.9431706, "Y": 0.28067018, "Z": -0.00015167 },
+    "Velocity": { "X": 0.00000505, "Y": -0.00847558, "Z": -0.00369751 }
+  },
+
+Daten neu und alt sind im Rahmen der Rundung identisch. Test passed, Bug fixed.
+

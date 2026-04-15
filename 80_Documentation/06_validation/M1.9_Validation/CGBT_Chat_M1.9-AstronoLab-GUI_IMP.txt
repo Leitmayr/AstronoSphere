@@ -1,0 +1,78 @@
+Diese Fragen beantworten:
+
+Ja. Vor dem Start habe ich ein paar präzise Rückfragen, damit wir ohne Annahmen sauber implementieren. Die Punkte ergeben sich direkt aus der Spec zu AstronoLab GUI M1.9, besonders aus der Trennung AstronoLab ↔ AstronoCert und dem Seed-Output nach 01_Seeds/Prepared
+
+Finales Seed-Schema
+Soll AstronoLab in M1.9 exakt nur
+
+Event
+Core
+
+schreiben, oder zusätzlich auch
+
+Metadata
+Notes
+
+wie im DataModel angedeutet?
+Dafür brauche ich die verbindliche Minimalstruktur.
+
+Verbindliche JSON-Werte
+Welche exakten Stringwerte sollen in JSON gespeichert werden?
+Beispiele:
+
+Observer.Type: "Heliocentric" / "Geocentric"?
+Observer.Body: "Sun" / "Earth"?
+Frame.Type: "HelioEcliptic" / "GeoEcliptic" / "Ecliptic" / "Equatorial"?
+ObservedObject.BodyClass: "Planet"?
+
+Ich möchte hier keine UI-Labels frei auf JSON mappen.
+
+ObservedObject-Struktur
+Ist die finale Core-Struktur:
+
+ObservedObject
+BodyClass
+Targets: []
+
+also exakt so, wie in M1.9 eingefroren?
+Oder verwendet AstronoLab im Seed noch ein anderes Modell?
+
+Dateiname in 01_Seeds/Prepared
+Wie soll der Dateiname vor Zertifizierung exakt aussehen?
+Mein aktueller Erwartungswert wäre:
+
+<HUMAN>__<EXPERIMENT>.json
+
+also z. B. ohne CatalogNumber. Bitte bestätigen.
+
+AstronoCert-Anbindung
+Existiert AstronoCert.CheckCoreHash(Core) bereits schon als nutzbare API, oder sollen wir in diesem Schritt nur die GUI gegen eine bereits vorhandene Klasse/Service-Schnittstelle anbinden?
+Ich brauche:
+Projekt/Assembly
+Namespace
+Methodensignatur
+Response-Typ (CoreHash, Exists, CatalogNumber)
+
+Hash/Preview bei invalider Eingabe
+Bei noch unvollständigen oder ungültigen Eingaben:
+
+soll kein AstronoCert-Call erfolgen,
+oder soll trotzdem versucht werden, sobald der Core serialisierbar ist?
+
+Die Spec nennt Minimalvalidierung und Live-Check, aber das Trigger-Verhalten bei Zwischenzuständen möchte ich sauber festziehen.
+
+Load Seed
+Der Button Load Seed:
+
+lädt nur aus 01_Seeds/Incoming,
+oder auch aus 01_Seeds/Prepared?
+
+Die Spec nennt Incoming/Prepared semantisch getrennt, deshalb will ich die Quelle vorab fixieren.
+
+Deterministische Serialisierung
+Soll AstronoLab zum Speichern eine bestehende zentrale JSON-Schreiblogik verwenden, falls vorhanden, oder soll die WPF-App lokal mit fest definierten JsonSerializerOptions serialisieren?
+Ich würde hier ungern eine zweite Serialisierungslogik erfinden.
+
+Sobald Du diese 8 Punkte beantwortest, können wir strikt loslegen.
+
+Kleiner Meilenstein-Hinweis: Wenn wir die Antworten fixiert haben, sollten wir direkt das nächste Freeze-/Implementierungs-md nachziehen.

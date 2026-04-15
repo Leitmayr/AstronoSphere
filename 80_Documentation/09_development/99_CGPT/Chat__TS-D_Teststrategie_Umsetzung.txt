@@ -1,0 +1,1676 @@
+
+GETTING STARTED:
+
+Zusammenarbeit - "Efficiency Package"
+
+Diese Zusammenarbeitskonvention soll die Effizienz steigern: Qualität und Implementierungszeit 
+
+1) Keine Seitentasks: volle Konzentration auf die Aufgabe. Bei Abweichungen von diesem Plan sofort Intervention und gemeinsame Abstimmung. 2) Kein Trial und Error! Nachfragen bei Unklarheiten. 
+
+2) Wiederholungen von bereits beschlossenem nicht unnötig in Antworten einbeziehen. 
+
+3) Kurze Antworten, keinen Overhead 
+
+4) Definierte Meilensteine. Wenn eine Phase abgeschlossen wurde: Zusammenfassung, Recap und nächste Phase planen 
+
+5) Posten von Code: 
+a) immer ganze Files, auch wenn es nur kleine Codesnippets sind 
+b) stets Pfad der zu ändernden Datein angeben 
+c) Status der zu ändernden Datei benennen: Erweiterung, Neu
+
+
+-----------------
+
+Vorschlag für die anstehenden Phasen: zur Diskussion
+
+
+Phase 0: GIT Anbindung
+Aufgaben:
+- Erzeugen eines neuen Repos Ephemeris Regression 
+- Erzeugen eines Feature-Branches 
+
+Phase 1: Klärung Verständnis
+
+Phase 2: Architektur und Ordnerstruktur in ER
+
+Phase 3: Erzeugung der Mesh Datenpunkte
+
+Phase 4: Anpassung und Optimierung der Daten für die Horizons API
+
+Phase 5: Erzeugung der eigentlichen Testdaten inkl. Meta und Hash im Header
+
+Phase 6: Erzeugung der Test-Sourcen in Astronometria
+
+Phase 7: Erzeugung der Deviation Data in Astronometria für die 
+
+
+-----------------
+
+Planung: 
+
+wieviel Zeit planst Du für die jeweiligen Phasen (bitte anwenden auf den von Dir angepassten Phasenplan)?
+
+
+
+-------------------
+
+Zu 1): Good catch!
+TS-D sollen im gegensatz zu dem, was in Validation_Strategy_V1 steht *nicht* RA/DEC sein
+TS-D sollen (X, Y, Z) basiert in Heliozentrisch ekliptikalen Koordinaten
+
+Was meinst Du mit A) und B) genau?
+
+----------------
+
+Zu 2): Dein jtziger Plan ist nicht ambitioniert :-) Wir brauchen niemals 1/2 Tag für GIT: bitte brich Deine Schätzungen auf Stunden herunter.
+Ich glaube, Phase 0 + 1 sowie Teile von Phase 2 sind in 8 Stunden möglich. Bitte um Review und Feedback!
+
+
+----------------
+
+
+Zu 3) Good catch again! Jason Export soll enthalten sein, statistical evaluation mache ich extern
+Zu 5) 8 Planeten inkl. Earth. Tests nicht für RA/DEC sondern (X, Y, Z) in Helioekliptisch
+
+
+Strukturvorschlag: folgender grober Programmablauf (analgo zu TS-A, -B):
+
+program.cs ruft Zentrales Steuerelement: MeshDataGenerationRunner auf
+- MeshDataGenerationRunner ruft ein "Zeitpunktermittlungsmodul" auf: bisher sind das Event Runner. Jetzt ist es lediglich ein Erzeugungsmodul (Factory?), das für die Epochen 1, 2, 3 die Zeitpunkte als JD in UTC erzeugt
+- danach kommt ein BatchingGenerator. Dieser muss Daten für effiziente API Aufrufe erstellen lassen. Jeder Planet wird nacheinander für die einzelnen Epcohen abgearbeitet. Die Anzahl der Aufrufe an die Horizons API muss limitiert werden. Der Generator liefert "Planet | Startwert, Endwert, Schrittweite ", so dass insgesamt eine überschaubare Anzahl an Aufrufen resultiert. Für jeden Chunk ruft der BatchingGeneator eine "MeshAPI-RequestFactory" auf 
+- Die "MeshAPI-RequestFactory" verwendet den Eingang "Planet | Startwert, Endwert, Schrittweite" und erweitert die Datenstruktur um die Parameter für die Simulation: helioecliptic.
+- Weiterreichung des Requests an den HorizonsAPIClient, der die Anfragen stellt, wait state 500ms einbauen
+- Wir bekommen ein Horizons Ergebnis zurück, eine strukturierte Liste von Zeitpunkten und (X, Y, Z, VX, VY, VZ): jetzt verwenden wir dieselbe Kette wie TS-A und TS-B mit MeshDataL0RawExportRunner (CSV), MeshDataL0xportRunner (Json). 
+- Für die Json Daten schlage ich folgendes Format vor
+Datenmodell: 
+<Planet>_TS-D_L0_Mesh-Epoch1.json Struktur: 
+- Header: 
+  "Planet": "Earth",
+  "TestSuite": "TS-D",
+  "EventName": "Mesh-Epoch <#>",		// hier Epoche #1, #2, #3
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=@10\nCOMMAND=<exakt API Request>",
+    "RequestHash": "<Hash as in TS-A, TS-B",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.1.0",
+    "CorrectionLevel": "L0",
+    "Mode": "HELIO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-19T21:06:32.0737622Z"
+- Referrenztestdaten:
+    {
+      "JulianDate": ,
+      "X": <data from Horizon>,
+      "Y": <data from Horizon>,
+      "Z": <data from Horizon>,
+      "VX": <data from Horizon>,
+      "VY": <data from Horizon>,
+      "VZ": <data from Horizon>
+    },
+
+Macht diese Spec für Dich Sinn?
+
+
+....................
+
+Zu 2: Ja, schlecht spezifiziert von mir. Wir bleiben beim bestehenden Zeitformat 2026-06-04T13:55 -> ISO 8601
+Zu 2: spezifiziere den Chunk Ansatz genauer: Zahlenwerte stehen in TS-D_Mesh_and_API_Batching_Concept.md
+Zu 3: ich hatte speichern des vollständigen Parametersets gemeint - passt also.
+Zu 4: Epoch: perfekt - ersetze Event! StateVectors ist gut. Wäre MeshGridPoint noch besser?
+Zu 5: für mich ist inner auch Merkur, Venus, Erde, Mars. Wichtig: Earth = Earth und *nicht* Earth-Moon-Barycentric
+
+Wenn das geklärt ist würde ich erst weitermachen mit den neuen Files und wo wir diese im Projekt anlegen (Ordnerstruktur).
+
+
+-----------------
+
+Zu 2) 2000 ist gut für mich: wir wollen nicht die Automatisierung riskieren. Abbrüche tun mehr weh als in bisschen länger warten.
+zu 3) Einverstanden. Hast Recht: wir nehmen StateVectors
+
+Hinweis: verstehe ich das richtig, dass Punkte aus Epoch1 gleichzeitig auch Punkte in Epoch2 oder 3 sein können? Falls das so ist: wir akzeptieren das und machen nicht einen aufwändigen "Aussortierungsalgorithmus" für die doppelten Einträge.
+
+Wenn es sonst keine offenen Punkte mehr gibt: Phase2
+
+Vorwarnung: Bevor wir mit Code loslegen machen wir Phase0: EphemerisRegression in GIT, Feature Branch
+
+
+---------------------
+
+Rückfrage: kein RawExportRunner?
+
+
+Struktur:
+Mesh       → Daten erzeugen
+Batching   → Requests strukturieren
+Api        → Call ausführen
+Export     → persistieren
+Runner     → alles orchestrieren
+
+
+Zwei Chunk File mit folgendem Inhalt an den richtigen Pfad geschrieben:
+Chunk01: TEST RAW CONTENT
+Chunk02: TEST RAW CONTENT
+
+Jedoch kein Json Ordner angelegt, entsprechend auch kein Jason-File:
+
+Hier die Konsolenausgabe:
+
+Running TS-D Mesh + Batch + Request + Raw + JSON QuickTest...
+
+Epoch: Core
+Mesh points (inner): 9752
+First: 1600-01-01T00:00:00
+Last : 2400-12-02T00:00:00
+
+Batches: 5
+First batch: Earth | Core | 1600-01-01T00:00:00 -> 1764-03-11T00:00:00 | Steps: 2000
+Last  batch: Earth | Core | 2257-02-05T00:00:00 -> 2400-12-02T00:00:00 | Steps: 1752
+
+CanonicalRequest (first batch):
+CENTER=@10
+COMMAND=399
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=1600-01-01T00:00:00
+STEP_SIZE=30 D
+STOP_TIME=1764-03-11T00:00:00
+
+Hash: CCE226A1C4253375107F1B117C45FD3A97E11648EDFFE0FD4A1F2E2FD51AFC94
+
+Output directories:
+  RAW : C:\Users\Marcu\source\repos\EphemerisRegression\EphemerisRegression\Horizons\Mesh\Helio\L0\Raw
+  JSON: C:\Users\Marcu\source\repos\EphemerisRegression\EphemerisRegression\Horizons\Mesh\Helio\L0\Json
+
+Raw export dummy files written.
+
+ERROR:
+rawChunkPaths and requestInfos must have same length.
+
+-----
+
+Start time      : A.D. 4200-Jan-01 00:00:00.0000 TDB
+Stop  time      : A.D. 4300-Apr-01 00:00:00.0000 TDB
+
+
+Start time      : A.D. 1000-Jan-01 00:00:00.0000 TDB
+Stop  time      : A.D. 1005-Jan-01 00:00:00.0000 TDB
+
+
+Core (klein)
+
+1600-01-01 → 1601-01-01
+Step 30 d
+
+Extended (klein)
+
+1000-01-01 → 1010-01-01
+Step 180 d
+
+Extreme (klein)
+
+4200-01-01 → 4220-01-01
+Step 730 d
+
+
+
+
+
+*******************************************************************************
+Ephemeris / WWW_USER Sun Feb 22 06:00:24 2026 Pasadena, USA      / Horizons
+*******************************************************************************
+Target body name: Earth (399)                     {source: DE441}
+Center body name: Sun (10)                        {source: DE441}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2200-Jan-01 00:00:00.0000 TDB
+Stop  time      : A.D. 2200-Apr-01 00:00:00.0000 TDB
+Step-size       : 43200 minutes
+*******************************************************************************
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
+Output units    : AU-D
+Calendar mode   : Mixed Julian/Gregorian
+Output type     : GEOMETRIC cartesian states
+Output format   : 2 (position and velocity)
+Reference frame : Ecliptic of J2000.0
+*******************************************************************************
+            JDTDB,            Calendar Date (TDB),        delta-T,                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,
+******************************************************************************************************************************************************************************************************************
+$$SOE
+2524593.500000000, A.D. 2200-Jan-01 00:00:00.0000,      69.183800, -1.289267301917316E-01,  9.749411090239669E-01, -4.321330583873423E-04, -1.732716688893999E-02, -2.322540149372834E-03,  2.141143018051808E-06,
+2524623.500000000, A.D. 2200-Jan-31 00:00:00.0000,      69.184652, -6.073900054994953E-01,  7.751598968671729E-01, -3.203501717069500E-04, -1.381491750637230E-02, -1.067467381115301E-02,  5.385819353672908E-06,
+2524653.500000000, A.D. 2200-Mar-02 00:00:00.0000,      69.185327, -9.207578338817590E-01,  3.642729710120152E-01, -1.214913269610505E-04, -6.605036052726953E-03, -1.605889788216250E-02,  7.143901060158904E-06,
+2524683.500000000, A.D. 2200-Apr-01 00:00:00.0000,      69.185645, -9.876299372260680E-01, -1.446523131560845E-01,  1.100729792700205E-04,  2.213168532468799E-03, -1.708339092952375E-02,  6.997452433290415E-06,
+$$EOE
+******************************************************************************************************************************************************************************************************************
+ 
+TIME
+
+  Barycentric Dynamical Time ("TDB" or T_eph) output was requested. This
+continuous coordinate time is equivalent to the relativistic proper time
+of a clock at rest in a reference frame co-moving with the solar system
+barycenter but outside the system's gravity well. It is the independent
+variable in the solar system relativistic equations of motion.
+
+  TDB runs at a uniform rate of one SI second per second and is independent
+of irregularities in Earth's rotation.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+REFERENCE FRAME AND COORDINATES
+
+  Ecliptic at the standard reference epoch
+
+    Reference epoch: J2000.0
+    X-Y plane: adopted Earth orbital plane at the reference epoch
+               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane
+    X-axis   : ICRF
+    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense
+               of Earth's north pole at the reference epoch.
+
+  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+    del_T    Time-scale conversion difference TDB - UT (s)
+      X      X-component of position vector (au)
+      Y      Y-component of position vector (au)
+      Z      Z-component of position vector (au)
+      VX     X-component of velocity vector (au/day)                           
+      VY     Y-component of velocity vector (au/day)                           
+      VZ     Z-component of velocity vector (au/day)                           
+
+ABERRATIONS AND CORRECTIONS
+
+ Geometric state vectors have NO corrections or aberrations applied.
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Author      : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************
+
+
+---------------
+
+$$SOE	
+2464143.850000000 = A.D. 2034-Jun-30 08:24:00.0000 TDB 	
+ X = 4.958635994651965E+00 Y =-1.186118274447243E-02 Z =-1.108849780732858E-01	
+ VX=-7.229113408392291E-05 VY= 7.906363124401407E-03 VZ=-3.120535608489974E-05	
+ LT= 2.864593461628988E-02 RG= 4.959889826747817E+00 RR=-9.048266148574065E-05	
+2464143.891666667 = A.D. 2034-Jun-30 09:24:00.0000 TDB 	
+ X = 4.958632970130489E+00 Y =-1.153175101554627E-02 Z =-1.108862780949498E-01	
+ VX=-7.288567361200326E-05 VY= 7.906357951290277E-03 VZ=-3.119574845537445E-05	
+ LT= 2.864591283355837E-02 RG= 4.959886055184771E+00 RR=-9.055213569848412E-05	
+2464143.933333333 = A.D. 2034-Jun-30 10:24:00.0000 TDB 	
+ X = 4.958629920875153E+00 Y =-1.120231973907503E-02 Z =-1.108875777241474E-01	
+ VX=-7.347810402256658E-05 VY= 7.906341466205367E-03 VZ=-3.118651189853137E-05	
+ LT= 2.864589103433523E-02 RG= 4.959882280766288E+00 RR=-9.061946796339717E-05	
+
+
+--------------------------
+
+
+TS-A für Helio und Geo übrigens das Verhalten von oben (hatte ich bisher nur für Helio geprüft). Check.
+TS-B
+Raw: interessanterweise binär identische Files, obwohl neu erzeug. Check.
+Json: gleich wie TS-A Geo+Helio: Unterschied im URL und im Hash. StateVectors identisch.
+
+Natürlich ist es ok, dass wir in TS-A Geo+Helio die Abweichung im Header der Rohdaten haben. Wichtig sind die StateVectors.
+
+TS-D: Regression
+Raw: unverändert (haben wir ja auch nicht angefasst)
+Json: Habe vergessen, diese alten Daten zu sichern. Sind jetzt überschrieben, konnte also keine BeyondCompare machen. Daten sehen aber i.O. aus. Für Dich interessehalber der Header mit den ersten beiden StateVectors:
+
+{
+  "Planet": "Earth",
+  "TestSuite": "TS-D",
+  "Epoch": "Extreme",
+  "CorrectionLevel": "L0",
+  "Mode": "HELIO",
+  "Metadata": {
+    "EngineVersion": "1.1.0",
+    "GeneratedAtUtc": "2026-02-22T19:02:31.0768657Z",
+    "EpochHash": "AC22E5933D360E4A396A284CAC6FEEB5273A56BD0671DBA35E50E61AEA5AD91F",
+    "Requests": [
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=399\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=4200-01-01T00:00:00\nSTEP_SIZE=730 D\nSTOP_TIME=4300-04-01T00:00:00",
+        "RequestHash": "0BDD057815767CDAEC1AB8007612AEDD62125FCC240ABB06801E570D7972C14B",
+        "HorizonsUrl": ""
+      }
+    ]
+  },
+  "StateVectors": [
+    {
+      "JulianDate": 3255078.5,
+      "X": 0.3502337762144093,
+      "Y": 0.9238512794262195,
+      "Z": -0.004787848803481346,
+      "VX": -0.0163485722308261,
+      "VY": 0.006007434131077241,
+      "VZ": -1.418504043254926E-05
+    },
+    {
+      "JulianDate": 3255808.5,
+      "X": 0.3587121406525631,
+      "Y": 0.9206676118844552,
+      "Z": -0.004785220473580894,
+      "VX": -0.01628301668208581,
+      "VY": 0.006158425101966798,
+      "VZ": -1.477010101407703E-05
+    },
+
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+ INPUT ERROR in VLADD  in following line:
+ STEP_SIZE=30 D
+              ^  Too many constants
+BATVAR: problem loading execution-control setting:
+LINE=STEP_SIZE=30 D
+WLDINI: error loading execution-control file.
+
+
+----------------
+
+Es wurden Daten geschrieben, CSV-Files und Json-Daten. Beide Files enthalten Nutzdaten, das heißt im Json sind auch StateVectors enthalten.
+
+Ich habe einen Vergleich des neuen und automatisch erzeugten Jsons mit meinem letzten Json gemacht. Der erste Datensatz ist der 1.1.1600 um 00:00 sein - JD = 2305447,5  -> stimmt überein mit meinem Datensatz.
+
+Manuell erzeugtes File:
+{
+  "Planet": "Earth",
+  "TestSuite": "TS-D",
+  "EventName": "Core",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=@10\nCOMMAND=399\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=1600-01-01T00:00:00\nSTEP_SIZE=30D\nSTOP_TIME=2400-04-01T00:00:00",
+    "RequestHash": "EAAA04D0FB1A0BE2F7678FC96704A6C5815A626C0F0B21B0DF58916B4D1EE1F1",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.1.0",
+    "CorrectionLevel": "L0",
+    "Mode": "HELIO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-22T19:26:50.3759017Z"
+  },
+  "Vectors": [
+    {
+      "JulianDate": 2305447.5,
+      "X": -0.2638652282592019,
+      "Y": 0.9470832122220952,
+      "Z": 0.0008453320533516006,
+      "VX": -0.01685036682240968,
+      "VY": -0.004674204077547677,
+      "VZ": -4.769711206921492E-06
+    },
+    {
+      "JulianDate": 2305477.5,
+      "X": -0.7102910571721134,
+      "Y": 0.6838291961974374,
+      "Z": 0.00057714017337818,
+      "VX": -0.01221212232058743,
+      "VY": -0.01244762168165217,
+      "VZ": -1.154141865194898E-05
+    },
+
+Hier die ersten beiden Datensätze vom neu erzeugten File (automatisch aus der API-Abrage):
+Der erste Datensatz ist der 1.1.1600 um 00:00 sein - JD = 2305447,5  -> stimmt überein mit dem automatisch generierten Datensatz.
+Auch die StateVectors 1 und 2 sind gleich wie die aus dem manuell erzeugten File.
+
+{
+  "Planet": "Earth",
+  "TestSuite": "TS-D",
+  "EventName": "Core",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": "CENTER=@10\nCOMMAND=399\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=1600-01-01T00:00:00\nSTEP_SIZE=30D\nSTOP_TIME=2400-04-01T00:00:00",
+    "RequestHash": "EAAA04D0FB1A0BE2F7678FC96704A6C5815A626C0F0B21B0DF58916B4D1EE1F1",
+    "HorizonsUrl": "",
+    "EngineVersion": "1.1.0",
+    "CorrectionLevel": "L0",
+    "Mode": "HELIO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-22T19:26:50.3759017Z"
+  },
+  "Vectors": [
+    {
+      "JulianDate": 2305447.5,
+      "X": -0.2638652282592019,
+      "Y": 0.9470832122220952,
+      "Z": 0.0008453320533516006,
+      "VX": -0.01685036682240968,
+      "VY": -0.004674204077547677,
+      "VZ": -4.769711206921492E-06
+    },
+    {
+      "JulianDate": 2305477.5,
+      "X": -0.7102910571721134,
+      "Y": 0.6838291961974374,
+      "Z": 0.00057714017337818,
+      "VX": -0.01221212232058743,
+      "VY": -0.01244762168165217,
+      "VZ": -1.154141865194898E-05
+    },
+	
+	--------------------
+	
+
+==========================================
+Analyse der CSV Dateien:
+==========================================
+
+(1) Extended
+
+Start/Stop in Extended Chunk_01:	
+Ausgabe in CSV: Bad dates -- start must be earlier than stop
+Falsche Eingabedaten in die API. Deshalb keine Daten, deshalb gehts erst mit Chunk_02 los. Wie von Dir vermutet.
+
+
+Start/Stop in Extended Chunk_02:	
+Start time      : A.D. 0985-Aug-19 00:00:00.0000 TDB
+Stop  time      : A.D. 1970-Oct-07 00:00:00.0000 TDB
+
+
+Start/Stop in Extended Chunk_03:	
+Start time      : A.D. 1971-Apr-05 00:00:00.0000 TDB
+Stop  time      : A.D. 2956-May-23 00:00:00.0000 TDB 
+	
+Start/Stop in Extended Chunk_04 + _05 sind plausibel.	
+
+
+(2) Core
+Start/Stop in Core Chunk_01:	
+Start time      : A.D. 1599-Dec-22 00:00:00.0000 TDB
+Stop  time      : A.D. 1764-Feb-29 00:00:00.0000 TDB
+--> Du startest schon am 22.12.1599. Also 10 Tage zu früh. Das erklärt den Versatz
+--> interessant ist, dass die Stop Time an einem Schalttag im Jahr 1764 ist. 1764 ist ein Schaltjahr, das stimmt zwar. Aber...  siehe nächster Datensatz
+
+
+Start/Stop in Core Chunk_02:	
+Start time      : A.D. 1764-Mar-30 00:00:00.0000 TDB
+Stop  time      : A.D. 1928-Jun-07 00:00:00.0000 TDB
+--> die Starttime ist jetzt der 30.3.1764. Das schließt weder direkt an Chunk_01 an, noch ist es 29 Tage von Chunk_01 entfernt. Es sind 30 Tage. Kann es sein, dass sich auf diese Weise (jeweils ein Tag zu viel als Anschlussdatum) der Fehler aufsummiert?
+
+Start/Stop in Core Chunk_03:	
+Start time      : A.D. 1928-Jul-07 00:00:00.0000 TDB
+Stop  time      : A.D. 2092-Sep-14 00:00:00.0000 TDB
+-> bei Chunk3 ist der Anschlusstag exakt 30 Tage nach dem Abschlusstag von Chunk_02: 7.6.1764 -> 7.7.1764 sind 30 Tage
+
+Bei Chunkg_04 und Chunk_05 stimmen die Anschlusstage dann wieder
+
+
+(3) Extreme
+
+Es gibt nur einen Extreme Datensatz 
+Start/Stop in Extreme Chunk_01:
+Start time      : A.D. 4199-Dec-03 00:00:00.0000 TDB
+Stop  time      : A.D. 4300-Mar-01 00:00:00.0000 TDB
+-> Dieser beginnt am 3.12.4199, also exakt 29 Tage zu früh.
+
+
+Mein Urtei nach genauer Prüfung:
+a) Die 29 Tage für Extreme sind mit dem falschen Starttag erklärt 
+b) die 10 Tage für Core sind durch den falschen Startwert *beinahe* erklärt. Aber am Schalttag passiert auch was komisches, so dass es wohl zu einer weiteren Verschiebung kommt.
+c) Extended funktioniert noch nicht richtig. Der erste Chunk hat die API offenbar mit falschen Daten aufgerufen (Bad Data). Vielleicht ein Übertragungsfehler?
+
+
+-----------------------
+
+6:25 h mittlerweile - wir haben heute wahnsinnig viel erreicht, und hatten nach 5 Stunden den ersten Laufzeit- und später noch den ersten Compilerfehler. Das ist hervorragend!
+Aber meine Akkus sind leer - machenwir morgen weiter!
+
+Wie ist Dein Recap von heute?
+
+
+======================================================
+
+
+2026-02-24:
+
+
+Schnelldiagnose:
+Keine API Fehler
+Vollständiger Runner
+5 Raw Chunks für Core erzeugt, genau ein Json für Core erzeugt
+5 Raw Chunks für Extended erzeugt, genau ein Json für Extended erzeugt
+1 Raw Chunk für Extreme erzeugt, genau ein Json für Extreme erzeugt
+Ablageort korrekt für Raw
+Ablageort korrekt für Json
+
+
+Detaildiagnose:
+(1) Test der Raw Daten:
+
+---------------------------
+Core Chunk1
+Startdatum: ok - 1.1.
+StateVectors: vorhanden
+
+Start time      : A.D. 1600-Jan-01 00:00:00.0000 TDB
+Stop  time      : A.D. 1764-Mar-11 00:00:00.0000 TDB
+
+---------------------------
+Core Chunk2
+Startdatum: ok - End Chunk1 + 30 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 1764-Apr-10 00:00:00.0000 TDB
+Stop  time      : A.D. 1928-Jun-20 00:00:00.0000 TDB
+
+---------------------------
+Core Chunk3
+Startdatum: ok - End Chunk2 + 30 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 1928-Jul-20 00:00:00.0000 TDB
+Stop  time      : A.D. 2092-Sep-27 00:00:00.0000 TDB
+
+---------------------------
+Core Chunk4
+Startdatum: ok - End Chunk3 + 30 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 2092-Oct-27 00:00:00.0000 TDB
+Stop  time      : A.D. 2257-Jan-06 00:00:00.0000 TDB
+
+---------------------------
+Core Chunk5
+Startdatum: ok - End Chunk4 + 30 Tage
+
+StateVectors: vorhanden
+Start time      : A.D. 2257-Feb-05 00:00:00.0000 TDB
+Stop  time      : A.D. 2400-Apr-01 00:00:00.0000 TDB
+
+Stichprobe: JD Startwert korrekt - JD2545447.5 = 2257-02-05 00:00:00.000
+
+==================
+
+
+---------------------------
+Extended Chunk1
+- Startdatum komisch: Horizons sagt selbst, es ist der 3.1.0001 und schreibt das so in das Raw File. Das wäre falsch. Die Webseite hier https://apps.aavso.org/v2/tools/julian-date-converter/ sagt, es ist der 1.1.0000. Das wäre richtig.
+--> das JD stimmt, aber Horizons konvertiert es falsch nach YYYY-MMM DD XX:YY.ZZZZ.ZZZZ
+
+StateVectors: vorhanden
+
+Start time      : B.C. 0001-Jan-03 00:00:00.0000 TDB
+Stop  time      : A.D. 0985-Feb-20 00:00:00.0000 TDB
+
+
+---------------------------
+Extended Chunk2
+Startdatum: ok - End Chunk1 + 180 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 0985-Aug-19 00:00:00.0000 TDB
+Stop  time      : A.D. 1970-Oct-20 00:00:00.0000 TDB
+
+---------------------------
+Extended Chunk3
+Startdatum: ok - End Chunk2 + 180 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 1971-Apr-18 00:00:00.0000 TDB
+Stop  time      : A.D. 2956-Jun-12 00:00:00.0000 TDB
+
+---------------------------
+Extended Chunk4
+Startdatum: ok - End Chunk3 + 180 Tage
+StateVectors: vorhanden
+
+Start time      : A.D. 2956-Dec-09 00:00:00.0000 TDB
+Stop  time      : A.D. 3942-Feb-04 00:00:00.0000 TDB
+
+---------------------------
+Extended Chunk5
+Startdatum: ok - End Chunk4 + 180 Tage
+
+
+StateVectors: vorhanden
+
+Start time      : A.D. 3942-Aug-03 00:00:00.0000 TDB
+Stop  time      : A.D. 4000-Apr-01 00:00:00.0000 TDB
+
+
+Stichprobe: JD Startwert korrekt - JD3161059,5 = 3942-08-03 00:00:00.000
+
+==================
+
+Startdatum: 1.1.4200
+StateVectors: vorhanden
+
+
+Extreme Chunk1
+Start time      : A.D. 4200-Jan-01 00:00:00.0000 TDB
+Stop  time      : A.D. 4300-Apr-01 00:00:00.0000 TDB
+
+
+(2) Test der Json Daten:
+
+---------------------------
+
+Earth_TS-D_L0_Core.json
+- kein 10 Tagesversatz bei Core mehr
+- StateVectors identisch mit manuellem File (Regression)
+
+
+Earth_TS-D_L0_Extended.json
+- Startwert passt: die Webseite hier https://apps.aavso.org/v2/tools/julian-date-converter/ sagt, es ist der 1.1.0000. Korrekt.
+- Zweites JD = Erstes JD + 180: Check
+
+Earth_TS-D_L0_Extreme.json
+- Startwert passt: JD korrekt laut https://apps.aavso.org/v2/tools/julian-date-converter/ 
+- Zweites JD = Erstes JD + 730: Check
+
+
+Fazit: 
+1) Im RAW File für Extended: falscher Datumswert für YYYY-MMM DD XX:YY.ZZZZ.ZZZZ im Header, JD aber korrekt
+Sonst sieht alles gut aus!
+
+--------------------------------
+
+Ich möchte nun wieder ein vollständiges program.cs, in dem ich
+TS-A ausführen kann wie früher
+TS-B ausführen kann wie früher
+TS-D ausführen kann - per Config kann ich auswählen, welche Planeten erzeugt werden sollen. In unserem Lauf sind es alle. Ich möchte diese Schnittstelle, damit ich das später einfach an die GUI anbinden kann. Dann kann ich auch Earth als Quicktest laufen lassen. 
+
+Also bitte: 
+- MeshGenerationRunner.cs mit allen Planeten: RunAllPlanetsAsync()
+- Was leistet Domain/PlanetCatalog.cs?
+
+
+
+Bitte gib die Plausibilisierungsdaten während des "8 Planetenlaufs" an der Konsole aus.
+
+
+dotnet run -- generate TS-D-EARTH
+dotnet run -- generate TS-D
+
+Ich habe drei Läufe gemacht. Jeweils gleiches Problem:
+Mercury, Venus und Earth werden erzeugt. Inklusive StateVectors. Genauere Analyse der Daten steht aus.
+Er bricht jedoch bei Mars beim ersten Chunk ab.
+
+Konsole:
+
+Planet: Earth | Epoch: Extreme
+  Chunk 01: JD3255078.5 -> JD3291692.5 | STEP=730D
+  JSON saved: Earth_TS-D_L0_Extreme.json | vectors=51
+
+Planet: Mars | Epoch: Core
+  Chunk 01: JD2305447.5 -> JD2365417.5 | STEP=30D
+ERROR:
+0 vectors: Mars Core chunk 01. RAW=C:\Users\Marcu\source\repos\EphemerisRegression\EphemerisRegression\Horizons\Mesh\Helio\L0\Raw\Mars_TS-D_L0_Core_Chunk_01.csv
+
+
+Zwischen Lauf1 und Lauf2 ist mir folgendes aufgefallen:
+In TS-D_Mesh_and_API_Batching_Concept.md haben wir die Epochen spezifiziert:
+
+# Three-Zone Strategy
+
+Epoche 1 (Core Zone): 1600–2400, Step 30d (inner) / 60d (outer)
+Epoche 2 (Extended Zone): 0–4000, Step 180d
+Epoche 3 (Extreme Zone): -4000–8000, Step 2y
+
+In MeshDataGenerationRunner.cs haben wir jedoch folgende Definition der Epochen implementiert:
+
+
+            var epochs = new[]
+            {
+                ("Core",     1600, 1, 1, 2400, 4, 1,  30.0),
+                ("Extended",    0, 1, 1, 4000, 4, 1, 180.0),
+                ("Extreme",  4200, 1, 1, 4300, 4, 1, 730.0)
+            };
+
+
+Ich habe diese Definition geändert in:
+
+            var epochs = new[]
+            {
+                ("Core",     1600, 1, 1, 2400, 1, 1,  30.0),
+                ("Extended",    0, 1, 1, 4000, 1, 1, 180.0),
+                ("Extreme",  -4000, 1, 1, 8000, 1, 1, 730.0)
+            };
+
+Er übernimmt das jedoch nicht, sondern er erzeugt trotzdem nur wie bei unseren Testläufen JD3255078.5 bis JD3291578.5.
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=Mars&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2365417.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=Venus&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2365417.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+Stimmt - Du bist ganz schön neugierig :-)
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Multiple major-bodies match string "MARS*"
+
+  ID#      Name                               Designation  IAU/aliases/other   
+  -------  ---------------------------------- -----------  ------------------- 
+        4  Mars Barycenter                                                      
+      499  Mars                                                                 
+       -3  Mars Orbiter Mission (spacecraft)  2013-060A    MOM Mangalyaan       
+      -41  Mars Express (spacecraft)          2003-022A    MEX                  
+      -53  Mars Odyssey (spacecraft)          2001-013A                         
+     -530  Mars Pathfinder (spacecraft)       1996-068A    MPF                  
+      -74  Mars Reconnaissance Orbiter (spacec2005-029A    MRO                  
+      -76  Mars Science Laboratory (spacecraft2011-070A    Curiosity MSL        
+     -143  ExoMars16 TGO (spacecraft)         2016-017A                         
+     -168  Mars2020 (spacecraft)              2020-052A    Ingenuity Perseveran 
+ 
+   Number of matches =  10. Use ID# to make unique selection.
+*******************************************************************************
+
+
+Planet Catalog:
+
+        public static readonly IReadOnlyList<PlanetInfo> AllPlanets =
+            new List<PlanetInfo>
+            {
+                new("Mercury", 199),
+                new("Venus",   299),
+                new("Earth",   399), // IMPORTANT: Earth, NOT EMB
+                new("Mars",    499),
+                new("Jupiter", 599),
+                new("Saturn",  699),
+                new("Uranus",  799),
+                new("Neptune", 899)
+            };
+			
+			
+Ich habe die API so angewendet wir zuvor auch schon.
+Bei Venus kommt übringes auch dieselbe Fehlermeldung, wenn ich diesen httpS-Request mache:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=Venus&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2365417.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+Und Venus wurde zuverlässig mehrere Male hintereinander erzeugt.
+
+Ich bin dafür, dass wir einen geeigneten Debug Code einfügen, aus dem die Rückgabe von Horizons hervorgeht. Sonst können wir nur raten.
+
+
+dotnet run -- generate TS-D Mars
+
+
+Ich habe Dir den ersten Chunk für Mars und Venus gepostet. Venus funktioniert und liefert 3*5 Chunks.
+
+
+TS-D Mesh automatic run started...
+Planets: Mars
+
+Planet: Mars | Epoch: Core
+  Chunk 01: JD2305447.5 -> JD2365417.5 | STEP=30D
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2365417.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+RESPONSE PREVIEW:
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Revised: June 02, 2025                 Mars                            499 / 4
+
+ PHYSICAL DATA (updated 2025-Jun-02):
+  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)
+  Mass x10^23 (kg)      =    6.4171       Flattening, f         =  1/169.779
+  Volume (x10^10 km^3)  =   16.318        Equatorial radius (km)=  3396.19
+  Sidereal rot. period  =   24.622962 hr  Sid. rot. rate, rad/s =  0.0000708822
+  Mean solar day (sol)  =   88775.24415 s Polar gravity m/s^2   =  3.758
+  Core radius (km)      = ~1700           Equ. gravity  m/s^2   =  3.71
+  Geometric Albedo      =    0.150
+
+  GM (km^
+
+------------------------------------------------------------
+
+ERROR:
+0 vectors: Mars Core chunk 01. RAW=C:\Users\Marcu\source\repos\EphemerisRegression\EphemerisRegression\Horizons\Mesh\Helio\L0\Raw\Mars_TS-D_L0_Core_Chunk_01.csv
+
+
+-----------------
+
+TS-D Mesh automatic run started...
+Planets: Venus
+
+Planet: Venus | Epoch: Core
+  Chunk 01: JD2305447.5 -> JD2365417.5 | STEP=30D
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2365417.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+RESPONSE PREVIEW:
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Revised: April 12, 2021                Venus                           299 / 2
+
+ PHYSICAL DATA (updated 2020-Oct-19):
+  Vol. Mean Radius (km) =  6051.84+-0.01 Density (g/cm^3)      =  5.204
+  Mass x10^23 (kg)      =    48.685      Volume (x10^10 km^3)  = 92.843
+  Sidereal rot. period  =   243.018484 d Sid. Rot. Rate (rad/s)= -0.00000029924
+  Mean solar day        =   116.7490 d   Equ. gravity  m/s^2   =  8.870
+  Mom. of Inertia       =     0.33       Core radius (km)      = ~3200
+  Geometric Albedo      =     0.65       Potential Love # k2   = ~0.25
+  GM (km^3/s^2)         = 324858.592     Equatorial Radius, Re = 6051.893 km
+  GM 1-sigma (km^3/s^2) =    +-0.
+
+------------------------------------------------------------
+
+  Chunk 02: JD2365447.5 -> JD2425417.5 | STEP=30D
+
+
+[...]
+
+  JSON saved: Venus_TS-D_L0_Extended.json | vectors=8117
+  
+  
+  
+  var response = await _http.GetAsync(
+    url,
+    HttpCompletionOption.ResponseHeadersRead);
+
+response.EnsureSuccessStatusCode();
+
+using var stream = await response.Content.ReadAsStreamAsync();
+using var reader = new StreamReader(stream);
+
+string content = await reader.ReadToEndAsync();
+
+
+Dieses Mal hattest Du einen guten Riecher... schau mal.
+
+Zunächst Analyse:
+Die anderen Planeten brechen auch ab. 
+Sie brechen allerdings an einer anderen Stelle ab als Mars. 
+Aber auch wenn ich Jupiter, Saturn, Uranus und Neptun wiederhole: es ist reproduzierbar *an derselben* Stelle.
+
+
+So, nun zur Lösung des Rätsels: wenn ich diesen Request absetze:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+
+
+erhalte ich folgende Meldung:
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Revised: June 02, 2025                 Mars                            499 / 4
+ 
+ PHYSICAL DATA (updated 2025-Jun-02):
+  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)
+  Mass x10^23 (kg)      =    6.4171       Flattening, f         =  1/169.779
+  Volume (x10^10 km^3)  =   16.318        Equatorial radius (km)=  3396.19
+  Sidereal rot. period  =   24.622962 hr  Sid. rot. rate, rad/s =  0.0000708822 
+  Mean solar day (sol)  =   88775.24415 s Polar gravity m/s^2   =  3.758
+  Core radius (km)      = ~1700           Equ. gravity  m/s^2   =  3.71
+  Geometric Albedo      =    0.150                                              
+
+  GM (km^3/s^2)         = 42828.375662    Mass ratio (Sun/Mars) = 3098703.59
+  GM 1-sigma (km^3/s^2) = +- 0.00028      Mass of atmosphere, kg= ~ 2.5 x 10^16
+  Mean temperature (K)  =  210            Atmos. pressure (bar) =    0.0056 
+  Obliquity to orbit    =   25.19 deg     Max. angular diam.    =  17.9"
+  Mean sidereal orb per =    1.88081578 y Visual mag. V(1,0)    =  -1.52
+  Mean sidereal orb per =  686.98 d       Orbital speed,  km/s  =  24.13
+  Hill's sphere rad. Rp =  319.8          Escape speed, km/s    =   5.027
+                                 Perihelion  Aphelion    Mean
+  Solar Constant (W/m^2)         717         493         589
+  Maximum Planetary IR (W/m^2)   470         315         390
+  Minimum Planetary IR (W/m^2)    30          30          30
+*******************************************************************************
+
+No ephemeris for target "Mars" prior to A.D. 1600-JAN-02 00:00:00.0000 TDB
+--> es gibt keine Daten vor dem 2.1.1600. Und wir starten am 1.1.1600, deshalb wird noch nicht mal Core erzeugt. Von Extreme und Extended ganz zu schweigen!
+
+
+Und Dein Link noch für die anderen äußeren Planeten:
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+-> Response: "No ephemeris for target "Jupiter" prior to A.D. 1600-JAN-11 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+--> Response: "No ephemeris for target "Saturn" prior to A.D. 1749-DEC-31 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+--> Response: "No ephemeris for target "Uranus" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB"
+
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&EPHEM_TYPE=VECTORS&START_TIME=JD2305447.5&STOP_TIME=JD2305507.5&STEP_SIZE=30D&CENTER=@10&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+-> Response: "No ephemeris for target "Neptune" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB"
+
+
+Suche im Netz und beim JPL, welche Zeiträume definiert sind. Wir müssen leider den Mesh für die äußeren Planeten einschränken und müssen herausfinden, auf welchen Bereich.
+
+
+
+-----------------
+
+
+TS-D Clipping and Test automation:
+
+Kurzbeschreibung: worum geht es heute? Infos siehe Anhang
+
+
+-----------------------------------
+
+
+Die drei ursprünglichen Epochen mit ihren Start und Endwerten sind verbindlich. Nicht jeder Planet kann voll abgedeckt werden. Es gelten folgende Anforderungen:
+
+die in Epoche "Core" vorhanden sind, laufen mit derselben Auslösung: 30d
+
+
+
+Core (1600–2400)
+
+Voll gültig für:
+
+Mercury, Venus, Earth
+
+Mars
+
+Uranus, Neptune
+
+Teilweise gültig:
+
+Jupiter (nur bis 2200)
+
+Saturn (erst ab 1750)
+
+Extended (0–4000)
+
+Nur Mercury, Venus, Earth
+
+Mars nur bis 2600
+
+Jupiter nur bis 2200
+
+Saturn nur 1750–2250
+
+Uranus/Neptune bis ~2400
+
+Extreme (-4000–8000)
+
+Nur Mercury, Venus, Earth
+
+
+-----------------------------
+
+Bevor Du codierst: es gelten folgende Regeln
+
+1) Kein Trial and Error
+2) Bei Unklarheiten Rückfrage
+3) Du postest mir immer ein komplettes File, keine Snippets: dann hast Du immer einen konsistenten Snapshot, was ich auch habe
+4) Du gibt mir immer einen Status: Änderung/Erweiterung/Neu: wenn es ein neues File zum erzeugen ist, Attribut "neu" etc.
+
+
+MeshDataGenerationRunner.cs:
+- Hier sind die Epochen definiert
+- Hier passiert das JD-Chunking
+- Hier werden API-Calls ausgelöst
+- Hier bauen wir das Clipping ein
+- Hier wird JSON geschrieben
+
+
+
+
+
+using EphemerisRegression.Api;
+using EphemerisRegression.Config;
+using EphemerisRegression.Domain;
+using EphemerisRegression.Export;
+using EphemerisRegression.Infrastructure;
+using EphemerisRegression.Parsing;
+using EphemerisRegression.Util;
+using EphemerisRegression.Domain;
+using EphemerisRegression.Api;
+using EphemerisRegression.Config;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace EphemerisRegression.Runner
+{
+    public sealed class MeshDataGenerationRunner
+    {
+        private const int MaxStepsPerChunk = 2000;
+
+        private readonly HorizonsApiClient _apiClient = new();
+
+
+        private readonly MeshHorizonsApiRequestFactory _meshFactory;
+
+        public MeshDataGenerationRunner()
+        {
+            var config = new HorizonsHelioLevel0Config();
+            _meshFactory = new MeshHorizonsApiRequestFactory(config);
+        }
+
+        public async Task RunEarthAsync()
+        {
+            Console.WriteLine("TS-D Earth automatic run started...");
+            Console.WriteLine();
+
+            var solutionRoot = ProjectPathResolver.GetSolutionRoot();
+
+            string rawDir = Path.Combine(
+                solutionRoot,
+                "EphemerisRegression",
+                "Horizons",
+                "Mesh",
+                "Helio",
+                "L0",
+                "Raw");
+
+            string jsonDir = Path.Combine(
+                solutionRoot,
+                "EphemerisRegression",
+                "Horizons",
+                "Mesh",
+                "Helio",
+                "L0",
+                "Json");
+
+            Directory.CreateDirectory(rawDir);
+            Directory.CreateDirectory(jsonDir);
+
+            var config = new HorizonsHelioLevel0Config();
+            var meshFactory = new MeshHorizonsApiRequestFactory(config);
+
+            var epochs = new[]
+            {
+                ("Core",     1600, 1, 1, 2400, 1, 1,  30.0),
+                ("Extended",    0, 1, 1, 4000, 1, 1, 180.0),
+                ("Extreme",  -4000, 1, 1, 8000, 1, 1, 730.0)
+            };
+
+            foreach (var e in epochs)
+            {
+                Console.WriteLine($"Epoch: {e.Item1}");
+
+                double jdStart = ToJulianDayProlepticGregorian(e.Item2, e.Item3, e.Item4);
+                double jdStop = ToJulianDayProlepticGregorian(e.Item5, e.Item6, e.Item7);
+
+                double stepDays = e.Item8;
+
+                var allVectors = new List<StateVector>();
+                var allRequests = new List<(string Canonical, string Hash)>();
+
+                int chunkIndex = 1;
+
+                for (double chunkStartJD = jdStart;
+                     chunkStartJD <= jdStop;
+                     chunkStartJD += MaxStepsPerChunk * stepDays, chunkIndex++)
+                {
+                    double chunkStopJD = chunkStartJD + (MaxStepsPerChunk - 1) * stepDays;
+                    if (chunkStopJD > jdStop)
+                        chunkStopJD = jdStop;
+
+                    var request = meshFactory.Create(
+                        399,
+                        chunkStartJD,
+                        chunkStopJD,
+                        stepDays);
+
+                    Console.WriteLine($"  Chunk {chunkIndex:00}: JD{chunkStartJD} -> JD{chunkStopJD}");
+
+                    string rawContent = await _apiClient.ExecuteAsync(request);
+
+                    string rawFileName = $"Earth_TS-D_L0_{e.Item1}_Chunk_{chunkIndex:00}.csv";
+                    string rawPath = Path.Combine(rawDir, rawFileName);
+
+                    await File.WriteAllTextAsync(rawPath, rawContent);
+
+                    var parser = new HorizonsVectorParser();
+                    var vectors = parser.Parse(rawContent).ToList();
+
+                    if (vectors.Count == 0)
+                    {
+                        throw new InvalidOperationException(
+                            $"Horizons returned 0 vectors for {e.Item1} chunk {chunkIndex:00}. " +
+                            $"Check RAW file: {rawPath}");
+                    }
+
+                    allVectors.AddRange(vectors);
+
+                    var parameters = request.ToParameterDictionary();
+                    var canonical = CanonicalRequestBuilder.Build(parameters);
+                    var hash = HashCalculator.ComputeSha256(canonical);
+
+                    allRequests.Add((canonical, hash));
+                }
+
+                string epochHash = HashCalculator.ComputeSha256(
+                    string.Join("|", allRequests.Select(r => r.Hash)));
+
+                var metadata = new ReferenceMetadata
+                {
+                    EpochHash = epochHash,
+                    Requests = allRequests.Select(r => new RequestInfo
+                    {
+                        CanonicalRequest = r.Canonical,
+                        RequestHash = r.Hash,
+                        HorizonsUrl = ""
+                    }).ToList(),
+                    HorizonsUrl = "",
+                    EngineVersion = "1.1.0",
+                    CorrectionLevel = "L0",
+                    Mode = "HELIO",
+                    EphemType = "VECTORS",
+                    GeneratedAtUtc = DateTime.UtcNow
+                };
+
+                var reference = new ReferenceStateVector(
+                    "Earth",
+                    "TS-D",
+                    e.Item1,
+                    "L0",
+                    allVectors,
+                    metadata);
+
+                var writer = new JsonReferenceWriter(JsonOptionsFactory.Create());
+
+                string jsonPath = Path.Combine(jsonDir, $"Earth_TS-D_L0_{e.Item1}.json");
+                await writer.WriteAsync(jsonPath, reference);
+
+                Console.WriteLine($"Epoch {e.Item1} complete. {allVectors.Count} vectors.");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("TS-D Earth automatic run complete.");
+        }
+
+        private static double ToJulianDayProlepticGregorian(int year, int month, int day)
+        {
+            int a = (14 - month) / 12;
+            int y = year + 4800 - a;
+            int m = month + 12 * a - 3;
+
+            int jdn = day
+                + (153 * m + 2) / 5
+                + 365 * y
+                + y / 4
+                - y / 100
+                + y / 400
+                - 32045;
+
+            return jdn - 0.5;
+        }
+
+        public async Task RunAllPlanetsAsync(TsDMeshRunConfig config)
+        {
+            if (config == null) throw new ArgumentNullException(nameof(config));
+            if (config.Planets == null || config.Planets.Count == 0)
+                throw new ArgumentException("Config.Planets must not be empty.", nameof(config));
+
+            Console.WriteLine("TS-D Mesh automatic run started...");
+            Console.WriteLine($"Planets: {string.Join(", ", config.Planets.Select(p => p.Name))}");
+            Console.WriteLine();
+
+            var solutionRoot = ProjectPathResolver.GetSolutionRoot();
+
+            string rawDir = Path.Combine(
+                solutionRoot,
+                "EphemerisRegression",
+                "Horizons",
+                "Mesh",
+                "Helio",
+                "L0",
+                "Raw");
+
+            string jsonDir = Path.Combine(
+                solutionRoot,
+                "EphemerisRegression",
+                "Horizons",
+                "Mesh",
+                "Helio",
+                "L0",
+                "Json");
+
+            Directory.CreateDirectory(rawDir);
+            Directory.CreateDirectory(jsonDir);
+
+            // (EpochName, startY,M,D, stopY,M,D, stepDays)
+            var epochs = new[]
+            {
+                ("Core",     1600, 1, 1, 2400, 1, 1,  30.0),
+                ("Extended",    0, 1, 1, 4000, 1, 1, 180.0),
+                ("Extreme",  -4000, 1, 1, 8000, 1, 1, 730.0)
+            };
+
+            foreach (var planet in config.Planets)
+            {
+                foreach (var e in epochs)
+                {
+                    await RunPlanetEpochAsync(
+                        planet,
+                        epochName: e.Item1,
+                        startY: e.Item2, startM: e.Item3, startD: e.Item4,
+                        stopY: e.Item5, stopM: e.Item6, stopD: e.Item7,
+                        stepDays: e.Item8,
+                        rawDir: rawDir,
+                        jsonDir: jsonDir,
+                        overwrite: config.OverwriteExistingFiles);
+                }
+            }
+
+            Console.WriteLine("TS-D Mesh automatic run complete.");
+        }
+
+        private async Task RunPlanetEpochAsync(
+    PlanetInfo planet,
+    string epochName,
+    int startY, int startM, int startD,
+    int stopY, int stopM, int stopD,
+    double stepDays,
+    string rawDir,
+    string jsonDir,
+    bool overwrite)
+        {
+            Console.WriteLine($"Planet: {planet.Name} | Epoch: {epochName}");
+
+            double jdStart = ToJulianDayProlepticGregorian(startY, startM, startD);
+            double jdStop = ToJulianDayProlepticGregorian(stopY, stopM, stopD);
+
+            var allVectors = new List<StateVector>();
+            var allRequests = new List<(string Canonical, string Hash)>();
+
+            int chunkIndex = 1;
+
+            for (double chunkStartJD = jdStart;
+                 chunkStartJD <= jdStop;
+                 chunkStartJD += MaxStepsPerChunk * stepDays, chunkIndex++)
+            {
+                double chunkStopJD = chunkStartJD + (MaxStepsPerChunk - 1) * stepDays;
+                if (chunkStopJD > jdStop) chunkStopJD = jdStop;
+
+                var request = _meshFactory.Create(
+                    planet.CommandCode,
+                    chunkStartJD,
+                    chunkStopJD,
+                    stepDays);
+
+                string rawFileName = $"{planet.Name}_TS-D_L0_{epochName}_Chunk_{chunkIndex:00}.csv";
+                string rawPath = Path.Combine(rawDir, rawFileName);
+
+                Console.WriteLine($"  Chunk {chunkIndex:00}: {request.StartTime} -> {request.StopTime} | STEP={request.StepSize}");
+
+                string rawContent = await _apiClient.ExecuteAsync(request);
+                await File.WriteAllTextAsync(rawPath, rawContent);
+
+                var parser = new HorizonsVectorParser();
+                var vectors = parser.Parse(rawContent).ToList();
+
+                if (vectors.Count == 0)
+                    throw new InvalidOperationException($"0 vectors: {planet.Name} {epochName} chunk {chunkIndex:00}. RAW={rawPath}");
+
+                allVectors.AddRange(vectors);
+
+                var parameters = request.ToParameterDictionary();
+                var canonical = CanonicalRequestBuilder.Build(parameters);
+                var hash = HashCalculator.ComputeSha256(canonical);
+
+                allRequests.Add((canonical, hash));
+            }
+
+            string epochHash = HashCalculator.ComputeSha256(
+                string.Join("|", allRequests.Select(r => r.Hash)));
+
+            var metadata = new ReferenceMetadata
+            {
+                EpochHash = epochHash,
+                Requests = allRequests.Select(r => new RequestInfo
+                {
+                    CanonicalRequest = r.Canonical,
+                    RequestHash = r.Hash,
+                    HorizonsUrl = ""
+                }).ToList(),
+                HorizonsUrl = "",
+                EngineVersion = "1.1.0",
+                CorrectionLevel = "L0",
+                Mode = "HELIO",
+                EphemType = "VECTORS",
+                GeneratedAtUtc = DateTime.UtcNow
+            };
+
+            var reference = new ReferenceStateVector(
+                planet.Name,
+                "TS-D",
+                epochName,
+                "L0",
+                allVectors,
+                metadata);
+
+            var writer = new JsonReferenceWriter(JsonOptionsFactory.Create());
+
+            string jsonPath = Path.Combine(jsonDir, $"{planet.Name}_TS-D_L0_{epochName}.json");
+            await writer.WriteAsync(jsonPath, reference);
+
+            Console.WriteLine($"  JSON saved: {Path.GetFileName(jsonPath)} | vectors={allVectors.Count}");
+            Console.WriteLine();
+        }
+        public sealed class TsDMeshRunConfig
+        {
+            public IReadOnlyList<PlanetInfo> Planets { get; init; } = PlanetCatalog.AllPlanets;
+
+            public bool OverwriteExistingFiles { get; init; } = true;
+
+            public static TsDMeshRunConfig OnlyEarth() =>
+                new TsDMeshRunConfig
+                {
+                    Planets = new[] { PlanetCatalog.Earth }
+                };
+        }
+    }
+}
+
+
+
+---------------------------------
+
+PlanetCatalog.cs
+
+- Enthält CommandCodes
+- ===> !!! Wird erweitert um MinJD / MaxJD !!! <===
+- Hier implementieren wir die planetenspezifischen Ranges
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace EphemerisRegression.Domain
+{
+    public sealed record PlanetInfo(string Name, int CommandCode)
+    {
+        public override string ToString() => $"{Name} ({CommandCode})";
+    }
+
+    public static class PlanetCatalog
+    {
+        public static readonly IReadOnlyList<PlanetInfo> AllPlanets =
+            new List<PlanetInfo>
+            {
+                new("Mercury", 199),
+                new("Venus",   299),
+                new("Earth",   399), // IMPORTANT: Earth, NOT EMB
+                new("Mars",    499),
+                new("Jupiter", 599),
+                new("Saturn",  699),
+                new("Uranus",  799),
+                new("Neptune", 899)
+            };
+
+        public static PlanetInfo Earth =>
+            AllPlanets.Single(p => p.Name == "Earth");
+
+        public static IReadOnlyList<PlanetInfo> ParseSelection(string? selection)
+        {
+            if (string.IsNullOrWhiteSpace(selection))
+                return AllPlanets;
+
+            var wanted = selection
+                .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            var result = AllPlanets
+                .Where(p => wanted.Contains(p.Name))
+                .ToList();
+
+            if (result.Count != wanted.Count)
+                throw new ArgumentException(
+                    "Unknown planet(s). Known: " +
+                    string.Join(", ", AllPlanets.Select(p => p.Name)));
+
+            return result;
+        }
+    }
+}
+
+
+----------------------------------------
+
+Horizons API Request:
+- Definiert, wie START_TIME / STOP_TIME / STEP_SIZE gesetzt werden
+- Relevant falls wir JD-Formate anpassen
+
+
+using System.Collections.Generic;
+
+namespace EphemerisRegression.Api
+{
+    public sealed class HorizonsApiRequest
+    {
+        public int Command { get; init; }
+        public string StartTime { get; init; } = "";
+        public string StopTime { get; init; } = "";
+        public string StepSize { get; init; } = "1h";
+
+        public string Center { get; init; } = "@10";
+        public string RefPlane { get; init; } = "ECLIPTIC";
+        public string RefSystem { get; init; } = "ICRF";
+        public string? VectorCorrection { get; init; }
+        public string OutputUnits { get; init; } = "AU-D";
+
+        public string CsvFormat { get; init; } = "NO";
+
+        public IDictionary<string, string> ToParameterDictionary()
+        {
+            var dict = new Dictionary<string, string>
+            {
+                ["COMMAND"] = Command.ToString(),
+                ["CENTER"] = Center,
+                ["START_TIME"] = StartTime,
+                ["STOP_TIME"] = StopTime,
+                ["STEP_SIZE"] = StepSize,
+                ["REF_PLANE"] = RefPlane,
+                ["REF_SYSTEM"] = RefSystem,
+                ["OUT_UNITS"] = OutputUnits,
+                ["EPHEM_TYPE"] = "VECTORS",
+                ["CSV_FORMAT"] = CsvFormat,
+                ["OBJ_DATA"] = "NO"
+            };
+
+            if (!string.IsNullOrWhiteSpace(VectorCorrection))
+                dict["VECT_CORR"] = VectorCorrection!;
+
+            return dict;
+        }
+    }
+}
+
+--------------------------
+
+MeshHorizonsRequestFactory.cs
+
+- Hier wird JD → API Request gemappt
+- Wichtig, falls wir Range-Clipping vor Request einbauen
+
+
+using EphemerisRegression.Batching;
+using EphemerisRegression.Config;
+using EphemerisRegression.Infrastructure;
+
+namespace EphemerisRegression.Api
+{
+    public sealed class MeshHorizonsRequestFactory
+    {
+        private readonly HorizonsLevelBaseConfig _config;
+
+        public MeshHorizonsRequestFactory(HorizonsLevelBaseConfig config)
+        {
+            _config = config;
+        }
+
+        public (HorizonsApiRequest Request, string Canonical, string Hash)
+            Create(MeshBatchDefinition batch)
+        {
+            var request = new HorizonsApiRequest
+            {
+                Command = batch.PlanetCode,
+                StartTime = batch.StartUtc.ToIsoString(),
+                StopTime = batch.StopUtc.ToIsoString(),
+                StepSize = $"{batch.StepDays} d",
+
+                Center = _config.Center,
+                RefPlane = _config.RefPlane,
+                RefSystem = _config.RefSystem,
+                VectorCorrection = _config.VectorCorrection,
+                OutputUnits = _config.OutputUnits
+            };
+
+            var parameters = request.ToParameterDictionary();
+
+            var canonical = CanonicalRequestBuilder.Build(parameters);
+            var hash = HashCalculator.ComputeSha256(canonical);
+
+            return (request, canonical, hash);
+        }
+    }
+}
+
+--------------
+
+planet.cs zum Start des Programm ist im Anhang.
+
+
+Frage1: A)
+Frage2: es sollen die Julianischen Daten der Tabelle in der Spalte Min JD als Konstanten verwendet werden.
+Frage3: es soll die Konsolenmeldung ausgegeben, aber übersprungen werden. 
+Chunk Ausgabe: ja, zusätzlich auch 1) JD, 2) JD des letzten Datums eines Chunks
+
+
+
+
+------------------------
+
+Test:
+alle Roh und Json Files wurden geprüft
+
+
+Testergebnis:
+Es wurden alle Raw und Json Files wie erwartet erstellt.
+Alle Datenfiles enthalten StateVectors (x, y, z, vx, vy, vz)
+Die Start und Endwerte stimmen mit dem Planetenrange überein
+Die Endwertregel (ganzzahliges Vielfaches) passt
+Die Chunk Größe ist ein ganzzahliges Vielfaches. Die Äquidistanz bleibt über die Chunks hinweg erhalten.
+Rohdaten- und Json-Fileinhalt ist plausibel.
+
+
+Auswertung Saturn:
+
+(1) Raw files
+Chunk1: Core
+Starttime passt zu Spec
+StateVectors vorhanden
+Start time      : A.D. 1749-Dec-31 00:00:00.0000 TDB
+Stop  time      : A.D. 1914-Mar-12 00:00:00.0000 TDB
+
+Startwert Query: 17.12.1749
+Erster Datenwert (State Vector): 17.12.1749
+Letzter Datenwert (State Vector): 12.03.1914 (Start + 1999*30 d)
+Stopwert Chunk: 12.03.1914 
+
+Die Chunklänge entspricht einem ganzzahligen Vielfachen der Stepsize.
+Der erste Wert im neuen Chunk ist genau einen Step weiter.
+-> Die Stepsize wird über die Chunk Grenze beibehalten = äquidistant über die Chunks hinweg.
+
+
+Chunk2: Core
+Starttime passt: 30d nach letztem Wert aus Chunk1
+StateVectors vorhanden
+Start time      : A.D. 1914-Apr-11 00:00:00.0000 TDB
+Stop  time      : A.D. 2078-Jun-19 00:00:00.0000 TDB
+
+
+Startwert Query: 1914-Apr-11
+Erster Datenwert (State Vector):1914-Apr-11
+Letzter Datenwert (State Vector): 2078-Jun-19 
+Stopwert Chunk: 2078-Jun-19
+
+Die Chunklänge entspricht einem ganzzahligen Vielfachen der Stepsize.
+Der erste Wert im neuen Chunk ist genau einen Step weiter.
+-> Die Stepsize wird über die Chunk Grenze beibehalten = äquidistant über die Chunks hinweg.
+
+Chunk3: Core
+Starttime passt: 30d nach letztem Wert aus Chunk2
+StateVectors vorhanden
+Start time      : A.D. 2078-Jul-19 00:00:00.0000 TDB
+Stop  time      : A.D. 2242-Sep-28 00:00:00.0000 TDB
+
+
+
+Chunk4: Core
+Starttime passt: 30d nach letztem Wert aus Chunk3
+StateVectors vorhanden
+Start time      : A.D. 2242-Oct-28 00:00:00.0000 TDB
+Stop  time      : A.D. 2250-Jan-05 00:00:00.0000 TDB
+
+Stop Time passt:
+Stop time ist 5.1.2250
+Letztes ganzzahliges Vielfaches ist 2542843.5 = 20.12.2249 (=Start Time + 87*30)
+Ende von Chunk4 ist Ende der Epoche. 16 Tage bleiben übrig, ok
+
+
+Chunk1: Extended
+Start time passt: 1749-Dec-31
+StateVectors vorhanden
+Start time      : A.D. 1749-Dec-31 00:00:00.0000 TDB
+Stop  time      : A.D. 2250-Jan-05 00:00:00.0000 TDB
+
+Erster Datenwert mit Statevector passt: 1749-Dec-31 
+Letzter Datenwert mit Statevector passt: 2249-Sep-21 (<180d vor Intervallende), ganzzahliges Vielfaches: Start + 1014*180 d
+
+
+
+Chunk1: Extreme
+Starttime passt: 
+StateVectors vorhanden
+Start time      : A.D. 1749-Dec-31 00:00:00.0000 TDB
+Stop  time      : A.D. 2250-Jan-05 00:00:00.0000 TDB
+
+Erster Datenwert mit Statevector passt: 1749-Dec-31 
+Letzter Datenwert mit Statevector passt: 2249-Sep-01 (<720d vor Intervallende), ganzzahliges Vielfaches: Start + 250*720 d
+
+
+
+(2) Json files
+genau ein Extreme, genau ein Extended und genau ein Core File da wie erwartet
+
+Core: 
+Statevectors da
+Start und Endwerte analog Raw Dateien und plausibel
+
+Extended:
+Statevectors da
+Start und Endwerte analog Raw Dateien und plausibel
+
+Extreme:
+Statevectors da
+Start und Endwerte analog Raw Dateien und plausibel

@@ -1,0 +1,89 @@
+Phase 2: TS-B
+
+Datensatz AS-000057.json
+
+JSON Datenformat: 
+- unterschiedlich zu früher, daher kein 1:1 Vergleich möglich
+	+ früher vor/am/nach dem Event - 3 Datensätze
+	+ heute: Event-1D:1H:Event+1D  
+	+ plausible Zahlenwerte des Zustandsvektors (Genauigkeit s.u.) am Event
+
+
+
+Datensatz AS-000057.json
+
+Szenario Header: JD 2461245.80347222
+Erster Datenpunkt im CSV-File: JD 2461245.803472000-> 2 Stellen gehen verloren
+Erster Datenpunkt im JSON-File: "JD": 2461245.803472 -> die 2 verlorenen Stellen aus CSV File
+--> Genauigkeitsverlust auch hier analog Datensatz AS-000015.json und AS-000025.json
+
+GENAUIGKEITS-ANALYSE:
+
+Candidate: SCN_000057.json: 9 Stellen (so soll es sein)
+  "Core": {
+    "Time": {
+      "StartJD": 2461245.803472222,
+      "StopJD": 2461247.803472222,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+SHG -> AS-000057.json: 6 Stellen
+  "Core": {
+    "Time": {
+      "StartJD": 2461245.803472,
+      "StopJD": 2461247.803472,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+    },
+
+SHG -> ScenarioID: 
+  "ScenarioID": "GEO-TD-2461245.80347222-2461247.80347222-1H",
+  StartJD und StopJD jeweils auf 8 Stellen
+  
+
+CSV zu AS-000057.json = GEO-TD-2461245.80347222-2461247.80347222-1H_L0.csv: 6-8 Stellen
+Auffällig bei den ersten 10 Zahlenwerten des API-Return im CSV File:
+2461245.803472000
+2461245.845138667
+2461245.886805333
+2461245.928472000
+2461245.970138667
+2461246.011805333
+2461246.053472000
+2461246.095138667
+2461246.136805333
+2461246.178472000
+
+Die letzten 3 Stellen sind entweder 200, 533 oder 867 
+-> bekanntes Phänomen aus TS-A. Dort war Startwert aber 000, daher 000, 333, 667 -> plausibel
+
+	
+JSON: 
+erster Datenpunkt: 6 Stellen
+  {
+    "JD": 2461245.803472,
+    "Position": { "X": 0.44006927, "Y": 1.97959913, "Z": -0.00044472 },
+    "Velocity": { "X": -0.02448151, "Y": 0.00155626, "Z": 0.00046394 }
+  },
+
+zweiter Datenpunkt: 8 Stellen  
+  {
+    "JD": 2461245.84513867,
+    "Position": { "X": 0.43904926, "Y": 1.97966368, "Z": -0.00042539 },
+    "Velocity": { "X": -0.02447905, "Y": 0.00154177, "Z": 0.00046394 }
+  },
+
+Gleiches Bild: die letzten 3 Stellen sind entweder 200, 533 oder 867 -> 1H = 1/24D = 0.04166667
+
+
+
+ANALYSE - INTERPRETATION:
+
+(1) "im Rahmen der Rundung gleiche Ergebnisse" -> API Call okay, aber mit falschen Daten
+(2) Root Causes wie bei TS-A
+
+
+
+
+

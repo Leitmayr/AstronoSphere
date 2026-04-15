@@ -1,0 +1,517 @@
+
+Processing: AS-000075 | HELIO-J2000-TDB-2305447-2341957-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=499
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2305447.5
+STEP_SIZE=30D
+STOP_TIME=JD2341957.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=499
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2305447.5
+StepSize=30D
+StopTime=JD2341957.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2305447-2341957-30D
+
+
+
+Processing: AS-000076 | HELIO-J2000-TDB-2305447-2341957-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=599
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2305447.5
+STEP_SIZE=30D
+STOP_TIME=JD2341957.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=599
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2305447.5
+StepSize=30D
+StopTime=JD2341957.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2305447-2341957-30D
+Processing: AS-000077 | HELIO-J2000-TDB-2305447-2341957-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=699
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2305447.5
+STEP_SIZE=30D
+STOP_TIME=JD2341957.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=699
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2305447.5
+StepSize=30D
+StopTime=JD2341957.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2305447-2341957-30D
+Processing: AS-000078 | HELIO-J2000-TDB-2305447-2341957-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=799
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2305447.5
+STEP_SIZE=30D
+STOP_TIME=JD2341957.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=799
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2305447.5
+StepSize=30D
+StopTime=JD2341957.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2305447-2341957-30D
+Processing: AS-000079 | HELIO-J2000-TDB-2305447-2341957-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=899
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2305447.5
+STEP_SIZE=30D
+STOP_TIME=JD2341957.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=899
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2305447.5
+StepSize=30D
+StopTime=JD2341957.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&CENTER=%4010&START_TIME=JD2305447.5&STOP_TIME=JD2341957.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2305447-2341957-30D
+
+Processing: AS-000086 | HELIO-J2000-TDB-2341972-2378482-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=699
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2341972.5
+STEP_SIZE=30D
+STOP_TIME=JD2378482.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=699
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2341972.5
+StepSize=30D
+StopTime=JD2378482.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2341972.5&STOP_TIME=JD2378482.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2341972-2378482-30D
+
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2524593-2561103-30D
+Processing: AS-000126 | HELIO-J2000-TDB-2524593-2561103-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=699
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2524593.5
+STEP_SIZE=30D
+STOP_TIME=JD2561103.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=699
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2524593.5
+StepSize=30D
+StopTime=JD2561103.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2524593.5&STOP_TIME=JD2561103.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2524593-2561103-30D
+P
+Processing: AS-000133 | HELIO-J2000-TDB-2561117-2597627-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=599
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2561117.5
+STEP_SIZE=30D
+STOP_TIME=JD2597627.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=599
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2561117.5
+StepSize=30D
+StopTime=JD2597627.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2561117.5&STOP_TIME=JD2597627.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2561117-2597627-30D
+Processing: AS-000134 | HELIO-J2000-TDB-2561117-2597627-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=699
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2561117.5
+STEP_SIZE=30D
+STOP_TIME=JD2597627.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=699
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2561117.5
+StepSize=30D
+StopTime=JD2597627.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2561117.5&STOP_TIME=JD2597627.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2561117-2597627-30D
+Processing: AS-000135 | HELIO-J2000-TDB-2561117-2597627-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=799
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2561117.5
+STEP_SIZE=30D
+STOP_TIME=JD2597627.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=799
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2561117.5
+StepSize=30D
+StopTime=JD2597627.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&CENTER=%4010&START_TIME=JD2561117.5&STOP_TIME=JD2597627.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2561117-2597627-30D
+
+Processing: AS-000141 | HELIO-J2000-TDB-2597641-2634151-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=599
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2597641.5
+STEP_SIZE=30D
+STOP_TIME=JD2634151.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=599
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2597641.5
+StepSize=30D
+StopTime=JD2634151.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2597641.5&STOP_TIME=JD2634151.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2597641-2634151-30D
+Processing: AS-000142 | HELIO-J2000-TDB-2597641-2634151-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=699
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2597641.5
+STEP_SIZE=30D
+STOP_TIME=JD2634151.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=699
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2597641.5
+StepSize=30D
+StopTime=JD2634151.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&CENTER=%4010&START_TIME=JD2597641.5&STOP_TIME=JD2634151.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2597641-2634151-30D
+Processing: AS-000143 | HELIO-J2000-TDB-2597641-2634151-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=799
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2597641.5
+STEP_SIZE=30D
+STOP_TIME=JD2634151.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=799
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2597641.5
+StepSize=30D
+StopTime=JD2634151.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&CENTER=%4010&START_TIME=JD2597641.5&STOP_TIME=JD2634151.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2597641-2634151-30D
+Processing: AS-000144 | HELIO-J2000-TDB-2597641-2634151-30D
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=899
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2597641.5
+STEP_SIZE=30D
+STOP_TIME=JD2634151.5
+=============================
+
+=== CANONICAL STRING ===
+Center=@10
+Command=899
+CsvFormat=YES
+EphemType=VECTORS
+OutUnits=AU-D
+RefPlane=ECLIPTIC
+RefSystem=ICRF
+StartTime=JD2597641.5
+StepSize=30D
+StopTime=JD2634151.5
+TimeScale=TDB
+========================
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&CENTER=%4010&START_TIME=JD2597641.5&STOP_TIME=JD2634151.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+[SKIP] Invalid ephemeris for HELIO-J2000-TDB-2597641-2634151-30D
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...

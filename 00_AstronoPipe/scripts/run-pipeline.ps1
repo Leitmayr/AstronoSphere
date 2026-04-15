@@ -1,86 +1,101 @@
 # ============================================================
-# FILE: run-pipeline.ps1
-# PURPOSE: Full AstronoSphere Pipeline Run (M1.5)
+# FILE: 00_AstronoPipe\scripts\run-pipeline.ps1
+# STATUS: M1.9 FINAL
+# PURPOSE:
+# - run AstronoLab
+# - run AstronoCert
+# - run AstronoTruth
+# - stop immediately on first error
+# - no Beyond Compare CLI integration
 # ============================================================
 
-Write-Host "============================================"
-Write-Host " AstronoSphere Pipeline Run"
-Write-Host "============================================"
-Write-Host ""
+$ErrorActionPreference = "Stop"
 
-# ============================================================
-# STEP 1: ROTATE RUN -> LASTRUN
-# ============================================================
-
-Write-Host "Step 1: Rotate Run -> LastRun"
-Write-Host ""
-
-# Rotation passiert in der EphemerisFactory (KISS)
-
-# ============================================================
-# STEP 2: RUN EPHEMERIS FACTORY (NON-INTERACTIVE)
-# ============================================================
-
-Write-Host "Step 2: Run EphemerisFactory"
-Write-Host ""
-
-$projectPath = Join-Path $PSScriptRoot "..\..\03_TruthFactory\src\EphemerisFactory\EphemerisFactory.csproj"
-
-$process = Start-Process `
-    -FilePath "dotnet" `
-    -ArgumentList "run --project `"$projectPath`"" `
-    -NoNewWindow `
-    -Wait `
-    -PassThru
-
-if ($process.ExitCode -ne 0) {
+function Write-Step([string]$text) {
     Write-Host ""
-    Write-Host "FAILURE: EphemerisFactory failed" -ForegroundColor Red
-    exit 1
+    Write-Host "============================================================" -ForegroundColor DarkGray
+    Write-Host $text -ForegroundColor Cyan
+    Write-Host "============================================================" -ForegroundColor DarkGray
 }
 
-# ============================================================
-# STEP 3: COMPARE RUN vs LASTRUN (Determinismus)
-# ============================================================
+function Invoke-DotNetRun {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProjectFolder,
+        [Parameter(Mandatory = $false)][string[]]$Arguments = @()
+    )
 
-Write-Host ""
-Write-Host "Step 3: Compare Run vs LastRun"
-Write-Host ""
+    if (-not (Test-Path $ProjectFolder)) {
+        throw "Project folder not found: $ProjectFolder"
+    }
 
-$compareLastRun = Join-Path $PSScriptRoot "compare-run-lastRun.ps1"
+    Push-Location $ProjectFolder
+    try {
+        Write-Host "Working directory: $ProjectFolder" -ForegroundColor DarkGray
 
-& $compareLastRun
+        $argLine = @("run", "--project", ".")
+        if ($Arguments.Count -gt 0) {
+            $argLine += "--"
+            $argLine += $Arguments
+        }
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Host ""
-    Write-Host "FAILURE: Determinism check failed (Run vs LastRun)" -ForegroundColor Red
-    exit 1
+        Write-Host "Command: dotnet $($argLine -join ' ')" -ForegroundColor DarkGray
+        & dotnet @argLine
+
+        if ($LASTEXITCODE -ne 0) {
+            throw "dotnet run failed in: $ProjectFolder (ExitCode=$LASTEXITCODE)"
+        }
+    }
+    finally {
+        Pop-Location
+    }
 }
 
-# ============================================================
-# STEP 4: COMPARE RUN vs RELEASED (Baseline / CM Gate)
-# ============================================================
+try {
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $repoRoot  = Resolve-Path (Join-Path $scriptDir "..\..")
 
-Write-Host ""
-Write-Host "Step 4: Compare Run vs Released"
-Write-Host ""
+    Write-Step "AstronoSphere M1.9 Pipeline Run"
+    Write-Host "Repo root: $repoRoot" -ForegroundColor DarkGray
 
-$compareReleased = Join-Path $PSScriptRoot "compare-run-released.ps1"
+    $astronoLabFolder   = Join-Path $repoRoot "01_AstronoLab\src\AstronoLab"
+    $astronoCertFolder  = Join-Path $repoRoot "02_AstronoCert\src"
+    $astronoTruthFolder = Join-Path $repoRoot "03_AstronoTruth\src\EphemerisFactory"
 
-& $compareReleased
+    # ------------------------------------------------------------
+    # 1) AstronoLab
+    # Erwartung:
+    # 01_Seeds\Incoming  -> 01_Seeds\Prepared
+    # ------------------------------------------------------------
+    Write-Step "[1/3] Running AstronoLab"
+    Invoke-DotNetRun -ProjectFolder $astronoLabFolder
 
-if ($LASTEXITCODE -ne 0) {
+    # ------------------------------------------------------------
+    # 2) AstronoCert
+    # Erwartung:
+    # 01_Seeds\Prepared  -> 02_Experiments\Released
+    # 01_Seeds\Prepared  -> 01_Seeds\Processed
+    # ------------------------------------------------------------
+    Write-Step "[2/3] Running AstronoCert"
+    Invoke-DotNetRun -ProjectFolder $astronoCertFolder
+
+    # ------------------------------------------------------------
+    # 3) AstronoTruth
+    # Erwartung:
+    # 02_Experiments\Released -> 03_GroundTruth\...\Run
+    # bestehendes Run wird nach LastRun rotiert
+    # ------------------------------------------------------------
+    Write-Step "[3/3] Running AstronoTruth"
+    Invoke-DotNetRun -ProjectFolder $astronoTruthFolder
+
+    Write-Step "Pipeline completed successfully"
+    Write-Host "Next manual step:" -ForegroundColor Yellow
+    Write-Host "Run == LastRun mit Beyond Compare GUI prüfen." -ForegroundColor Yellow
+
+    exit 0
+}
+catch {
     Write-Host ""
-    Write-Host "FAILURE: Baseline regression detected (Run vs Released)" -ForegroundColor Red
+    Write-Host "PIPELINE FAILED" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
     exit 1
 }
-
-# ============================================================
-# DONE
-# ============================================================
-
-Write-Host ""
-Write-Host "============================================"
-Write-Host " PIPELINE SUCCESS"
-Write-Host "============================================"
-Write-Host ""

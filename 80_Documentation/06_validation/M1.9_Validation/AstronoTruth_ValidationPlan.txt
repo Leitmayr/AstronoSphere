@@ -1,0 +1,44 @@
+Step1: Dataset #23
+Änderung: 
+- GT liest jetzt die neuen Experimente aus Experiments/Released
+Test: 
+- Vergleich mit alter GroundTruth: Datenblock identisch? Struktur/Precision? 
+BeyondCompare: 
+- Datenblock identisch 
+- Header manuell checken. plausibel?
+- Json/CSV Precision Plausi
+
+
+Step2: Dataset #23
+Änderung: 
+- DatasetHeader manuell aus #23 entfernen
+- GT liest das gekürzte #23er Experiment Experiments/Released und erzeugt selbst den DatasetHeader
+
+Test: 
+- Vergleich mit LastRun: Datenblock und selbst erzeugter Header -> binär identisch? 
+BeyondCompare: 
+- Datenblock identisch 
+- Header manuell checken. plausibel?
+- Hash manuell nachrechnen (Web Interface)
+
+Step3: Dataset #23
+Änderung:
+- keine Änderung
+- neuerlicher Run
+
+Test:
+- Vergleich Run/LastRun: -> binär identisch? BeyondCompare
+
+Step4: 
+wiederhole Step2 und 3 für Datasets AS-000003.json	AS-000015.json	AS-000046.json	AS-000054.json	AS-000057.json	AS-000072.json
+
+Test: 
+- Vergleich mit LastRun: Datenblock und selbst erzeugter Header -> binär identisch? BeyondCompare
+- Vergleich Run/LastRun: -> binär identisch? BeyondCompare
+
+Step5: 
+alle 144 zwei Mal erzeugen
+
+Test:
+- compare Tool mit alten Referenzfiles (nur Datenblock)
+- Run/LastRun

@@ -1,0 +1,10 @@
+Frame.Epoch=J2000
+Frame.Type=HelioEcliptic
+ObservedObject.BodyClass=Planet
+ObservedObject.Targets[0]=Saturn
+Observer.Body=Sun
+Observer.Type=Heliocentric
+Time.StartJD=2463504.088194000
+Time.Step=1H
+Time.StopJD=2463506.088194000
+Time.TimeScale=TDB

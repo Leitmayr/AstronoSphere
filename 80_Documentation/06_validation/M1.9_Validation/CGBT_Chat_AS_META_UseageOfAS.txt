@@ -1,0 +1,154 @@
+
+Das heißt, für den korrekten Gebrauch ist ein Workflow erforderlich.
+
+Ich sehe das anders, z.B. 
+
+USE CASE1: Engine Correctness
+
+Nimme den Fall, dass die Experimente und Messungen schon vorhandensind. Dann muss die Experiment Auswahl nicht in AstronoLab erfolgen. AstronoLab ist für mich ein *Erzeuger*Ü neuer Experimente.
+Nehmen wir an, wir haben einen Pool von bestehenden Experimenten und einen zweiten von bestehenden Referenzdaten. Beides brauchen wir für UC1 - EngineCorrectness.
+Die Prüfung "EngineCorrectness" kann dann aus Astronolysis angestoßen werden, indem mit einer GUI dort die Messungen und zugehörigen Experimente geladen werden. Beides ist ja sogar im DatasetHeader der Messung über den CoreHash des Experiments verknüpft.
+
+Oder würdest Du *immer* neue Daten erzeugen und gar nicht auf den ExperimentCatalog oder die GroundTruth Data Base zugreifen?
+
+
+Ich hätte intuitiv gesagt: der User nutzt zum Anstoßen von Analysen meist Astronolysis und erzeugt fehlende Eingangsdaten bei Bedarf in den GUIs von AstronoLab und AstronoMeasurement.
+
+
+-------------
+
+Wir verschieben die Entscheidung GUI/Query/Hybrid noch ein bisschen - aber bitte nicht vergessen und später zurück. Vorher aber ein paar Bemerkungen:
+
+Du sagst: 
+
+2. Neue Systemdefinition
+Ich formuliere das bewusst scharf:
+"AstronoSphere ist ein System, das von Astronolysis gesteuert wird."
+
+Stimmt m.E. auch nicht ganz: Astronometria itself kann als Standalone Komponente im "Produktivmodus" verwendet werden. Mein Ziel ist schon noch, dass dieses Tool den Sternenhimmel inkl. Planeten darstellen kann, wie in der Vision beschrieben.
+
+
+Voll d'accord mit Dienem Punkt 4.
+
+
+Mode 2: Heuristic
+
+Hier sehe ich Astronometria: man spielt im Programm AST herum und identifiziert interessante Situation: "Saturn in voller Ringöffnung" -> gibt es Situationen, in denen ein Hintergundstern durch den Ring scheint? (Sternbedeckung). Das ist spielerisch und falls es ein Ergebnis gibt, soll ein neuer Seed gespeichert werden der beginnend mti AstronoLab durch die "Definition-Pipeline" läuft: erst Experiment, dann Hash dafür, dann GroundTruth von Horizons holen, Hash erzeugen, dann als Referenzdatensatz abseichern.
+
+------------
+
+ 
+Ergänzung zu 1)
+Wir nutzen den Explorationsmodus, um die Engine zu perfektionieren. In meinem Mind-Model ist das der "Validation-Modus" für Astronometria. Die Nutzung der Engine als Standalone-Program ist aber der "Produktivmodus": AstronoSphere wirft eine hochgenaue Astronometria als "Nebenprodukt" ab:
+
+Fazit:
+Explorationsmodus = "Validation-Modus"
+Heuristikmodus = "Produktivmodus"
+
+
+Ergänzung zu 6)
+Heuristik darf niemals direkt in die Pipeline eingreifen
+
+Ja, aber Astronometria soll Experimente laden und selber rechnen können: 
+1) ohne Referenzdaten aus der Truth, um einen schnellen Einstieg zu finden: "Finde nächste Kantenlage", ausgehend davon Sternbedeckung checken.
+2) mit Referenzdaten aus der Truth: jetzt habe ich ein Scenario entdeckt und möchte dafür die Referenz laden, falls existent.
+
+zu 11 von Dir: wieso nicht vollständig? 
+
+        "Core":  {
+          "Time":  {
+            "StartJD":  2443872.704,
+            "StopJD":  2443874.704,
+            "Step":  "1H",
+            "TimeScale":  "TDB"
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",
+            "Body":  "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",
+            "Targets":  [
+              "Venus"
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",
+            "Epoch":  "J2000"
+          }
+        },
+		
+Ich gehe das systematisch durch:
+- Time: liegt bei der Exploration vor
+- Observer: in Astronometria bin ich in einem bestimmten View, während ich die interessanten neuen Seed-Kandidaten identifiziere, z.B. in einer heliozentrischen View des Ssonnensystems. Daten sind also vorhanden.
+- Observed Object: ich weiß, dass ich die Venus untersuch und dass die ein Planet ist.
+- Frame: ich kenne mein Bezugsframe.
+
+Es wäre ein gigantisches Feature, wenn Astronometria zu jedem Zeitpukt wüsste, welchen "Seed-Zustand" sie gerade einnimmt, oder?
+
+
+-------
+
+zu 6: Capture Button - Super! Aber der User bekommt dann den Zustand, in dem sich Astronometria selbst sieht zum Review. Z.B. eine Konjunktion von Venus und Mars: soll ein Mars Seed oder ein Venus Seed erzeugt werden: User entscheiden und drückd dann "Safe Seed"
+
+zu 8: 100% d'accord.
+
+----------- 
+
+Weiter mit A)
+Observable Engine State: meine Meinung sollte den Core vollständig abdecken. Muss Annahmen treffen, z.B.
+- Time: jetzt +/-1 Tag, Steps 1H immer. Kann später bei Seed Processing in AstronoLab noch korrigiert werden.
+- Observer: das hängt ab, wie die Koordinaten eines Objekts in der aktuellen Ansicht repräsentiert sind - zeige ich gerade einen View in Geoäquatorialen Koordinaten? Wenn ja, Body = Earth. Type GeoEquatorial
+- Observed Object: was zeige ich gerade an? Es wird doch wahrscheinlich eine Checkbox-Liste geben, in der ich die Planeten auswählen kann: Alle gecheckten Planeten kommen in die Targets Liste
+- Frame: wenn ich in einer Mercator Darstellung der Eklipitic bin: GeoEcliptic, schaue ich von oben auf das Sonnensystem, dann HelioEcliptic. Wenn ich eine nahe Konjunktion zweier Planeten analysiere und im "apparentPlace" Modue bin: Epoch = "ofDate"
+- Weitere Daten des Views (z.B. Location, von der aus auf der Erde beobachtet wird) -> "Notes" Feld in Seeds verwenden
+
+-------------
+
+Du hast das gut zusammengefasst: hier meine 10 Cents:
+
+Du hast Recht, implizit über den UI-State ist sehr schlechtes Design. Wir leiten es aus den Koordinaten ab, die wir anzeigen (z.B. Level 2 in geoäquatorial). Ich muss doch zu jedem Zeitpunkt wissen, wie ich die Referenzdaten von Horizons holen müsste, wie der API-Call aussehen muss. Darüber ist doch der Astronometria ObservationState genau definiert.
+
+-> ich habe das geschrieben, bevor ich an Deinem Punkt 7 war. Ich würde mal nur bei Seeds bleiben fürs Erste.
+
+Also in eigenen Worten: Astronometria ist in einem bestimmten Zweig seines Algos und ist über verschiedene "Selections" dort gelandet. Astronometria erzeugt intern *explizit* einen globalen "ZustandsvektorOfItself". Dieser Zustandsvektor ist compliant mit dem Seed-Core und kann jederzeit exportiert werden. Der User kann im Zweifel unklare Entscheidungen vor dem "Save Seed" korrigieren oder ergänzen.
+Ich finde das ein Monster-Feature, das noch eine riesige "Schippe Determinismus" auf das gesamte Konzept hinzugibt. Was meinst Du? Bist Du auch so begeistert darüber?
+
+--------------
+
+
+Du bist ziemlich verhalten. :-) Ich finde, das Feature ist der Hammer. :-)))
+
+Dein Punkt 5): das meinte ich mit  "Astronometria erzeugt intern *explizit* einen globalen "ZustandsvektorOfItself" ". Es gibt eine globale Variable (oder wie auch immer Du das im Code implementierst) und die wird permanent angepasst. Ich nehme Mars dazu -> Mars kommt in die Targets List. Ich ändere auf "ApparentPosition" -> State wechselt von J2000 auf "ofDate"
+
+zu 9) inkonsistenter State: kann das wirklich passieren? Wenn die Astronometria ein Experiment anzeigt, dann kann sie das doch nur in dem Fall korrekt tun, in dem alle Beobachtungsparameter vollständig determiniert sind.
+
+Hast Du eine Idee, wofür Multi-State nützlich seinn könnte?
+
+------------------
+
+Du bist sehr schnell - ich habe noch ein/zwei Kommentare. Außerdem die Frage: wann machen wir ein md-File? Jetzt gleich oder erst die Use Cases (meine Präferenz)
+
+Design Regel: Erweiterung
+
+User Selection über UI -> State -> Rendering
+Und es gibt noch eine zweite Dimension:
+User lädt Experiment aus dem ExperimentCatalog -> State wird daraus berechnet -> Rendering wird erzeugt
+-> So lande ich sofort in dem richtigen View und kann meine Analyse vom Vortag wieder laden und verfeinern. Das wird immer besser!
+
+
+Deine Use Cases sind topp: ich möchte später multi-State, weil es den Use Case # 9. Didaktik / Ausbildung adressiert. 
+-> Welche Datenstruktur würdest Du vorstellen. (Anmerkung: das ist eigentlich zu konkret für einen Meta-Chat. Aber es hilft mir beim Verständnis).
+
+----------------
+
+
+Über Deine ActiveStateId bin ich auf folgendes gekommen:
+1) Seed Core ist nur ein Teil des Zustands von Astronometria -> wir werden noch mehr brauchen um den letzten Stand wiederherstellen zu können (z.B. welche Location, welcher View wird gerändert, ..:?
+2) Lohnt sich ein Hash über diesen Enhanced StateVector?
+
+Dann A)
+
+------------
+
+ja, hatte an sowas wie einen Session Hash gedacht zur Beantwortung der Frage: schaue ich mir das gleiche an wie gestern?

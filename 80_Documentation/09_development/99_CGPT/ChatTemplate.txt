@@ -1,0 +1,172 @@
+
+
+Beschleunigungsregeln (mit Template kombinieren)
+Regel 1 – Ein Ziel pro Chat
+
+Kein:
+
+„Und noch schnell L2“
+
+„Und vielleicht GUI…“
+
+Regel 2 – Chat nicht länger als 40–60 Nachrichten
+
+Sobald:
+
+Kontext scrollt
+
+ich wiederhole Dinge
+
+Du musst viel kopieren
+
+→ STOP
+→ Zusammenfassung
+→ Neuer Chat mit Template
+
+Regel 3 – Architektur & Implementierung nie mischen
+
+Wenn während Implementation plötzlich:
+
+„Vielleicht sollten wir die Pipeline anders bauen…“
+
+Sofort abbrechen → Architektur-Chat.
+
+Regel 4 – Am Ende jeder Session eine Mini-Zusammenfassung
+
+Ich schreibe:
+
+Was wurde erreicht?
+Was ist unverändert?
+Nächster logischer Schritt?
+Das verhindert mentale Fragmentierung.
+
+
+---------------------------------------
+
+SESSION TYPE:
+[Architecture | Implementation | Validation | Meta]
+
+GOAL (1 sentence):
+<Was ist das exakt definierte Ziel dieser Session?>
+
+SCOPE:
+- Was ist erlaubt?
+- Was ist explizit nicht erlaubt?
+
+FREEZE REFERENCES:
+- M1 Bible
+- ArchitectureFreeze_EphemeridesPipelineLx
+- Horizons_Level_Mapping_Freeze_M1
+- Weitere relevante Dokumente (falls nötig)
+
+CURRENT STATE:
+- Build: [grün / offen]
+- Tests: [welche relevant?]
+- Level: [L0–L5]
+- Mode: [HELIO/GEO/OBSERVER]
+
+SUCCESS CRITERIA:
+- Woran erkennen wir, dass diese Session erfolgreich war?
+
+STOP CONDITION:
+- Wann brechen wir ab und eröffnen einen neuen Chat?
+
+
+--------------------------------
+
+
+Beispiel 1 – Architektur-Session (L1)
+SESSION TYPE:
+Architecture
+
+GOAL:
+Light-Time Solver Integrationsstrategie finalisieren
+
+SCOPE:
+- Nur L1
+- Keine Implementierung
+- Keine GUI-Themen
+
+FREEZE REFERENCES:
+- M1 Bible
+- LightTimeFundamentalConcept.md
+- ArchitectureFreeze_EphemeridesPipelineLx.md
+
+CURRENT STATE:
+- L0 stabil
+- Orthogonale Pipelines definiert
+
+SUCCESS CRITERIA:
+- Klare Integrationsskizze
+- Sequenzdiagramm
+- md-Freeze am Ende
+
+STOP CONDITION:
+- Sobald Freeze-Dokument erzeugt wurde
+
+------------------------------------
+
+Beispiel 2 – Implementierungs-Session
+SESSION TYPE:
+Implementation
+
+GOAL:
+LightTimeSolver implementieren + Unit Tests
+
+SCOPE:
+- Nur Solver-Klasse
+- Keine Pipeline-Refactorings
+- Keine Mapping-Änderungen
+
+FREEZE REFERENCES:
+- M1 Bible
+- LightTimeFundamentalConcept.md
+
+CURRENT STATE:
+- L0 grün
+- Solver noch nicht vorhanden
+
+SUCCESS CRITERIA:
+- Ganze cs-Datei geliefert
+- Tests grün
+- Kein L0 Regression-Fehler
+
+STOP CONDITION:
+- Sobald Build grün ist
+
+------------------------------------------
+
+Beispiel 3 – Validation-Session
+SESSION TYPE:
+Validation
+
+GOAL:
+L1 Anchor Validation durchführen
+
+SCOPE:
+- Nur Anchor Set (1600,1800,2000,2200,2400)
+- Kein Full Mesh
+- Keine Refactorings
+
+FREEZE REFERENCES:
+- M1 Bible
+- Horizons_Level_Mapping_Freeze_M1.md
+- Validation_Strategy_V1.md
+
+CURRENT STATE:
+- L1 implementiert
+- MappingVersion = 1
+
+SUCCESS CRITERIA:
+- Abweichungen innerhalb VSOP-Toleranzen
+- Keine systematische Drift
+
+STOP CONDITION:
+- Sobald Analyse abgeschlossen ist
+
+
+-------------------------------
+
+
+
+

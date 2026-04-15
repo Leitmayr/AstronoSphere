@@ -1,0 +1,181 @@
+Ein Beispiel für ein Seed ist das hier (aus AstronoSphere_Pipeline_DataModel.md)
+    {
+      "SeedCandidate": {
+        "Event": {
+          "Category": "QCR",
+          "Qualifier": "L18",
+          "Description": "X coordinate sign change (- to +)"
+        },
+        "Core": {
+          "Time": {
+            "StartJD": 2478083.966,
+            "StopJD": 2478085.966,
+            "Step": "1H",
+            "TimeScale": "TDB"
+          },
+          "Observer": {
+            "Type": "Heliocentric",
+            "Body": "Sun"
+          },
+          "ObservedObject": {
+            "BodyClass": "Planet",
+            "Targets": ["Jupiter"]
+          },
+          "Frame": {
+            "Type": "HelioEcliptic",
+            "Epoch": "J2000"
+          }
+        },
+        "Metadata": {
+          "Author": "Astronolysis",
+          "Priority": 2,
+          "Status": {
+            "Maturity": "Draft",
+            "Visibility": "Private"
+          }
+        },
+        "Notes": "Generated automatically from residual peak detection."
+      },
+      "SeedOrigin": {
+        "ResultID": "MARS-OPP-1900-2000_ENGINE-COMPARISON",
+        "Reason": "High residual near opposition cluster",
+        "Trigger": "ResidualPeak",
+        "CreatedAtUtc": "2026-04-03T21:15:00Z"
+      }
+    }
+  
+Folgende Besonderheiten beim Scenario Merger: ich gehe den Inhalt von SCN-000003.json der Reihe nach durch
+
+--------------------
+Seed: Element1 - Event
+
+Old: 
+  "Event": {
+    "Category": "Perihelion",
+    "ApproximateJD": 2443873.704,
+    "Source": "Meeus, Astronomical Algorithms, 2nd ed., Ex. 38a, p. 270",
+    "Comment": "d/dt Delta/R has zero crossing in Heliocentric Coordinates"
+  },
+  
+New:
+    
+	"Event": {
+	  "Category": <To Do: Category von oben übernehmen also im Beispiel "Perihelion"> ,
+	  "Qualifier": <To Do: 'null'>,
+	  "Description": <To Do: Comment übernehmen, also im Beispiel "d/dt Delta/R has zero crossing in Heliocentric Coordinate">
+	},
+	
+--------------------
+Seed: Element 2 - Core
+
+Old: 
+
+  "Core": {
+    "Time": {
+      "StartJD": 2443872.704,
+      "StopJD": 2443874.704,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+
+New:
+	"Core": {
+	  "Time": {
+		"StartJD": 2478083.966, <To Do: Wert aus StartJD 1-1 übernehmen>
+		"StopJD": 2478085.966, <To Do: Wert aus StopJD 1-1 übernehmen>
+		"Step": <To Do: StepDays -> Step ändern>, Text aus StepDays übernehmen, also im Beispiel "1H">,
+		"TimeScale": "TDB" <To Do: Wert aus TimeScale 1-1 übernehmen>
+
+--------------------
+Seed: Element 3 - Observer
+
+Old: 
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+
+
+New:
+	  "Observer": {
+		"Type": "Heliocentric",
+		"Body": "Sun"
+	  },
+
+To Do Observer: Wert aus SCN_*.json 1-1 übernehmen
+
+--------------------
+Seed: Element 4 - ObservedObject
+
+
+New:
+	  "ObservedObject": {
+		"BodyClass": "Planet",
+		"Targets": ["Jupiter"]
+	  },
+
+Old:
+    "Targets": [
+	  "Venus"
+	],
+
+To do: ObservedObject
+- "ObservedObject" als Übergruppe anlegen
+- Body Class immer "Planet"
+- Targets old -> Targets New kopieren
+
+----------------------
+Seed: Element 5  Frame
+
+New:
+	  "Frame": {
+		"Type": "HelioEcliptic",
+		"Epoch": "J2000"
+	  }
+
+
+Old: 
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    },
+
+To Do Observer: Wert aus SCN_*.json 1-1 übernehmen
+
+3) Core alt -> Core new, aber: StepDays -> Step
+
+-------------------------
+Seed: Metadata 
+
+Der Standard Footer für alle 144 Datensätze:
+immer gleich: 
+
+	  Metadata": {
+          "Author": "Sceneario Merger",
+          "Priority": 1,
+          "Status": {
+            "Maturity": "Released",
+            "Visibility": "Private"
+          }
+        },
+		
+-------------------------
+Seed: Notes 	
+
+Der Standard Footer für alle 144 Datensätze:
+immer gleich: 	
+        "Notes": "Sceneario Merger: Generated automatically from 144 existing scenarios."
+      
+-------------------------
+Seed: SeedOrigin 	
+
+Standard Footer für alle 144 Datensätze:
+immer gleich:   
+	  "SeedOrigin": {
+        "ResultID": "144-EXISTING-SCENARIOS_SCENARIO-TRANSFER",
+        "Reason": "Merge of scenario candidates to sseds",
+        "Trigger": "M1.9 Data Model transfer",
+        "CreatedAtUtc": "2026-04-05T16:00:00Z"
+      }
+	

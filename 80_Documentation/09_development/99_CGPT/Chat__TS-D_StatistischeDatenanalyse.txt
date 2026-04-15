@@ -1,0 +1,426 @@
+1. ÖFfentliche Pipeline
+2. Es existiert noch kein Json Reader für TS_D. Wir fangen in der Astronometria bei 0 an bzgl. TS_D. Ich poste Dir den Kontext:
+a) Testdatei
+b) VsopProvider
+c) VsopRepository
+
+<some usings...>
+namespace AstroSim.Ephemerides.Test.EphemerisValidation.HeliocentricEcliptic
+{
+    [TestFixture]
+    public class L0_TSA_HelioEclipticQuadrant_HorizonsRegression_Tests
+    {
+        private string _vsopPath = string.Empty;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var solutionRoot = SolutionPathResolver.GetSolutionRoot();
+
+            _vsopPath = Path.Combine(
+                solutionRoot,
+                "src",
+                "AstroSim.Ephemerides",
+                "VSOP",
+                "Data",
+                "87A");
+        }
+
+        public static IEnumerable<string> GetJsonFiles()
+        {
+            var solutionRoot = SolutionPathResolver.GetSolutionRoot();
+
+            var path = Path.Combine(
+                solutionRoot,
+                "test",
+                "AstroSim.Ephemerides.Test",
+                "EphemerisValidation",
+                "TestData",
+                "Helio",
+                "TS-A");
+
+            if (!Directory.Exists(path))
+                return Enumerable.Empty<string>();
+
+            return Directory.GetFiles(path, "*.json", SearchOption.AllDirectories);
+        }
+
+        [TestCaseSource(nameof(GetJsonFiles)), Category("Position")]
+        public void L0_TSA_Helio_Position_Regression(string jsonFile)
+        {
+            var json = File.ReadAllText(jsonFile);
+            var reference = JsonSerializer.Deserialize<ReferenceData>(json)!;
+
+            var repo = new VsopRepository(_vsopPath);
+            var provider = new VsopProvider(repo);
+
+            var planetId = Enum.Parse<PlanetId>(reference.Planet);
+            var tol = RegressionTolerances.GetHelioPositionTolerance(planetId);
+
+            foreach (var vector in reference.Vectors)
+            {
+                var time = new TTInstant(vector.JulianDate);
+                var state = provider.GetHeliocentricState(planetId, time);
+
+                Assert.That(state.Position.X, Is.EqualTo(vector.X).Within(tol));
+                Assert.That(state.Position.Y, Is.EqualTo(vector.Y).Within(tol));
+                Assert.That(state.Position.Z, Is.EqualTo(vector.Z).Within(tol));
+            }
+        }
+    }
+}
+---------------
+
+Das hier ist der VsopProvider.cs:
+
+using AstroSim.Core.Bodies;
+using AstroSim.Core.Geometry;
+using AstroSim.Ephemerides.Interfaces;
+using AstroSim.Ephemerides.VSOP.Calculation;
+using AstroSim.Ephemerides.VSOP.Model;
+using AstroSim.Time.Astro;   // <-- NEU
+
+namespace AstroSim.Ephemerides.VSOP
+{
+    /// <summary>
+    /// VSOP87A-based heliocentric provider.
+    /// Returns positions in ecliptic J2000 frame.
+    /// Velocity currently set to zero (M1).
+    /// </summary>
+    public sealed class VsopProvider : IVsopProvider
+    {
+        private readonly VsopRepository _repository;
+
+        public VsopProvider(VsopRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public StateVector GetHeliocentricState(
+            PlanetId planet,
+            TTInstant time)   // <-- geändert
+        {
+            var vsopPlanet = _repository.GetPlanet(planet);
+
+            double T = time.JulianMillenniaSinceJ2000();
+            double[] xyz = VsopCalculator.Compute(vsopPlanet, T);
+
+            var position = new Vector3(xyz[0], xyz[1], xyz[2]);
+
+            return new StateVector(position, Vector3.Zero);
+        }
+    }
+}
+
+---------------
+
+Hier haben wir das VsopRepository.cs:
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using AstroSim.Core.Bodies;
+using AstroSim.Ephemerides.VSOP.Model;
+using AstroSim.Ephemerides.VSOP.Parsing;
+
+namespace AstroSim.Ephemerides.VSOP
+{
+    /// <summary>
+    /// Central repository holding all VSOP planetary data.
+    /// Loads and stores parsed VSOP files.
+    /// </summary>
+    public sealed class VsopRepository
+    {
+        private readonly Dictionary<PlanetId, VsopPlanet> _planets;
+
+        public VsopRepository(string dataDirectory)
+        {
+            _planets = new Dictionary<PlanetId, VsopPlanet>();
+
+            LoadPlanet(dataDirectory, PlanetId.Mercury);
+            LoadPlanet(dataDirectory, PlanetId.Venus);
+            LoadPlanet(dataDirectory, PlanetId.Earth);
+            LoadPlanet(dataDirectory, PlanetId.Mars);
+            LoadPlanet(dataDirectory, PlanetId.Jupiter);
+            LoadPlanet(dataDirectory, PlanetId.Saturn);
+            LoadPlanet(dataDirectory, PlanetId.Uranus);
+            LoadPlanet(dataDirectory, PlanetId.Neptune);
+        }
+
+        private void LoadPlanet(string dir, PlanetId id)
+        {
+            string fileName = $"VSOP87A_{id.ToString().ToLower()}.dat";
+
+            string file = Path.Combine(dir, fileName);
+
+            var planet = Vsop87Parser.Parse(file);
+
+            _planets[id] = planet;
+        }
+        public VsopPlanet GetPlanet(PlanetId id)
+        {
+            return _planets[id];
+        }
+    }
+}
+
+
+--------------
+
+
+3. Siehe Screenshot
+
+------
+
+4. AstroTime ist Geschichte. Alle Zeiten in der Astronometria jetzt in TtInstant.
+
+---------
+
+5. NUnit Config: nichts spezielles - Standardkonfiguration, habe nichts verändert. Sag mir, was Du genau brauchst und wie ich da hinkomme.
+
+---------
+
+Beispiel Json: Header und die ersten zwei Datensätze
+
+{
+  "Planet": "Mercury",
+  "TestSuite": "TS-D",
+  "EventName": "Core",
+  "CorrectionLevel": "L0",
+  "Metadata": {
+    "CanonicalRequest": null,
+    "RequestHash": null,
+    "EpochHash": "CD829C792F1672C3D50E65B3C527EEC1873D6002E000A594E5B8C3A84F1C592E",
+    "Requests": [
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2305447.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2365417.5",
+        "RequestHash": "63108F7A9D9FC4C4A8E71509E4AB71E49CCCC2FE17E3986F7D58A2DA8B657247",
+        "HorizonsUrl": ""
+      },
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2365447.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2425417.5",
+        "RequestHash": "273857F3BA66EB5CD64EE636DB4F88C33C1B3DA216CB369BA991AF270D963324",
+        "HorizonsUrl": ""
+      },
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2425447.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2485417.5",
+        "RequestHash": "E9AEC5718DBEF1EF1367C730026CFEFC8DD5BE09ECAB48ECEB2939F4C5EA04E0",
+        "HorizonsUrl": ""
+      },
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2485447.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2545417.5",
+        "RequestHash": "BE540C185265A31EA4F493559853B0EEB3940708408F7314F8444AC89F7CC201",
+        "HorizonsUrl": ""
+      },
+      {
+        "CanonicalRequest": "CENTER=@10\nCOMMAND=199\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2545447.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2597641.5",
+        "RequestHash": "36B390318BF74C2E9B7359EA81F67B997F316BC67292C5AB844533C1CEA2E2CB",
+        "HorizonsUrl": ""
+      }
+    ],
+    "HorizonsUrl": "",
+    "EngineVersion": "1.1.0",
+    "CorrectionLevel": "L0",
+    "Mode": "HELIO",
+    "EphemType": "VECTORS",
+    "GeneratedAtUtc": "2026-02-25T20:42:54.2224903Z"
+  },
+  "Vectors": [
+    {
+      "JulianDate": 2305447.5,
+      "X": 0.2737813604833304,
+      "Y": -0.3164421022612743,
+      "Z": -0.05109324513447672,
+      "VX": 0.01569913326681141,
+      "VY": 0.01982453112822416,
+      "VZ": 0.0001519305016671896
+    },
+    {
+      "JulianDate": 2305477.5,
+      "X": -0.07417657706227275,
+      "Y": 0.3028848754258947,
+      "Z": 0.0314672486401085,
+      "VX": -0.03295027475948797,
+      "VY": -0.005598887731087778,
+      "VZ": 0.002603758879080774
+    },
+	
+	---------
+	
+	HelioMesh_TS-D_L0_Tests.cs ist ein guter Name
+	
+	---------------
+	
+
+	
+Deine Fragen:
+
+1. Die Testdaten liegen hier, copy to Output Directory bereits gemacht
+repos\Astronometria\test\AstroSim.Ephemerides.Test\EphemerisValidation\TestData\Helio\TS-D\*.json
+
+2. Machen wir Helio fertig und danach sofort Geo
+
+3. Data Size
+Epoche1: 71825 data sets
+Epoche2: 31854 data sets
+Epoche3: 19851 data sets
+
+und ja: wir machen nur die Pos-Tests und nicht die Vel-Tests
+
+Mach schöne Kategorien
+TS-D_L0_Helio_Mercury  (oder so ähnlich -> Vorschlag?)
+
+---------
+
+1) ah, verstanden. Ich möchte den  TS-D Runner möglichst nahe am TS-A Runner haben. Passt also!
+
+3a) ich möchte mich über eigene Extended und Extreme Toleranzen an die Genauigkeit heran spielen. Ins Detail gehe ich mit diesem Spiel dann bei der statistischen Auswertung.
+3b) nein. Ich möchte Accuracy Tests
+
+4) drei Klassen würden mir besser gefallen. dann könnte ich die Extended und Extreme Tests auch leichter herausfiltern. Also bitte einführen! Was bedeutet das für die Toleranzen?
+
+5) Ja, machen wir so
+
+
+RegressionTolerances.cs:
+
+using AstroSim.Core.Bodies;
+
+namespace AstroSim.Ephemerides.Test.EphemerisValidation.Common
+{
+    public static class RegressionTolerances
+    {
+        // ------------------------------------------------------------
+        // GEO – Position (AU) - Toleranz in geo ecliptical = geo equatorial 
+        // ------------------------------------------------------------
+        public static double GetGeoPositionTolerance(PlanetId planet)
+        {
+            return planet switch
+            {
+                PlanetId.Mercury => 1e-5,
+                PlanetId.Venus => 1e-5,
+                PlanetId.Earth => 1e-5,
+                PlanetId.Mars => 2e-5,
+
+                PlanetId.Jupiter => 1e-4,
+                PlanetId.Saturn => 2e-4,
+
+                PlanetId.Uranus => 1e-3,
+                PlanetId.Neptune => 1e-3,
+
+                _ => 2e-5
+            };
+        }
+
+        // ------------------------------------------------------------
+        // GEO – Velocity (AU/day) - Toleranz in geo ecliptical = geo equatorial 
+        // ------------------------------------------------------------
+        public static double GetGeoVelocityTolerance(PlanetId planet)
+        {
+            return planet switch
+            {
+                PlanetId.Mercury => 3e-7,
+                PlanetId.Venus => 3e-7,
+                PlanetId.Earth => 3e-7,
+                PlanetId.Mars => 2e-7,
+
+                PlanetId.Jupiter => 2e-7,
+                PlanetId.Saturn => 2e-7,
+                PlanetId.Uranus => 2e-7,
+                PlanetId.Neptune => 2e-7,
+
+                _ => 2e-7
+            };
+        }
+
+        // ------------------------------------------------------------
+        // HELIO – Position (AU)
+        // ------------------------------------------------------------
+        public static double GetHelioPositionTolerance(PlanetId planet)
+        {
+            return planet switch
+            {
+                PlanetId.Mercury => 5e-6,
+                PlanetId.Venus => 5e-6,
+                PlanetId.Earth => 5e-6,
+                PlanetId.Mars => 1e-5,
+
+                PlanetId.Jupiter => 5e-5,
+                PlanetId.Saturn => 1e-4,
+
+                PlanetId.Uranus => 5e-4,
+                PlanetId.Neptune => 7e-4,
+
+                _ => 1e-5
+            };
+        }
+
+        // ------------------------------------------------------------
+        // HELIO – Velocity (AU/day)
+        // ------------------------------------------------------------
+        public static double GetHelioVelocityTolerance(PlanetId planet)
+        {
+            return planet switch
+            {
+                PlanetId.Mercury => 2e-7,
+                PlanetId.Venus => 1e-7,
+                PlanetId.Earth => 1e-7,
+                PlanetId.Mars => 1e-7,
+
+                PlanetId.Jupiter => 1e-7,
+                PlanetId.Saturn => 1e-7,
+                PlanetId.Uranus => 1e-7,
+                PlanetId.Neptune => 1e-7,
+
+                _ => 1e-7
+            };
+        }
+    }
+}
+
+
+Planet,Count,Mean_dr,RMS_dr,Max_dr,P95_dr
+Earth,9740,5,692307700834482E-07,6,296959458215882E-07,1,2753891553475847E-06,1,1400874539260554E-06
+Jupiter,7305,6,444170686564905E-06,7,636608492403955E-06,1,8426971464458552E-05,1,456993033803299E-05
+Mars,9740,1,7146950693245408E-06,2,4172723323847153E-06,7,14049781537392E-06,5,623066643455982E-06
+Mercury,9740,2,263063448746109E-07,2,5035659643999895E-07,5,760759381155709E-07,4,2870282133369655E-07
+Neptune,9740,0,0004093813772675826,0,00047643590276936045,0,0009537034500015364,0,0008118098097208629
+Saturn,6088,1,1422987298988692E-05,1,3097155087538838E-05,2,5672191997676317E-05,2,1984130661230467E-05
+Uranus,9740,0,00014389222127447092,0,0001792231774674406,0,0005197565236824361,0,0003285628564567526
+Venus,9740,3,5164226254144214E-07,3,8529477528388424E-07,7,07631599809823E-07,6,415864024746787E-07
+
+
+Planet,Count,Mean_dr,RMS_dr,Max_dr,P95_dr
+Earth,9740,5.692307700834482E-07,6.296959458215882E-07,1.2753891553475847E-06,1.1400874539260554E-06
+Jupiter,7305,6.444170686564905E-06,7.636608492403955E-06,1.8426971464458552E-05,1.456993033803299E-05
+Mars,9740,1.7146950693245408E-06,2.4172723323847153E-06,7.14049781537392E-06,5.623066643455982E-06
+Mercury,9740,2.263063448746109E-07,2.5035659643999895E-07,5.760759381155709E-07,4.2870282133369655E-07
+Neptune,9740,0.0004093813772675826,0.00047643590276936045,0.0009537034500015364,0.0008118098097208629
+Saturn,6088,1.1422987298988692E-05,1.3097155087538838E-05,2.5672191997676317E-05,2.1984130661230467E-05
+Uranus,9740,0.00014389222127447092,0.0001792231774674406,0.0005197565236824361,0.0003285628564567526
+Venus,9740,3.5164226254144214E-07,3.8529477528388424E-07,7.07631599809823E-07,6.415864024746787E-07
+
+
+
+Extended:
+Planet,Count,Mean_dr,RMS_dr,Max_dr,P95_dr
+Earth,8117,1.3554285721854679E-06,1.5869325738138992E-06,3.896874617429545E-06,2.6459325628239137E-06
+Jupiter,1218,6.441579230120288E-06,7.634081581313233E-06,1.8124203450553484E-05,1.4592101936586424E-05
+Mars,2030,3.423546286281593E-06,5.168829002390875E-06,1.4960904779014957E-05,1.21138798883867E-05
+Mercury,8117,1.0051766819168646E-06,1.3226434892525039E-06,4.315665418345418E-06,2.702396060984282E-06
+Neptune,1624,0.00040954594236031,0.00047662392011679067,0.0009531696641765394,0.0008115808192215343
+Saturn,1015,1.1417008320051375E-05,1.3091334948986169E-05,2.550083374530164E-05,2.190544482997675E-05
+Uranus,1624,0.0001439889243841089,0.00017936796913303396,0.0005194588176444959,0.0003287324972398319
+Venus,8117,1.251071354438182E-06,1.7883669525652743E-06,5.108260713419442E-06,4.072258375612226E-06
+
+
+Extreme:
+Planet,Count,Mean_dr,RMS_dr,Max_dr,P95_dr
+Earth,6004,5.691643018144154E-06,8.891584912716188E-06,3.658259376926653E-05,1.9929379703851587E-05
+Jupiter,301,6.463508244024589E-06,7.64978806999663E-06,1.7467798052432888E-05,1.4677108067497415E-05
+Mars,501,3.417845347362016E-06,5.154226564359466E-06,1.4304432517504802E-05,1.2020143054353741E-05
+Mercury,6004,6.825675709797535E-06,9.383957688052247E-06,3.236412671688493E-05,2.0964255888672073E-05
+Neptune,401,0.00041002821001077217,0.0004771894424583369,0.0009521718279946964,0.0008091578331008326
+Saturn,251,1.1436005579952018E-05,1.3125749327201813E-05,2.522958300858791E-05,2.19890803361759E-05
+Uranus,401,0.00014434405741097064,0.00017987449259669952,0.0005194953502980153,0.0003295747796357849
+Venus,6004,8.828617360346781E-06,1.4078103874849035E-05,5.104607828868521E-05,3.4834668420472094E-05

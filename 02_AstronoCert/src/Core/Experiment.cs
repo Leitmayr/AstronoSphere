@@ -1,4 +1,6 @@
-﻿namespace AstronoCert.Core
+﻿using System.Text.Json.Serialization;
+
+namespace AstronoCert.Core
 {
     public sealed class Experiment
     {
@@ -10,11 +12,14 @@
 
         public CoreDefinition Core { get; set; }
 
-        // Rest bleibt unverändert (Seed enthält bereits alles)
         public object Event { get; set; }
         public object Metadata { get; set; }
         public object Notes { get; set; }
+
+        [JsonIgnore]
         public object ScenarioCitation { get; set; }
+
+        [JsonIgnore]
         public object DatasetHeader { get; set; }
     }
 }

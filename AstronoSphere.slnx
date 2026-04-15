@@ -20,17 +20,17 @@
   <Folder Name="/02_AstronoCert/src/">
     <Project Path="02_AstronoCert/src/AstronoCert.csproj" />
   </Folder>
-  <Folder Name="/03_TruthFactory/" />
-  <Folder Name="/03_TruthFactory/src/">
-    <Project Path="03_TruthFactory/src/EphemerisFactory/EphemerisFactory.csproj" Id="2d0ace0a-cef4-47f0-b00d-9559ede25a1e" />
+  <Folder Name="/03_AstronoTruth/" />
+  <Folder Name="/03_AstronoTruth/src/">
+    <Project Path="03_AstronoTruth/src/EphemerisFactory/EphemerisFactory.csproj" />
   </Folder>
   <Folder Name="/04_Astronometria/" />
   <Folder Name="/04_Astronometria/src/">
     <Project Path="04_Astronometria/src/Astronometria.Desktop/Astronometria.Desktop.csproj" Id="8edd55b3-8a61-4aa1-9b47-d19788102f58" />
   </Folder>
-  <Folder Name="/05_AnalysisTool/" />
-  <Folder Name="/05_AnalysisTool/src/">
-    <Project Path="05_AnalysisTool/src/AnalysisTool.csproj" />
+  <Folder Name="/05_Astronolysis/" />
+  <Folder Name="/05_Astronolysis/src/">
+    <Project Path="05_Astronolysis/src/AnalysisTool.csproj" />
   </Folder>
   <Folder Name="/06_AstronoMeasurement/" />
   <Folder Name="/06_AstronoMeasurement/src/">

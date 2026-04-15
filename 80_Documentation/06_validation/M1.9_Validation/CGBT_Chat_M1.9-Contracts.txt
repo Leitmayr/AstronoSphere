@@ -1,0 +1,555 @@
+Dieser Chat muss heißen AS_IMP_Sprint1.9_M1.9_HashingInContracts
+IMPLEMENTATION MODE (STRICT)
+Sprache dieses Chats: Deutsch
+
+Documents:
+02_AstronoSphere_HashSpec_M1.9.md (in CGPT Project Documents)
+
+
+Sprint M1.9 – IMPLEMENTATION MODE (STRICT)
+
+Scope: Contracts Layer – Hashing
+
+Goal:
+Implement canonical hashing according to frozen spec (M1.9).
+
+Context:
+
+* HashSpec is fully defined and frozen
+* No deviations allowed
+* No interpretation allowed
+
+Architecture Decision (FINAL):
+
+* Hashing operates on OBJECT input (not JSON, not string)
+* Canonicalizer performs full flattening via reflection
+* Caller provides plain data objects (POCOs)
+* NO preprocessing allowed in caller
+
+Implementation targets:
+
+1. Canonicalizer.cs
+
+* input: object
+
+* reflection-based traversal (recursive)
+
+* ONLY public properties are allowed
+
+* properties MUST be sorted alphabetically before processing
+
+* flatten using dot notation (Parent.Child.Key)
+
+* hierarchical key sorting (Parent → Child → Key)
+
+* numeric normalization (9 dp, truncation, zero-padding)
+
+* string handling (no modification, UTF-8)
+
+* array handling (preserve order, no sorting)
+
+CRITICAL RULES:
+
+* reflection order MUST NOT be used (always sort properties)
+* no private fields, no methods, no dynamic objects
+* no hidden logic in getters (must be deterministic)
+* canonicalization MUST be a pure function (no side effects)
+
+2. HashCalculator.cs
+
+* input: canonical string
+* SHA256
+* UTF-8 encoding
+* uppercase hex output
+
+API Design (FROZEN):
+
+string canonical = Canonicalizer.Build(object input);
+string hash = HashCalculator.Compute(string canonical);
+
+Debug Requirement:
+
+* canonical string MUST be printed to console
+
+Out of scope:
+
+* AstronoCert integration
+* AstronoTruth integration
+* hash index / persistence
+
+Test Expectations (MANDATORY):
+
+1. Determinism:
+   same object → same hash (multiple runs)
+
+2. Order independence:
+   property order in object must not affect hash
+
+3. Numeric normalization:
+   2451545.1 == 2451545.100000000
+
+4. Special characters:
+   "München" must produce stable hash
+
+5. Structural change:
+   any change in object structure must change hash
+
+Important:
+This implementation becomes the single source of truth for all hashing in AstronoSphere.
+
+Failure tolerance:
+ZERO.
+
+
+
+Constraint: I want an interface so that I can test the Canonicalization and Hash Generation with at least these four test cases: 
+Rahmenbedingung: ich möchte ein Interface, so dass ich die Canonicalization und Hash Generation mit mindestens den folgenen Testfällen z.B. an der Konsole testen kann.
+
+Test 1 – Determinism
+Input → Hash → Hash → Hash
+→ immer identisch
+
+Test 2 – Reihenfolge egal
+JSON Reihenfolge ändern → gleicher Hash
+
+Test 3 – Precision
+2451545.1 vs 2451545.100000000
+→ gleicher Hash
+
+Test 4 – Umlaut
+"München"
+→ stabil
+
+
+------------
+
+Ergebnis aus Contracts:    00AC9E0DD3110B2CC4CF55443ADA1CCA9BE24270EDF1F3F13E6DD46342B08B1C
+Ergebnis aus Webinterface: 00AC9E0DD3110B2CC4CF55443ADA1CCA9BE24270EDF1F3F13E6DD46342B08B1C
+
+------------
+
+Änderungen sind gemacht. Build grün. Programm zwei Mal ausgeführt.
+
+Test1:
+Canonicals: Expectation mit Erzeugung vergleichen
+1) ich habe Deine Expectation für das Canonical aus dem Chat in ein File kopiert
+2) ich habe das Canonical von der Konsole in ein zweites File kopiert
+-> BeyondCompare: binär identisch
+-> Canonicalization exakt wie prädiziert, das heißt: ok
+
+Test2: Hashes intern erzeugen und extern verfizieren
+Ergebnis aus Contracts:    4FA0DAEF8C0EF41962FDDAC502FABA88570924F8D74B67E0733743FE7DD7412F
+Ergebnis aus Webinterface: 4FA0DAEF8C0EF41962FDDAC502FABA88570924F8D74B67E0733743FE7DD7412F
+-> Hashes sind identisch
+-> aus demselben canonical wird derselbe Hash
+
+Test 3: 
+-> Hash erster Run des Programs:  4FA0DAEF8C0EF41962FDDAC502FABA88570924F8D74B67E0733743FE7DD7412F
+-> Hash zweiter Run des Programs: 4FA0DAEF8C0EF41962FDDAC502FABA88570924F8D74B67E0733743FE7DD7412F
+-> Hashes sind identisch
+-> deterministisch
+
+Alle drei Tests sind mit der Zielstruktur bestanden! Sehr gute Arbeit - das mit dem Wrapper war ein Gamechanger. Habe jetzt richtig gute Konfidenz in die Implementierung!
+
+-----------------
+
+
+# AstronoSphere – AstronoData.Contracts - Hashing Implementation (M1.9)
+
+Version: 1.0
+Status: IMPLEMENTED & VALIDATED
+Scope: Contracts Layer
+Component: AstronoData.Contracts.Hashing
+
+---
+
+
+# 1. Purpose
+
+This document defines the **final and frozen implementation** of canonical hashing in AstronoSphere.
+
+Hashing provides:
+
+> **Deterministic identity for scientific objects**
+
+It is the foundation for:
+
+* CoreHash (AstronoCert)
+* RequestHash (AstronoTruth)
+* DatasetHash (future)
+* SnapshotHash (Analysis)
+
+---
+
+# 2. Architecture Decision (FINAL)
+
+## Input Model
+
+Hashing operates on:
+
+> **Plain C# objects (POCOs)**
+
+NOT allowed:
+
+* JSON strings
+* Dictionaries
+* dynamic objects
+* JsonElement
+
+---
+
+## Responsibility Split
+
+| Component      | Responsibility                  |
+| -------------- | ------------------------------- |
+| Caller         | Provides fully populated object |
+| Canonicalizer  | Deterministic flattening        |
+| HashCalculator | SHA256 hashing                  |
+
+---
+
+# 3. API (FROZEN)
+
+```csharp
+string canonical = Canonicalizer.Build(object input);
+string hash = HashCalculator.Compute(string canonical);
+```
+
+OR via service:
+
+```csharp
+IHashService hashService = new HashService();
+
+string canonical = hashService.BuildCanonical(core);
+string hash = hashService.ComputeHash(canonical);
+```
+
+---
+
+# 4. Canonicalization Rules (STRICT)
+
+## 4.1 General
+
+* Pure function (no side effects)
+* Deterministic
+* No hidden logic
+* No reflection order usage
+
+---
+
+## 4.2 Property Handling
+
+* ONLY public properties
+* MUST be sorted alphabetically
+* Case-sensitive (Ordinal)
+
+---
+
+## 4.3 Flattening
+
+Dot notation:
+
+```
+Parent.Child.Property=value
+```
+
+Example:
+
+```
+Time.StartJD=2463504.088194000
+```
+
+---
+
+## 4.4 Hierarchical Sorting
+
+Final sorting:
+
+```
+OrderBy(fullKey, Ordinal)
+```
+
+---
+
+## 4.5 Arrays
+
+* Order MUST be preserved
+* Indexed notation:
+
+```
+Targets[0]=Saturn
+```
+
+---
+
+## 4.6 Numeric Normalization
+
+* Truncate to 9 decimal places (NO rounding)
+* Zero-pad to 9 dp
+
+Example:
+
+```
+2463504.088194 → 2463504.088194000
+```
+
+---
+
+## 4.7 Strings
+
+* No modification
+* UTF-8 encoding (Hash layer)
+
+---
+
+## 4.8 Boolean
+
+```
+true / false (lowercase)
+```
+
+---
+
+## 4.9 Null Handling
+
+> NULL VALUES ARE FORBIDDEN
+
+* Any null → Exception
+* Guarantees fully defined Core
+
+---
+
+## 4.10 Empty Object
+
+> FORBIDDEN
+
+* If canonicalization produces 0 entries → Exception
+
+---
+
+## 4.11 Unsupported Types
+
+> FORBIDDEN
+
+* DateTime
+* complex runtime objects
+
+Allowed types:
+
+* string
+* numeric (double, float, decimal)
+* bool
+
+---
+
+# 5. Hashing Rules
+
+* Algorithm: SHA256
+* Encoding: UTF-8
+* Output: UPPERCASE HEX
+
+---
+
+# 6. Debug Requirement (MANDATORY)
+
+Canonical string MUST be printed to console.
+
+Purpose:
+
+* external verification
+* reproducibility
+* debugging
+
+---
+
+# 7. Validation (PROVEN)
+
+## 7.1 Test Strategy
+
+### Test 1 – Determinism
+
+Same object → same hash (multiple runs)
+✔ PASSED
+
+---
+
+### Test 2 – Order Independence
+
+Different property order → same hash
+✔ PASSED
+
+---
+
+### Test 3 – Numeric Precision
+
+2451545.1 == 2451545.100000000
+✔ PASSED
+
+---
+
+### Test 4 – UTF-8 Stability
+
+"München"
+✔ PASSED
+
+---
+
+### Test 5 – Binary Canonical Verification
+
+* Expected canonical string vs generated canonical
+* Compared via BeyondCompare
+
+✔ BINARY IDENTICAL
+
+---
+
+### Test 6 – External Hash Verification
+
+* Canonical string copied to external SHA256 tool
+* Compared with internal hash
+
+✔ IDENTICAL
+
+---
+
+### Test 7 – Repeatability
+
+* Program executed multiple times
+* Hash stable
+
+✔ PASSED
+
+---
+
+# 8. Real Data Validation
+
+Tested with real scenario:
+
+SCN_000023
+
+Canonical output fully matches predicted structure.
+
+Hash verified internally and externally.
+
+---
+
+# 9. Critical Guarantees
+
+This implementation guarantees:
+
+* deterministic identity
+* cross-system reproducibility
+* scientific traceability
+
+---
+
+# 10. Integration Contract (AstronoCert)
+
+## Input
+
+```csharp
+Core core
+```
+
+Requirements:
+
+* fully populated
+* no null values
+* valid structure
+
+---
+
+## Usage
+
+```csharp
+var canonical = hashService.BuildCanonical(core);
+var coreHash = hashService.ComputeHash(canonical);
+```
+
+---
+
+## Constraints
+
+* NO preprocessing
+* NO transformation
+* NO filtering
+
+The Core must be passed **as-is**
+
+---
+
+# 11. Architectural Importance
+
+This component is:
+
+> **Single Source of Truth for identity in AstronoSphere**
+
+Failure tolerance:
+
+> ZERO
+
+---
+
+# 12. Status
+
+✔ IMPLEMENTED
+✔ VALIDATED
+✔ READY FOR INTEGRATION
+
+---
+
+End of document.
+
+Wie Du siehst habe ich mich entschieden, die Hasherzeugung in AstronoData.Contracts zu zentralisieren. Außerdem sind die Seeds in 01_Seeds\Prepared deutlich umfangreicher als die früheren Candidates, siehe Datensatz 000023.json.
+Mit diesem Wissen eine Kontrollfrage: Welche Aufgaben hat AstronoCert jetzt noch zu erfüllen? Wie machst Du das?
+
+Ich habe Dir alle Files aus dem bisherigen ScenarioHeaderGenerator gepostet. Bitte unterteile:
+a) welche Teile brauchst Du nicht mehr?
+b) welche Files benennen wir um und was muss ich beachten (namespaces, etc.)
+
+---------------
+
+Eine Vertiefung zu Deiner Antwort bzgl. der Aufgaben von AstronoCert: CatalogNumberGenerator.cs -> soll künftig die Hashes der erzeugten Files prüfen -> siehe angehängtes Dokument.
+
+Was habe ich in VS gemacht: Umbenennung in AstronoCert
+CoreCanonicalizer.cs aus Projekt entfernt
+CoreHashGenerator.cs aus Projekt entfernt
+
+-> Projekt baut jetzt aktuell nicht.
+
+Projektverweis gesetzt auf AstronoData.Contracts.
+
+Wenn das für Dich passt: "GO"
+
+---------
+
+
+Ich habe noch eine Reihe Compilerfehler trotz Anpassung der namespaces:
+
+Schweregrad	Code	Beschreibung	Projekt	Datei	Zeile	Unterdrückungszustand	Details
+Fehler (aktiv)	CS0117	"AstronoSpherePaths" enthält keine Definition für "GetObservationCatalogCreatedFolder".	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	17		
+Fehler (aktiv)	CS0117	"AstronoSpherePaths" enthält keine Definition für "GetObservationCatalogReleasedFolder".	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	20		
+Fehler (aktiv)	CS0103	Der Name "CoreHashGenerator" ist im aktuellen Kontext nicht vorhanden.	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	36		
+Fehler (aktiv)	CS0103	Der Name "ScenarioHeaderGenerator" ist im aktuellen Kontext nicht vorhanden.	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\ScenarioCandidates\ScenarioCandidateLoader.cs	23		
+Fehler (aktiv)	CS0246	Der Typ- oder Namespacename "CoreDefinition" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	52		
+Fehler (aktiv)	CS0246	Der Typ- oder Namespacename "LocationDefinition" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	56		
+Fehler (aktiv)	CS0246	Der Typ- oder Namespacename "ScenarioCandidate" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	22		
+Fehler (aktiv)	CS0246	Der Typ- oder Namespacename "ScenarioCandidate" wurde nicht gefunden (möglicherweise fehlt eine using-Direktive oder ein Assemblyverweis).	AstronoCert	C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\02_AstronoCert\src\Core\ScenarioHeaderGenerator.cs	71		
+
+---------
+
+First Run:
+Ergebnis aus AstronoCert:  63EA024B770746F1522C77328C7BE8CEE467513E06C5A438407085EE853B04D0
+Ergebnis aus Webinterface: 63EA024B770746F1522C77328C7BE8CEE467513E06C5A438407085EE853B04D0
+
+144 files erzeugt (Time Stamp 21:47)
+
+Second Run:
+=== AstronoCert ===
+AstronoCert completed successfully.
+Press any key to exit...
+
+0 files erzeugt um 21:50, Time Stamp immer noch 21:47
+
+git branch
+git push -u origin feature/M1.9_pipeline_process_optimization

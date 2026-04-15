@@ -1,0 +1,1023 @@
+STRICT MODE. NO DEVIATION.
+
+AS_IMP_Sprint2_AstronoTruth
+
+STRICT BUILD MODE.
+
+Context:
+- AstronoCert is completed and validated
+- Deterministic Seed → Experiment pipeline is stable
+- Hashing is centralized in AstronoData.Contracts (FINAL)
+
+Goal:
+Implement AstronoTruth (EphemerisFactory - Horizons)
+
+Scope:
+- Input: Experiment (Released)
+- Output: GroundTruth Dataset
+
+Requirements:
+- deterministic
+- canonical request generation
+- RequestHash via HashService
+- DatasetHeader fully compliant with DataModel
+- NO deviation from specs
+
+Critical:
+- JSON precision must remain intact (9 dp internal)
+- Encoding must be UnsafeRelaxedJsonEscaping
+- CanonicalRequest must be reproducible
+
+No assumptions. Ask if unclear.
+
+------------
+
+
+Fragen zu beantworten:
+
+
+Ich plane folgede Test Steps bei der Änderung von AstronoTruth:
+
+Step1: Dataset #23
+Änderung: 
+- GT liest jetzt die neuen Experimente aus Experiments/Released
+Test: 
+- Vergleich mit alter GroundTruth: Datenblock identisch? Struktur/Precision? 
+BeyondCompare: 
+- Datenblock identisch 
+- Header manuell checken. plausibel?
+- Json/CSV Precision Plausi
+
+
+Step2: Dataset #23
+Änderung: 
+- DatasetHeader manuell aus #23 entfernen
+- GT liest das gekürzte #23er Experiment Experiments/Released und erzeugt selbst den DatasetHeader
+
+Test: 
+- Vergleich mit LastRun: Datenblock und selbst erzeugter Header -> binär identisch? 
+BeyondCompare: 
+- Datenblock identisch 
+- Header manuell checken. plausibel?
+- Hash manuell nachrechnen (Web Interface)
+
+Step3: Dataset #23
+Änderung:
+- keine Änderung
+- neuerlicher Run
+
+Test:
+- Vergleich Run/LastRun: -> binär identisch? BeyondCompare
+
+Step4: 
+wiederhole Step2 und 3 für Datasets AS-000003.json	AS-000015.json	AS-000046.json	AS-000054.json	AS-000057.json	AS-000072.json
+
+Test: 
+- Vergleich mit LastRun: Datenblock und selbst erzeugter Header -> binär identisch? BeyondCompare
+- Vergleich Run/LastRun: -> binär identisch? BeyondCompare
+
+Step5: 
+alle 144 zwei Mal erzeugen
+
+Test:
+- compare Tool mit alten Referenzfiles (nur Datenblock)
+- Run/LastRun
+
+Welche Lücken und Tücken siehst Du?
+
+
+HELIO-TDB-2463504.08819444-2463506.08819444-1H_L0
+
+
+Ich verstehe das so: auf Scenarios basierte Daten (#23 von vor einer Woche)
+die alten Referenzdaten wurden aus der ScenarioID erzeugt und haben deshalb 8 Stellen Genauigkeit
+die neuen Daten wurden aus dem Core erzeugt und haben deshalb nur 6 Stellen
+
+Künftig 
+werden die Experimente im Core bereits mind. 9 Stellen haben (linke Seite des Compares) und die Scenarion ID hat keine Nachkommastellen mehr
+-> der Algo in AstronoTruth muss sich also die Daten künftig aus dem Core holen
+
+Was ist vermutlich passiert?
+Wir hatten ein Precision Problem, haben aber festgestellt, dass wir in den alten Scenarien die Core Time auf 6 Stellen beschnitten hatten.
+Aus diesem Grund hast Du die Daten nun nicht mehr aus dem Core geholt sondern aus der ScenarioID: damit gewinnen wir wenigstens 2 Stellen und haben insgesamt 8. Mit dieser Änderung wurden die alten Referenzdaten erzeugt. In der Zwischenzeit haben wir zurückgestellt auf: Daten aus dem Core verwenden. Die heutigen Referenzdaten haben deshalb nun wieder nur 6 Stellen.
+
+"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\03_TruthFactory\src\EphemerisFactory\Infrastructure\CanonicalRequestBuilder.cs"
+
+-----
+
+Ich habe parallel einige weitere Dinge geklärt, so dass Du ein Status Update brauchst:
+
+
+
+# AstronoTruth – Implementation Status (M1.9)
+
+## 1. Current State
+
+AstronoTruth (EphemerisFactory) has been successfully refactored and stabilized.
+
+Key achievements:
+
+- Precision handling fixed (no floating point reformatting)
+- Core.Time is now the single source of truth (string-based propagation)
+- ScenarioID is no longer used as a numerical source
+- Full determinism verified (Run == LastRun)
+
+---
+
+## 2. Precision Fix (CRITICAL)
+
+Root cause:
+
+- Time values were previously derived from ScenarioID (higher apparent precision)
+- Core.Time contained reduced precision (6 dp)
+- Mixed usage caused inconsistent Horizons requests
+
+Fix:
+
+- Time values are now read from Core.Time using GetRawText()
+- No double parsing allowed
+- No formatting allowed
+- Exact string propagation into CanonicalRequest
+
+Result:
+
+- Sub-millisecond precision achieved
+- Stable and reproducible Horizons requests
+
+---
+
+## 3. Architecture Simplification
+
+The EphemerisFactory has been reduced to a minimal core:
+
+### Core Components
+
+- FactoryRunner
+- HorizonsRequestBuilder
+- HorizonsApiClient
+- HorizonsCsvParser
+- DatasetBuilder
+
+### Supporting Components
+
+- AstronoSpherePaths
+- PlanetMapper
+- HorizonsMapping
+- Domain (StateVector, CanonicalRequest, HashCalculator)
+
+Removed:
+
+- EventFinding
+- Regression
+- Mesh
+- Runner
+- Batching
+- Legacy EphemerisRegression logic
+
+---
+
+## 4. Measurement Handling (M1.9)
+
+Measurement abstraction removed for M1:
+
+- Level = L0 (fixed)
+- Type = VEC (fixed)
+
+Rationale:
+
+- KISS principle
+- avoid premature abstraction
+- MeasurementDefinition deferred to M2
+
+---
+
+## 5. Validation Strategy
+
+Primary validation rule:
+
+Run == LastRun MUST be binary identical
+
+Reference dataset:
+
+- Dataset #23 (provided)
+- used for all regression testing
+
+Validation process:
+
+- Single-run testing via CLI (--id 23)
+- B2B comparison using BeyondCompare
+- Hash verification via CanonicalRequest
+
+---
+
+## 6. Current Input Source
+
+IMPORTANT:
+
+AstronoTruth currently reads from:
+
+02_ObservationCatalog/Released
+
+NOT yet:
+
+02_Experiments/Released
+
+This transition will be performed in the next step.
+
+---
+
+## 7. DatasetHeader
+
+DatasetHeader generation follows strict specification:
+
+- CanonicalRequest fully materialized
+- RequestHash derived from canonical string
+- All defaults explicitly included
+- No implicit behavior
+
+See attached DatasetHeader specification.
+
+---
+
+## 8. Current Status
+
+AstronoTruth is now:
+
+- deterministic
+- precision-stable
+- minimal
+- testable
+- ready for next integration step
+
+---
+
+## 9. Next Steps
+
+1. Switch input from ObservationCatalog → Experiments
+2. Full pipeline run (all datasets)
+3. DatasetHeader final verification
+4. Integration with Astronolysis
+
+---
+
+## 10. Key Principle
+
+Data integrity > legacy compatibility
+
+The system now prioritizes:
+
+- correct source (Core)
+- deterministic behavior
+- physical correctness
+
+over historical dataset matching.
+
+---
+
+Zusatzinfo:
+- Precision Fix: Core.Time via GetRawText (no double)
+- Measurement entfernt (L0 fix)
+- Input aktuell: ObservationCatalog (noch nicht Experiments), Output muss auch angepasst werden nach Spec AstronoSphere_Pipeline_DataModel.md (Projektunterlagen)
+- Run==LastRun ist Pflichttest
+
+
+------
+
+
+Neues Spec File: AstronoTruth_DatasetHeader_and_DataRepresentation_Spec.md 
+
+Source Attachments:
+1) AstronoTruth Files
+2) AstronoData.Contract Files
+
+Data: 
+- unsere Referenzfile des Inputs (Datensatz #23) AS-0000er.json
+- unsere Referenzfile des Outputs (Datensatz #23) 9_HELIO-TDB-2463504.08819444-2463506.08819444-1H_L0.json
+
+Validation:
+AstronoTruth_ValidationPlan.txt
+-> bitte lass uns diesen Plan abarbeiten
+
+
+-----------------
+
+
+Das DatasetID Schema von M1.9-Pipeline Freeze gilt!
+
+Bemerkung zum Validation Plan:
+- die Daten müssen stimmen (vor allem Precision!)
+- Der Header darf abweichen, diesen muss ich manuell prüfen
+- baue in das Konsolenprogramm bitte immer als Konsolenausgeabe den canonical ein, den ich kopieren kann, um manuell SHA256 zu prüfen
+- Der Hash ist anders, das ist klar.
+- Oberste Priorität hat für mich, dass die Daten gleich bleiben!!!
+
+AstronoTruth_DatasetHeader_and_DataRepresentation_Spec.md siehe Anhang
+
+------------
+
+Zu den Pfaden: 
+
+INPUT:
+aktuell holst Du die Scenarios aus 
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\02_ObservationCatalog\Released
+
+künftig holst Du die Experimente aus
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\02_Experiments\Released
+
+OUTPUT:
+aktuell schreibst Du nach
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_ReferenceData\Runs\Run
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_ReferenceData\Runs\LastRun
+
+Künftig sollst Du den Output hierhin schreiben:
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_ReferenceData\Run
+C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_ReferenceData\LastRun
+
+
+Web von Konsole: 1087961F7BF6044406B914A0D8A2FD70A154E6CFE7FDC90ACB1445F91812D2DD
+von AstronoTruth:1087961F7BF6044406B914A0D8A2FD70A154E6CFE7FDC90ACB1445F91812D2DD
+
+
+------------
+
+🚀 Morgen – klare Checkliste
+Phase 1
+Batch laufen lassen
+Logs beobachten
+Phase 2
+Run == LastRun
+Phase 3
+Golden Samples vergleichen
+1–2 Full File Reviews
+Phase 4
+Pipeline komplett laufen lassen (Seed → Truth)
+Phase 5
+Tag+1 Determinism Test
+Phase 6
+Baseline + Git Tag
+
+
+--
+
+So, heute und morgen schließen wir M1.9 ab.
+
+Ich habe übrigens die Projektdokumentation in CGPT aktualisiert. Lies Dir alle Quellen durch und beginne mit AS_Spec_Documentation_Index.md.
+Sobald Du fertig bist gebe ich Dir den Plan, wie es weitergeht.
+
+
+Das hier ist der detaillierte Plan: bitte um Review und Rückmeldung.
+
+--------------------------------------
+Teil I:
+
+Teil A: letzte Implementierungen und Test
+
+Findings aus CORE_AstronoSphere_Pipeline_DataModel_V1.1.md
+1) Wir müssen die Dateinamen ändern, die AstronoLab erzeugt. 
+2) Wir müssen die Dateinamen ändern, die AstronoCert erzeugt. 
+3) AstronoCert darf den DatasetHeader nicht mehr erzeugen und vorhandene DatasetHeader entfernen/nicht übernehmen
+
+Danach folgende Validierungsstrategie für 1) - 3)
+a) Erzeugung von Datensatz #23 neu in AstronoLab. 
+Test a1: stimmt Dateiname? 
+Test a2: ist der Dateiinhalt identisch bis auf Dateiname und bewusst entfernte/veränderte Felder
+
+b) Erzeugung von Datensatz #23 neu in AstronoCert
+Test b1: stimmt Dateiname?
+Test b2: wird der DatasetHeader nach Plan nicht mehr erzeugt?
+Test b3: ist der Rest der Datei identisch bis auf CatalogNumber/CoreHash/Dateiname und ohne DatasetHeader, falls Cert diese Felder naturgemäß erzeugt bzw. verändert
+
+
+Teil B: Erzeugung der 144 Seeds aus 01_Seeds/Incoming durch AstronoLab
+Erwartung: 
+- Ablage in 01_Seeds/Prepared
+- korrekter Dateiname
+- Datei identisch aber mit nicht erzeugtem DatasetHeader
+
+
+Teil C: Erzeugung der 144 Experiments aus 01_Seeds/Prepared durch AstronoCert
+Erwartung: 
+- Ablage in 02_Experiments/Released
+- Re-Run von AstronoCert erzeugt keine Duplikate in Released
+- korrekter Dateiname
+- Datei identisch aber mit nicht erzeugtem DatasetHeader
+	- Test mit BeyondCompare Script
+- *.* aus /01_SeedsPrepared verschoben nach /01_SeedsProcessed
+
+
+
+Teil D: Erzeugung der 144 GroundTruth datasets aus 02_Experiments/Released durch AstronoTruth
+Erwartung: 
+- Ablage in 03_GroundTruth/Ephemeris/Horizons/Run
+- korrekter Dateiname
+- AstronoTruth erzeugt den funktional äquivalenten bzw. spec-konformen DatasetHeader:
+	- Test mit BeyondCompare: vorher in Experiments == nachher in GroundTruth
+- Datenblock in 03_GroundTruth/Ephemeris/Horizons/Run ist identisch wie alte Daten in LastRun
+	- Test mit BeyondCompare Script
+- Headerblock in 03_GroundTruth/Ephemeris/Horizons/Run unterscheiden sich korrekt von alten Daten in LastRun. Referenz: CORE_AstronoSphere_Pipeline_DataModel_V1.1.md
+
+
+--------------------------------------
+
+Teil II: Automatischer Run durch die komplette Pipeline
+
+Implementierung eines "Run-Pipeline" Scripts, das 
+- nacheinander alle Tools der Pipeline aufruft
+- als letzten Befehl ein Beyond Compare Scripts aufruft, welches die Run == LastRun Prüfung durchführt
+
+Finaler Test: 03_GroundTruth/Ephemeris/Horizons/Run == 03_GroundTruth/Ephemeris/Horizons/LastRun
+	- Durchführung mit Compare Scipt in BC
+
+Zwischentests: 
+- keine neuen 02_Experiments/Released erzeugt: AstronoCert hat Hash-Compare Prüfung durchgeführt. Da Daten unverändert: Hash unverändert -> Daten nicht dupliziert
+- GroundTruth erzeugt keinen neuen Datensatz, wenn ein modifizierter Eingangsdatensatz im Status "created" und nicht "released" steht. Dazu fehlerhaften Datensatz 23c mit manipuliertem Header in 02_Experiments/Released einschmuggeln
+- Konsolenausgaben checken: z.B. AstronoTruth und AstronoCert geben Canonicals aus
+
+----------------------------------------
+
+Teil III: Abschluss M1.9 in GIT
+- Commit auf Feature Branch
+- Tag/Baseline-Zustand festhalten
+- Push Feature Branch
+- Merge auf main
+- Push main
+- Branch schließen
+
+
+============================
+
+
+Alles klar. Beginnen wir mit der ersten Änderung in AstronoLab: 
+Im Anhang sind die beiden einzigen Files aus AstronoLab.
+Darüber hinaus eine Seed/Incoming/SCN_000023.json und eine Seed/Prepared/SCN_000023_.json.
+
+Änderung1: Dateinamen
+Folgende Dateinamen-Struktur soll abgeleitet werden aus dem Core: PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H.json
+
+Änderung2: 
+DatasetHeader soll nicht erzeugt werden. Zielstruktur wie UC1_SCN_000023b.json
+
+Halte Dich an EfficiencyPackage, speziell OneFile Policy.
+
+--------
+
+Sieht so aus, als kann die Program.cs auch Einzelfiles verarbeiten. Gib mir dazu das dotnet Kommando.
+
+
+------------------------------
+
+Testergebnis
+
+1) Stabilität:
+Super stabiler Horizons Call! Das komplette Mesh Core dort abgefragt, über 900 Jahre mit allen Planeten in einem 30d Raster -> Kein Abbruch: Perfekt! 
+
+2) Anzahl: 
+Eingangsdatensätze: 144
+Ergebnisdatensätze: 126
+
+
+## Horizons Valid time ranges
+
+Compact table of the API requests:
+
+  Planet    Min Date (TDB)   Min JD      Max Date (TDB)   Max JD
+  --------- ---------------- ----------- ---------------- -----------
+  Mercury   -4713-11-25            0.5   9999-12-30       5373482.5
+  Venus     -4713-11-25            0.5   9999-12-30       5373482.5
+  Earth     -4713-11-25            0.5   9999-12-30       5373482.5
+  Mars       1600-01-02      2305448.5   2600-01-01       2670690.5
+  Jupiter    1600-01-11      2305457.5   2200-01-09       2524601.5
+  Saturn     1749-12-31      2360233.5   2250-01-05       2542859.5
+  Uranus     1600-01-05      2305451.5   2399-12-16       2597625.5
+  Neptune    1600-01-05      2305451.5   2400-01-01       2597641.5
+
+
+
+18 Datensätze nicht vorhanden. Das hängt zusammen mit Horizons Gültigkeitsbereich. Abgefragt werden
+
+1600-1700: Mars, Jupiter, Saturn, Uranus, Neptun nicht vollständig -> 5 Datensätze fehlen
+1700-1800: Saturn nicht vollständig: 1 Datensatz fehlt
+1800-1900: alle
+1900-2000: alle 
+2000-2100: alle
+2100-2200: alle
+2200-2300: Jupiter und Saturn nicht vollständig -> 2 Datensätze fehlen
+2300-2400: Jupiter und Saturn fehlen, Uranus nicht vollständig -> 3 Datensätze fehlen
+2400-2500: Jupiter, Saturn, Uranus fehlen, Neptun nicht vollständig -> 4 Datensätze fehlen
+
+15 fehlende Datensätze sind erklärbar. Für 15 Datensätze an der Konsole auch "SKIP", das ist der Befehl, wenn die Daten nicht vorhanden sind. Passt perfekt.
+3 weitere Datensätze fehlen.
+
+Wir haben gesagt. Bugfix one after another, also jagen wir mal nach den 3 fehlenden. 
+Ich habe in Experiments/Released über "dir > Experiments__Released.txt" alle Files in ein Textfile gepiped: Experiments__Released.txt
+Ich habe in AstronoTruth/.../Run über "dir > AstronTruth_Run" alle Files in ein Textfile gepiped: AstronTruth_Run.txt
+
+-> Ermittle über die ExperimentID im Dateinamen, welche Files fehlen. Daraus extrahieren wir die 3 restlichen. D'accord?
+
+
+----------------
+
+Wir sind jetzt wieder on track:
+
+DS #145 erzeugt und abgelegt in 02_Experiments/Released, wenn Status.Maturity = "Released"
+DS #145 nicht erzeugt und nicht abgelegt in 02_Experiments/Released, wenn Status.Maturity = "Created". Seed wird nicht in 02_Seeds/Processed verschoben. -> exakt gewünschtes Verhalten
+DS #145 nicht erzeugt und nicht abgelegt in 02_Experiments/Released, wenn Status.Maturity = "Deprecated". Seed wird nicht in 02_Seeds/Processed verschoben. -> exakt gewünschtes Verhalten
+DS #145 nicht erzeugt und nicht abgelegt in 02_Experiments/Released, wenn Status.Maturity = "Anything". Seed wird nicht in 02_Seeds/Processed verschoben. -> exakt gewünschtes Verhalten
+
+Experiment #145 für Status.Maturity = "Released":
+- Header stimmt mit Spec überein
+- SvenarioID stimmt mit Spec überein
+- CatalogNumber wie erwartet
+- Hash aus Canonical manuell nachgerechnet: passt!
+
+Next step: GoldenSamples + #145
+- DS3
+- DS15
+- DS23
+- DS46
+- DS57
+- DS72
+- DS100
+- DS145
+
+Header plausibel: Daten identisch? Ich melde mich, wenn diese Tests abgeschlossen sind
+
+
+--------------
+
+Dataset #3: (Standalone - kein Vergleich mit alten Daten!)
+
+Hash-Referenz:  https://emn178.github.io/online-tools/sha256.html:
+
+Konsole: 
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=299
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2443872.704
+STEP_SIZE=1H
+STOP_TIME=JD2443874.704
+
+Hash-Referenz zu Konsole:  	C966493074BD121112719ECADB568171B5A2E288B8CBBB4D86302D0DAE607351
+---------------------------------------------------------------------------------------
+Hash aus Program: 			DCB9F0B0D96454F60241B45B840B61EAF5E493904BB71C4F776010A4A460ED0E
+Hash-Referenz zu Program:   6929FD1C2E67127ED333F4B3B03904D265D92D985D1BAF292B09098EFB220DB8
+
+===== CANONICAL REQUEST AUS HEADER ==== 
+CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704
+
+
+-> Canonicals stimmen nicht überein
+-> Hashes stimmmen selbst bei identischem Canonical nicht überein
+
+'2463504.088194443
+'2463504.0881944429
+
+'2476727.404861111
+'2476727.4048611112
+
+'2461245.803472222
+'2461245.8034722218
+
+
+'2459845.640277778
+'2459845.640277778
+'2459845.640277778
+'2459845.640277778
+'2459845.6402777778
+
+2415020.500000
+'2415020.500000000
+'2460835.712500000
+'2460835.7124999999
+
+
+---------------------------------
+
+Auswertung
+
+Die Header sind alle ok.
+Für DS3 habe ich auch den URL getestet: ok
+
+Nun zu den anderen Themen.
+
+Teil I: Auswertung neuer Datenblock zu alten Datenblock
+
+Es gibt immer dann Abweichungen zu den alten Daten, wenn mehr als 6 Nachkommastellen erforderlich sind. Sind es weniger (-> Mesh Analyis, immer *.5), dann sind die Ergebnisse identisch. Dort wo es Abweichungen gibt sind diese plausibel: Anzahl ungenauer Nachkommastellen passt in etwa.
+
+Interpretation: nicht zu viel in das BackToBack Testing investieren. Früher wurde auf 6 Stellen gerundet, das wurde dann wieder korrigiert. Unklar, ob die alten Referenzdaten als Ground Truth geeignet sind oder ob wir nicht inzwischen sowieso genauer unterwegs sind.
+
+Check.
+
+---------------------------------
+
+
+Teil II:  Rundung der Zahlen nur in den aktuellen Runs - Precision durch die Pipeline hindurch
+
+Dort gibt Auffälligkeiten: wieder mal das Rundungsverhalten, siehe Tabelle im Screenshot
+
+Zella A beschreibt den Pipeline Schritt: 
+1 - JD Start des SeedIncomiings 
+2- StartJD des SeedPrepared (nach AstronoLab)
+3- StartJD des Experiment (nach AstronoCert)
+4- StartJD des CSV Returns von Horizons (AstronoTruth)
+5- StartJD des json Files. GroundTruth (nach AstronoTruth) in /../Run
+
+Ergebnisse:
+a) AstronoLab und AstronoCert verändern die Ausgangspräzision für keines der Golden Samples. Hier also korrektes Weiterverarbeiten der Eingangspräzision. Check.
+b) Horizons liefert meist leicht andere Werte zurück. Vermutlich gibt AstronoTruth schon leicht veränderte Werte in den Horizons Call.
+c) Bei der Erzeugung der Jsons erfolgt dann nochmal etwas komisches Werte in den Horizons Call. Der Hoirzons Wert wird in der letzten und manchmal auch vorletzten Stelle verändert. Die geforderte Genauigkeit von 1e-9 ist damit nicht möglich
+
+Die Abweichung TT-TDB ist 1.66ms. Nahezu alle Ergebnise (Spalten 12 un 13) bleiben unter dieser Genauigkeit. Jedoch sind die räumlichen Abweichungen durch die Lichtgeschwindigkeit damit schon gewaltig: bei einer Abweichung von 1e-9 s beträgt diese bereits ca. 25km.
+
+Bitte rechne die Tabelle nach und gib mir Rückmeldung
+i) stimmen die Daten in der Tabelle
+ii) wie bewertest Du die Genauigkeitsabweichungen? Du weißt, dass mir Präzision wichtig ist, wenn es aber andere bestimmende Einflüsse gibt, die ich nicht berücksichtige, dann bitte um kritische Diskussion.
+
+---------------------------------
+
+
+Teil III: Überprüfung der Hashes
+
+Dataset #3: (Standalone - kein Vergleich mit alten Daten!)
+
+Hash-Referenz:  https://emn178.github.io/online-tools/sha256.html:
+
+Konsole: 
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=299
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2443872.704
+STEP_SIZE=1H
+STOP_TIME=JD2443874.704
+
+Hash-Referenz zu Konsole:  	C966493074BD121112719ECADB568171B5A2E288B8CBBB4D86302D0DAE607351
+---------------------------------------------------------------------------------------
+Hash aus Program: 			DCB9F0B0D96454F60241B45B840B61EAF5E493904BB71C4F776010A4A460ED0E
+Hash-Referenz zu Program:   6929FD1C2E67127ED333F4B3B03904D265D92D985D1BAF292B09098EFB220DB8
+
+===== CANONICAL REQUEST AUS HEADER ==== 
+CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704
+
+
+-> Canonicals stimmen nicht überein
+-> Hashes stimmmen selbst bei identischem Canonical nicht überein
+
+Bitte hashes mit den Canonicals nachrechnen und Rückmeldung geben.
+
+-------------------------------
+
+Ganz schön viel Zeug noch - jetzt bist Du dran!
+
+
+
+2443872.704000000, A.D. 1978-Dec-30 04:53:45.6000, -4.602048307611095E-01,  5.506488712832519E-01,  3.406601727503271E-02, -1.559068236563826E-02, -1.307947253187653E-02,  7.221941221383044E-04,  
+
+      "Position": {"X":-0.46020483076110952,"Y":0.55064887128325191,"Z":0.034066017275032709},
+      "Velocity": {"X":-0.015590682365638261,"Y":-0.013079472531876531,"Z":0.00072219412213830436}
+    },
+	
+Ergebnis der Untersuchung: 
+
+alle Golden Samples haben im Json nun dasselbe JD stehen wie im CSV-File. 
+AS-000003	AS-000015	AS-000023	AS-000046	AS-000057	AS-000072	AS-000104	AS-000145
+
+Geprüft wurde immer der erste Zahlenwert. Damit sind wir viel besser und nachvollziehbarer wie davor und können jegliche Unsicherheit auf Horizons zurückführen.
+	
+	
+DS#3:
+Canonical von Konsole: 
+CENTER=@10
+COMMAND=299
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2443872.704
+STEP_SIZE=1H
+STOP_TIME=JD2443874.704
+
+Request Hash im Web Interface mit Konsolen Canonical: C966493074BD121112719ECADB568171B5A2E288B8CBBB4D86302D0DAE607351
+
+
+Canonical im Header: CENTER=@10\nCOMMAND=299\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2443872.704\nSTEP_SIZE=1H\nSTOP_TIME=JD2443874.704
+
+Request Hash im Header: C966493074BD121112719ECADB568171B5A2E288B8CBBB4D86302D0DAE607351
+Request Hash im Web Interface mit Canonical aus Header: 6929FD1C2E67127ED333F4B3B03904D265D92D985D1BAF292B09098EFB220DB8
+
+Interpretation DS#3: 
+- der Canonical von der Konsole liefert im Web-Interface dasselbe Hash-Ergebnis wie im Header.
+- der Canonical vom Header liefert im Web-Interface ein anderes Hash-Ergebnis wie im Header. 
+-> hier sieht es so aus, als würde das C# Programm mit dem Konsolen-Header arbeiten und deshalb denselben Hash erzeugen wie das Webinterface. Der im json File abgespeichert Canonical ist ein anderer und passt nicht zum Request-Hash.
+
+DS#145
+
+Canonical von Konsole: 
+CENTER=@10
+COMMAND=499
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2460835.7125
+STEP_SIZE=1H
+STOP_TIME=JD2460837.7125
+
+Request Hash im Web Interface mit Konsolen Canonical: 646F7C4EBAF96EC8D234BEC4C9E7CC6A64CA52DC3CD9B4E3BBD2CDBB1040B45E
+
+
+Canonical im Header: 
+CENTER=@10\nCOMMAND=499\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2597641.5\nSTEP_SIZE=30D\nSTOP_TIME=JD2634151.5
+
+Request Hash im Header: FBEF6CBAFAC26D200BB4305EC45C93364BDF2C3D041F30FD2D19072E7C80BF0A
+Request Hash im Webinterface mit dem Canonical aus dem Header: 55710B05E3D0D920FECDC26B577F7817B9362F712DF65345DD8BA70C71434BF4
+
+Interpretation DS#3: 
+- der Canonical von der Konsole liefert im Web-Interface ein anderes Hash-Ergebnis wie im Header.
+- der Canonical vom Header liefert im Web-Interface ein anderes Hash-Ergebnis wie im Header. 
+-> hier sieht es so aus, als würden Web-Interface jeweils einen anderen Canonical verwenden. Der abgespeicherte Header im json passt zu keinem Canonical.
+
+--------
+
+Test1: 
+DS3: URL funktioniert
+DS145: URL funktioniert
+
+Result: die URLs funktionieren: Test passed 
+
+Test2: DS3 Hash Gleichheit
+a) Web Tool: Aufruf mit 
+CENTER=@10|COMMAND=299|CSV_FORMAT=YES|EPHEM_TYPE=VECTORS|OBJ_DATA=NO|OUT_UNITS=AU-D|REF_PLANE=ECLIPTIC|REF_SYSTEM=ICRF|START_TIME=JD2443872.704|STEP_SIZE=1H|STOP_TIME=JD2443874.704
+
+Request Hash aus Web-Tool: A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72
+
+b) File 3 Header
+
+Request Hash im Header: A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72
+
+Result: die Request Hashs sind gleich: Test passed 
+
+Test 3:  DS145 Hash Gleichheit
+a) Web Tool: Aufruf mit 
+CENTER=@10|COMMAND=499|CSV_FORMAT=YES|EPHEM_TYPE=VECTORS|OBJ_DATA=NO|OUT_UNITS=AU-D|REF_PLANE=ECLIPTIC|REF_SYSTEM=ICRF|START_TIME=JD2460835.7125|STEP_SIZE=1H|STOP_TIME=JD2460837.7125
+
+Request Hash aus Web-Tool: 04BA8204D7D1D1C463FA667285C795DDA3087487322B68FD6FB2E2A062FD7ABA
+
+b) File 145 Header
+
+Request Hash im Header: 04BA8204D7D1D1C463FA667285C795DDA3087487322B68FD6FB2E2A062FD7ABA
+
+Result: die Request Hashs sind gleich: Test passed 
+
+Ergebnis Test 1-3: Verhalten wie gewünscht: Fix erfolgreich.
+
+
+Anlage: Konsole für DS3 und DS145
+=== EphemerisFactory v1 ===
+EphemerisFactory started...
+Resetting Run folder...
+Experiments found: 2
+Processing: AS-000003 | HELIO-J2000-TDB-2443872-2443874-1H
+=== HORIZONS INPUT DEBUG ===
+StartJD (raw) : 2443872.704
+StopJD  (raw) : 2443874.704
+Step          : 1H
+================================
+=== FINAL REQUEST VALUES ===
+START_TIME = JD2443872.704
+STOP_TIME  = JD2443874.704
+================================
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=299
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2443872.704
+STEP_SIZE=1H
+STOP_TIME=JD2443874.704
+=============================
+
+===== HASH INPUT (PARAMETER) =====
+CENTER=@10|COMMAND=299|CSV_FORMAT=YES|EPHEM_TYPE=VECTORS|OBJ_DATA=NO|OUT_UNITS=AU-D|REF_PLANE=ECLIPTIC|REF_SYSTEM=ICRF|START_TIME=JD2443872.704|STEP_SIZE=1H|STOP_TIME=JD2443874.704
+==================================
+
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&CENTER=%4010&START_TIME=JD2443872.704&STOP_TIME=JD2443874.704&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+=== CSV DEBUG (FIRST ROW) ===
+RAW LINE: 2443872.704000000, A.D. 1978-Dec-30 04:53:45.6000, -4.602048307611095E-01,  5.506488712832519E-01,  3.406601727503271E-02, -1.559068236563826E-02, -1.307947253187653E-02,  7.221941221383044E-04,  4.149392031322779E-03,  7.184449590848025E-01, -3.740258254538987E-06,
+JD STRING: 2443872.704000000
+JD PARSED: 2443872,7039999999
+=============================
+=== CSV DEBUG (FIRST ROW) ===
+RAW LINE: 2443872.704000000, A.D. 1978-Dec-30 04:53:45.6000, -4.602048307611095E-01,  5.506488712832519E-01,  3.406601727503271E-02, -1.559068236563826E-02, -1.307947253187653E-02,  7.221941221383044E-04,  4.149392031322779E-03,  7.184449590848025E-01, -3.740258254538987E-06,
+JD STRING: 2443872.704000000
+JD PARSED: 2443872,7039999999
+=============================
+-> written: PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json
+Processing: AS-000145 | HELIO-J2000-TDB-2460835-2460837-1H
+=== HORIZONS INPUT DEBUG ===
+StartJD (raw) : 2460835.7125
+StopJD  (raw) : 2460837.7125
+Step          : 1H
+================================
+=== FINAL REQUEST VALUES ===
+START_TIME = JD2460835.7125
+STOP_TIME  = JD2460837.7125
+================================
+
+===== CANONICAL REQUEST =====
+CENTER=@10
+COMMAND=499
+CSV_FORMAT=YES
+EPHEM_TYPE=VECTORS
+OBJ_DATA=NO
+OUT_UNITS=AU-D
+REF_PLANE=ECLIPTIC
+REF_SYSTEM=ICRF
+START_TIME=JD2460835.7125
+STEP_SIZE=1H
+STOP_TIME=JD2460837.7125
+=============================
+
+===== HASH INPUT (PARAMETER) =====
+CENTER=@10|COMMAND=499|CSV_FORMAT=YES|EPHEM_TYPE=VECTORS|OBJ_DATA=NO|OUT_UNITS=AU-D|REF_PLANE=ECLIPTIC|REF_SYSTEM=ICRF|START_TIME=JD2460835.7125|STEP_SIZE=1H|STOP_TIME=JD2460837.7125
+==================================
+
+
+============================================
+REQUEST URL:
+https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&CENTER=%4010&START_TIME=JD2460835.7125&STOP_TIME=JD2460837.7125&STEP_SIZE=1H&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D
+============================================
+
+=== CSV DEBUG (FIRST ROW) ===
+RAW LINE: 2460835.712500000, A.D. 2025-Jun-09 05:06:00.0000, -1.651507806824707E+00,  1.280616329973561E-02,  4.076740121919679E-02,  4.137468615252251E-04, -1.279707641095025E-02, -2.783287396342295E-04,  9.541505910687394E-03,  1.652060536065062E+00, -5.196748804255952E-04,
+JD STRING: 2460835.712500000
+JD PARSED: 2460835,7124999999
+=============================
+=== CSV DEBUG (FIRST ROW) ===
+RAW LINE: 2460835.712500000, A.D. 2025-Jun-09 05:06:00.0000, -1.651507806824707E+00,  1.280616329973561E-02,  4.076740121919679E-02,  4.137468615252251E-04, -1.279707641095025E-02, -2.783287396342295E-04,  9.541505910687394E-03,  1.652060536065062E+00, -5.196748804255952E-04,
+JD STRING: 2460835.712500000
+JD PARSED: 2460835,7124999999
+=============================
+-> written: PLANET-MARS-QCR__HELIO-J2000-TDB-2460835-2460837-1H__EPH-HORIZONS-VEC-L0.json
+Factory completed successfully.
+Factory completed successfully.
+Press any key to exit...
+
+Anlage2: json Files DS3 und DS145
+
+Bitte selbst auch analysieren und Feedback geben!
+
+--------
+
+& "C:\Program Files\Beyond Compare 5\BCompare.exe" `
+  RunCSV LastRunSCSV `
+  /silent /qc
+  
+
+-----------------------------
+  
+ Ich habe folgendes vorbereitet:
+ einen Doppellauf der 126 Experimente
+ 
+ Jsons in Run/LastRun
+ CSVs in RunCSV/LastRunCSV
+ 
+ -> das heißt ich arbeite mit den Zielordner die bereits die Zieldaten enthalten.
+ 
+Ergebnis: Json-Ordner sind binär identisch, sagt BC GUI -> siehe Screenshot der Einstellungen
+ 
+ An der Console gebe ich ein: 
+ & "C:\Program Files\Beyond Compare 5\BCompare.exe" `
+  Run LastRun `
+  /silent /qc
+  
+-> kein Ergebnis: folgende Ausgabe
+
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_GroundTruth\Ephemeris\Horizons>  & "C:\Program Files\Beyond Compare 5\BCompare.exe" `
+>>   Run LastRun `
+>>   /silent /qc
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_GroundTruth\Ephemeris\Horizons>
+
+???
+
+-----------------------------------
+
+ CSV-Ordner werden niemals binär identisch sein, da CSV den Request-Zeitpunkt mitloggt und sich darin immer unterscheiden wird
+ 
+ Konsole:
+ 
+ & "C:\Program Files\Beyond Compare 5\BCompare.exe" `
+  RunCSV LastRunCSV `
+  /silent /qc
+ 
+-> kein Ergebnis: Folgende Ausgabe
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_GroundTruth\Ephemeris\Horizons> & "C:\Program Files\Beyond Compare 5\BCompare.exe" `
+>>   RunCSV LastRunCSV `
+>>   /silent /qc
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\03_GroundTruth\Ephemeris\Horizons>
+
+
+== > Für binär identische und binär unterschiedliche Ordner keine Ausgabe am Prompt. Hmh.
+
+----------------------------------
+
+Generelle Anmerkung: können wir beim Hauptlauf nur die Jsons vergleichen?
+
+-------------------
+
+Ich poste Dir zwei Files:
+
+1) M1.9-FinalReleaseTest__ShowdownRun.txt: Mein Testprotokoll des Showdown Runs
+2) M1.9_ShowdownRun__FinalDataComparison.txt: alle Datenstrukturen (DS 3) entlang der Pipeline: bitte prüfe diese Datenstrukturen, ob Du sie auch korrekt findest.
+
+Ich warte Dein Urteil ab, bevor ich sage: "Mission accomplished: 1.9 Milestone successfully reached."
+
+
+Showdown Tests:
+
+For Dataset3
+
+Test1: Seeds Incoming 01_Seeds/Incoming - note down the following
+- Filename SCN_*.json
+- Incoming Folder: content ok - 142 elemente vorhanden
+- Precision: 3 digits
+
+After AstronoLab Run:
+
+Test2: 01_Seeds/Prepared
+- Filename: ok
+- Folder: right folder: ok - 142 elemente vorhanden: ok
+- Header: ok
+- Core Precision: 3 digits - ok
+- No DatasetHeader: yes - ok
+
+After AstronoCert Run:
+
+Test3: 01_Seeds Processed
+- all files copied to this folder: yes - 142 elemente vorhanden: ok
+- Filename: ok
+- Folder: ok
+- Header ok
+- Core Precision 3 digits - ok
+- No DatasetHeader: yes - ok
+
+Test4: 02_Experiments/Released
+- all files copied to this folder: yes
+- Filename: ok
+- Folder: ok
+- Header ok. Sonderzeichen ok (checked mit Datensatz 23)
+- Core Precision ok 3 digits - ok
+- No DatasetHeader: yes - ok
+- CoreHash 8 characters - ok
+
+After AstronoTruth Run:
+
+Test5: 03_GroundTruth/Run
+- Filename: ok: \03_GroundTruth\Ephemeris\Horizons\Run\PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json
+- Folder: ok: \03_GroundTruth\Ephemeris\Horizons\Run\PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json
+- Data kopiert von Run mach  LastRun? LastRun Time Stamp 13-04-2026 20:50...20:52 -> 13-04-2026 20:58...21:00 yes correct: ok
+- Header ok
+- Horizons URL: ok - liefert identische Daten wie die im Datenblock des json Files
+- CoreHash identical to Experiment? yes: ok
+- RequestHash ok - yes, checke with https://emn178.github.io/online-tools/sha256.html: ok
+- Data:
+	a) json
+	- Format ok
+	- JD Precision ok: 3 digits mit 6 schließenden Nullen - ok
+	- Position Precision: 18 digits - ok
+	- Velocity Precision: 18 digits  - ok
+- Run == LastRun?
+	- Run: 15.04.2026 19:18
+	- LastRun: 13.04.2026 20:58 
+	- json: DS 3 files sind identisch zwischen Run und LastRun
+	
+	b) CSV: DS 3 files sind identisch bis auf den Zeitstempel der Horizons Anfrage
+	
+==> Ergebnis: alle Tests bestanden. M1.9 erreicht.

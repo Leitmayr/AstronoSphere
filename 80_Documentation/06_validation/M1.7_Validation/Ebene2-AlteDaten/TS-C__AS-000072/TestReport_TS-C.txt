@@ -1,0 +1,126 @@
+Auswertung: TS-c
+
+Datensatz AS-000072.json
+
+JSON Datenformat: 
+- unterschiedlich zu früher, daher kein 1:1 Vergleich möglich
+	+ früher vor/am/nach dem Event - 3 Datensätze
+	+ heute: Event-1D:1H:Event+1D  
+
+	
+	Request früher:
+    "CanonicalRequest": "CENTER=500@399\nCOMMAND=599\nCSV_FORMAT=NO\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=FRAME\nREF_SYSTEM=ICRF\nSTART_TIME=2022-09-23T02:22\nSTEP_SIZE=1H\nSTOP_TIME=2022-09-25T02:22",
+
+	Request jetzt:
+     "CanonicalRequest": "CENTER=500@399\nCOMMAND=599\nCSV_FORMAT=YES\nEPHEM_TYPE=VECTORS\nOBJ_DATA=NO\nOUT_UNITS=AU-D\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD2459845.640278\nSTEP_SIZE=1H\nSTOP_TIME=JD2459847.640278",
+
+		
+	Unterschiede: 
+	- REF_PLANE=FRAME -> REF_PLANE=ECLIPTIC: --> Interpretation: Ref_Plane=Ecliptic ist falsch für geo-äquatorial
+	- CSV_FORMAT=NO -> YES
+	- Datum: anderer Bereich
+	- Datum: früher UTC (falsch) jetzt JD (richtig)
+
+
+Zustandsvektor früher:
+
+    "At": {
+      "JulianDate": 2459846.640277778,
+      "X": 3.943170601231,
+      "Y": 0.2806701805598933,
+      "Z": -0.0001516661578826529,
+      "VX": 5.050289612866818E-06,
+      "VY": -0.008475584025936433,
+      "VZ": -0.003697506973473093
+    },
+
+Zustandsvektor neu:
+
+  {
+    "JD": 2459846.640278,
+    "Position": { "X": 3.9431706, "Y": 0.25744952, "Z": -0.11178334 },
+    "Velocity": { "X": 0.00000505, "Y": -0.00924698, "Z": -0.000021 }
+  },
+  
+Zustandsvektoren: Abweichungen vor allem in y- und z-Koordinate. Vermutlich wegen unterschiedlichem Horizons Call (REF_PLANE=FRAME vs. REF_PLANE=ECLIPTIC).
+
+
+
+Datensatz AS-000072.json
+
+Szenario Header: JD 2459845.64027778
+Erster Datenpunkt im CSV-File: JD 2459845.640278000 -> 2 Stellen gehen verloren
+Erster Datenpunkt im JSON-File: "JD": 2459845.640278 -> die 2 verlorenen Stellen aus CSV File
+--> Genauigkeitsverlust auch hier analog Datensatz AS-000015.json, AS-000025.json, AS-000057.json
+
+GENAUIGKEITS-ANALYSE:
+
+Candidate: SCN_000072.json: 9 Stellen (so soll es sein)
+  "Core": {
+    "Time": {
+      "StartJD": 2459845.640277778,
+      "StopJD": 2459847.640277778,
+      "StepDays": "1H",
+      "TimeScale": "TDB"
+    },
+
+SHG -> AS-000072.json: 6 Stellen
+  "Core": {
+    "Time": {
+      "StartJD": 2459845.640278,
+      "StopJD": 2459847.640278,
+      "StepDays": "1H",
+      "TimeScale": "TD"
+    },
+
+SHG -> ScenarioID: 
+  "ScenarioID": "GEO-TD-2459845.64027778-2459847.64027778-1H",
+  StartJD und StopJD jeweils auf 8 Stellen
+  
+
+CSV zu AS-000057.json = GEO-TD-2461245.80347222-2461247.80347222-1H_L0.csv: 6-8 Stellen
+Auffällig bei den ersten 10 Zahlenwerten des API-Return im CSV File:
+2461245.803472000
+2461245.845138667
+2461245.886805333
+2461245.928472000
+2461245.970138667
+2461246.011805333
+2461246.053472000
+2461246.095138667
+2461246.136805333
+2461246.178472000
+
+Die letzten 3 Stellen sind entweder 200, 533 oder 867 
+-> bekanntes Phänomen aus TS-A. Dort war Startwert aber 000, daher 000, 333, 667 -> plausibel
+
+	
+JSON: 
+erster Datenpunkt: 6 Stellen
+  {
+    "JD": 2461245.803472,
+    "Position": { "X": 0.44006927, "Y": 1.97959913, "Z": -0.00044472 },
+    "Velocity": { "X": -0.02448151, "Y": 0.00155626, "Z": 0.00046394 }
+  },
+
+zweiter Datenpunkt: 8 Stellen  
+  {
+    "JD": 2461245.84513867,
+    "Position": { "X": 0.43904926, "Y": 1.97966368, "Z": -0.00042539 },
+    "Velocity": { "X": -0.02447905, "Y": 0.00154177, "Z": 0.00046394 }
+  },
+
+Gleiches Bild: die letzten 3 Stellen sind entweder 200, 533 oder 867 -> 1H = 1/24D = 0.04166667
+
+
+
+ANALYSE - INTERPRETATION:
+
+(1) unterschiedliche Zustandsvektoren. Dieses Mal ist der API-Call falsch, zumindest unterschiedlich
+(2) Root Cause für falschen Call zu analysieren: war früher falsch oder ist jetzt falsch (Soll: Geoäquatorial)
+Die GENAUIGKEITS-Abweichungen haben dieselbe Root-Cause wie TS-A und TS-B
+
+
+
+
+

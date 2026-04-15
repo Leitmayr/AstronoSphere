@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace AstronoCert
 {
@@ -6,8 +7,19 @@ namespace AstronoCert
     {
         public static string GetRepoRoot()
         {
-            var current = Directory.GetCurrentDirectory();
-            return Path.GetFullPath(Path.Combine(current, @"..\..\..\..\.."));
+            var baseDir = AppContext.BaseDirectory;
+
+            var dir = new DirectoryInfo(baseDir);
+
+            while (dir != null && dir.Name != "AstronoSphere")
+            {
+                dir = dir.Parent;
+            }
+
+            if (dir == null)
+                throw new Exception("AstronoSphere root not found.");
+
+            return dir.FullName;
         }
 
         public static string GetAstronoDataRoot()
@@ -28,6 +40,17 @@ namespace AstronoCert
         public static string GetExperimentsReleasedFolder()
         {
             return Path.Combine(GetAstronoDataRoot(), "02_Experiments", "Released");
+        }
+
+        public static void PrintPaths()
+        {
+            Console.WriteLine("=== PATH DEBUG ===");
+            Console.WriteLine($"RepoRoot   : {GetRepoRoot()}");
+            Console.WriteLine($"DataRoot   : {GetAstronoDataRoot()}");
+            Console.WriteLine($"Prepared   : {GetSeedsPreparedFolder()}");
+            Console.WriteLine($"Processed  : {GetSeedsProcessedFolder()}");
+            Console.WriteLine($"Experiments: {GetExperimentsReleasedFolder()}");
+            Console.WriteLine("==================");
         }
     }
 }
