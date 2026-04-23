@@ -194,10 +194,17 @@ Finalized V1.4 of Scenario Definition -> FREEZE
 
 ### 2026-04-15
 - showdown run successfully passed all tests, especially Run == LastRun, see special Info 
-- it is an extremely good day because it was hell of a fight to get it all fixes to reach this milestone. It is a fundamental basis now for future extensions: **very happy today!!! :-)**
+- it is an extremely good day because it was hell of a fight to get it all fixed to reach this milestone. It is a fundamental basis now for future extensions: **very happy today!!! :-)**
 - see extra session description below
 
+### 2026-04-18
+- worked out a firm specification for the Mesh-Files. Decided to implement a MeshGenerator, because Start- und Stop-Points on a Mesh are hard to determine manually
 
+### 2026-04-22
+- began with the MeshGenerator. Found some spec inconsistencies, fixed them. Could not finalize the MeshGenerator, though.
+
+### 2026-04-23
+- finalized the MeshGenerator and updated spec accordingly
 
 ------------------
 

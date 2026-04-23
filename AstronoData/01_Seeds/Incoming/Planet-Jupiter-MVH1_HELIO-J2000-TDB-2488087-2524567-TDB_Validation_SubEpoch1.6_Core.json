@@ -1,0 +1,48 @@
+{
+  "GeneratedSeeds": [
+    {
+      "SeedCandidate": {
+        "Event": {
+          "Category": "Mesh",
+          "Qualifier": "Validation_SubEpoch1.6_Core",
+          "Description": "MVH1"
+        },
+        "Core": {
+          "Time": {
+            "StartJD": 2488087.5,
+            "StopJD": 2524567.5,
+            "Step": "30D",
+            "TimeScale": "TDB"
+          },
+          "Observer": {
+            "Type": "Heliocentric",
+            "Body": "Sun"
+          },
+          "ObservedObject": {
+            "BodyClass": "Planet",
+            "Targets": [
+              "Jupiter"
+            ]
+          },
+          "Frame": {
+            "Type": "HelioEcliptic",
+            "Epoch": "J2000"
+          }
+        },
+        "Metadata": {
+          "Author": "MeshGenerator",
+          "Priority": 1,
+          "Maturity": "Released",
+          "Visibility": "Private"
+        },
+        "Notes": "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+      },
+      "SeedOrigin": {
+        "ResultID": "Planet-Jupiter-MVH1_HELIO-J2000-TDB-2488087-2524567-TDB_Validation_SubEpoch1.6_Core",
+        "Reason": "Extension of the data set in M2.1",
+        "Trigger": "M2.1 Mesh Seed Generation",
+        "CreatedAtUtc": "2026-04-23T13:30:19Z"
+      }
+    }
+  ]
+}

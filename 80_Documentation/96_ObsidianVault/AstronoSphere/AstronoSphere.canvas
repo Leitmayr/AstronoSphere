@@ -1,0 +1,18 @@
+{
+	"nodes":[
+		{"id":"83c5564dc9d9238d","type":"text","text":"RESULTS\n\n- Analyse durch Astronolysis\n\nInhalte:\n- Delta (Truth vs Simulation)\n- Statistiken\n- Validierung\n\nZiel:\n- Modellqualität bewerten","x":-10,"y":-1040,"width":262,"height":323,"color":"6"},
+		{"id":"55c502c9defc1d60","type":"text","text":"GROUND TRUTH\n\n- Erzeugt durch AstronoTruth\n- Quelle: JPL Horizons (DE440)\n\nEnthält:\n- DatasetHeader\n- CanonicalRequest\n- RequestHash\n\nWichtig:\n- Time direkt aus Core (KEIN Reformatting!)\n- Precision: deterministisch","x":360,"y":140,"width":300,"height":445,"color":"5"},
+		{"id":"7d93d59dedaa4451","type":"text","text":"SIMULATIONS\n\n- Engine: Astronometria\n\nZiel:\n- Reproduktion von GroundTruth\n\nOutput:\n- Simulated Data\n\nVergleich:\n- gegen GroundTruth","x":720,"y":-600,"width":280,"height":380,"color":"3"},
+		{"id":"eab91dd4a2ae89b8","type":"text","text":"HORIZONS REQUEST (Canonical)\n\nCENTER=@10\nCOMMAND=699\nEPHEM_TYPE=VECTORS\nREF_PLANE=ECLIPTIC\nREF_SYSTEM=ICRF\nSTART_TIME=JD...\nSTOP_TIME=JD...\nSTEP_SIZE=1H\n\nHash:\n- SHA256 über Canonical","x":440,"y":818,"width":256,"height":382,"color":"5"},
+		{"id":"ea88f90c6489848e","type":"text","text":"SEEDS\n\n- Input durch AstronoLab\n- Enthält:\n  - Time (StartJD, StopJD, Step, TimeScale=TDB)\n  - Observer\n  - ObservedObject\n  - Frame\n\nRegel:\n- KEINE Measurements\n- KEINE Corrections","x":-680,"y":-600,"width":260,"height":397,"color":"1"},
+		{"id":"c00e2261b74cab9c","type":"text","text":"EXPERIMENTS\n\n- Erzeugt durch AstronoCert\n- Core = physikalische Wahrheit\n\nWichtig:\n- ExperimentID (z.B. HELIO-J2000-TDB-...)\n- CoreHash (8 Zeichen)\n- CatalogNumber (AS-000xxx)\n\nHallo Regel:\n- Core ist immutable nach Release","x":-380,"y":220,"width":270,"height":445,"color":"4"}
+	],
+	"edges":[
+		{"id":"32580cdb8b34b8e0","fromNode":"ea88f90c6489848e","fromSide":"bottom","toNode":"c00e2261b74cab9c","toSide":"left","label":"\"Seed → zertifiziert (AstronoCert)\""},
+		{"id":"08ea76f902180d7f","fromNode":"c00e2261b74cab9c","fromSide":"right","toNode":"55c502c9defc1d60","toSide":"left","label":"\"Experiment → Horizons Request\""},
+		{"id":"f6947726522cc8fe","fromNode":"55c502c9defc1d60","fromSide":"right","toNode":"7d93d59dedaa4451","toSide":"bottom","label":"\"Truth → Referenz für Engine\""},
+		{"id":"8e957c2f43861af0","fromNode":"7d93d59dedaa4451","fromSide":"top","toNode":"83c5564dc9d9238d","toSide":"right","label":"\"Simulation vs Truth → Delta\""},
+		{"id":"e0331e332a76571b","fromNode":"83c5564dc9d9238d","fromSide":"left","toNode":"ea88f90c6489848e","toSide":"top"},
+		{"id":"d8b9f738cd29aa8c","fromNode":"eab91dd4a2ae89b8","fromSide":"top","toNode":"55c502c9defc1d60","toSide":"bottom","label":"https://ssd.jpl.nasa.gov/horizons/app.html#/"}
+	]
+}

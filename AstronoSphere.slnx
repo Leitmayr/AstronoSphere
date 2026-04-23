@@ -12,6 +12,9 @@
   <Folder Name="/00_AstronoPipe/tools/">
     <Project Path="00_AstronoPipe/tools/ScenarioHeaderMerger/ScenarioHeaderMerger.csproj" Id="78d0dd5f-b63d-4999-9793-151dffee87f9" />
   </Folder>
+  <Folder Name="/00_AstronoTools/">
+    <Project Path="00_AstronoTools/AstronoTools.MeshGenerator/AstronoTools.MeshGenerator.csproj" Id="73c95d6b-198d-4439-aeda-968c89deb75c" />
+  </Folder>
   <Folder Name="/01_AstronoLab/" />
   <Folder Name="/01_AstronoLab/src/">
     <Project Path="01_AstronoLab/src/AstronoLab/AstronoLab.csproj" Id="3ec62cf7-b1a9-4a7c-b98f-179abb5896c1" />

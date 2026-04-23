@@ -1,0 +1,49 @@
+﻿{
+  "GeneratedSeeds":  [
+    {
+      "SeedCandidate":  {
+        "Event":  {
+          "Category":  "Mesh",  <- this is constant and shall always be Mesh
+          "Qualifier":  "<Simulation | Validation>_<SubEpoch><1|2|3>.<1 | 2 | ...>_<Core | Extended | Outer>", <- this is variable and depends on Epoch/SubEpoch
+          "Description":  "<Abbreviation: <MXT1 | MXT2 | MVH1 | MVH2 | MVH3>"  <- this is variable and depends on Epoch
+        },
+        "Core":  {
+          "Time":  {
+            "StartJD":  2451544.500000, <- this is variable and depends on the Epoch and SubEpoch. It shall be generated in the exact same way as displayed here.
+            "StopJD":  2488054.500000,  <- this is variable and depends on the Epoch and SubEpoch. It shall be generated in the exact same way as displayed here.
+            "Step":  "30D", 			<- this is variable and depends on the Epoch, see CanonicalMeshDefinitions.md
+            "TimeScale":  "TDB"			<- this is constant and shall always be TDB
+          },
+          "Observer":  {
+            "Type":  "Heliocentric",	<- this is constant and shall always be "Heliocentric"
+            "Body":  "Sun"				<- this is constant and shall always be "Sun"
+          },
+          "ObservedObject":  {
+            "BodyClass":  "Planet",		<- this is constant and shall always be Planet
+            "Targets":  [
+              "Saturn"					<- this is variable and depends on the Planet
+            ]
+          },
+          "Frame":  {
+            "Type":  "HelioEcliptic",	<- this is constant and shall always be HelioEcplictic
+            "Epoch":  "J2000"			<- this is constant and shall always be J2000
+          }
+        },
+        "Metadata":  {
+          "Author":  "MeshGenerator", <- this is constant and shall always be "MeshGenerator"
+          "Priority":  1,				<- this is constant and shall always be 1
+            "Maturity":  "Released",	<- this is constant and shall always be "Released"
+            "Visibility":  "Private"	<- this is constant and shall always be "Private"
+          }
+        },
+        "Notes":  "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md." <- this is constant and shall always be this string
+      },
+      "SeedOrigin":  {
+        "ResultID":  "Planet-<Targets>-<Abbreviation>_HELIO-J2000-TDB-<StartID: int w/o dec>-<StopID: int w/o dec>-TDB_<Qualifier>", <- this is variable and shall be a concatenation of these strings
+        "Reason":  "Extension of the data set in M2.1", <- this is constant and shall always be this string
+        "Trigger":  "M2.1 Mesh Seed Generation", 	<- this is constant and shall always be this string
+        "CreatedAtUtc":  "2026-04-05T17:05:00Z" <- this is variable and depends on date and time of creation
+      }
+    }
+  ]
+}

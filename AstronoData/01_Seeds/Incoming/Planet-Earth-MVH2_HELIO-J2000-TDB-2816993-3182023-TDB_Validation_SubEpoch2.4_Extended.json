@@ -1,0 +1,48 @@
+{
+  "GeneratedSeeds": [
+    {
+      "SeedCandidate": {
+        "Event": {
+          "Category": "Mesh",
+          "Qualifier": "Validation_SubEpoch2.4_Extended",
+          "Description": "MVH2"
+        },
+        "Core": {
+          "Time": {
+            "StartJD": 2816993.5,
+            "StopJD": 3182023.5,
+            "Step": "211D",
+            "TimeScale": "TDB"
+          },
+          "Observer": {
+            "Type": "Heliocentric",
+            "Body": "Sun"
+          },
+          "ObservedObject": {
+            "BodyClass": "Planet",
+            "Targets": [
+              "Earth"
+            ]
+          },
+          "Frame": {
+            "Type": "HelioEcliptic",
+            "Epoch": "J2000"
+          }
+        },
+        "Metadata": {
+          "Author": "MeshGenerator",
+          "Priority": 1,
+          "Maturity": "Released",
+          "Visibility": "Private"
+        },
+        "Notes": "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+      },
+      "SeedOrigin": {
+        "ResultID": "Planet-Earth-MVH2_HELIO-J2000-TDB-2816993-3182023-TDB_Validation_SubEpoch2.4_Extended",
+        "Reason": "Extension of the data set in M2.1",
+        "Trigger": "M2.1 Mesh Seed Generation",
+        "CreatedAtUtc": "2026-04-23T13:30:19Z"
+      }
+    }
+  ]
+}

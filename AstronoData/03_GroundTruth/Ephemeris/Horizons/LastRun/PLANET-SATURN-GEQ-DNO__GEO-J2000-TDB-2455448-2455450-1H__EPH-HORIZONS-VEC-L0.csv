@@ -4,7 +4,7 @@ API SOURCE: NASA/JPL Horizons API
 
 
 *******************************************************************************
-Ephemeris / API_USER Mon Apr 13 11:59:19 2026 Pasadena, USA      / Horizons
+Ephemeris / API_USER Wed Apr 15 10:19:57 2026 Pasadena, USA      / Horizons
 *******************************************************************************
 Target body name: Saturn (699)                    {source: sat441l}
 Center body name: Earth (399)                     {source: DE441}
@@ -21,8 +21,8 @@ Output units    : AU-D
 Calendar mode   : Mixed Julian/Gregorian
 Output type     : GEOMETRIC cartesian states
 Output format   : 3 (position, velocity, LT, range, range-rate)
-EOP file        : eop.260410.p260707
-EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-APR-10. PREDICTS-> 2026-JUL-06
+EOP file        : eop.260414.p260711
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-APR-14. PREDICTS-> 2026-JUL-10
 Reference frame : Ecliptic of J2000.0
 *******************************************************************************
             JDTDB,            Calendar Date (TDB),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,                     LT,                     RG,                     RR,

@@ -1,0 +1,48 @@
+{
+  "GeneratedSeeds": [
+    {
+      "SeedCandidate": {
+        "Event": {
+          "Category": "Mesh",
+          "Qualifier": "Simulation_SubEpoch2.2_Extended",
+          "Description": "MXT1"
+        },
+        "Core": {
+          "Time": {
+            "StartJD": 2086511.5,
+            "StopJD": 2451541.5,
+            "Step": "211D",
+            "TimeScale": "TDB"
+          },
+          "Observer": {
+            "Type": "Heliocentric",
+            "Body": "Sun"
+          },
+          "ObservedObject": {
+            "BodyClass": "Planet",
+            "Targets": [
+              "Venus"
+            ]
+          },
+          "Frame": {
+            "Type": "HelioEcliptic",
+            "Epoch": "J2000"
+          }
+        },
+        "Metadata": {
+          "Author": "MeshGenerator",
+          "Priority": 1,
+          "Maturity": "Released",
+          "Visibility": "Private"
+        },
+        "Notes": "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+      },
+      "SeedOrigin": {
+        "ResultID": "Planet-Venus-MXT1_HELIO-J2000-TDB-2086511-2451541-TDB_Simulation_SubEpoch2.2_Extended",
+        "Reason": "Extension of the data set in M2.1",
+        "Trigger": "M2.1 Mesh Seed Generation",
+        "CreatedAtUtc": "2026-04-23T13:30:19Z"
+      }
+    }
+  ]
+}
