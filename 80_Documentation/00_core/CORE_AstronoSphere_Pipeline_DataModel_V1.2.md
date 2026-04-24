@@ -1213,21 +1213,32 @@ That makes folder browsing and mental indexing much easier.
 
 Category abbreviations summarize the experiment phenomenon.
 
-Examples include:
+Examples include but may not be limited to:
 
-- ANO = Ascending Node
-- APH = Aphelion
-- CON = Conjunction
-- DNO = Descending Node
-- INC = Inferior Conjunction
-- MCRE = MeshValidation
-- OPP = Opposition
-- PER = Perihelion
-- QCR = Quadrant Crossing
-- STA = Station
-- GWE = Greatest Western Elongation
-- GEE = Greatest Eastern Elongation
-- MDP = Miscellaneous Data Point
+```
+ "ASCENDING NODE" => "ANO",
+ "APHELION" => "APH",
+ "CONJUNCTION" => "CON",
+ "DESCENDING NODE" => "DNO",
+ "INFERIOR CONJUNCTION" => "INC",
+ // M2.1 MESH CATEGORIES
+ "MESH SIMULATION CORE" => "MCRE",
+ "MESH SIMULATION EXTENDED" => "MXT1",
+ "MESH SIMULATION OUTER" => "MXT2",
+ "MESH VALIDATION HORIZONS CORE" => "MVH1",
+ "MESH VALIDATION HORIZONS EXTENDED" => "MVH2",
+ "MESH VALIDATION HORIZONS OUTER" => "MVH3",
+ "OPPOSITION" => "OPP",
+ "PERIHELION" => "PER",
+ "QUADRANT CROSSING" => "QCR",
+ "STATION" => "STA",
+ "GREATEST WESTERN ELONGATION" => "GWE",
+ "GREATEST EASTERN ELONGATION" => "GEE",
+ "MISCELLANEOUS DATA POINT" => "MDP",
+ // GEO EXTENSIONS
+ "GEO EQ ASCENDING NODE" => "GEQ-ANO",
+ "GEO EQ DESCENDING NODE" => "GEQ-DNO",
+```
 
 These abbreviations allow a compact but meaningful event classification directly in the file name.
 

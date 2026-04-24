@@ -7,21 +7,50 @@ namespace AstronoLab
     {
         static void Main(string[] args)
         {
-            var inputFolder = @"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\01_Seeds\Incoming";
-            var outputFolder = @"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\01_Seeds\Prepared";
+            var inputFolder = Path.Combine(GetAstronoDataRoot(), "01_Seeds", "Incoming");
+            var outputFolder = Path.Combine(GetAstronoDataRoot(), "01_Seeds", "Prepared");
+
+            if (args.Length == 1 && args[0].Equals("--meshgen", StringComparison.OrdinalIgnoreCase))
+            {
+                MeshGenRunner.Run(inputFolder, outputFolder, MeshGenRunMode.Full);
+                return;
+            }
+
+            if (args.Length == 1 && args[0].Equals("--meshgen-gmss", StringComparison.OrdinalIgnoreCase))
+            {
+                MeshGenRunner.Run(inputFolder, outputFolder, MeshGenRunMode.Gmss);
+                return;
+            }
 
             if (args.Length == 1)
             {
-                // 👉 Single File Mode (z.B. SCN_000023)
                 var file = Path.Combine(inputFolder, args[0] + ".json");
-
                 SeedToExperimentConverter.RunSingle(file, outputFolder);
+                return;
             }
-            else
+
+            SeedToExperimentConverter.Run(inputFolder, outputFolder);
+        }
+
+        private static string GetRepoRoot()
+        {
+            var baseDir = AppContext.BaseDirectory;
+            var dir = new DirectoryInfo(baseDir);
+
+            while (dir != null && dir.Name != "AstronoSphere")
             {
-                // 👉 Default: alle
-                SeedToExperimentConverter.Run(inputFolder, outputFolder);
+                dir = dir.Parent;
             }
+
+            if (dir == null)
+                throw new Exception("AstronoSphere root not found.");
+
+            return dir.FullName;
+        }
+
+        private static string GetAstronoDataRoot()
+        {
+            return Path.Combine(GetRepoRoot(), "AstronoData");
         }
     }
 }

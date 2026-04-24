@@ -1,0 +1,40 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2488087-2524567-30D",
+  "CatalogNumber": "AS-000311",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2488087.5,
+      "StopJD": 2524567.5,
+      "Step": "30D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Venus"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Core",
+    "Qualifier": "Validation_SubEpoch1.6_Core",
+    "Description": "MVH1"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Maturity": "Released",
+    "Visibility": "Private"
+  },
+  "Notes": "Planet-Venus-MVH1_HELIO-J2000-TDB-2488087-2524567-TDB_Validation_SubEpoch1.6_Core<_|_>MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

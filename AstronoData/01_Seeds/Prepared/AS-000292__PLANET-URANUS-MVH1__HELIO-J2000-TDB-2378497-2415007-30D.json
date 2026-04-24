@@ -1,0 +1,40 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2378497-2415007-30D",
+  "CatalogNumber": "AS-000292",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2378497.5,
+      "StopJD": 2415007.5,
+      "Step": "30D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Uranus"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Core",
+    "Qualifier": "Validation_SubEpoch1.3_Core",
+    "Description": "MVH1"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Maturity": "Released",
+    "Visibility": "Private"
+  },
+  "Notes": "Planet-Uranus-MVH1_HELIO-J2000-TDB-2378497-2415007-TDB_Validation_SubEpoch1.3_Core<_|_>MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

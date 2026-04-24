@@ -1,0 +1,567 @@
+<!DOCTYPE html><html><head>
+      <title>CORE_CanonicalMeshDefinitions</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Marcu\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.24\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-details{margin:0;padding:0;border:none}.markdown-preview .md-toc summary.md-toc-link-wrapper{cursor:pointer;list-style-position:outside}.markdown-preview .md-toc summary.md-toc-link-wrapper::marker{font-size:.85em}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='0']{margin-left:12px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='1']{margin-left:28px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='2']{margin-left:44px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='3']{margin-left:60px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='4']{margin-left:76px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='5']{margin-left:80px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-details{margin:0;padding:0;border:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='0']{padding-left:0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='1']{padding-left:16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='2']{padding-left:32px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='3']{padding-left:48px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='4']{padding-left:64px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='5']{padding-left:80px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="m21--mesh--horizons-api-batching-concept">M2.1  Mesh &amp; Horizons API Batching Concept </h1>
+<h2 id="ephemerisregression-design-document">EphemerisRegression Design Document </h2>
+<hr>
+<h1 id="executive-summary">Executive Summary </h1>
+<p>This document defines the Mesh generation strategy and the Horizons API batching architecture for M2.1.</p>
+<p>Goals:</p>
+<ul>
+<li>Deterministic and reproducible time sampling</li>
+<li>API-efficient batch processing</li>
+<li>Clean separation of concerns (Mesh ≠ API ≠ VSOP)</li>
+</ul>
+<p>Example use cases of generated meshes:</p>
+<ul>
+<li>GroundTruth comparions (Horizons, Miriade) on the same grid</li>
+<li>Statistically meaningful accuracy evaluation of VSOP vs DE-440</li>
+<li>Controlled degradation analysis outside the specification interval</li>
+</ul>
+<hr>
+<h1 id="1-conceptual-architecture">1. Conceptual Architecture </h1>
+<ol>
+<li>Generate time mesh experiments for all 8 planets by means of AstronoLab and AstronoCert</li>
+<li>Batch request of Horizons reference data</li>
+</ol>
+<p>Mesh generation and API batching are strictly separated concerns.</p>
+<hr>
+<h1 id="2-time-ranges">2. Time Ranges </h1>
+<p>There are three independent time range with overlapping regions: "Three Epochs Approach".<br>
+Requirements for the three Epochs:</p>
+<p>Epoch1:  1600–2400, represents the high-accuracy range of VSOP models<br>
+Epoch2:  0000–4000, represents the anno domini epoch. However, rather arbitrarily chosen and accepted as such.<br>
+Epoch3: -4000–8000, represents the Julian Day Epoch somehow. However, rather arbitrarily chosen and accepted as such.</p>
+<h1 id="2-mesh-design">2. Mesh Design </h1>
+<h2 id="21-core-principle">2.1 Core Principle </h2>
+<ul>
+<li>Deterministic</li>
+<li>Planet-dependent experiments</li>
+<li>Reproducible via fixed definition</li>
+</ul>
+<h2 id="22-mesh-types">2.2 Mesh types </h2>
+<p>There are different mesh types depending on the purpose. Every mesh type consists of three independent.</p>
+<blockquote>
+<p>Epoch1: inner Epoch<br>
+Epoch2: medium Epoch<br>
+Epoch3: outer Epoch</p>
+</blockquote>
+<h3 id="221-meshtype-simulation">2.2.1 MeshType: Simulation </h3>
+<ul>
+<li>Focus: Simulation</li>
+<li>Characteristic: large time range covering largely every point of the defined time range</li>
+<li>Names:
+<ul>
+<li>Epoch1: MCRE (Core Mesh)</li>
+<li>Epoch2: MXT1 (Extended Mesh)</li>
+<li>Epoch3: MXT2 (Outer Mesh)</li>
+</ul>
+</li>
+</ul>
+<h3 id="222-meshtype-validation">2.2.2 MeshType: Validation </h3>
+<ul>
+<li>Focus: GroundTruthAvailability</li>
+<li>Characteristic: time range determined by the availablity of data of the used GroundTruth provider
+<ul>
+<li>Epoch1: MVH1 - Mesh Validation Horizons 1 (=Core Mesh for Validation with Horizons)</li>
+<li>Epoch2: MVH2 - Mesh Validation Horizons 2 (=Extended Mesh for Validation with Horizons)</li>
+<li>Epoch3: MVH3 - Mesh Validation Horizons 3 (=Outer Mesh for Validation with Horizons)</li>
+</ul>
+</li>
+</ul>
+<p>Note: when using Miriade as GroundTruth Provider, naming would adapt to MVM1, MVM2, MVM3.</p>
+<hr>
+<h1 id="3-dataset-limitations">3. Dataset Limitations </h1>
+<p>The generated Mesh Data will be used to</p>
+<ol>
+<li>Conduct simulations with the engine (e.g Astronometria)</li>
+<li>request Reference Data for validation of the simulations (e.g. Miriade, Horizons)</li>
+<li>design reasonable analyses of astronomical data</li>
+</ol>
+<p>Unlimited design of mesh data would cause computational issues (never ending simulations) or unstable requests at the GroundTruth providers. These are reasons why the number of data sets per Epoch must be controlled.The number of steps N defines the number of samples, which is N + 1.</p>
+<p>N shall follow the</p>
+<blockquote>
+<p><strong>sampleNumberRule:</strong><br>
+N &lt; 2000</p>
+</blockquote>
+<p>The sample number rule cuts the Epochs in sub-Epochs. For example, in Epoch1 there may exist sub-Epochs 1.1, 1.2, etc.</p>
+<h1 id="3-three-zone-strategy">3. Three-Zone Strategy </h1>
+<h2 id="31-starting-point">3.1 Starting Point </h2>
+<p>The exact starting point of the mesh inside the Epochs follows the following rules:</p>
+<ol>
+<li>Point on the Simulation Mesh (determined by a globally continuous mesh grid per Epoch)</li>
+<li>Point inside the Availability range of MeshType Validation</li>
+</ol>
+<h2 id="32-stepdays">3.2 StepDays </h2>
+<ol>
+<li>different StepSize: the inner mesh has the smallest StepSize, the medium one higher, the outer mesh has the biggest StepSize</li>
+<li>the StepSizes shall be no simple multiple of each others: this delivers asynchronous meshes with no inter-Mesh resonances</li>
+<li>the StepSizes shall be no simple multiple of any major planet period. E.g. shall it not be a multiple of a earth year, mars year etc. to avoid clustering the mesh sample points in the same heliocentric region.</li>
+<li>Prime numbers for are a good choice to avoid resonances.</li>
+<li>StepDays shall not be influenced by periods of other celestial objects than planets. E.g. moon periods shall be neglected, since Moon experiments do have different scope.</li>
+</ol>
+<h3 id="design-rules-for-epoch-1">Design Rules for Epoch 1 </h3>
+<p>KISS: keep existing experiments and verify step size.<br>
+Starting point was 30d (~1 month)</p>
+<ul>
+<li>360d in one year</li>
+<li>after ~10 years on revolution through the phase room (-&gt; acceptable shuffle in heliocentric coordinates)</li>
+<li>no prime number</li>
+</ul>
+<p>-&gt; KISS principle beats the optimal number.</p>
+<p>Recommended:</p>
+<blockquote>
+<p><strong>StepDays = 30 days</strong></p>
+</blockquote>
+<h3 id="design-rules-for-epoch-2">Design Rules for Epoch 2 </h3>
+<p>Starting point was 183d (~0.5 earth years)</p>
+<ul>
+<li>avoid near-integer multiples of dominant orbital periods (e.g. Earth year)</li>
+<li>ensure significant phase shift per step</li>
+<li>be chosen as a prime number above a defined threshold</li>
+</ul>
+<p>Definition:</p>
+<blockquote>
+<p>StepDays = NextPrimeLargerThan(k * BaseStep)</p>
+</blockquote>
+<p>with:<br>
+BaseStep = 183 days<br>
+k ≈ 1.1</p>
+<p>Recommended:</p>
+<blockquote>
+<p><strong>StepDays = 211 days</strong></p>
+</blockquote>
+<h3 id="design-rules-for-epoch-3">Design Rules for Epoch 3 </h3>
+<p>Starting point was 730d (~2 earth years)</p>
+<ul>
+<li>avoid near-integer multiples of dominant orbital periods (e.g. Earth year)</li>
+<li>ensure significant phase shift per step</li>
+<li>be chosen as a prime number above a defined threshold</li>
+</ul>
+<p>Definition:</p>
+<blockquote>
+<p>StepDays = NextPrimeLargerThan(k * BaseStep)</p>
+</blockquote>
+<p>with:<br>
+BaseStep = 730 days<br>
+k ≈ 1.1</p>
+<p>Recommended:</p>
+<blockquote>
+<p><strong>StepDays = 809 days</strong></p>
+</blockquote>
+<h3 id="final-definition-for-the-stepsize-freeze">Final definition for the StepSize (FREEZE) </h3>
+<ul>
+<li>StepSize1 (Core Mesh): 30 days</li>
+<li>StepSize2 (Extended Mesh): 211 days</li>
+<li>StepSize3 (Outer Mesh): 809 days</li>
+</ul>
+<h2 id="33-stop-point">3.3 Stop Point </h2>
+<p>The stop point is determined by the following rule:</p>
+<blockquote>
+<p>JD_StopDay = JD_StartDay + N*StepDaysOfEpoch</p>
+</blockquote>
+<p>N must fulfill the rule N &lt; 2000. This is to guarantee stable Horizons API calls and to avoid overload of the API.</p>
+<h1 id="4-concrete-simulation-meshes">4. Concrete Simulation Meshes </h1>
+<p>Important Global Rule:</p>
+<p>Within each Epoch, the mesh grid is globally continuous.</p>
+<ul>
+<li>StepDays is constant per Epoch</li>
+<li>The grid is generated once starting from the Epoch start date</li>
+<li>SubEpochs are only slicing constructs for batching and validation</li>
+<li>SubEpoch boundaries MUST NOT reset or shift the grid</li>
+</ul>
+<p>This ensures statistical consistency across the entire Epoch.</p>
+<h2 id="41-epoch-1">4.1 Epoch 1 </h2>
+<h3 id="411-cutting-mesh-into-slices">4.1.1 Cutting Mesh into slices </h3>
+<p>To fulfill the sampleNumberRule the data is sliced of roughly 100 years. These 100 years slices are the "sub-Epochs".</p>
+<h3 id="412-real-start-and-end-stepdays">4.1.2 Real start and end, StepDays </h3>
+<p>The real start JDStart of a sub-Epoch shall be derived from a globally continuous mesh grid.</p>
+<p>Definition:</p>
+<ul>
+<li>A global mesh grid is defined for the entire Epoch using a fixed StepDays.</li>
+<li>The grid starts at the first day of the Epoch (e.g. 1.1.1600 for Epoch1).</li>
+<li>All subsequent points are generated by repeatedly adding StepDays.</li>
+</ul>
+<p>SubEpochs do NOT reset the grid.<br>
+They are only logical slices of a continuous grid.</p>
+<p>The StepDays shall be 30 days fixed throughout the entire time range of Epoch1.</p>
+<p>Important:<br>
+The mesh grid is globally continuous across all SubEpochs.<br>
+There is no phase reset at SubEpoch boundaries.</p>
+<p>The real end shall be calculated as follows: JDend = JDstart + N * StepDays with N &lt; 2000.<br>
+This rule implies, that the last day of the SubEpochs will not necessarily fall on December 31 of the last year of the century. Instead, there will be a remainder. Depending on the century, the last day will be either the 17th or the 18th of December of said last year of the century. For the Core Mesh, the end day is determined by JDEnd = JDStart + 1217*30 days.<br>
+That means the entire set of data of one century is 1218 elements which fulfills the sampleNumberRule.</p>
+<p>Note: numberSamples = N + 1</p>
+<h3 id="413-resulting-data-slices-for-core-mesh">4.1.3 Resulting data slices for Core Mesh </h3>
+<p>Epoch1:<br>
+SubEpoch1.1: 1600-1700 -&gt; JD 2305447.5 to JD 2341957.5 = 1.1.1600 to 17.12.1699<br>
+SubEpoch1.2: 1700-1800 -&gt; JD 2341972.5 to JD 2378482.5 = 1.1.1700 to 18.12.1799<br>
+SubEpoch1.3: 1800-1900 -&gt; JD 2378496.5 to JD 2415006.5 = 1.1.1800 to 18.12.1899<br>
+SubEpoch1.4: 1900-2000 -&gt; JD 2415020.5 to JD 2451530.5 = 1.1.1900 to 18.12.1999<br>
+SubEpoch1.5: 2000-2100 -&gt; JD 2451544.5 to JD 2488054.5 = 1.1.2000 to 17.12.2099<br>
+SubEpoch1.6: 2100-2200 -&gt; JD 2488069.5 to JD 2524579.5 = 1.1.2100 to 18.12.2199<br>
+SubEpoch1.7: 2200-2300 -&gt; JD 2524593.5 to JD 2561103.5 = 1.1.2200 to 18.12.2299<br>
+SubEpoch1.8: 2300-2400 -&gt; JD 2561116.5 to JD 2597627.5 = 1.1.2300 to 18.12.2399<br>
+SubEpoch1.9: 2400-2500 -&gt; JD 2597641.5 to JD 2634151.5 = 1.1.2400 to 17.12.2499</p>
+<h2 id="42-epoch-2">4.2 Epoch 2 </h2>
+<h3 id="421-cutting-mesh-into-slices">4.2.1 Cutting Mesh into slices </h3>
+<p>To fulfill the sampleNumberRule the data is sliced of roughly 1000 years. These 1000 years-slices are the "sub-Epochs".</p>
+<h3 id="422-real-start-and-end-stepdays">4.2.2 Real start and end, StepDays </h3>
+<p>The real start JDStart of a sub-Epoch shall be the first day of the new Millenium, e.g. Jan 1, 1000 or Jan 1, 2000, etc.</p>
+<p>The StepDays shall be 211 days fix throughout the entire time range of Epoch2.</p>
+<p>The real end shall be calculated as follows: JDend = JDstart + N * StepDays with N &lt; 2000.<br>
+This rule implies, that the last day of the SubEpochs will not necessarily fall on December 31 of the last year of the millenium. Instead, there will be a remainder. Depending on the millenium, the last day will be either the 30th or the 31st of December of said last year of the millenium. For the Extended Mesh, the end day is determined by JDEnd = JDStart + 1731*211 days.<br>
+That means the entire set of data of one century is 1732 elements which fulfills the sampleNumberRule.</p>
+<h3 id="423-resulting-data-slices-for-extended-mesh">4.2.3 Resulting data slices for Extended Mesh </h3>
+<p>Epoch2:<br>
+SubEpoch2.1: 0000 - 1000 -&gt; JD 1721059.5 to JD 2086300.5 = 1.1.0000 to 30.12.0999<br>
+SubEpoch2.2: 1000 - 2000 -&gt; JD 2086302.5 to JD 2451543.5 = 1.1.1000 to 31.12.1999<br>
+SubEpoch2.3: 2000 - 3000 -&gt; JD 2451544.5 to JD 2816785.5 = 1.1.2000 to 30.12.2999<br>
+SubEpoch2.4: 3000 - 4000 -&gt; JD 2816787.5 to JD 3182028.5 = 1.1.3000 to 31.12.3999</p>
+<h2 id="43-epoch-3">4.3 Epoch 3 </h2>
+<h3 id="431-cutting-mesh-into-slices">4.3.1 Cutting Mesh into slices </h3>
+<p>To fulfill the sampleNumberRule the data is sliced of roughly 4000 years. These 4000 years-slices are the "sub-Epochs".</p>
+<h3 id="432-real-start-and-end-stepdays">4.3.2 Real start and end, StepDays </h3>
+<p>The real start JDStart of a sub-Epoch shall be the first day of the Epoch, e.g. Jan 1, -4000 or Jan 1, 4000, etc.</p>
+<p>The StepDays shall be 809 days fix throughout the entire time range of Epoch3.</p>
+<p>The real end shall be calculated as follows: JDend = JDstart + N * StepDays with N &lt; 2000.<br>
+This rule implies, that the last day of the SubEpochs will not necessarily fall on December 31 of Epoch3. Instead, there will be a remainder. JDEnd = JDStart + 1805*809 days.<br>
+That means the entire set of data of one century is 1806 elements which fulfills the sampleNumberRule.</p>
+<h3 id="433-resulting-data-slices-for-outer-mesh">4.3.3 Resulting data slices for Outer Mesh </h3>
+<p>Epoch3:<br>
+SubEpoch3.1: -4000 - 0000 -&gt; JD  260089.5 to JD 1720334.5 = 1.1.-4000 to 06.01.-0002<br>
+SubEpoch3.2:  0000 - 4000 -&gt; JD 1721059.5 to JD 3181304.5 = 1.1.0000  to 06.01.3998<br>
+SubEpoch3.3:  4000 - 8000 -&gt; JD 3182029.5 to JD 4642274.5 = 1.1.4000  to 06.01.7998</p>
+<h1 id="5-concrete-validation-meshes">5. Concrete Validation Meshes </h1>
+<p>As mentioned above, the Ground Truth providers may not cover the entire simulation mesh range. For this, the maximum range must be determined and the validation meshes must be adapted to these ranges.</p>
+<h2 id="51-horizons-data-ranges">5.1 Horizons data ranges </h2>
+<p>The minimum and maximum dates available in Horizons were determined by means of dedicated API-requests outside the specified range, to achieve an error return from Horizons which tells about the borders:</p>
+<h3 id="511-range-mercury">5.1.1 Range Mercury </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=199&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=199&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>Beginn bei JD0</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=199&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=199&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Mercury" after A.D. 9999-DEC-30 12:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="512-range-venus">5.1.2 Range Venus </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=299&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=299&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>Beginn bei JD0</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=299&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=299&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Venus" after A.D. 9999-DEC-30 12:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="513-range-earth">5.1.3 Range Earth </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=399&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=399&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD0.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>Beginn bei JD0</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=399&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=399&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Earth" after A.D. 9999-DEC-30 12:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="514-range-mars">5.1.4 Range Mars </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=499&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=499&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Mars" prior to A.D. 1600-JAN-02 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=499&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=499&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Mars" after A.D. 2600-JAN-01 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="515-range-jupiter">5.1.5 Range Jupiter </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=599&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=599&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Jupiter" prior to A.D. 1600-JAN-11 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=599&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=599&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Jupiter" after A.D. 2200-JAN-09 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="516-range-saturn">5.1.6 Range Saturn </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=699&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=699&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Saturn" prior to A.D. 1749-DEC-31 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=699&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=699&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Saturn" after A.D. 2250-JAN-05 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="517-range-uranus">5.1.7 Range Uranus </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=799&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=799&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Uranus" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB</strong><br>
+<a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=799&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=799&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Uranus" after A.D. 2399-DEC-16 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<h3 id="518-range-neptune">5.1.8 Range Neptune </h3>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=899&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=899&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD2305447.5&amp;STOP_TIME=JD2305507.5&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Neptune" prior to A.D. 1600-JAN-05 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<blockquote>
+<p><a href="https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=899&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D">https://ssd.jpl.nasa.gov/api/horizons.api?format=text&amp;COMMAND=899&amp;EPHEM_TYPE=VECTORS&amp;START_TIME=JD9000000&amp;STOP_TIME=JD10000D&amp;STEP_SIZE=30D&amp;CENTER=@10&amp;REF_PLANE=ECLIPTIC&amp;REF_SYSTEM=ICRF&amp;OUT_UNITS=AU-D</a><br>
+<strong>No ephemeris for target "Neptune" after A.D. 2400-JAN-01 00:00:00.0000 TDB</strong></p>
+</blockquote>
+<h2 id="52-summary-planet-dependent-valid-time-ranges">5.2: Summary: Planet dependent valid time ranges </h2>
+<p>Compact table of the API requests:</p>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Min Date (TDB)</th>
+<th>Min JD</th>
+<th>Max Date (TDB)</th>
+<th>Max JD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mercury</td>
+<td>-4713-11-25</td>
+<td>0.5</td>
+<td>9999-12-30</td>
+<td>5373482.5</td>
+</tr>
+<tr>
+<td>Venus</td>
+<td>-4713-11-25</td>
+<td>0.5</td>
+<td>9999-12-30</td>
+<td>5373482.5</td>
+</tr>
+<tr>
+<td>Earth</td>
+<td>-4713-11-25</td>
+<td>0.5</td>
+<td>9999-12-30</td>
+<td>5373482.5</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>1600-01-02</td>
+<td>2305448.5</td>
+<td>2600-01-01</td>
+<td>2670690.5</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>1600-01-11</td>
+<td>2305457.5</td>
+<td>2200-01-09</td>
+<td>2524601.5</td>
+</tr>
+<tr>
+<td>Saturn</td>
+<td>1749-12-31</td>
+<td>2360233.5</td>
+<td>2250-01-05</td>
+<td>2542859.5</td>
+</tr>
+<tr>
+<td>Uranus</td>
+<td>1600-01-05</td>
+<td>2305451.5</td>
+<td>2399-12-16</td>
+<td>2597625.5</td>
+</tr>
+<tr>
+<td>Neptune</td>
+<td>1600-01-05</td>
+<td>2305451.5</td>
+<td>2400-01-01</td>
+<td>2597641.5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="53-determination-of-start-and-stop-day">5.3 Determination of Start and Stop Day </h2>
+<p>The start and Stop Days can be determined with this formal definition</p>
+<blockquote>
+<p>ValidationMesh = {<br>
+t ∈ SimulationMesh<br>
+AND t ∈ ProviderRange(planet)<br>
+}</p>
+</blockquote>
+<p>In the following, a detailed example based on this formal definition is described.</p>
+<h3 id="531-jd_start">5.3.1 JD_Start </h3>
+<p>JD_Start is defined as the first available Horizons value on the simulation mesh grid of the respective Epoch:</p>
+<blockquote>
+<p><strong>JD_Start = first t ∈ SimulationMesh WHERE t ≥ ProviderMin</strong></p>
+</blockquote>
+<h4 id="example-epoch1">Example: Epoch1 </h4>
+<blockquote>
+<ul>
+<li>First availabe Saturn Data Point: JD 2360233.5 = 1749-12-31</li>
+<li>First point which is greater or equal than 2360233.5 but on the grid: JD 2360257.5 = 1750-01-24</li>
+</ul>
+</blockquote>
+<p>Check: 1750-01-24 is 25 days after 1749-12-31: 25 &lt; 30<br>
+-&gt; first point in mesh grid after 1749-12-31</p>
+<h3 id="532-step">5.3.2 Step </h3>
+<p>The Step is fix and defined Epoch specific, see above.</p>
+<h3 id="533-jd_stop">5.3.3 JD_Stop </h3>
+<p>JD_Stop is defined as the last available Horizons value on the simulation mesh grid of the respective Epoch:</p>
+<blockquote>
+<p><strong>JD_Stop  = last  t ∈ SimulationMesh WHERE t ≤ ProviderMax</strong></p>
+</blockquote>
+<h4 id="example-epoch1-1">Example: Epoch1 </h4>
+<blockquote>
+<ul>
+<li>Last availabe Saturn Data Point: JD 2542859.5 = 2250-01-05</li>
+<li>Last point which is less or equal than 2542859.5 but on the grid: JD 2542837.5 = 14.12.2249</li>
+</ul>
+</blockquote>
+<p>Check: 14.12.2249 is 22 days before 2250-01-05: 22 &lt; 30<br>
+-&gt; last point in mesh grid before 2250-01-05</p>
+<h4 id="534-result-example-table-mhv1-for-saturn">5.3.4 Result: Example Table MHV1 for Saturn </h4>
+<p>(updated manually according to manual Test Results)</p>
+<table>
+<thead>
+<tr>
+<th>Sub-Epoch</th>
+<th>Range</th>
+<th>JD_Start</th>
+<th>JD_Stop</th>
+<th>UTC_Start</th>
+<th>UTC_Stop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SubEpoch1.1</td>
+<td>1600-1700</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SubEpoch1.2</td>
+<td>1700-1800</td>
+<td>2360257.5</td>
+<td>2378467.5</td>
+<td>24.1.1750</td>
+<td>03.12.1799</td>
+</tr>
+<tr>
+<td>SubEpoch1.3</td>
+<td>1800-1900</td>
+<td>2378497,5</td>
+<td>2415007.5</td>
+<td>2.1.1800</td>
+<td>19.12.1899</td>
+</tr>
+<tr>
+<td>SubEpoch1.4</td>
+<td>1900-2000</td>
+<td>2415037.5</td>
+<td>2451517.5</td>
+<td>18.1.1900</td>
+<td>05.12.1999</td>
+</tr>
+<tr>
+<td>SubEpoch1.5</td>
+<td>2000-2100</td>
+<td>2451547.5</td>
+<td>2488057.5</td>
+<td>4.1.2000</td>
+<td>20.12.2099</td>
+</tr>
+<tr>
+<td>SubEpoch1.6</td>
+<td>2100-2200</td>
+<td>2488087.5</td>
+<td>2524567.5</td>
+<td>19.1.2100</td>
+<td>06.12.2199</td>
+</tr>
+<tr>
+<td>SubEpoch1.7</td>
+<td>2200-2300</td>
+<td>2524597.5</td>
+<td>2542837.5</td>
+<td>5.1.2200</td>
+<td>14.12.2249</td>
+</tr>
+<tr>
+<td>SubEpoch1.8</td>
+<td>2300-2400</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SubEpoch1.9</td>
+<td>2400-2500</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>The same process needs to be repeated for all Epochs and all Planets.</p>
+<hr>
+<h1 id="6-horizons-api-batching-strategy">6. Horizons API Batching Strategy </h1>
+<p>DO NOT request per timestamp.<br>
+Instead: Use START/STOP/STEP batch calls per segment.</p>
+<p>Sequential execution recommended.<br>
+Optional 500ms delay between calls.</p>
+<hr>
+<p>NOTE:</p>
+<h2 id="appendix-a-random-sampling-layer-formerly-section-3-random-layer---deferred">Appendix A. Random Sampling Layer (formerly Section "3. Random Layer" - DEFERRED) </h2>
+<p>This concept is intentionally excluded from M2.1.</p>
+<p>Reason:</p>
+<ul>
+<li>introduces analysis dimension</li>
+<li>violates single-dimension principle of Stealth Mode</li>
+</ul>
+<p>Future location:</p>
+<ul>
+<li>Astronolysis (analysis-driven sampling strategies)</li>
+</ul>
+<p>Status:</p>
+<ul>
+<li>postponed</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
