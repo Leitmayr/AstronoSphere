@@ -1,0 +1,28 @@
+Printing approach results now: 
+------------------------------ 
+Jupiter	 -   Saturn:	 7.8.1940	14h23	1.186°	 in Ari
+Jupiter	 -   Saturn:	 19.10.1940	19h11	1.234°	 in Ari
+Jupiter	 -   Saturn:	 15.2.1941	7h11	1.288°	 in Ari
+Jupiter	 -   Saturn:	 18.2.1961	21h35	0.2293°	 in Sgr
+Jupiter	 -   Saturn:	 19.9.1961	14h23	4.077°	 in Sgr
+Jupiter	 -   Saturn:	 31.12.1980	2h23	1.047°	 in Vir
+Jupiter	 -   Saturn:	 2.3.1981	7h11	1.06°	 in Vir
+Jupiter	 -   Saturn:	 24.7.1981	7h11	1.104°	 in Vir
+Jupiter	 -   Saturn:	 28.5.2000	19h11	1.142°	 in Ari
+Jupiter	 -   Saturn:	 15.5.2020	21h35	4.696°	 in Sgr
+Jupiter	 -   Saturn:	 21.12.2020	11h59	0.1053°	 in Cap
+
+Printing approach results now: 
+------------------------------ 
+Jupiter	 -   Saturn:	 7.8.1940	14h23	1.186°	 in Ari
+Jupiter	 -   Saturn:	 19.10.1940	4h47	1.232°	 in Ari
+Jupiter	 -   Saturn:	 13.2.1941	4h47	1.292°	 in Ari
+Jupiter	 -   Saturn:	 18.2.1961	21h35	0.2266°	 in Sgr
+Jupiter	 -   Saturn:	 19.9.1961	14h23	4.069°	 in Sgr
+Jupiter	 -   Saturn:	 29.12.1980	14h23	1.05°	 in Vir
+Jupiter	 -   Saturn:	 2.3.1981	21h35	1.059°	 in Vir
+Jupiter	 -   Saturn:	 23.7.1981	9h35	1.105°	 in Vir
+Jupiter	 -   Saturn:	 27.5.2000	7h11	1.153°	 in Ari
+Jupiter	 -   Saturn:	 15.5.2020	14h23	4.697°	 in Sgr
+Jupiter	 -   Saturn:	 21.12.2020	19h11	0.1017°	 in Cap
+test_eventHandler(): Event Handler terminates
