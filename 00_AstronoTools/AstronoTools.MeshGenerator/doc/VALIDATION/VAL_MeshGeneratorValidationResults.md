@@ -198,7 +198,7 @@ The MeshGenerator is:
 - spec-compliant (after correction)
 - deterministic
 - ready for extended validation
-
+ 
 The MeshGenerator implementation is considered validated for M2.1 core logic.
 
 Validated dimensions:

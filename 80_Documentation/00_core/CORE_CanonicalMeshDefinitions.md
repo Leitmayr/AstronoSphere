@@ -63,7 +63,7 @@ Epoch3: outer Epoch
     - Epoch2: MXT1 (Extended Mesh) 
     - Epoch3: MXT2 (Outer Mesh)
 
-### 2.2.1 MeshType: Validation 
+### 2.2.2 MeshType: Validation 
 - Focus: GroundTruthAvailability
 - Characteristic: time range determined by the availablity of data of the used GroundTruth provider
     - Epoch1: MVH1 - Mesh Validation Horizons 1 (=Core Mesh for Validation with Horizons) 

@@ -205,6 +205,13 @@ Finalized V1.4 of Scenario Definition -> FREEZE
 
 ### 2026-04-23
 - finalized the MeshGenerator and updated spec accordingly
+- all new mesh files can be generated now
+- old mesh files are inconsistent and shall be deprecated (what a bummer, but it must be for clarity reasons)
+- generated DocumentationPolicy. I found that, because of the high development speed, too many documents are being generated and not filed with enough structure. Now I have defined which documents to generate and where to store them.
+
+### 2026-04-24
+-  began implementing new data storage as per documentation policy
+
 
 ------------------
 
