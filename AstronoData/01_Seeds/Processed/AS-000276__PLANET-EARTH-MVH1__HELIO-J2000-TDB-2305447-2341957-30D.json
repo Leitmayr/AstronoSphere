@@ -1,0 +1,42 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2305447-2341957-30D",
+  "CatalogNumber": "AS-000276",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2305447.5,
+      "StopJD": 2341957.5,
+      "Step": "30D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Earth"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Core",
+    "Qualifier": "Validation_SubEpoch1.1_Core",
+    "Description": "MVH1"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Earth-MVH1_HELIO-J2000-TDB-2305447-2341957-TDB_Validation_SubEpoch1.1_Core_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2488087-2524567-30D",
+  "CatalogNumber": "AS-000320",
+  "CoreHash": "44FC28BB",
+  "Core": {
+    "Time": {
+      "StartJD": 2488087.5,
+      "StopJD": 2524567.5,
+      "Step": "30D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Neptune"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Core",
+    "Qualifier": "Validation_SubEpoch1.6_Core",
+    "Description": "MVH1"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Neptune-MVH1_HELIO-J2000-TDB-2488087-2524567-TDB_Validation_SubEpoch1.6_Core_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

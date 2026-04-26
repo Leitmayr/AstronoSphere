@@ -1,0 +1,42 @@
+﻿{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2451752-2816782-211D",
+  "CatalogNumber": "AS-000239",
+  "CoreHash": "TO_BE_REPLACED",
+  "Core": {
+    "Time": {
+      "StartJD": 2451752.5,
+      "StopJD": 2816782.5,
+      "Step": "211D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Saturn"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Simulation Extended",
+    "Qualifier": "Simulation_SubEpoch2.3_Extended",
+    "Description": "MXT1"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Saturn-MXT1_HELIO-J2000-TDB-2451752-2816782-TDB_Simulation_SubEpoch2.3_Extended_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

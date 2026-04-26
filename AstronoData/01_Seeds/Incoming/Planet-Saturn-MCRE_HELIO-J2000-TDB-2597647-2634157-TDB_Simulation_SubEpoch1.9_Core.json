@@ -32,8 +32,10 @@
         "Metadata": {
           "Author": "MeshGenerator",
           "Priority": 1,
-          "Maturity": "Released",
-          "Visibility": "Private"
+          "Status": {
+            "Maturity": "Released",
+            "Visibility": "Private"
+          }
         },
         "Notes": "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
       },
@@ -41,7 +43,7 @@
         "ResultID": "Planet-Saturn-MCRE_HELIO-J2000-TDB-2597647-2634157-TDB_Simulation_SubEpoch1.9_Core",
         "Reason": "Extension of the data set in M2.1",
         "Trigger": "M2.1 Mesh Seed Generation",
-        "CreatedAtUtc": "2026-04-23T13:30:19Z"
+        "CreatedAtUtc": "2026-04-26T14:45:05Z"
       }
     }
   ]

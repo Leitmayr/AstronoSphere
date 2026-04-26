@@ -42,19 +42,19 @@ namespace AstronoLab
     /// </summary>
     public static class MeshGenRunner
     {
-        private const int FirstCatalogNumber = 143;
-        private const string NotesSeparator = "<_|_>";
+        private const int FirstCatalogNumber = 146;
+        private const string NotesSeparator = "_|_";
 
         private static readonly HashSet<string> GmssCatalogNumbers = new(StringComparer.OrdinalIgnoreCase)
         {
-            "AS-000143",
-            "AS-000203",
-            "AS-000221",
-            "AS-000254",
-            "AS-000283",
-            "AS-000340",
-            "AS-000342",
-            "AS-000363"
+            "AS-000146",
+            "AS-000206",
+            "AS-000224",
+            "AS-000257",
+            "AS-000286",
+            "AS-000343",
+            "AS-000345",
+            "AS-000366"
         };
 
         private static readonly string[] MeshOrder =

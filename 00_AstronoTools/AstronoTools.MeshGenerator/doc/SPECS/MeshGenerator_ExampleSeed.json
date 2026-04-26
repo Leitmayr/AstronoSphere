@@ -32,6 +32,7 @@
         "Metadata":  {
           "Author":  "MeshGenerator", <- this is constant and shall always be "MeshGenerator"
           "Priority":  1,				<- this is constant and shall always be 1
+         "Status":  {
             "Maturity":  "Released",	<- this is constant and shall always be "Released"
             "Visibility":  "Private"	<- this is constant and shall always be "Private"
           }

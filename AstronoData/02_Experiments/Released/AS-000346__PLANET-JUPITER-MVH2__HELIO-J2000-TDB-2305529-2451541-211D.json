@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2305529-2451541-211D",
+  "CatalogNumber": "AS-000346",
+  "CoreHash": "36722AED",
+  "Core": {
+    "Time": {
+      "StartJD": 2305529.5,
+      "StopJD": 2451541.5,
+      "Step": "211D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Jupiter"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Extended",
+    "Qualifier": "Validation_SubEpoch2.2_Extended",
+    "Description": "MVH2"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Jupiter-MVH2_HELIO-J2000-TDB-2305529-2451541-TDB_Validation_SubEpoch2.2_Extended_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

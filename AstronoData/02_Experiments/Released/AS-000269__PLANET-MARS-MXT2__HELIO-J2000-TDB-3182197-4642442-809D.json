@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-3182197-4642442-809D",
+  "CatalogNumber": "AS-000269",
+  "CoreHash": "3B054845",
+  "Core": {
+    "Time": {
+      "StartJD": 3182197.5,
+      "StopJD": 4642442.5,
+      "Step": "809D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Mars"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Simulation Outer",
+    "Qualifier": "Simulation_SubEpoch3.3_Outer",
+    "Description": "MXT2"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Mars-MXT2_HELIO-J2000-TDB-3182197-4642442-TDB_Simulation_SubEpoch3.3_Outer_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}

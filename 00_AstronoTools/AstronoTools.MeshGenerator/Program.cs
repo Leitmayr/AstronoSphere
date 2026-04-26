@@ -551,8 +551,11 @@ internal static class Program
                 {
                     Author = "MeshGenerator",
                     Priority = 1,
-                    Maturity = "Released",
-                    Visibility = "Private"
+                    Status = new StatusData
+                    {
+                        Maturity = "Released",
+                        Visibility = "Private"
+                    }
                 },
                 Notes = "MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
             },
@@ -614,11 +617,6 @@ internal static class Program
 
         foreach (var mesh in meshDefinitions)
         {
-            //if (mesh.MeshKind != MeshKind.Validation)
-           // {
-            //    continue;
-            //}
-
             foreach (var planet in planets)
             {
                 Console.WriteLine();
@@ -906,6 +904,11 @@ public sealed class MetadataData
 {
     public string Author { get; set; } = string.Empty;
     public int Priority { get; set; }
+    public StatusData Status { get; set; } = new();
+}
+
+public sealed class StatusData
+{
     public string Maturity { get; set; } = string.Empty;
     public string Visibility { get; set; } = string.Empty;
 }

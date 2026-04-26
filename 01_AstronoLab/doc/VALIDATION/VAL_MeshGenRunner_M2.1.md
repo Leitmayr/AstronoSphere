@@ -45,14 +45,14 @@ The following selection of data sets should fulfill the rules from A.1:
 - critical data set: MCRE/Jupiter with JD > 2300
 
 ```
-AS-000143  MCRE  SubEpoch1.1  Mercury
-AS-000203  MCRE  SubEpoch1.8  Jupiter   // JD > 2300 erfüllt
-AS-000221  MXT1  SubEpoch2.1  Uranus
-AS-000254  MXT2  SubEpoch3.1  Neptune
-AS-000283  MVH1  SubEpoch1.2  Saturn
-AS-000340  MVH2  SubEpoch2.2  Venus
-AS-000342  MVH2  SubEpoch2.2  Mars
-AS-000363  MVH3  SubEpoch3.2  Earth
+AS-000146  MCRE  SubEpoch1.1  Mercury
+AS-000206  MCRE  SubEpoch1.8  Jupiter   // JD > 2300 erfüllt
+AS-000224  MXT1  SubEpoch2.1  Uranus
+AS-000257  MXT2  SubEpoch3.1  Neptune
+AS-000286  MVH1  SubEpoch1.2  Saturn
+AS-000343  MVH2  SubEpoch2.2  Venus
+AS-000345  MVH2  SubEpoch2.2  Mars
+AS-000366  MVH3  SubEpoch3.2  Earth
 ```
 
 
@@ -82,8 +82,8 @@ AS-000363  MVH3  SubEpoch3.2  Earth
 - For every GMSS Data set:
     - Check data availability against VAL_MeshTables_AllPlanets.md 
 - Check for 229 data sets
-    - First data set 143 
-    - Last data set = 371 ?
+    - First data set 146 
+    - Last data set = 374 ?
 - check GMSS run done
     - Amount of created files done
     - Amount of covered planets  done
@@ -163,8 +163,8 @@ Observation: Run with GMSS
 
 Observation: Full Run
 - 229 Files generated: ok
-- first file #143 ok
-- last file #371 ok
+- first file #146 ok
+- last file #374 ok
 - no duplicates ok
 
 
@@ -190,14 +190,14 @@ Observation: Run with GMSS
     - Notes ok
     - Beyond Compare Compared original input file (LastRun) and - generated File: acceptable deviation in ResultID: ok!
 - Beyond Compares made for with the criteria of File 363
-    - File 143: ok
-    - File 203: ok
-    - File 221: ok
-    - File 254: ok
-    - File 283: ok
-    - File 340: ok
-    - File 342: ok
-    - File 363: ok (see above)
+    - File 146: ok
+    - File 206: ok
+    - File 224: ok
+    - File 257: ok
+    - File 286: ok
+    - File 343: ok
+    - File 345: ok
+    - File 366: ok (see above)
 - Compare new generated 00_Seeds/Prepared/#254 with 00_Seeds/Processed (DataSet #23) for structural plausibility
     - Structure fits perfectly. ok.
 - Check JD_Start and JD_Stop of MVH1, 2, 3 against Reference 1. (above)
@@ -219,14 +219,14 @@ Confirmed
 
 Observation: Full Run
 - Run (Full) == LastRun (GMSS) Comparison with Beyond Conmpare
-    - File 143: binary identical ok
-    - File 203: binary identical ok
-    - File 221: binary identical ok
-    - File 254: binary identical ok
-    - File 283: binary identical ok
-    - File 340: binary identical ok
-    - File 342: binary identical ok
-    - File 363: binary identical ok
+    - File 146: binary identical ok
+    - File 206: binary identical ok
+    - File 224: binary identical ok
+    - File 257: binary identical ok
+    - File 286: binary identical ok
+    - File 343: binary identical ok
+    - File 345: binary identical ok
+    - File 366: binary identical ok
 
 - Run (Full) == LastRun (Full) Comparison with Beyond Compare
     - all 229 binary identical

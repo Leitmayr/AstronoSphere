@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "1.0",
+  "ExperimentID": "HELIO-J2000-TDB-2816993-3182023-211D",
+  "CatalogNumber": "AS-000358",
+  "CoreHash": "7453FA4E",
+  "Core": {
+    "Time": {
+      "StartJD": 2816993.5,
+      "StopJD": 3182023.5,
+      "Step": "211D",
+      "TimeScale": "TDB"
+    },
+    "Observer": {
+      "Type": "Heliocentric",
+      "Body": "Sun"
+    },
+    "ObservedObject": {
+      "BodyClass": "Planet",
+      "Targets": [
+        "Mercury"
+      ]
+    },
+    "Frame": {
+      "Type": "HelioEcliptic",
+      "Epoch": "J2000"
+    }
+  },
+  "Event": {
+    "Category": "Mesh Validation Horizons Extended",
+    "Qualifier": "Validation_SubEpoch2.4_Extended",
+    "Description": "MVH2"
+  },
+  "Metadata": {
+    "Author": "MeshGenerator",
+    "Priority": 1,
+    "Status": {
+      "Maturity": "Released",
+      "Visibility": "Private"
+    }
+  },
+  "Notes": "Planet-Mercury-MVH2_HELIO-J2000-TDB-2816993-3182023-TDB_Validation_SubEpoch2.4_Extended_|_MeshGenerator: Generated automatically based on CanonicalMeshDefinitions.md."
+}
