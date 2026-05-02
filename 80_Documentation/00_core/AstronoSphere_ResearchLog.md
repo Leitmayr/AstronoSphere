@@ -1,32 +1,100 @@
 # AstronoSphere Research Log
 
 ## 2026
-### January
 
-- year begin with a nice grafical tool Sternkarten showing the heliocentric positions of the planets according to the Sterne und Weltraum monthly pages
-- began with a first grafical representation of Astronometria in C# and WPF: 
-    - included Bright Star Catalog Data and created first "Drehbare Sternscheibe" Code with constallations and various set of starts. Also added star colors according to Spectral Type.
-    - decided to "add the planets quickly"
-    - decided to postpone visualization of the planets "for a bit" to validate VSOP data first
-- first thoughts about a Ground Truth generation with Horizons
-- decision to develop Astronometria with Chat GPT
+## April 2026
 
-### February
+### 2026-04-02
+- fixed all 7 Bugs in an evenmore exhausting session. I prepared the session extremely diligent and opened a dedicated chat to solve the issues. At the end of the evening all bugs were fixed and the pipeline was logically and numerically stabilized. Highlight Session!
+
+### 2026-04-03
+- renaming decision: AstronoLab, AstronoCert, AstronoTuth, Astronometria, Astronalysis
+- specified and documented complete data model of Astronosphere in an 8 hours session: file names, folders, headers, workflow and writing permits.
+
+### 2026-04-04
+- Planning of the migration: ScenarioMerger defined
+- Validation plan created
+
+### 2026-04-06
+- implemented ScenarioMerger Part 1
+- "STRICT-Implementation Mode" established: needed to avoid that CGPT begins to interpret and deviates from the plan.
+- the session was bad... so the STRICT mode was born as a countermeasure
+- still learning how to use AI efficiently, still observing suprises
+
+### 2026-04-07
+- AstronoLab implemented: seeds are being generated now in AstronoLab
+- Secenario Merger Part 2 used to migrate old data sets
+
+### 2026-04-08
+- decided in the morning to establish a central hashing entity in AstronoData.Contracts, which is being used to canonicalize and hash all inputs in the same way, independent if experiments, dataset (measurements) or analysis data are being hashed
+- specified hashing and implemented AstronoData.Contracts in the evening
+- implemented AstronoCert - struggled with precision topics and escape sequences again
+
+### 2026-04-10
+- META chat about use cases of AstronoSphere in the morning
+- afternoon Dataset23: AstronoTruth implemented - ExperimentID, DatasetIF, Filename, DatasetHeader, Canonical, Hash centralized -> fully validated
+- Refactoring:  EphemerisRegression Legacy code cleaned up. Folder renaming, old files deleted. Very good cleanup!
+- A super session! I prepared it most diligently. Every step, a lot of interaction with CGPT. One of the strongest sessions ever today!
+- see extra session description below
+
+### 2026-04-11
+- established the future development strategy: change only one dimension to control complexity
+- prepare sessions diligently
+- use CGPT as a reviewer/sparrings partner not just a coding monkey
+- planned M2 
+- setup a test plan for finalizing the whole pipeline
+- identified Beyond Compare CLI capabilities for more efficient validation -> will probably purchase the full version of the program: it became a core tool for me
+- Stealth Manifest formulated
+- in the evening: brillant Web-Session on the Miriade-Homepage: plenty of different reference data available there. Enough material for scientific research!
 
 
-#### 2025-02-03
-- idea of developing a program which provides data from JPL Horizons
-- Program called Ephemeris Regression (ER)
+### 2026-04-12
+- updated documentation and threw out outdated files
+- made a diligent pipeline validation plan
+- identified three optimization points during testing and fixed them right away
+- almost finished testing. Identified dublettes in the data - the Pipeline is correct but the input data was not. The pipeline has taken care of it: strong signal for stable pipeline.
+- Tomorrow last GoldenSample validation and then the automatic run of the entire pipeline: let's us hope for the best. I am quite confident...
+- a brillant and very productive week is over: the pipeline is almost finished
 
-#### 2025-02-10
-- spent a compelte Saturday to refactor the time domain: threw out UTC out of AstroDomain
+### 2026-04-13
 
-#### 2025-02-17
-- created code to generate two test suites TS-A, -B. EventDetection included in ER
-- added TS-D: Mesh to evaluate VSOP
-- created simple statistical report about VSOP vs. DE440
+- Pipeline just one step before finalization
+- one major issue with precision found and another one with the Request Hash
+- did not think I would encounter such topics short before closure
+- after almost one day in tweaking 8 decimals behind the comma I am done
+- postponed the final test with the pipeline to tomorrow but prepared everything for the big showdown :-)
 
-### March
+
+### 2026-04-15
+- showdown run successfully passed all tests, especially Run == LastRun, see special Info 
+- it is an extremely good day because it was hell of a fight to get it all fixed to reach this milestone. It is a fundamental basis now for future extensions: **very happy today!!! :-)**
+- see extra session description below
+
+### 2026-04-18
+- worked out a firm specification for the Mesh-Files. Decided to implement a MeshGenerator, because Start- und Stop-Points on a Mesh are hard to determine manually
+
+### 2026-04-22
+- began with the MeshGenerator. Found some spec inconsistencies, fixed them. Could not finalize the MeshGenerator, though.
+
+### 2026-04-23
+- finalized the MeshGenerator and updated spec accordingly
+- all new mesh files can be generated now
+- old mesh files are inconsistent and shall be deprecated (what a bummer, but it must be for clarity reasons)
+- generated DocumentationPolicy. I found that, because of the high development speed, too many documents are being generated and not filed with enough structure. Now I have defined which documents to generate and where to store them.
+
+### 2026-04-24 
+- began implementing new data storage as per documentation policy 
+- implemented MeshGenRunner to generate Mesh SeedsPrepared. Created excellent Specification documents and also a fabulous test spec for AstronoLab, wher MeshGenRunner.cs resides. Tests were without failure. 
+- Applied new files to AstronoCert thereafter and identified spec failure one step earlier in AstronoTools for the MeshGenerator. Root cause was a weak and nasty spec. -> Back to MeshGenerator 
+- Other than that: the MeshGenRunner was one of the strongest ever. Excellent collaboration with CGPT. - will fix the MeshGenerator later. Have to stop now with existing bug but with known root cause, fix strategy and back2back validation plan. Could be worse.
+
+### 2026-04-26
+- eliminated bug in MeshGenerator: 229 experiments now correctly generated in AstronoCert
+- introduced AstronoDiag as the global system diagnosis instance of AstronoSphere.
+- Developed good spec for AstronoDiag for M2.1, structured VS project diligently, created Validation Spec as well --> perfectly prepared for next implementation session
+> **Best of this week: stable work mode established: Idea -> Chat Discussion -> Spec -> Chat Discussion (% Fulfillment) -> Validation Spec -> Chat Discussion (Iteration) -> Freeze -> Implementation**
+
+### March 2026
 
 #### 2026-03-02
 
@@ -131,75 +199,41 @@ Finalized V1.4 of Scenario Definition -> FREEZE
 - a selection of the 144 scenarios tested in the pipeline
 - identified 7 Bugs to be fixed. Session was extremely exhausting, many hours fully concentrated work. But very effective!
 
-### 2026-04-02
-- fixed all 7 Bugs in an evenmore exhausting session. I prepared the session extremely diligent and opened a dedicated chat to solve the issues. At the end of the evening all bugs were fixed and the pipeline was logically and numerically stabilized. Highlight Session!
 
-### 2026-04-03
-- renaming decision: AstronoLab, AstronoCert, AstronoTuth, Astronometria, Astronalysis
-- specified and documented complete data model of Astronosphere in an 8 hours session: file names, folders, headers, workflow and writing permits.
-
-### 2026-04-04
-- Planning of the migration: ScenarioMerger defined
-- Validation plan created
-
-### 2026-04-06
-- implemented ScenarioMerger Part 1
-- "STRICT-Implementation Mode" established: needed to avoid that CGPT begins to interpret and deviates from the plan.
-- the session was bad... so the STRICT mode was born as a countermeasure
-- still learning how to use AI efficiently, still observing suprises
-
-### 2026-04-07
-- AstronoLab implemented: seeds are being generated now in AstronoLab
-- Secenario Merger Part 2 used to migrate old data sets
-
-### 2026-04-08
-- decided in the morning to establish a central hashing entity in AstronoData.Contracts, which is being used to canonicalize and hash all inputs in the same way, independent if experiments, dataset (measurements) or analysis data are being hashed
-- specified hashing and implemented AstronoData.Contracts in the evening
-- implemented AstronoCert - struggled with precision topics and escape sequences again
-
-### 2026-04-10
-- META chat about use cases of AstronoSphere in the morning
-- afternoon Dataset23: AstronoTruth implemented - ExperimentID, DatasetIF, Filename, DatasetHeader, Canonical, Hash centralized -> fully validated
-- Refactoring:  EphemerisRegression Legacy code cleaned up. Folder renaming, old files deleted. Very good cleanup!
-- A super session! I prepared it most diligently. Every step, a lot of interaction with CGPT. One of the strongest sessions ever today!
-- see extra session description below
-
-### 2026-04-11
-- established the future development strategy: change only one dimension to control complexity
-- prepare sessions diligently
-- use CGPT as a reviewer/sparrings partner not just a coding monkey
-- planned M2 
-- setup a test plan for finalizing the whole pipeline
-- identified Beyond Compare CLI capabilities for more efficient validation -> will probably purchase the full version of the program: it became a core tool for me
-- Stealth Manifest formulated
-- in the evening: brillant Web-Session on the Miriade-Homepage: plenty of different reference data available there. Enough material for scientific research!
+### February 2026 
 
 
-### 2026-04-12
-- updated documentation and threw out outdated files
-- made a diligent pipeline validation plan
-- identified three optimization points during testing and fixed them right away
-- almost finished testing. Identified dublettes in the data - the Pipeline is correct but the input data was not. The pipeline has taken care of it: strong signal for stable pipeline.
-- Tomorrow last GoldenSample validation and then the automatic run of the entire pipeline: let's us hope for the best. I am quite confident...
-- a brillant and very productive week is over: the pipeline is almost finished
+#### 2025-02-03
+- idea of developing a program which provides data from JPL Horizons
+- Program called Ephemeris Regression (ER)
 
-### 2026-04-13
+#### 2025-02-10
+- spent a compelte Saturday to refactor the time domain: threw out UTC out of AstroDomain
 
-- Pipeline just one step before finalization
-- one major issue with precision found and another one with the Request Hash
-- did not think I would encounter such topics short before closure
-- after almost one day in tweaking 8 decimals behind the comma I am done
-- postponed the final test with the pipeline to tomorrow but prepared everything for the big showdown :-)
+#### 2025-02-17
+- created code to generate two test suites TS-A, -B. EventDetection included in ER
+- added TS-D: Mesh to evaluate VSOP
+- created simple statistical report about VSOP vs. DE440
 
 
-### 2026-04-15
-- showdown run successfully passed all tests, especially Run == LastRun, see special Info 
-- it is an extremely good day because it was hell of a fight to get it all fixes to reach this milestone. It is a fundamental basis now for future extensions: **very happy today!!! :-)**
-- see extra session description below
+
+
+### January 2026
+
+- year begin with a nice grafical tool Sternkarten showing the heliocentric positions of the planets according to the Sterne und Weltraum monthly pages
+- began with a first grafical representation of Astronometria in C# and WPF: 
+    - included Bright Star Catalog Data and created first "Drehbare Sternscheibe" Code with constallations and various set of starts. Also added star colors according to Spectral Type.
+    - decided to "add the planets quickly"
+    - decided to postpone visualization of the planets "for a bit" to validate VSOP data first
+- first thoughts about a Ground Truth generation with Horizons
+- decision to develop Astronometria with Chat GPT
+
 
 
 
 ------------------
+
+# Annex
 
 ## Special info about this great session of 2026-04-15: Milestone 1 successfully reached
 

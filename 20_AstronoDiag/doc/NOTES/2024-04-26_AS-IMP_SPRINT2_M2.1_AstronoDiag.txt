@@ -1,0 +1,89 @@
+Startup Dialog:
+
+AS-IMP-SPRINT2_M2.1-AstronoDiag: neuer Implementation Sprint Chat zur Erstellung des neuen Moduls AstronoDiag.
+Kontext in den angehängten md-Files:
+
+1) AstronoDiag_M2.1_Design.md
+2) CORE_CanonicalMeshDefinitions.md
+
+Ziel: GroundTruth-Generation ohne Crash, mit DiagnosticRecords
+
+Wir sind im STRICT Modus: kein Trial and Error, bei Unklarheiten nachfragen: ich poste alle Codefiles, die Du brauchst.
+Lies Dir darüber hinaus für den vollständigen Kontext die Projektquellen im CGPT Projekt ausführlich durch.
+
+Status: 
+aktuell liegen ca. 370 Experimente in 01_Experiements/Released. Die Datensätze #146-#374 sind die neu generierten Meshes.
+Der Vorgänger Chat war AS-IMP-SPRINT1_M2.1-MeshGenerator.
+
+Scope für Sprint 2:
+- 10_AstronoDiag anlegen
+- DiagnosticRecord / Severity / Catalog
+- AstronoTruth: Maturity != Released → 030.003
+- AstronoTruth: ProviderRangeViolation → 030.005
+- keine Aggregation, kein Lifecycle
+
+------------
+
+Spec Ergänzungen:
+
+1) Dateiname
+Dateiname nicht "ExperimentID"
+Stattdessen "CatalogNumber"
+Prefix "DiagMsg" -> sonst zu ähnlich mit anderen Dateinamen
+Ergebnis: DiagMsg__PLANET-SATURN-MXT1__AS000223__030.005.json
+
+2) DiagnosticRecord
+- CatalogNumber ergänzt
+
+
+Diskussion:
+- ist es sinnvoll Run/LastRun Folder und Logik einzuführen um zu prüfen, ob ein Fehler deterministisch ist oder zufällig (z.B. "NoResponseFromHorizons" kann sich von Lauf zu Lauf ändern.
+- Future Extensions ### 10.: ist es sinnvoll, nach einem Lauf eine Executive Summary = Liste aller Fehler in ein log file zu schreiben. Das würde beim Debuggen wahrscheinlich sehr helfen, weil z.B. wenn mehrere 030.006-Fehler: Vermutlich Problem mit Horizons, nicht mit dem Request. 
+- Future Extensions ### 10.: Location für Logs, z.B. 03_GroundTruth/Ephemeris/Horizons/RunFailures/: sinnvoll, später auch für andere Module 01_AstronoLab, 02_AstronoCert diese Ordner vorsehen.
+- Future Extensions ### 10.: alle Moduole auf Run/LastRun umstellen, um FMI 008 aus jedem Modul zu unterstützen
+
+
+------------
+
+Wie so oft ändert sich auch nochmal die SPEC, wenn man sich richtig Gedanken zum Testing macht.
+
+
+SPEC Verbesserungen: (siehe Attachment)
+a) Ich habe die CatalogNumber auf AS-000XXX geändert, in SPEC und VAL Doku. Das "-" ist auch im ExperimentHeader und so muss es auch im AstronoDiag verwendet werden.
+B) wenn wir mehr EphemerisFactories haben werden (Horizons, Miriade, ...): wie unterscheiden wir 030-Miriade.005 und 030-Horizons.005? 
+-> Ich schlage vor, wir bleiben bei 030 und fügen im DiagnosticRecord ein Feld SubSourceSystem ein:
+
+"SubSourceSystem": "<Horizons|Miraide|...>";
+
+c) wir müssen in der Spec ausweisen, dass immer nur genau ein Fehler geworfen werden kann. Ich habe einen Satz hinzugefügt: 
+
+For each Experiment, exactly one failure can be thrown and recorded, if present:
+IF Maturity != Released
+    → skip dataset
+    → write DiagnosticRecord (030.003)
+
+ELSE IF outside ProviderRange
+    → skip dataset
+    → write DiagnosticRecord (030.005)
+
+ELSE IF request fails
+    → write DiagnosticRecord (030.006)
+
+ELSE IF parse fails
+    → write DiagnosticRecord (030.007)
+
+ELSE
+    → generate dataset normally
+
+
+Fragen zu VAL: 
+a) sollen alle Tests mit Saturn in MCRE ausgeführt werden? Gewinnen wir bzgl. Code-Coverage oder logischer Abdeckung etwas, wenn wir alle GMSS nehmen und modifizieren?
+b) ## Case 4 und 5: Ich verstehe, dass wir für Code-Coverage diese beiden Cases brauchen. Aber ich frage mich: wie kann fehlerhafter Horizons Input erzeugt werden? Codeänderung und Test? Danach wieder zurück ändern? Das wäre fragwürdiger Stil.
+
+	
+Open Decisions:
+	
+OD1: Entscheidung A)
+OD2: einverstanden mit Vorschlag
+OD3: einverstanden mit Vorschlag
+

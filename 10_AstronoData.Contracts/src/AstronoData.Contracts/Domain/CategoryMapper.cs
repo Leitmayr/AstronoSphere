@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: CategoryMapper.cs
-// STATUS: NEW (M1.9 Domain Rule)
+// STATUS: UPDATED (M2.1 Mesh Categories)
 // ============================================================
 
 using System;
@@ -15,7 +15,6 @@ namespace AstronoData.Contracts.Domain
             if (string.IsNullOrWhiteSpace(input))
                 throw new Exception("Category is empty.");
 
-            // CamelCase → words
             var result = Regex.Replace(input, "([a-z])([A-Z])", "$1 $2");
 
             return result.Trim().ToUpperInvariant();
@@ -32,7 +31,15 @@ namespace AstronoData.Contracts.Domain
                 "CONJUNCTION" => "CON",
                 "DESCENDING NODE" => "DNO",
                 "INFERIOR CONJUNCTION" => "INC",
-                "MESH VALIDATION" => "MCRE",
+
+                // M2.1 MESH CATEGORIES
+                "MESH SIMULATION CORE" => "MCRE",
+                "MESH SIMULATION EXTENDED" => "MXT1",
+                "MESH SIMULATION OUTER" => "MXT2",
+                "MESH VALIDATION HORIZONS CORE" => "MVH1",
+                "MESH VALIDATION HORIZONS EXTENDED" => "MVH2",
+                "MESH VALIDATION HORIZONS OUTER" => "MVH3",
+
                 "OPPOSITION" => "OPP",
                 "PERIHELION" => "PER",
                 "QUADRANT CROSSING" => "QCR",

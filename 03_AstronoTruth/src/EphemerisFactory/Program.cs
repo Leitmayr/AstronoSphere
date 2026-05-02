@@ -1,6 +1,6 @@
 ﻿// ============================================================
 // FILE: Program.cs
-// STATUS: UPDATE (Single Run Support)
+// STATUS: UPDATE (M2.1 CatalogNumber direct run support)
 // ============================================================
 
 using System;
@@ -16,14 +16,23 @@ namespace EphemerisFactory
 
             try
             {
+                string? catalogNumber = ParseArgument(args, "--catalog");
                 string? experimentId = ParseArgument(args, "--experiment");
                 string? numericId = ParseArgument(args, "--id");
 
+                if (catalogNumber == null && args.Length == 1 && args[0].StartsWith("AS-", StringComparison.OrdinalIgnoreCase))
+                    catalogNumber = args[0];
+
                 var runner = new FactoryRunner();
 
-                if (!string.IsNullOrWhiteSpace(experimentId))
+                if (!string.IsNullOrWhiteSpace(catalogNumber))
                 {
-                    Console.WriteLine($"Running single experiment: {experimentId}");
+                    Console.WriteLine($"Running single catalog number: {catalogNumber}");
+                    runner.RunSingle(catalogNumber);
+                }
+                else if (!string.IsNullOrWhiteSpace(experimentId))
+                {
+                    Console.WriteLine($"Running single experiment/catalog argument: {experimentId}");
                     runner.RunSingle(experimentId);
                 }
                 else if (!string.IsNullOrWhiteSpace(numericId))
@@ -55,6 +64,7 @@ namespace EphemerisFactory
                 if (args[i].Equals(key, StringComparison.OrdinalIgnoreCase))
                     return args[i + 1];
             }
+
             return null;
         }
     }

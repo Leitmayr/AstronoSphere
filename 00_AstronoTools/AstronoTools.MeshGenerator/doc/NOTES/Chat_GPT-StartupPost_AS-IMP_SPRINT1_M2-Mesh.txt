@@ -1,0 +1,266 @@
+# AS_IMP_Sprint1_M2.1 – MeshGenerator Implementation Kickoff
+
+## Context
+
+We are implementing the **MeshGenerator** inside:
+
+```
+00_AstronoTools
+ └─ AstronoTools.MeshGenerator (Console App)
+```
+
+The MeshGenerator is responsible for:
+
+* deterministic generation of **SeedCandidates**
+* based strictly on the **Canonical Mesh Definition**
+* WITHOUT any manual values
+
+---
+
+## Input Documents (Source of Truth)
+
+1. CanonicalMeshDefinitions.md
+   → full specification of Simulation Mesh + Validation Mesh
+
+
+2. MeshGenerator_ExampleSeed.json
+   → defines the exact structure of the output seeds
+
+
+---
+
+## Fundamental Rule (NON-NEGOTIABLE)
+
+All values MUST be computed algorithmically.
+
+```text
+ValidationMesh = {
+    t ∈ SimulationMesh
+    AND t ∈ ProviderRange(planet)
+}
+```
+
+DO NOT:
+
+* use any precomputed JD_Start / JD_Stop
+* copy values from documentation
+* manually adjust results
+
+---
+
+## Responsibilities of MeshGenerator
+
+### 1. Simulation Mesh Generation
+
+Generate all Simulation Meshes:
+
+| Epoch  | Name | StepDays |
+| ------ | ---- | -------- |
+| Epoch1 | MCRE | 30D      |
+| Epoch2 | MXT1 | 211D     |
+| Epoch3 | MXT2 | 809D     |
+
+IMPORTANT:
+
+```text
+MCRE already exists (Experiments #73–#144)
+→ MUST NOT be generated again
+```
+
+So:
+
+* Generate MXT1 and MXT2 only
+* MCRE is read-only reference
+
+---
+
+### 2. Validation Mesh Generation
+
+Generate:
+
+| Epoch  | Name |
+| ------ | ---- |
+| Epoch1 | MVH1 |
+| Epoch2 | MVH2 |
+| Epoch3 | MVH3 |
+
+For each planet:
+
+* determine ProviderRange (Horizons)
+* intersect with SimulationMesh
+
+---
+
+## Mathematical Definitions (STRICT)
+
+### JD_Start
+
+```text
+JD_Start = first t ∈ SimulationMesh WHERE t ≥ ProviderMin
+```
+
+---
+
+### JD_Stop
+
+```text
+JD_Stop = last t ∈ SimulationMesh WHERE t ≤ ProviderMax
+```
+
+---
+
+### Step
+
+```text
+Step = fixed per Epoch (30 / 211 / 809 days)
+```
+
+---
+
+### Sample Rule
+
+```text
+N = number of steps
+N < 2000
+numberSamples = N + 1
+```
+
+---
+
+## Output Requirements
+
+For each generated seed:
+
+* strictly follow structure in MeshGenerator_ExampleSeed.json
+* no deviations in naming
+* no missing fields
+* no additional fields
+
+Important details:
+
+* TimeScale = "TDB"
+* Observer = Heliocentric / Sun
+* Frame = HelioEcliptic / J2000
+* Author = "MeshGenerator"
+
+---
+
+### ResultID Rules
+
+```text
+StartID = integer part of JD_Start (truncate, not round)
+StopID  = integer part of JD_Stop (truncate, not round)
+```
+
+---
+
+## Console Output (MANDATORY)
+
+The tool MUST print for each generated segment:
+
+```text
+Planet: Saturn
+Mesh: MVH1
+SubEpoch: 1.2
+
+JD_Start: XXXXX
+JD_Stop : XXXXX
+
+Validation:
+  GridAlignment: OK
+  Range: OK
+  Maximality: OK
+```
+
+---
+
+## Validation Rules (must be implemented)
+
+For every JD:
+
+### 1. Grid Alignment
+
+```text
+(JD - MeshStart) % Step == 0
+```
+
+---
+
+### 2. Range Check
+
+```text
+JD_Start ≥ ProviderMin
+JD_Stop  ≤ ProviderMax
+```
+
+---
+
+### 3. Maximality
+
+```text
+JD_Stop + Step > ProviderMax
+```
+
+---
+
+## Implementation Strategy (ORDER!)
+
+1. Implement Simulation Mesh (Epoch1–3 grid only)
+2. Implement ProviderRange (from spec table)
+3. Implement ValidationMesh logic
+4. Implement Validator (3 rules)
+5. Implement SeedWriter
+
+---
+
+## Explicit Non-Goals
+
+* No AstronoCert integration
+* No pipeline execution
+* No file comparison
+* No Horizons API calls
+
+---
+
+## Deliverable of this Sprint
+
+* deterministic MeshGenerator
+* console output for all meshes
+* seeds written to file system
+* values ready for manual plausibility checks
+
+Note: Ouput Path is C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\01_Seeds\Incoming
+Paths shall not be determined by trial end error with "..\..\..\" but via GetRepoRoot() like in AstronoCert:         
+public static string GetAstronoDataRoot()
+        {
+            return Path.Combine(GetRepoRoot(), "AstronoData");
+        }
+
+
+
+---
+
+## Before Start:
+
+- read CGPT Source Files which are uploaded carefully
+- read attachments to this post carefully
+- this Chat shall be called "AS_IMP_Sprint1_M2.1 – MeshGenerator"
+
+
+## Final Principle
+
+```text
+We implement the rules.
+The numbers emerge from the implementation.
+```
+
+---
+
+## Working Mode: "STRICT Mode", No Trial and Error, etc.
+
+
+## Next Step After This Sprint
+
+* manual spot-check of JD_Start / JD_Stop
+* update spec tables as GENERATED artifacts
+* ensure full sync between Spec and Implementation

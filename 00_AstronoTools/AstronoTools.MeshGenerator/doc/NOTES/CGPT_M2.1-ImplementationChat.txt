@@ -1,0 +1,125 @@
+Ich habe nun ein VS Projekt wie besprochen angelegt, siehe Bild im Attachment.
+Die Implementierung des MeshGenerators möchte ich in den Chat AS_IMP_Sprint1_M2.1 verlagern.
+
+Wir müssen im Implementierungschat:
+1) Validation Mesh Daten anlegen
+2) Simulation Mesh Daten anlegen
+
+Zu 2) gemäß der Spec müssen für das Simlation Mesh drei Epochen erstellt werden: 
+    - Epoch1: MCRE (Core Mesh) 
+    - Epoch2: MXT1 (Extended Mesh) 
+    - Epoch3: MXT2 (Outer Mesh)
+	
+Beachte: MCRE existiert bereits! Es handelt sich um die Experimente #73-#144. Diese sind nicht zu erzeugen von MeshGenerator!
+
+Als Spezifikation für den IMP-Chat habe ich die genaue Spezifikation des Json Files für die Seed/Incoming attached. Bitte um Review und Feedback.
+
+Dem Chat würde ich diese Files mitgeben:
+1) VS Struktur (wie das Attachment)
+2) CanonicalMeshDefinition.md (genau das Attachment an diesem Post) 
+3) MeshGenerator_ExampleSeed.json (das Attachment nach Deinem Review)
+
+Beachte zu Dokument 2): 
+Zu Vermeidung von Konfusion habe ich das ehemalige Kapitel 5.4 mit den falschen JD_Start und JD_Stop im ValidationMesh entfernt. Start und Stop soll der neue Chat nach Deiner Regel selbst bestimmen:
+>ValidationMesh = {
+    t isElementOf SimulationMesh
+    AND t isElementOf ProviderRange(planet)
+}
+
+Am Ende, nach Deinem Feedback, möchte ich gerne, dass Du einen Start-Post für den neuen Chat erstellt. Aber das hat Zeit bis zum übernächsten Post oder danach.
+
+
+---------
+
+Zu 2.2: wie komme ich eigentlich darauf, dass VSOP87A nur in [1600, 2400] definiert ist? -> kannst Du das bitte noch einmal recherchieren??
+
+Zu 3.1: :-) schon klar, dass das ein Json Fehler ist. Aber das soll ja auch kein Json-Seed File sein sondern die Spec dafür, also quasi ein Textfile :-)
+
+3.2: der geht auf mich: copy+paste Fehler -> korrigiert
+
+3.3 geändert wie vorgeschlagen
+
+3.4 geändert wie vorgeschlagen
+
+3.5 geändert wie vorgeschlagen
+
+Bitte nochmal Review des Attachments: Achtung -  die Kommentare im json sind immer noch drin: Spec, nicht json!
+
+Den Start-Post machen wir danach.
+
+----------
+
+DO NOT use any precomputed JD_Start / JD_Stop values.
+All values must be calculated from:
+SimulationMesh ∩ ProviderRange
+
+------------
+
+First of all: das Ergebnis ist super! Fast keine Fehler, nur einer und ein Folgefehler. Ich komme ganz unten zur Interpretation:
+
+
+Review of File 
+Planet-Saturn-MXT1_HELIO-J2000-TDB-1721059-2086511-TDB_Simulation_SubEpoch2.1_Extended.json
+
+Fehler1:
+Json-File: "StopJD": 2086511.5, // entspricht 1000-07-29 00:00:00.000
+Sollwert nach Canonical Spec:  2086300.5  // entspricht 999-12-30 00:00:00.000
+
+
+Fehler2: (Folgefehler)
+ResultID:  falscher Stopwert im Namen
+
+------ 
+
+Review of File 
+Planet-Saturn-MXT1_HELIO-J2000-TDB-2086302-2451754-TDB_Simulation_SubEpoch2.2_Extended.json
+
+Fehler1:
+Json-File: "StopJD": 2451754.5, // entspricht 2000-07-29 00:00:00.000
+Sollwert nach Canonical Spec: 2451543.5  // entspricht 1999-12-31 00:00:00.000
+
+Fehler2: (Folgefehler)
+ResultID:  falscher Stopwert im Namen
+
+----------
+
+Review of File 
+Planet-Saturn-MXT1_HELIO-J2000-TDB-2451544-2816996-TDB_Simulation_SubEpoch2.3_Extended
+
+Fehler1:
+Json-File: "StopJD": 2816996.5 // entspricht 3000-07-29 00:00:00.000
+Sollwert nach Canonical Spec: 2816785.5 // 2999-12-30 00:00:00.000
+
+Fehler2: (Folgefehler)
+ResultID:  falscher Stopwert im Namen
+
+-----------
+
+Review of File 
+Planet-Saturn-MXT1_HELIO-J2000-TDB-2816787-3182239-TDB_Simulation_SubEpoch2.4_Extended
+
+Fehler1:
+Json-File: "StopJD": 3182239.5 // 4000-07-29 00:00:00.000
+Sollwert nach Canonical Spec: 3182028.5 // 3999-12-31 00:00:00.000
+
+
+--------
+
+Interpretation:
+1) Das Stoppdatum ist 211 Tage zu spät.
+2) Das kommt, weil Du Dich nicht an die JDEnd Formel für Epoch2 in der Spec hältst: 
+
+JDEnd = JDStart + 1732*211 days.
+That means the entire set of data of one century is 1733 elements which fulfills the sampleNumberRule.
+
+Ich vermute, der Fehler liegt in Deinem File hier:
+
+    private static int CountSamples(double start, double stop, int stepDays)
+    {
+        return CountSteps(start, stop, stepDays) + 1;
+    }
+
+
+CountSamples addiert +1. Deshalb ein Step zu viel, deshalb Enddatum +211 Tage. Stimmts? ;-)
+
+Aber generell: sehr stark!
