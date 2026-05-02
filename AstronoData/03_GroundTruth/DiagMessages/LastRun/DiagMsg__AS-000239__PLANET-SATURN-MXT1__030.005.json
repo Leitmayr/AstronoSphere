@@ -1,0 +1,19 @@
+{
+  "Code": "030.005",
+  "Symbol": "AstronoTruth.ProviderRangeViolation",
+  "Severity": "Warning",
+  "Message": "Experiment time range is outside provider range.",
+  "SourceSystem": "AstronoTruth",
+  "SubSourceSystem": "Horizons",
+  "InputObjectType": "Experiment",
+  "InputObjectId": "HELIO-J2000-TDB-2451752-2816782-211D",
+  "CatalogNumber": "AS-000239",
+  "Details": {
+    "Target": "Saturn",
+    "StartJD": 2451752.5,
+    "StopJD": 2816782.5,
+    "ProviderMinJD": 2360233.5,
+    "ProviderMaxJD": 2542859.5
+  },
+  "CreatedAtUtc": "2026-05-02T20:25:26.3737658Z"
+}

@@ -1,0 +1,18 @@
+{
+  "Code": "030.006",
+  "Symbol": "AstronoTruth.RequestFailed",
+  "Severity": "Error",
+  "Message": "Horizons request failed.",
+  "SourceSystem": "AstronoTruth",
+  "SubSourceSystem": "Horizons",
+  "InputObjectType": "Experiment",
+  "InputObjectId": "HELIO-J2000-TDB-2524597-2524597-30D",
+  "CatalogNumber": "AS-000325",
+  "Details": {
+    "Target": "Jupiter",
+    "RequestUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&CENTER=%4010&START_TIME=JD2524597.5&STOP_TIME=JD2524597.5&STEP_SIZE=30D&EPHEM_TYPE=VECTORS&CSV_FORMAT=YES&OBJ_DATA=NO&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D",
+    "Reason": "InvalidHorizonsResponse",
+    "ResponseSnippet": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n\nBad dates -- start must be earlier than stop\n"
+  },
+  "CreatedAtUtc": "2026-05-02T20:27:05.4410612Z"
+}

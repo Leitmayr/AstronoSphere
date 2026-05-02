@@ -1,6 +1,6 @@
 ﻿// ============================================================
-// FILE: 03_TruthFactory/src/EphemerisFactory/Core/AstronoSpherePaths.cs
-// STATUS: UPDATE (M1.9 PATH FREEZE)
+// FILE: 03_AstronoTruth/src/EphemerisFactory/Core/AstronoSpherePaths.cs
+// STATUS: UPDATE (M2.1 AstronoDiag paths)
 // ============================================================
 
 using System;
@@ -20,18 +20,10 @@ namespace EphemerisFactory.Core
             return Path.Combine(root, "AstronoData");
         }
 
-        // =====================================================
-        // INPUT (M1.9 FINAL)
-        // =====================================================
-
         public static string GetExperimentsReleasedFolder()
         {
             return Path.Combine(GetAstronoDataRoot(), "02_Experiments", "Released");
         }
-
-        // =====================================================
-        // OUTPUT (M1.9 FINAL)
-        // =====================================================
 
         public static string GetGroundTruthRunFolder()
         {
@@ -53,13 +45,33 @@ namespace EphemerisFactory.Core
                 "LastRun");
         }
 
+        public static string GetGroundTruthDiagMessagesRunFolder()
+        {
+            return Path.Combine(
+                GetAstronoDataRoot(),
+                "03_GroundTruth",
+                "DiagMessages",
+                "Run");
+        }
+
+        public static string GetGroundTruthDiagMessagesLastRunFolder()
+        {
+            return Path.Combine(
+                GetAstronoDataRoot(),
+                "03_GroundTruth",
+                "DiagMessages",
+                "LastRun");
+        }
+
         public static void PrintPaths()
         {
             Console.WriteLine("=== PATH DEBUG ===");
-            Console.WriteLine($"AstronoData Root : {GetAstronoDataRoot()}");
-            Console.WriteLine($"Experiments      : {GetExperimentsReleasedFolder()}");
-            Console.WriteLine($"Run              : {GetGroundTruthRunFolder()}");
-            Console.WriteLine($"LastRun          : {GetGroundTruthLastRunFolder()}");
+            Console.WriteLine($"AstronoData Root       : {GetAstronoDataRoot()}");
+            Console.WriteLine($"Experiments            : {GetExperimentsReleasedFolder()}");
+            Console.WriteLine($"GroundTruth Run        : {GetGroundTruthRunFolder()}");
+            Console.WriteLine($"GroundTruth LastRun    : {GetGroundTruthLastRunFolder()}");
+            Console.WriteLine($"DiagMessages Run       : {GetGroundTruthDiagMessagesRunFolder()}");
+            Console.WriteLine($"DiagMessages LastRun   : {GetGroundTruthDiagMessagesLastRunFolder()}");
             Console.WriteLine("==================");
         }
     }
