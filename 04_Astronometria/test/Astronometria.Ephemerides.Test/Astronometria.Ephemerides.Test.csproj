@@ -7,6 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <Compile Remove="EphemerisValidation\TestData\**" />
+    <Compile Remove="Planetary\**" />
+    <Compile Remove="VSOP\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="EphemerisValidation\TestData\**" />
+    <EmbeddedResource Remove="Planetary\**" />
+    <EmbeddedResource Remove="VSOP\**" />
+    <None Remove="Common\**" />
+    <None Remove="EphemerisValidation\TestData\**" />
+    <None Remove="Planetary\**" />
+    <None Remove="VSOP\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="EphemerisValidation\Common\DeviationStatEntry.cs" />
+    <Compile Remove="EphemerisValidation\Common\HorizonsReferenceModels.cs" />
+    <Compile Remove="EphemerisValidation\Common\NodeEvent.cs" />
+    <Compile Remove="EphemerisValidation\Common\NodeReferenceModel.cs" />
+    <Compile Remove="EphemerisValidation\Common\NodeReferenceModels.cs" />
+    <Compile Remove="SolutionPathResolver.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\10_AstronoData.Contracts\src\AstronoData.Contracts\AstronoData.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Astronometria.Core\Astronometria.Core.csproj" />
     <ProjectReference Include="..\..\src\Astronometria.Ephemerides\Astronometria.Ephemerides.csproj" />
     <ProjectReference Include="..\..\src\Astronometria.Time.Astro\Astronometria.Time.Astro.csproj" />

@@ -2,6 +2,32 @@
 
 ## 2026
 
+## May 2026
+
+### 2026-05-05
+- implemented CatalogExperiments, statiscial analysis showed no new effects 
+- identified, that Ground Truth Data for geo-quatorial experiments were generated falsely -> deprecated Ground Truth Folder introduced.
+- Result: 156 high quality tests, 139 passed, 17 fail but are analyzed and explainable
+- cleaned up former Astronometria tests
+- finalized GIT and closed M2.2
+
+### 2026-05-04
+- implemented MVH2 and MVH3
+- statistical analysis shows that MVH3 accuracy is deteriorating for times before year 0 (BC). Great result, because it shows the limits of VSOP for the inner planets, where we have also Horizons data.
+- a great day! We are transitioning now to scientific working.
+
+### 2026-05-03
+- implemented Holy12 Tests based on 02_Experiments/Released und 04_GroundTruth/.../Baseline
+- conducted simple deviation analysis to confirm proper implementation of tests
+- implemented Mesh Tests MVH1 for validation in Horizons
+- first statistical analysis of MVH1 - very interesing. Entered Scientific mode after weeks in Architecture, Spec and Implementation mode. :-)
+- Pending: MVH2, MVH3
+
+### 2026-05-02
+- implemented AstronoDiag
+- created all experiments with the updated TruthFactory
+- reached Milestone M2.1 today
+
 ## April 2026
 
 ### 2026-04-02

@@ -32,7 +32,9 @@ namespace Astronometria.Ephemerides.VSOP
 
             var position = new Vector3(xyz[0], xyz[1], xyz[2]);
 
-            return new StateVector(position, Vector3.Zero);
+
+            return new StateVector(position, Vector3.Zero); // velocity = (0, 0, 0, ) for the time being
+
         }
     }
 }

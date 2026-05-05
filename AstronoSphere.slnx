@@ -44,8 +44,28 @@
     <Project Path="03_AstronoTruth/src/EphemerisFactory/EphemerisFactory.csproj" />
   </Folder>
   <Folder Name="/04_Astronometria/" />
-  <Folder Name="/04_Astronometria/src/">
-    <Project Path="04_Astronometria/src/Astronometria.Desktop/Astronometria.Desktop.csproj" Id="8edd55b3-8a61-4aa1-9b47-d19788102f58" />
+  <Folder Name="/04_Astronometria/src/" />
+  <Folder Name="/04_Astronometria/src/Astronometria.Core/">
+    <Project Path="04_Astronometria/src/Astronometria.Core/Astronometria.Core.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/src/Astronometria.Desktop/">
+    <Project Path="04_Astronometria/src/Astronometria.Desktop/Astronometria.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/src/Astronometria.Ephemerides/">
+    <Project Path="04_Astronometria/src/Astronometria.Ephemerides/Astronometria.Ephemerides.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/src/Astronometria.Time.Astro/">
+    <Project Path="04_Astronometria/src/Astronometria.Time.Astro/Astronometria.Time.Astro.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/src/Astronometria.Time.Conversion/">
+    <Project Path="04_Astronometria/src/Astronometria.Time.Conversion/Astronometria.Time.Conversion.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/src/Astronometria.Time.User/">
+    <Project Path="04_Astronometria/src/Astronometria.Time.User/Astronometria.Time.User.csproj" />
+  </Folder>
+  <Folder Name="/04_Astronometria/test/" />
+  <Folder Name="/04_Astronometria/test/Astronometria.Ephemerides.Test/">
+    <Project Path="04_Astronometria/test/Astronometria.Ephemerides.Test/Astronometria.Ephemerides.Test.csproj" />
   </Folder>
   <Folder Name="/05_Astronolysis/" />
   <Folder Name="/05_Astronolysis/src/">

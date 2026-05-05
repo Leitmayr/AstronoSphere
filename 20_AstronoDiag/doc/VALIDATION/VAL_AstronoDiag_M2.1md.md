@@ -494,3 +494,7 @@ Hast Du mit 167 schon gemacht. Check.
 4f)Deprecated schlägt ProviderRange. 
 Ein out-of-range Experiment temporär auf Deprecated: Erwartung 030.003, nicht 030.005. Das testet die IF/ELSE-Priorität.
 -> checked with data set 220. Ok.
+
+5) Back To Back Testing
+
+Datensätze 3, 15, 23, 46, 57 (Golden Samples von früher): Daten wurden binär identisch erzeugt wie am 15.4. -> Implementierung hat alte Daten nicht verändert.

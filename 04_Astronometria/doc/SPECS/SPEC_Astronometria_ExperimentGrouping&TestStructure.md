@@ -172,10 +172,29 @@ Compare:
 
 ### 4.2.2 Mesh:
 - large-scale systematic validation
-- Set_Mesh = {  AS-000146, AS-000147, ... AS-000374}
 
-For machines: Set_Mesh = AS-000146 through AS-000374 inclusive, step size 1
+For Mesh we must distinguish two working modes:
 
+a) Productive Mode (=simulation)
+
+In the productive mode, the mesh is defined as the set of all generated mesh files from the MeshTypes = { MCRE, MXT1, MXT2, MVH1, MVH2, MVH3}
+-> Set_Mesh_Simulation = {  AS-000146, AS-000147, ... AS-000374}
+
+For machines: Set_Mesh_Simulation = AS-000146 through AS-000374 inclusive, step size 1
+
+b) Test Suite Mode (=testing)
+
+In Test Suite Mode, Mesh means only Horizons-validation mesh experiments.
+Set_Mesh_Testing is the explicitly mapped subset of Set_Mesh_Simulation whose MeshType is one of { MVH1, MVH2, MVH3 }.
+
+For every experiment in Set_Mesh_Testing:
+- a Horizons Baseline dataset MUST exist
+every simulation timestamp (JD) MUST have an exact matching Horizons timestamp
+- every matched position vector MUST be within the defined tolerance
+
+Missing reference data inside Set_Mesh_Testing is a test failure, not a skip condition. It indicates an invalid mesh definition or incomplete GroundTruth generation.
+
+For details about the individual range of each planet see the detailed Validaiton Spec VAL_MeshTables_AllPlanets.md in \AstronoSphere\00_AstronoTools\AstronoTools.MeshGenerator\doc\VALIDATION
 
 ### 4.2.3 Catalog:
 - regular experiments outside special sets

@@ -3,13 +3,12 @@ using Astronometria.Core.Geometry;
 using Astronometria.Ephemerides.Interfaces;
 using Astronometria.Ephemerides.Transformations;
 using Astronometria.Ephemerides.VSOP.Model;
-using Astronometria.Time.Astro;   // <-- NEU
+using Astronometria.Time.Astro;
 
 namespace Astronometria.Ephemerides.Planetary
 {
     /// <summary>
-    /// Provides geocentric planetary state vectors
-    /// in equatorial J2000 reference frame.
+    /// Provides planetary state vectors derived from VSOP heliocentric states.
     /// </summary>
     public sealed class PlanetPositionService
     {
@@ -21,33 +20,42 @@ namespace Astronometria.Ephemerides.Planetary
         }
 
         /// <summary>
-        /// Returns geocentric equatorial J2000 state vector.
+        /// Returns geocentric ecliptic J2000 state vector.
         /// </summary>
-        public StateVector GetGeocentricEquatorialState(
+        public StateVector GetGeocentricEclipticState(
             PlanetId planet,
-            TTInstant time)   // <-- geändert
+            TTInstant time)
         {
-            // Heliocentric planet
             StateVector helioPlanet =
                 _vsopProvider.GetHeliocentricState(planet, time);
 
-            // Heliocentric Earth
             StateVector helioEarth =
                 _vsopProvider.GetHeliocentricState(PlanetId.Earth, time);
 
-            // Geocentric ecliptic
             Vector3 geoPosEcl =
                 helioPlanet.Position - helioEarth.Position;
 
             Vector3 geoVelEcl =
                 helioPlanet.Velocity - helioEarth.Velocity;
 
-            // Rotate to equatorial J2000
+            return new StateVector(geoPosEcl, geoVelEcl);
+        }
+
+        /// <summary>
+        /// Returns geocentric equatorial J2000 state vector.
+        /// </summary>
+        public StateVector GetGeocentricEquatorialState(
+            PlanetId planet,
+            TTInstant time)
+        {
+            StateVector geoEcl =
+                GetGeocentricEclipticState(planet, time);
+
             Vector3 geoPosEqu =
-                CoordinateTransform.EclipticToEquatorial(geoPosEcl);
+                CoordinateTransform.EclipticToEquatorial(geoEcl.Position);
 
             Vector3 geoVelEqu =
-                CoordinateTransform.EclipticToEquatorial(geoVelEcl);
+                CoordinateTransform.EclipticToEquatorial(geoEcl.Velocity);
 
             return new StateVector(geoPosEqu, geoVelEqu);
         }
