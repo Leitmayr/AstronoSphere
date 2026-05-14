@@ -1,0 +1,148 @@
+{
+  "RunClassification": {
+    "RunType": "ScientificRun",
+    "InputType": "CertifiedExperiment",
+    "TargetCardinality": "SingleTarget"
+  },
+  "ExperimentRef": {
+    "CatalogNumber": "AS-000003",
+    "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+    "CoreHash": "5FEF9D98",
+    "SourceFile": "AS-000003__PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H.json"
+  },
+  "Measurement": {
+    "Domain": "Ephemeris",
+    "Instrument": "VEC",
+    "CorrectionLevel": "L0",
+    "TimeScale": "TDB"
+  },
+  "GroundTruthRef": {
+    "Provider": "Horizons",
+    "DatasetID": "HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0",
+    "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+    "SourceFile": "PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json"
+  },
+  "Engine": {
+    "Name": "Astronometria",
+    "SimulationModel": {
+      "Family": "VSOP",
+      "Type": "VSOP87A",
+      "Truncation": "none",
+      "TimeDomain": "TT"
+    },
+    "Build": {
+      "GitCommit": "<FROM_BUILDINFO_JSON>",
+      "GitBranch": "<FROM_BUILDINFO_JSON>"
+    }
+  },
+  "ObservationScene": {
+    "SceneContext": {
+      "TemporalMode": "ObservationTime",
+      "Time": {
+        "StartJD": 2443872.704,
+        "StopJD": 2443874.704,
+        "Step": "1H",
+        "TimeScale": "TDB"
+      },
+      "Observer": {
+        "Type": "Heliocentric",
+        "Body": "Sun"
+      },
+      "Frame": {
+        "Origin": "HELIO",
+        "Plane": "ECL",
+        "Type": "HelioEcliptic",
+        "Epoch": "J2000",
+        "RefSystem": "J2000"
+      }
+    },
+    "TargetSimulations": [
+      {
+        "Target": {
+          "BodyClass": "Planet",
+          "Name": "Venus",
+          "Abbreviation": "VEN"
+        },
+        "TerminalNode": {
+          "NodeId": "VEN_NODE_001",
+          "NodeType": "VSOP87.L0.HELIO.ECL.J2000.TDB.VEC",
+          "NodeRole": "TerminalNode",
+          "Status": "Completed",
+          "StateHash": "<TO_BE_COMPUTED>",
+          "DataHash": "<TO_BE_COMPUTED>",
+          "Data": [
+            {
+              "JD": 2443872.704,
+              "Position": {"X":-0.46020483076110952,"Y":0.55064887128325191,"Z":0.034066017275032709},
+              "Velocity": {"X":0.0,"Y":0.0,"Z":0.0}
+            },
+            {
+              "JD": 2443874.704,
+              "Position": {"X":-0.49063534678798182,"Y":0.5236252825367318,"Z":0.035455283965725358},
+              "Velocity": {"X":0.0,"Y":0.0,"Z":0.0}
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+-----------
+
+
+Wie realisieren wir den "Pflichtbestandteil" vor jedem Run: machen wir ein ps1-file, das den Run tiggert: 
+Zeile 1: git rev-parse --short HEAD
+Zeile 2: Astronometria CLI Call
+
+
+--------------
+
+
+zu 2) SubSourceSystem "ScientificRun"
+zu 3) richtig entschieden: keine Test Models produktiv verwenden. Anlegen eher in Core. Astronometria.Desktop ist eigentlich das GUI von Astronometria. Passt nichr richtig, oder?
+Es gibt noch kein Program.cs, im  Moment ist Astronometria.Ephemeris als Klassenbibliothek konfiguriert. Du kannst also ein Program.cs designen. Anforderungen von mir: ich muss zu Beginn single-Experiment Run haben, später dann ohne CLI-Parameter dann Full-Run.
+Astronometria hat niemals eine Runner-Struktur erhalten. Wir müssen hier also Runner, Planner, etc. einführen. Wir dürfen aber die StateGraph Struktur noch nicht umsetzen, das ist M2.4.
+
+
+--------------
+
+Eigentlich sehe ich Astronometria.Desktop als die Location für "Astronometria.exe". CLI und GUI sollten gleich starten. Astronometria.Runner wirkt wie ein Balkon, den wir anbauen. Projekte habe ich eigentlich schon genügend :-) Außerdem finde ich die Architektur von Astronometria mit den Sub-Projekten gut. Das spricht alles für Astronometria.Desktop. Bitte um Rückmeldung dazu zunächst.
+
+Dann kommt die andere Seite, dazu muss ich Dir etwas historischen Kontext geben: Astronometria.Desktop ist Windows-Applikation, die den Sternhimmel in sphärischer Projektion mit Hilfe des BSC-Katalogs darstellen kann. An irgendeinem Punkt vor 3 Monaten habe ich entschieden, dass ich VSOP-Planeten in die Karte einzeichnen möchte. Dazu musste ich VSOP nach C# umziehen. Und dafür brauchte ich Testdaten. Die habe ich mir von Horizons geholt mit einem Tool, das EphemerisRegression hieß. Das war nach vier Wochen unpraktisch. Ich habe daraufhin mit AstronoSphere begonnen und Astronometria.Desktop abrupt fallen lassen. Das Sub-Projekt ist seither ungewartet. Die Sourcen sind weitgehend unstrukturiert. Hier muss umfassend refactored werden. Wenn wir jetzt nach Astronometria.Desktop gehen, dann in einem Unterordner mit allen neuen Sourcen, so dass ich den Rest ohne Impakt auf unsere jetzige Weiterentwicklung später bereinigen kann. Wir haben das ähnlich gemacht mit AstronoTruth, dass das alte EphemerisRegression abgelöst hat. Die Struktur von Astronometria.Desktop ist im Anhang, die gibt Dir einen Einblick in den "Müllhaufen" dort :-) (Augenzwinkern)
+
+Das sind die Rahmenbedingungen. Wie ist Dein Vorschlag? In AstronoTruth gibt es jetzt einen Ordner AstronoTruth.EphemerisFactory.Core, in dem die neue Umsetzung drin ist. Wäre das ein Template? In Core die CLI Scientific-Sourcen, in einem GUI-Unterordner dann eher den explorativen Teil?
+
+
+
+-------
+
+\04_Astronometria\src\Astronometria.Core\ScientificRun\Build\BuildInfoService.cs
+
+-------
+
+GitCommit stimmt überein mit Git-Webinterface
+GitBranch stimmt überein mit Git-Webinterface
+
+Daten-Review
+- Erster und letzter Datensatz: Position Daten unterscheiden sich ab der fünften oder sechsten Nachkommastelle. Das ist plausibel mit dem Toleranzbild.
+- Velocity 0.0 für alle Dimensionen und alle Samples: passt.
+
+Zwei Probleme:
+1) Die Ausgabe der Deltawerte am Prompt fehlt noch, ich kann die nicht vergleichen mit den früheren Testruns im TestEditor.
+2) StateHash hat wieder mal das bekannte Problem mit den Sonderzeichen: \u003C statt < und \u003E statt >
+
+Der Rest ist identisch mit Deinem Dry Run vom Anfang, den ich bereits gereviewed hatte. Kein schlechtes Ergebnis für den ersten Versuch!
+
+-----------
+
+StateHash:
+ganz altes File gegen ersten neuen Run: ausschließlich StateHash aund DataHash von <TO_BE_COMPUTED> auf Hash geändert => alte Daten unverändert
+Run == LastRun: Binär identisch => StateHash und DataHash identisch
+
+StateHash json: 1AB91CFA9D302FDC952344354A2283B1C0D113DFBDBC749A94CAAEAFE9724950
+StateHash  web: 1AB91CFA9D302FDC952344354A2283B1C0D113DFBDBC749A94CAAEAFE9724950
+
+DataHash json:  24B576D25FB57989ADDBB7C5E26EFA4DDBB07A5657CAD90B97E243E83101E005
+DataHash  web:  24B576D25FB57989ADDBB7C5E26EFA4DDBB07A5657CAD90B97E243E83101E005
+

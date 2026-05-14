@@ -84,9 +84,8 @@ Simulates Experiments with configurable model accuracy
 04_Simulations/Astronometria/Baseline/
 
 Examples:
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json  
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-VSOP87-VEC-L0.json  
-
+- AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__MEEUS-VEC-L0.json
+- AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json
 ---
 
 ## 5. Astronolysis
@@ -1213,32 +1212,21 @@ That makes folder browsing and mental indexing much easier.
 
 Category abbreviations summarize the experiment phenomenon.
 
-Examples include but may not be limited to:
+Examples include:
 
-```
- "ASCENDING NODE" => "ANO",
- "APHELION" => "APH",
- "CONJUNCTION" => "CON",
- "DESCENDING NODE" => "DNO",
- "INFERIOR CONJUNCTION" => "INC",
- // M2.1 MESH CATEGORIES
- "MESH SIMULATION CORE" => "MCRE",
- "MESH SIMULATION EXTENDED" => "MXT1",
- "MESH SIMULATION OUTER" => "MXT2",
- "MESH VALIDATION HORIZONS CORE" => "MVH1",
- "MESH VALIDATION HORIZONS EXTENDED" => "MVH2",
- "MESH VALIDATION HORIZONS OUTER" => "MVH3",
- "OPPOSITION" => "OPP",
- "PERIHELION" => "PER",
- "QUADRANT CROSSING" => "QCR",
- "STATION" => "STA",
- "GREATEST WESTERN ELONGATION" => "GWE",
- "GREATEST EASTERN ELONGATION" => "GEE",
- "MISCELLANEOUS DATA POINT" => "MDP",
- // GEO EXTENSIONS
- "GEO EQ ASCENDING NODE" => "GEQ-ANO",
- "GEO EQ DESCENDING NODE" => "GEQ-DNO",
-```
+- ANO = Ascending Node
+- APH = Aphelion
+- CON = Conjunction
+- DNO = Descending Node
+- INC = Inferior Conjunction
+- MCRE = MeshValidation
+- OPP = Opposition
+- PER = Perihelion
+- QCR = Quadrant Crossing
+- STA = Station
+- GWE = Greatest Western Elongation
+- GEE = Greatest Eastern Elongation
+- MDP = Miscellaneous Data Point
 
 These abbreviations allow a compact but meaningful event classification directly in the file name.
 
@@ -1249,7 +1237,7 @@ These abbreviations allow a compact but meaningful event classification directly
 The final file name design can be understood as:
 
 ```text
-[Human Meaning]__[Experiment Definition]__[Measurement Definition]
+AS-XXXX__[Human Meaning]__[Experiment Definition]__[Measurement Definition]
 ```
 
 This is one of the strongest conceptual outcomes of the naming work.
@@ -1368,7 +1356,7 @@ HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0
 ### 21.4 File name
 
 ```text
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json
 ```
 
 ### 21.5 Structural principles

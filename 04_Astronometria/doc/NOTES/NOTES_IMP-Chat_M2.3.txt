@@ -1,0 +1,65 @@
+Lies Dir die angehängte Spec durch. Diese sollst Du implementieren.
+Als Test, ob die Spec für Dich verständlich ist: erstelle das Beispiel in Kapitel 10.3 auf Basis der beiden angehängten Files: Experiment AS-000003 und das zugehörige GT-File.
+Bitte verwende als "Data" den ersten und letzten Datensatz aus dem GT-File für die Position. 
+
+Danach: Umsetzung in folgender Sequenz
+
+1. buildinfo.json
+2. CLI loading
+3. GT resolution
+4. TerminalNode derivation
+5. JSON generation
+6. Run/LastRun rotation
+7. StateHash/DataHash
+8. GoldenSamples
+9. Holy12
+10. Diagnostics
+11. Mesh
+
+Wir sind im Modus
+1) STEALTH
+2) STRICT
+3) KISS
+Lies Dir dazu auch noch die Quelle "EfficiencyPackage" durch.
+
+
+--------
+
+
+Dein Beispiel ist schon ziemlich gut. Ein paar Verbesserungen: 
+
+Ich arbeite gerade mit VSOP87A non truncated, daher gilt 
+
+  "Engine": {
+    "Name": "Astronometria",
+    "SimulationModel": {
+      "Family": "VSOP",
+      "Type": "VSOP87A",
+      "Truncation": "none"
+    },
+
+-> Spec ist aktualisiert
+
+SceneContext soll folgende Struktur haben
+   "SceneContext": {
+      "TemporalMode": "ObservationTime",
+      "Time": {
+        "StartJD": 2443872.704,
+        "StopJD": 2443874.704,
+        "Step": "1H",
+        "TimeScale": "TDB"
+      },
+      "Observer": {
+        "Type": "Heliocentric",
+        "Body": "Sun"
+      },
+      "Frame": {
+        "Origin": "HELIO",
+        "Plane": "ECL",
+        "Type": "HelioEcliptic",
+        "Epoch": "J2000",
+        "RefSystem": "J2000"
+      },
+   }
+
+-> Spec ist aktualisiert

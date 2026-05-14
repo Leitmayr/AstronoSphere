@@ -17,6 +17,7 @@ JD 2451545–2451546, Step 1H
 | V1.2 | - added example Filename for Seeds/Incoming:  | 2026-04-15
 | | - added prefix AS-000123 for Seeds/Prepared | 2026-04-15
 | | - adapted the example given in VI. 7.1  to match example experiment for consistency | 2026-04-15
+| V1.3 | - file naming convention adapted | 2026-05-13
 
 ## 1. AstronoLab
 
@@ -84,9 +85,8 @@ Simulates Experiments with configurable model accuracy
 04_Simulations/Astronometria/Baseline/
 
 Examples:
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json  
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-VSOP87-VEC-L0.json  
-
+- AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__MEEUS-VEC-L0.json
+- AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json
 ---
 
 ## 5. Astronolysis
@@ -1238,7 +1238,7 @@ These abbreviations allow a compact but meaningful event classification directly
 The final file name design can be understood as:
 
 ```text
-[Human Meaning]__[Experiment Definition]__[Measurement Definition]
+AS-XXXX__[Human Meaning]__[Experiment Definition]__[Measurement Definition]
 ```
 
 This is one of the strongest conceptual outcomes of the naming work.
@@ -1357,7 +1357,7 @@ HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0
 ### 21.4 File name
 
 ```text
-PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__EPH-HORIZONS-VEC-L0.json
+AS-XXXXXX__PLANET-MERCURY-INC__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json
 ```
 
 ### 21.5 Structural principles

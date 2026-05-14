@@ -4,6 +4,17 @@
 
 ## May 2026
 
+### 2026-05-14
+
+- implementation of M2.3 according to Spec 
+
+### 2026-05-06 to 2025-05-13
+
+- intensive spec phase for Astronometria, e.g.
+  - productive runs: ScientificRun, ExplorationRun and StatisticalRun were born
+  - ExplorationRun with GroundTruth Call
+  - Definition of json file format for Simulation results
+
 ### 2026-05-05
 - implemented CatalogExperiments, statiscial analysis showed no new effects 
 - identified, that Ground Truth Data for geo-quatorial experiments were generated falsely -> deprecated Ground Truth Folder introduced.

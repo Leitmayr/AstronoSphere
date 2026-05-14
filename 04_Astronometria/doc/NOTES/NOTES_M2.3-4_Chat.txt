@@ -1,0 +1,385 @@
+Bleibt noch die Frage nach den Dateinamen. In CORE_AstronoSphere_Pipeline_DataModel_V1.2.md (siehe Quellen) haben wir folgendes definiert.
+
+
+
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json
+Human_<ExperimentID>_<SimuID>.json
+
+
+Die Dateinamen werden jetzt brutal lang:
+
+AS-XXXXXX_PLANET-MERCURY-INC_HELIOCENTRIC-ECLIPTICAL-J2000-TDB-2451545-2451546-1H_ASTRONOMETRIA-VSOP87-VEC-L0.json
+
+Insgesamt gefällt mir die Konkatenation von ExperimendID, DatasetID und SimulationID ganz gut.
+
+Ich hab HELIOCENTRIC im alten C++ AstroLab als HE abgekürzt. GE Geocentric Ecliptical, GA Geocentric Equatorial (auf deutsch Äquatoreal, daher GA). Das würde sehr helfen. Oder wir machen HELIO-ECL- vs. GEO-EQU udn GEO-ECL vs. TOPO.
+Verzichtbar ist vermutlich auch ASTRONOMETRIA. Der Rest eher nicht.
+
+Abgekürzte Varianten
+
+Variante A:
+AS-XXXXXX_PLANET-MERCURY-INC_HE-J2000-TDB-2451545-2451546-1H_VSOP87-VEC-L0.json
+
+Variante B:
+AS-XXXXXX_PLANET-MERCURY-INC_HELIO-ECL-J2000-TDB-2451545-2451546-1H_VSOP87-VEC-L0.json
+----
+
+Mir ist INNERPLANETS zu speziell, wir brauchen ein kürzere, aber allgemeinere Liste. Vorschlag:
+
+File name for ExplorationRuns:
+EXPLORE__<TARGET_LIST>__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json 
+
+<TARGET_LIST> is the "- separated" list of planets in three character abbreviation 
+
+MER: Mercury
+VEN: Venus
+EAR: Earth
+MAR: Mars
+JUP: Jupiter
+SAT: Saturn
+URA: Uranus
+NEP: Neptune
+
+For other bodies than Planets intermediate solution [BD1, BD2, ...]
+
+Order of <TARGET_LIST> as specified above = increasing mean solar distance.
+
+
+----
+
+Eng mit dem Dateiname verknüpft is der NodeType. Er enthält Teile des Dateinamens, aber in einer anderen Reihenfolge. Ich würde diese bewusst verändert:
+
+NodeType: 
+Node 1:  VSOP87.L0.HELIO.ECL.J2000.TDB.VEC
+
+VSOP: which model is it from? In which context is this StateGraphRunning
+HELIO-ECL define, that the left column in the picture is taken
+L0 describes which row will be taken
+J2000 and TDB are the main branch. Alternative time bases or Ref_System can be side branches from the main branch which in this case is "Column left"
+VEC describes the output format
+
+
+NodeID:
+"NodeId": "VENUS_NODE_1",
+
+VENUS is the target and NODE_1 could be a reference to the attached image.
+
+----------
+
+PLANET-URANUS-QCR__HELIO-J2000-TDB-2486286-2486288-1H__EPH-HORIZONS-VEC-L0.json
+
+----
+
+Also: ich habe jetzt die Spec von gestern noch etwas gesäubert und erweitert. 
+
+Change Log:
+----
+- General Clean Up, menschliche Lesbarkeit verbessert 
+
+- Status aktualisiert 
+- ChangeLog eingefügt 
+- 4.2.5 leicht restrukturiert, Build{} hinzugefügt 
+- 5.1 StateTree 
+- 5.4 Added completely 
+- 5.8 GIT Commit Determination 
+
+
+Bitte um Review.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------
+
+Sicherungskopie des alten Examples:
+
+
+```json
+{
+  "SimulationCore": {
+    "Version": "DRAFT-M2.4",
+    "SceneContext": {
+      "Observer": {
+        "Type": "Geocentric",
+        "Body": "Earth"
+      },
+      "ObservationTime": {
+        "JD": 2451545.0,
+        "TimeScale": "TDB",
+        "TemporalMode": "ObservationTime"
+      },
+      "Frame": {
+        "Type": "Ecliptic",
+        "Epoch": "J2000"
+      },
+      "Instrument": "VEC",
+      "Domain": "Ephemeris"
+    },
+    "StateGraph": {
+      "ExecutionOrder": [
+        "VENUS_NODE_1",
+        "VENUS_NODE_2",
+        "JUPITER_NODE_1",
+        "JUPITER_NODE_2"
+      ],
+      "StateNodes": [
+        {
+          "NodeId": "VENUS_NODE_1",
+          "NodeType": "L0.VSOP.HELIOCENTRIC_GEOMETRIC_VECTOR",
+          "NodeRole": "Intermediate",
+          "State": {
+            "Target": "Venus",
+            "Engine": "Astronometria",
+            "EngineModel": "VSOP87",
+            "Level": "L0",
+            "OutputType": "Vector3",
+            "Units": "AU"
+          },
+          "StateHash": "<STATEHASH_VENUS_NODE_1>",
+          "Data": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "DataHash": "<DATAHASH_VENUS_NODE_1>",
+          "Status": "Completed"
+        },
+        {
+          "NodeId": "VENUS_NODE_2",
+          "NodeType": "L0.GEOCENTRIC_GEOMETRIC_VECTOR",
+          "NodeRole": "Terminal",
+          "State": {
+            "Target": "Venus",
+            "Engine": "Astronometria",
+            "EngineModel": "VSOP87",
+            "Level": "L0",
+            "OutputType": "Vector3",
+            "Units": "AU"
+          },
+          "StateHash": "<STATEHASH_VENUS_NODE_2>",
+          "Data": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "DataHash": "<DATAHASH_VENUS_NODE_2>",
+          "Status": "Completed",
+          "Truth": {
+            "TruthMappingRef": "HORIZONS.EPHEM.VECTORS.L0.GEOCENTRIC",
+            "GroundTruthProvider": "Horizons",
+            "GroundTruthDatasetId": "<GT_DATASET_ID>",
+            "AccuracyStatus": "NotEvaluated"
+          }
+        },
+        {
+          "NodeId": "JUPITER_NODE_1",
+          "NodeType": "L0.VSOP.HELIOCENTRIC_GEOMETRIC_VECTOR",
+          "NodeRole": "Intermediate",
+          "State": {
+            "Target": "Jupiter",
+            "Engine": "Astronometria",
+            "EngineModel": "VSOP87",
+            "Level": "L0",
+            "OutputType": "Vector3",
+            "Units": "AU"
+          },
+          "StateHash": "<STATEHASH_JUPITER_NODE_1>",
+          "Data": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "DataHash": "<DATAHASH_JUPITER_NODE_1>",
+          "Status": "Completed"
+        },
+        {
+          "NodeId": "JUPITER_NODE_2",
+          "NodeType": "L0.GEOCENTRIC_GEOMETRIC_VECTOR",
+          "NodeRole": "Terminal",
+          "State": {
+            "Target": "Jupiter",
+            "Engine": "Astronometria",
+            "EngineModel": "VSOP87",
+            "Level": "L0",
+            "OutputType": "Vector3",
+            "Units": "AU"
+          },
+          "StateHash": "<STATEHASH_JUPITER_NODE_2>",
+          "Data": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "DataHash": "<DATAHASH_JUPITER_NODE_2>",
+          "Status": "Completed",
+          "Truth": {
+            "TruthMappingRef": "HORIZONS.EPHEM.VECTORS.L0.GEOCENTRIC",
+            "GroundTruthProvider": "Horizons",
+            "GroundTruthDatasetId": "<GT_DATASET_ID>",
+            "AccuracyStatus": "NotEvaluated"
+          }
+        }
+      ],
+      "Transitions": [
+        {
+          "TransitionId": "T1",
+          "TransitionType": "ComputeVSOPHeliocentricVector",
+          "ToNodeTypes": [
+            "L0.VSOP.HELIOCENTRIC_GEOMETRIC_VECTOR"
+          ]
+        },
+        {
+          "TransitionId": "T2",
+          "TransitionType": "TransformHeliocentricToGeocentric",
+          "FromNodeType": "L0.VSOP.HELIOCENTRIC_GEOMETRIC_VECTOR",
+          "ToNodeType": "L0.GEOCENTRIC_GEOMETRIC_VECTOR"
+        }
+      ],
+      "TerminalNodeRefs": [
+        "VENUS_NODE_2",
+        "JUPITER_NODE_2"
+      ]
+    }
+  }
+}
+```
+
+---
+
+# 10. Multi Target Example: Venus and Jupiter L0 at Observer Time
+
+
+fill based on #9
+
+## 10.1 Scenario
+
+The example ObservationScene contains:
+
+* Observer: Earth
+* Targets: Venus and Jupiter
+* ObservationTimeJD: 2451545.0
+* TimeScale: TDB
+* Frame: Ecliptic
+* Epoch: J2000
+* Engine: Astronometria
+* EngineModel: VSOP87
+* Level: L0
+* Instrument: VEC
+
+The objective is to compute L0 geocentric vectors for both Venus and Jupiter at the same observation time.
+
+## 10.2 Conceptual StateGraph
+
+
+ObservationScene
+|
+|-- Venus path
+|   |
+|   |-- StateNode V1: VSOP heliocentric geometric vector
+|   |
+|   '-- StateNode V2: geocentric geometric vector [TerminalNode]
+|
+'-- Jupiter path
+    |
+    |-- StateNode J1: VSOP heliocentric geometric vector
+    |
+    '-- StateNode J2: geocentric geometric vector [TerminalNode]
+
+
+
+
+Transitions:
+
+Transition T1:
+ComputeVSOPHeliocentricVector
+
+Transition T2:
+TransformHeliocentricToGeocentric
+
+The same Transition types are used for Venus and Jupiter.
+
+The StateNodes are target-specific instances.
+
+
+## 10.3 Multidata storage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 10. Simulation DatasetHeader Implication
+
+M2.3 Simulation DatasetHeader must contain SimulationCore.
+
+The Simulation DatasetHeader must therefore include:
+
+* Dataset identity
+* Experiment reference
+* Simulation identity
+* SimulationCore
+* terminal output references
+* StateHash/DataHash values
+* GroundTruth comparison metadata for TerminalNodes
+
+The Simulation DatasetHeader does not redefine SimulationCore.
+
+It embeds it.
+
+---
+
+# 11. Open Questions
+
+The following questions are not frozen:
+
+1. Exact JSON field names
+2. Whether State should duplicate selected SceneContext values or inherit them by reference
+3. Exact canonicalization boundary for arrays of StateNodes
+4. Whether DataHash is computed per StateNode or per StateNode time series for mesh datasets
+5. Exact structure of TruthMappingRef catalog
+6. Exact location of accuracy metadata
+7. Whether TerminalNode Truth metadata belongs inside StateGraph or DatasetHeader validation block
+
+---
+
+# 12. Draft Freeze Criteria
+
+This specification can move toward FREEZE when the following are resolved:
+
+* terminology is accepted
+* JSON draft is accepted structurally
+* State vs Data boundary is accepted
+* M2.4 includes/excludes are accepted
+* Run == LastRun rule is accepted
+* TerminalNode validation boundary is accepted
+* M2.3 DatasetHeader dependency is accepted
+
+---
