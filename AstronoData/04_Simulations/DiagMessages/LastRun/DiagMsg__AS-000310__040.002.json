@@ -1,0 +1,14 @@
+{
+  "Code": "040.002",
+  "Severity": "Warning",
+  "SourceSystem": "Astronometria",
+  "SubSourceSystem": "ScientificRun",
+  "CatalogNumber": "AS-000310",
+  "ExperimentID": "HELIO-J2000-TDB-2451547-2488057-30D",
+  "CoreHash": "1D0E8634",
+  "Message": "Multiple matching GroundTruth baselines found for CoreHash \u00271D0E8634\u0027.",
+  "MatchingFiles": [
+    "PLANET-SATURN-MCRE__HELIO-J2000-TDB-2451547-2488057-30D__EPH-HORIZONS-VEC-L0.json",
+    "PLANET-SATURN-MVH1__HELIO-J2000-TDB-2451547-2488057-30D__EPH-HORIZONS-VEC-L0.json"
+  ]
+}

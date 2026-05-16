@@ -1,0 +1,82 @@
+{
+  "RunClassification": {
+    "RunType": "ScientificRun",
+    "InputType": "CertifiedExperiment",
+    "TargetCardinality": "SingleTarget"
+  },
+  "ExperimentRef": {
+    "CatalogNumber": "AS-000003",
+    "ExperimentID": "HELIO-J2000-TDB-2443872-2443874-1H",
+    "CoreHash": "5FEF9D98",
+    "SourceFile": "AS-000003__PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H.json"
+  },
+  "Measurement": {
+    "Domain": "Ephemeris",
+    "Instrument": "VEC",
+    "CorrectionLevel": "L0",
+    "TimeScale": "TDB"
+  },
+  "GroundTruthRef": {
+    "Provider": "Horizons",
+    "DatasetID": "HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0",
+    "RequestHash": "A019110EA006AD993898D7215144C52882A468CEB620475D641954E08870BF72",
+    "SourceFile": "PLANET-VENUS-PER__HELIO-J2000-TDB-2443872-2443874-1H__EPH-HORIZONS-VEC-L0.json"
+  },
+  "Engine": {
+    "Name": "Astronometria",
+    "SimulationModel": {
+      "Family": "VSOP",
+      "Type": "VSOP87A",
+      "Truncation": "VSOP Meeus"
+    },
+    "Build": {
+      "GitCommit": "<FROM_BUILDINFO_JSON>",
+      "GitBranch": "<FROM_BUILDINFO_JSON>"
+    }
+  },
+  "ObservationScene": {
+    "SceneContext": {
+      "TemporalMode": "ObservationTime",
+      "Observer": {
+        "Type": "Heliocentric",
+        "Body": "Sun"
+      },
+      "Frame": {
+        "Type": "HelioEcliptic",
+        "Epoch": "J2000"
+      },
+      "TimeScale": "TDB",
+      "Instrument": "VEC",
+      "Domain": "Ephemeris"
+    },
+    "TargetSimulations": [
+      {
+        "Target": {
+          "BodyClass": "Planet",
+          "Name": "Venus",
+          "Abbreviation": "VEN"
+        },
+        "TerminalNode": {
+          "NodeId": "VEN_NODE_001",
+          "NodeType": "VSOP87.L0.HELIO.ECL.J2000.TDB.VEC",
+          "NodeRole": "TerminalNode",
+          "Status": "Completed",
+          "StateHash": "<TO_BE_COMPUTED>",
+          "DataHash": "<TO_BE_COMPUTED>",
+          "Data": [
+            {
+              "JD": 2443872.704000000,
+              "Position": {"X":-0.46020483076110952,"Y":0.55064887128325191,"Z":0.034066017275032709},
+              "Velocity": {"X":0.0,"Y":0.0,"Z":0.0}
+            },
+            {
+              "JD": 2443874.704000000,
+              "Position": {"X":-0.49063534678798182,"Y":0.5236252825367318,"Z":0.035455283965725358},
+              "Velocity": {"X":0.0,"Y":0.0,"Z":0.0}
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

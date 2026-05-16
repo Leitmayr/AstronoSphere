@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Astronometria.Core\Astronometria.Core.csproj" />
     <ProjectReference Include="..\Astronometria.Data\Astronometria.Data.csproj" />
     <ProjectReference Include="..\Astronometria.Projection\Astronometria.Projection.csproj" />
+	<ProjectReference Include="..\Astronometria.Ephemerides\Astronometria.Ephemerides.csproj" />
   </ItemGroup>
 
 </Project>

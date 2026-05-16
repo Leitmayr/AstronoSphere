@@ -1,17 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using Astronometria.ScientificRun.Hosting;
 
 namespace Astronometria
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (e.Args.Length > 0)
+            {
+                int exitCode;
+
+                try
+                {
+                    exitCode = ScientificRunHost.Run(e.Args);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("=== Astronometria ScientificRun failed ===");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex);
+                    exitCode = 1;
+                }
+
+                Shutdown(exitCode);
+                return;
+            }
+
+            var window = new MainWindow();
+            MainWindow = window;
+            window.Show();
+        }
     }
 }

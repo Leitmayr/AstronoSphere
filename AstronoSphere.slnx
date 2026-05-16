@@ -46,7 +46,9 @@
   <Folder Name="/04_Astronometria/" />
   <Folder Name="/04_Astronometria/src/" />
   <Folder Name="/04_Astronometria/src/Astronometria.Core/">
-    <Project Path="04_Astronometria/src/Astronometria.Core/Astronometria.Core.csproj" />
+    <Project Path="04_Astronometria/src/Astronometria.Core/Astronometria.Core.csproj">
+      <BuildDependency Project="10_AstronoData.Contracts/src/AstronoData.Contracts/AstronoData.Contracts.csproj" />
+    </Project>
   </Folder>
   <Folder Name="/04_Astronometria/src/Astronometria.Desktop/">
     <Project Path="04_Astronometria/src/Astronometria.Desktop/Astronometria.Desktop.csproj" />

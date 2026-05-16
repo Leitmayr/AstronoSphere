@@ -1,0 +1,11 @@
+{
+  "Code": "040.008",
+  "Severity": "Warning",
+  "SourceSystem": "Astronometria",
+  "SubSourceSystem": "ScientificRun",
+  "CatalogNumber": "AS-000069",
+  "ExperimentID": "GEO-J2000-TDB-2431313-2431315-1H",
+  "CoreHash": "D0E097AF",
+  "Message": "Unsupported ScientificRun configuration. Frame.Type='GeoEquatorial' is not supported in M2.3/M2.4.",
+  "MatchingFiles": []
+}

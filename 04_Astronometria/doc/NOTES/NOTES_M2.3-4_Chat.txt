@@ -1,0 +1,214 @@
+Bleibt noch die Frage nach den Dateinamen. In CORE_AstronoSphere_Pipeline_DataModel_V1.2.md (siehe Quellen) haben wir folgendes definiert.
+
+
+
+PLANET-MERCURY-INC__HELIO-J2000-TDB-2451545-2451546-1H__ASTRONOMETRIA-MEEUS-VEC-L0.json
+Human_<ExperimentID>_<SimuID>.json
+
+
+Die Dateinamen werden jetzt brutal lang:
+
+AS-XXXXXX_PLANET-MERCURY-INC_HELIOCENTRIC-ECLIPTICAL-J2000-TDB-2451545-2451546-1H_ASTRONOMETRIA-VSOP87-VEC-L0.json
+
+Insgesamt gefällt mir die Konkatenation von ExperimendID, DatasetID und SimulationID ganz gut.
+
+Ich hab HELIOCENTRIC im alten C++ AstroLab als HE abgekürzt. GE Geocentric Ecliptical, GA Geocentric Equatorial (auf deutsch Äquatoreal, daher GA). Das würde sehr helfen. Oder wir machen HELIO-ECL- vs. GEO-EQU udn GEO-ECL vs. TOPO.
+Verzichtbar ist vermutlich auch ASTRONOMETRIA. Der Rest eher nicht.
+
+Abgekürzte Varianten
+
+Variante A:
+AS-XXXXXX_PLANET-MERCURY-INC_HE-J2000-TDB-2451545-2451546-1H_VSOP87-VEC-L0.json
+
+Variante B:
+AS-XXXXXX_PLANET-MERCURY-INC_HELIO-ECL-J2000-TDB-2451545-2451546-1H_VSOP87-VEC-L0.json
+----
+
+Mir ist INNERPLANETS zu speziell, wir brauchen ein kürzere, aber allgemeinere Liste. Vorschlag:
+
+File name for ExplorationRuns:
+EXPLORE__<TARGET_LIST>__HELIO-ECL-J2000-TDB-2451545-2451546-1H__VSOP87-VEC-L0.json 
+
+<TARGET_LIST> is the "- separated" list of planets in three character abbreviation 
+
+MER: Mercury
+VEN: Venus
+EAR: Earth
+MAR: Mars
+JUP: Jupiter
+SAT: Saturn
+URA: Uranus
+NEP: Neptune
+
+For other bodies than Planets intermediate solution [BD1, BD2, ...]
+
+Order of <TARGET_LIST> as specified above = increasing mean solar distance.
+
+
+----
+
+Eng mit dem Dateiname verknüpft is der NodeType. Er enthält Teile des Dateinamens, aber in einer anderen Reihenfolge. Ich würde diese bewusst verändert:
+
+NodeType: 
+Node 1:  VSOP87.L0.HELIO.ECL.J2000.TDB.VEC
+
+VSOP: which model is it from? In which context is this StateGraphRunning
+HELIO-ECL define, that the left column in the picture is taken
+L0 describes which row will be taken
+J2000 and TDB are the main branch. Alternative time bases or Ref_System can be side branches from the main branch which in this case is "Column left"
+VEC describes the output format
+
+
+NodeID:
+"NodeId": "VENUS_NODE_1",
+
+VENUS is the target and NODE_1 could be a reference to the attached image.
+
+----------
+
+PLANET-URANUS-QCR__HELIO-J2000-TDB-2486286-2486288-1H__EPH-HORIZONS-VEC-L0.json
+
+-----------
+
+Ich habe nun alle Aspekte in ein Spezifikationsfile (attached) geschrieben. Lass uns ein Review durchführen. Am Ende, wenn wir einen FREEZE erreicht haben möchte ich, dass Du für ein gegebenes Paar "Experiment/GroundTruth" das Kapitel 10.3 ausfüllst, also aus der Spec ein Beispielfile generierst. 
+Die Spec beinhaltet Input aus verschiedenen Chats der vergangenen Tage. Es gibt sicherlich noch Widersprüche. Richtig unsicher bin ich bei der Defintion der SimulationRuns. Schau Dir das mal an, ob das so Sinn macht, v.a. Verwechslungen von ExecutionRun und ExplorationRun.
+Auch das permanenten Unterscheiden "ExplorationRun" vs. "ScientificRun" war sehr anstrengend und macht das Dokument nicht gerade lesbarer. 
+Aber jetzt schau Dir das einfach mal an und reviewe es.
+
+
+------
+
+Mir ist noch ein wichtiger Punkt eingefallen, den wir nicht in der Spezifikation berücksichtigt haben: Citation und Provenance. Hier ein Auszug aus dem Header eines beliebigen GroundTruthFiles: 
+
+    "FactoryMetadata": {
+      "FactoryName": "EphemerisFactory",
+      "FactoryVersion": "1.0.0",
+      "Source": "JPL Horizons https://ssd.jpl.nasa.gov/horizons/app.html#/",
+      "ReferenceEphemeris": "DE440",
+      "Mode": "HELIO",
+      "EphemType": "VECTORS",
+      "CorrectionLevel": "L0",
+      "TimeScale": "TDB"
+    },
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+    "Provenance": {
+      "ScenarioFactory": "AstronoSphere | MeeusScenarioFactory",
+      "TruthFactory": "HorizonsTruthFactory",
+      "ValidationTarget": {
+        "Software": "AstronoSphere",
+        "GitCommit": null,
+        "GitBranch": null,
+        "GitTag": null
+      }
+    },
+    "EngineCitation": {
+      "Author": null,
+      "Software": null,
+      "Citation": null
+    },
+    "ValidationFingerprint": null
+
+
+Die Punkte Provenance und Engine Citation stehen eigentlich erst zu dem Zeitpunkt fest, an dem Astronometria simuliert. 
+
+Es müsste genau genommen so sein:
+
+1) in AstronoLab/AstronoCert wird Provenance "ExperimentFactory" statt "ScenarioFactory" befüllt (später, beim Refactoring Teil von M2)
+ExperimentCitation sollte in ExperimentData hinzugefügt werden:
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab"
+	}
+	
+2) in GroundTruth: Provencance "TruthFactory" wird zu "ExperimentFactory" ergänzt.
+TruthCitation wird erzeugt und hinzugefügt. Danach: 
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+	}
+
+3) in Astronometria: Provenance "SimulationEngine" statt "ValidationTarget" wird ergänzt. EngineCitation wird erzeugt und hinzugefügt.
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+	
+	"EngineCitation": {
+      "Provider": "AstronoSphere.Astronometria",
+      "Source": "https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+				"SimulationEngine": "AstronoSphere.Astronometria"
+	}
+
+4) in Astronolysis: Provenance "Astronolysis" wird erzeugt und hinzugefügt
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+ 
+	"TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+	
+	"EngineCitation": {
+      "Provider": "AstronoSphere.Astronometria",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"AnalysisCitation": {
+      "Provider": "AstronoSphere.Astronolysis",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronolysis - An Astronomical Analysis Tool from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+				"SimulationEngine": "AstronoSphere.Astronometria",
+				"AnalysisTool": "AstronoSphere.Astronolysis"
+	}
+
+** end of Spec **
+
+
+Die gesamte Kette aktualisieren wir in M3.X. Sollen wir für Astronometria Punkt 3 bereits berücksichtigen und umsetzen. Wäre geschickt, jetzt, bevor wir 280 Files erzeugen.
