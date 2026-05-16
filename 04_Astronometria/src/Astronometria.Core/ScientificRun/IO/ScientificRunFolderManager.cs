@@ -6,7 +6,9 @@ namespace Astronometria.Core.ScientificRun.IO
 {
     public static class ScientificRunFolderManager
     {
-        public static string PrepareRunFolder(string repositoryRoot)
+        public static string PrepareRunFolder(
+            string repositoryRoot,
+            bool rotateExistingRun)
         {
             var baseFolder = Path.Combine(
                 repositoryRoot,
@@ -22,28 +24,40 @@ namespace Astronometria.Core.ScientificRun.IO
             Directory.CreateDirectory(runFolder);
             Directory.CreateDirectory(lastRunFolder);
 
-            RotateRunToLastRun(runFolder, lastRunFolder);
-
-            Directory.CreateDirectory(runFolder);
+            if (rotateExistingRun)
+            {
+                CopyRunToLastRunAndClearRun(
+                    runFolder,
+                    lastRunFolder);
+            }
 
             return runFolder;
         }
 
-        private static void RotateRunToLastRun(string runFolder, string lastRunFolder)
+        private static void CopyRunToLastRunAndClearRun(
+            string runFolder,
+            string lastRunFolder)
         {
-            foreach (var file in Directory.GetFiles(runFolder, "*.json").OrderBy(x => x, StringComparer.Ordinal))
+            var runFiles = Directory
+                .GetFiles(runFolder, "*.json")
+                .OrderBy(x => x, StringComparer.Ordinal)
+                .ToList();
+
+            foreach (var file in runFiles)
             {
-                var target = Path.Combine(lastRunFolder, Path.GetFileName(file));
+                var target = Path.Combine(
+                    lastRunFolder,
+                    Path.GetFileName(file));
 
-                if (File.Exists(target))
-                    File.Delete(target);
-
-                File.Move(file, target);
+                File.Copy(
+                    file,
+                    target,
+                    overwrite: true);
             }
 
-            foreach (var directory in Directory.GetDirectories(runFolder).OrderBy(x => x, StringComparer.Ordinal))
+            foreach (var file in runFiles)
             {
-                Directory.Delete(directory, recursive: true);
+                File.Delete(file);
             }
         }
     }

@@ -142,6 +142,20 @@ namespace Astronometria.ScientificRun.Execution
                     }
                 },
 
+                EngineCitation = new ScientificEngineCitation
+                {
+                    Provider = "AstronoSphere.Astronometria",
+                    Source = "https://github.com/Leitmayr/AstronoSphere",
+                    Citation = "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+                },
+
+                Provenance = new ScientificProvenance
+                {
+                    ExperimentFactory = "AstronoSphere.AstronoLab",
+                    TruthFactory = "JPL Horizons",
+                    SimulationEngine = "AstronoSphere.Astronometria"
+                },
+
                 ObservationScene = new ScientificObservationScene
                 {
                     SceneContext = new ScientificSceneContext

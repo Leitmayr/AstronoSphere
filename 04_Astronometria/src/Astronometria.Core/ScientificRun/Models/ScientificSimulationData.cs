@@ -14,6 +14,10 @@ namespace Astronometria.Core.ScientificRun.Models
 
         public ScientificEngine Engine { get; init; } = new();
 
+        public ScientificEngineCitation EngineCitation { get; init; } = new();
+
+        public ScientificProvenance Provenance { get; init; } = new();
+
         public ScientificObservationScene ObservationScene { get; init; } = new();
     }
 
@@ -67,6 +71,21 @@ namespace Astronometria.Core.ScientificRun.Models
     {
         public string GitCommit { get; init; } = string.Empty;
         public string GitBranch { get; init; } = string.Empty;
+    }
+
+    public sealed class ScientificEngineCitation
+    {
+        public string Provider { get; init; } = "AstronoSphere.Astronometria";
+        public string Source { get; init; } = "https://github.com/Leitmayr/AstronoSphere";
+        public string Citation { get; init; } =
+            "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere";
+    }
+
+    public sealed class ScientificProvenance
+    {
+        public string ExperimentFactory { get; init; } = "AstronoSphere.AstronoLab";
+        public string TruthFactory { get; init; } = "JPL Horizons";
+        public string SimulationEngine { get; init; } = "AstronoSphere.Astronometria";
     }
 
     public sealed class ScientificObservationScene

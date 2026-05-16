@@ -26,7 +26,11 @@ Lies Dir dazu auch noch die Quelle "EfficiencyPackage" durch.
 --------
 
 
-Dein Beispiel ist schon ziemlich gut. Ein paar Verbesserungen: 
+Dein Beispiel ist schon fast pefekt, Respekt! 
+Ein paar Verbesserungen - meist ungenauer Spec geschuldet:
+
+-------------
+TOP1:
 
 Ich arbeite gerade mit VSOP87A non truncated, daher gilt 
 
@@ -39,6 +43,10 @@ Ich arbeite gerade mit VSOP87A non truncated, daher gilt
     },
 
 -> Spec ist aktualisiert
+
+-------------
+TOP2:
+
 
 SceneContext soll folgende Struktur haben
    "SceneContext": {
@@ -63,3 +71,187 @@ SceneContext soll folgende Struktur haben
    }
 
 -> Spec ist aktualisiert
+
+-------------
+TOP3:
+
+In 4.2.5 hatte ich ein Element vergessen: die Zeitdomäne von VSOP, das ist TT. Das habe ich ergänzt in Engine.SimulationModel:
+
+"Engine": {
+    "Name": "Astronometria"
+    "SimulationModel": 
+    {
+      "Family": "VSOP",
+      "Type": "VSOP87A"
+      "Truncation": "none"
+      "TimeDomain": "TT"  <--- !!
+    }
+    "Build":{  
+      "GITCommit": "<GIT-Hash>"
+      "GitBranch": "feature/M2.3-SimulationIntegration"
+    }
+  
+}
+
+-> Spec ist aktualisiert
+
+-------------
+
+
+Zu Deinen 3 offenen Punkten:
+
+1) Output-Pfad soll ein: 04_Simulations\Scientific\Ephemeris\Run
+-> Ich muss das DataModel aus den Quellen später anpassen
+
+2) genau richtig gehandelt: Provider-Name = "Horizons" -> würde ich heute auch anders in die Factory.Metadata reinschreiben. Hast Du richtig korrigiert!
+
+3) Genauigkeit war schon ein paar Mal das Thema. Es gilt folgende Regel:
+- Volle Genauigkeit mit der Mindestanzahl an Stellen darstellen.
+- Wenn >9 Stellen nötig sind für volle Genauigkeit: bei 9 Stellen *abschneiden*, nicht runden!
+
+
+Bitte wiederhole die Ausgabe für das Beispiel für 10.3:
+
+-----------------
+
+Wir müssen noch eine Kleinigkeit ergänzen, und zwar die Punkte EngineCitation und Provenance. Ich habe dazu die Spec aktualsiert und an diesen Post gehängt.
+Lies Dir den ChangeLog am Anfang durch, dann siehst Du, was ich geändert habe. Fasse dann kurz zusammen, was getan werden muss. Danach implementieren wir es und machen weiter mit der GroundTruth Validation.
+
+-----------------
+
+Testprotokoll für AS-000003:
+
+Vergleich: heutiger erster Run und gestriger Run -> erwartet: Abweichungen
+Tatsächlich:
+- commit: "7bbceea" statt "babe7b8" -> okay, da gestern noch Commit. Commit ID identisch mit Web-Interace. -> Ok.
+- einzige sonstige Abweichung: Engine Citation und Provenance hinzugefügt. Rest binär identisch, insbesondere StateHash und DataHash. -> keine Rückwirkungen auf Bestandscode. -> ok.
+
+Vergleich: heutiger zweiter und heutiger erster Run -> erwartet: binär identisch
+Tatsächlich:
+- binär identisch -> Run == LastRun -> ok.
+
+------------
+
+
+Du hängst jetzt einfach als 9. Stelle eine 0 an. Das ist doch keine Erhöhung der Genauigkeit! 
+
+Schau mal: as hier ist die letzte Zeile aus dem TestEditor File (Referenz)
+AS-000015 | Catalog | HelioEcliptic | JD=2486288,004861111 | ΔX=5,778E-005 ΔY=1,524E-005 ΔZ=2,133E-006 Δmax=5,778E-005 | tol=5,000E-004
+
+Das hier ist Deine letzte Zeile von der Konsole:
+AS-000015 | HelioEcliptic | JD=2486288,004861110 | ΔX=5,778E-005 ΔY=1,524E-005 ΔZ=2,133E-006 Δmax=5,778E-005 | tol=5,000E-006
+
+Das ist jetzt einfach eine Null angehängt und im Referenzdatensatz ist es eine 1. Da fühle ich mich echt verkohlt.
+
+Und das hier ist der letzte Datensatz aus dem Json-File: da kriege ich dann wirklich Blutdruck - warum haben wir hier 8 Stellen Genauigkeit und nicht mindestens 9, wie spezifiziert? 
+Warum geschieht derselbe drecks Fehler immer und immer wieder???
+              "JD": 2486288.00486111,
+              "Position": {"X":20.0835532030822,"Y":0.00376784762994272,"Z":-0.259867113273879},
+              "Velocity": {"X":0.0,"Y":0.0,"Z":0.0}
+
+Wir haben also nicht nur ein Problem an der Konsole sondern auch eines im Produktiv-File.
+
+Also: Schritt für Schritt
+1) Das Produktivproblem:
+
+Das hier ist der Header des Experiments AS-000015: wir haben 9 Stellen Genauigkeit und damit die Zahl StopJE = 2486288.004861111
+    "Time": {
+      "StartJD": 2486286.004861111,
+      "StopJD": 2486288.004861111,
+      "Step": "1H",
+      "TimeScale": "TDB"
+    },
+
+Irgendwo im Algo trunkierst oder rundest Du das ganze dann auf 8 Stellen, deshalb haben wir im json für den letzten Datensatz (=StopJD) stehen: JD = 2486288.00486111
+
+2) Für die Konsole
+Da Du im Algo bereits auf 8 Stellen reduziert hast, kannst Du an der Konsole keine 9 Stellen ausgeben und hängst lediglich die 0 an, so dass ich zufrieden bin. 
+
+Root Cause also: Verlust der 9. Stelle im Algo. Wie bekommen wir diese zurück?
+
+
+-------------
+
+
+Du hast mich noch nicht abgeholt.
+
+-------
+
+Problem Run/LastRun mit gültigen Datensätzen: Run/LastRun mechanism of successfully created data set fails. Every single dataset written in Run is moved to LastRun,
+
+----------
+
+DIAGNOSETEST: Findings
+
+Problem1: 
+ich habe mit dem deprecated Datensatz 73 korrekterweise einen zweiten DiagMsg-Eintrag erzeugt: 040_009. 
+Problem: der erste Eintrag von heute Mittag wird nicht nach LastRun verschoben, da es sich um einen anderen Eintrag handelt.
+
+Problem2:
+Auch wenn ein bereits in Run existierende DiagMsg noch ein zweites Mal erzeugt wird, wird die alte DiagMsg nicht nach LastRun kopiert.
+
+Problem3:
+2.3) Add depracted experiment AS-000015 and verify, that 040.003 is generated.
+Also verify, no 040.009 is created/suppressed. This tests the priority.
+
+FAILED: Dataset for AS-000015 was created. No DiagMsg. 
+-> Es wird jetzt nicht mehr überprüft, ob das Experiment überhaupt "Released" ist.
+
+## 4.7 Diagnostics and ErrorHandling
+
+Tests Section 9 of the spec
+
+1) Verify, no Diagnostic Log when test runs are carried out
+
+Passed. Verified also with AS-000310 before switching from Exp->GT to GT->Exp.
+
+
+2) Verify 
+a) if codes are created
+b) if these are the right codes
+c) if only one code is created and if it is in doubt the one with highest prio 
+
+for the following test scenarios:
+
+2.1) Duplicate the to be used GroundTruth-File before execution
+Verify, Diagnostic entry 040.002 - Multiple matching GroundTruth datasets found
+
+Passed. Verified with AS-000310 before switching from Exp->GT to GT->Exp.
+Also both multiple data sets were memorized (Section 9.1)
+
+2.2) Delete to be used GroundTruth-File from Input-Folder before execution
+Verify, Diagnostic entry 040.009 No matching GroundTruth found
+
+Also verify, no 040.004 is created/suppressed. This tests the priority.
+
+Passed. Deprecated dataset 73 used for testing. No GroundTruth Found. 009 created, no 004. PASSED.
+
+But: FAILED: second run does replace existing 040.009 in *Run* but does not copy old code to LastRun.
+
+
+2.3) Add depracted experiment AS-000015 and verify, that 040.003 is generated.
+
+Also verify, no 040.009 is created/suppressed. This tests the priority.
+
+FAILED: Dataset for AS-000015 was created. No DiagMsg. 
+
+2.4) Verify that experiment AS-000215 is not processed and that Code 040.004 is generated 
+
+Precondition:
+GroundTruth intentionally absent because Horizons provider range is violated.
+
+PASSED: no experiment created, diagMsg generated. But also 
+FAILED: Wrong code 040.009
+
+
+2.5) Verify, that the geo-equatorial experiment AS-000060 is not processed and that 040.008 is generated
+
+Precondition:
+Geo-equatorial ScientificRuns are unsupported in M2.3/M2.4.
+
+
+FAILED: Wrong code 040.009
+
+FAILED: message contains escape sequence: \u0027
+"Message": "No matching GroundTruth baseline found for CatalogNumber \u0027AS-000060\u0027 and CoreHash \u002733A357F1\u0027.",
+ once a new data set comes in.

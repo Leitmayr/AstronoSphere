@@ -19,6 +19,15 @@ namespace Astronometria.ScientificRun.Cli
                 };
             }
 
+            if (args.Length == 1 &&
+                args[0].Equals("--all", StringComparison.OrdinalIgnoreCase))
+            {
+                return new CliArguments
+                {
+                    RunAll = true
+                };
+            }
+
             if (args.Length == 2 &&
                 args[0].Equals("--catalog", StringComparison.OrdinalIgnoreCase))
             {
@@ -34,7 +43,7 @@ namespace Astronometria.ScientificRun.Cli
             }
 
             throw new ArgumentException(
-                "Unsupported arguments. Use: Astronometria.Desktop.exe --catalog AS-000003");
+                "Unsupported arguments. Use: Astronometria.Desktop.exe --catalog AS-000003 or --all");
         }
     }
 }

@@ -123,3 +123,6 @@ Ich vermute, der Fehler liegt in Deinem File hier:
 CountSamples addiert +1. Deshalb ein Step zu viel, deshalb Enddatum +211 Tage. Stimmts? ;-)
 
 Aber generell: sehr stark!
+
+-----------------
+

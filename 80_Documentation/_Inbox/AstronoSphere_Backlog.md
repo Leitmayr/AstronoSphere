@@ -1,3 +1,98 @@
+## Provenance und Citation
+
+In ca. M3.X, wenn Provenance stabilisiert wird: ergänzen in Experiments, GroundTruth
+
+1) in AstronoLab/AstronoCert wird Provenance "ExperimentFactory" statt "ScenarioFactory" befüllt (später, beim Refactoring Teil von M2)
+ExperimentCitation sollte in ExperimentData hinzugefügt werden:
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab"
+	}
+	
+2) in GroundTruth: Provencance "TruthFactory" wird zu "ExperimentFactory" ergänzt.
+TruthCitation wird erzeugt und hinzugefügt. Danach: 
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+	}
+
+3) in Astronometria: Provenance "SimulationEngine" statt "ValidationTarget" wird ergänzt. EngineCitation wird erzeugt und hinzugefügt.
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+	
+    "TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+	
+	"EngineCitation": {
+      "Provider": "AstronoSphere.Astronometria",
+      "Source": "https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+				"SimulationEngine": "AstronoSphere.Astronometria"
+	}
+
+4) in Astronolysis: Provenance "Astronolysis" wird erzeugt und hinzugefügt
+
+    "ExperimentCitation": {
+      "Provider": "AstronoSphere.AstronoLab",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, AstronoSphere - An Astronomical Experiment Factory from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },
+ 
+	"TruthCitation": {
+      "Provider": "NASA - Jet Propulsion Laboratory, California Institute of Technology",
+      "Source": "https://ssd.jpl.nasa.gov/horizons/",
+      "Citation": "PL Solar System Dynamics Group. JPL Horizons On-Line Ephemeris System. California Institute of Technology. Accessed: 2026-03-23. https://ssd.jpl.nasa.gov/horizons/"
+    },
+	
+	"EngineCitation": {
+      "Provider": "AstronoSphere.Astronometria",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronometria - An Astronomical Simulation Engine from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"AnalysisCitation": {
+      "Provider": "AstronoSphere.Astronolysis",
+      "Source": "AstronoSphere: https://github.com/Leitmayr/AstronoSphere",
+      "Citation": "M. Hiemer, Astronolysis - An Astronomical Analysis Tool from the AstronoSphere Ephemeris Validation Framework, 2026, https://github.com/Leitmayr/AstronoSphere"
+    },	
+
+	"Provenance":{
+	      "ExperimentFactory": "AstronoSphere.AstronoLab",
+		        "TruthFactory": "JPL Horizons",
+				"SimulationEngine": "AstronoSphere.Astronometria",
+				"AnalysisTool": "AstronoSphere.Astronolysis"
+	}
+
 ## BuildInfoService
 
 Aus 04_Astronometria zentralisieren nach 

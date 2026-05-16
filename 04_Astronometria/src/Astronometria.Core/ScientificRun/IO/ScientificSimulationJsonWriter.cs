@@ -1,7 +1,7 @@
-﻿using System.Text.Encodings.Web;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using Astronometria.Core.ScientificRun.Models;
 
@@ -15,7 +15,6 @@ namespace Astronometria.Core.ScientificRun.IO
             File.WriteAllText(path, json, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         }
 
-
         private static string BuildJson(ScientificSimulationData data)
         {
             var sb = new StringBuilder();
@@ -26,6 +25,8 @@ namespace Astronometria.Core.ScientificRun.IO
             AppendMeasurement(sb, data);
             AppendGroundTruthRef(sb, data);
             AppendEngine(sb, data);
+            AppendEngineCitation(sb, data);
+            AppendProvenance(sb, data);
             AppendObservationScene(sb, data);
             sb.AppendLine("}");
 
@@ -88,6 +89,24 @@ namespace Astronometria.Core.ScientificRun.IO
             sb.AppendLine("  },");
         }
 
+        private static void AppendEngineCitation(StringBuilder sb, ScientificSimulationData data)
+        {
+            sb.AppendLine("  \"EngineCitation\": {");
+            JsonProp(sb, 4, "Provider", data.EngineCitation.Provider, comma: true);
+            JsonProp(sb, 4, "Source", data.EngineCitation.Source, comma: true);
+            JsonProp(sb, 4, "Citation", data.EngineCitation.Citation, comma: false);
+            sb.AppendLine("  },");
+        }
+
+        private static void AppendProvenance(StringBuilder sb, ScientificSimulationData data)
+        {
+            sb.AppendLine("  \"Provenance\": {");
+            JsonProp(sb, 4, "ExperimentFactory", data.Provenance.ExperimentFactory, comma: true);
+            JsonProp(sb, 4, "TruthFactory", data.Provenance.TruthFactory, comma: true);
+            JsonProp(sb, 4, "SimulationEngine", data.Provenance.SimulationEngine, comma: false);
+            sb.AppendLine("  },");
+        }
+
         private static void AppendObservationScene(StringBuilder sb, ScientificSimulationData data)
         {
             var scene = data.ObservationScene;
@@ -143,7 +162,7 @@ namespace Astronometria.Core.ScientificRun.IO
                 sb.AppendLine("            {");
                 sb.AppendLine($"              \"JD\": {FormatNumber(sample.JD)},");
                 sb.AppendLine($"              \"Position\": {{\"X\":{FormatNumber(sample.Position.X)},\"Y\":{FormatNumber(sample.Position.Y)},\"Z\":{FormatNumber(sample.Position.Z)}}},");
-                sb.AppendLine($"              \"Velocity\": {{\"X\":0.0,\"Y\":0.0,\"Z\":0.0}}");
+                sb.AppendLine($"              \"Velocity\": {{\"X\":{FormatNumber(sample.Velocity.X)},\"Y\":{FormatNumber(sample.Velocity.Y)},\"Z\":{FormatNumber(sample.Velocity.Z)}}}");
                 sb.AppendLine($"            }}{comma}");
             }
 
@@ -181,9 +200,7 @@ namespace Astronometria.Core.ScientificRun.IO
 
         private static string FormatNumber(double value)
         {
-            return value.ToString("0.#################", CultureInfo.InvariantCulture);
+            return value.ToString("G17", CultureInfo.InvariantCulture);
         }
-
-
     }
 }
