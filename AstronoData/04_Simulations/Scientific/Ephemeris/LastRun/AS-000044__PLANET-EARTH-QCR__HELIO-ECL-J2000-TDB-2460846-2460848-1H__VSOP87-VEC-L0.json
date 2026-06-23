@@ -31,8 +31,8 @@
       "TimeDomain": "TT"
     },
     "Build": {
-      "GitCommit": "7bbceea",
-      "GitBranch": "feature/M2.3-SimulationIntegration-L0"
+      "GitCommit": "52312e9",
+      "GitBranch": "feature/M2.4-astronometria-state-machine-L0"
     }
   },
   "EngineCitation": {

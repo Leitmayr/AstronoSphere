@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Astronometria.Core.Bodies;
-using Astronometria.Core.Geometry;
 using Astronometria.Core.ScientificRun.Build;
 using Astronometria.Core.ScientificRun.Models;
+using Astronometria.Core.ScientificRun.StateTree;
 using Astronometria.Ephemerides.Planetary;
 using Astronometria.Ephemerides.VSOP;
 using Astronometria.Time.Astro;
@@ -21,6 +22,16 @@ namespace Astronometria.ScientificRun.Execution
             TerminalNodeDescriptor terminalNode)
         {
             var planetId = Enum.Parse<PlanetId>(terminalNode.TargetName);
+
+            var terminalPhysicsNodeType = PhysicsStateNodeType.FromValue(
+                terminalNode.PhysicsNodeType);
+
+            var stateTreePath = PhysicsStateTreeRegistry.ResolvePath(
+                terminalPhysicsNodeType);
+
+            PrintPhysicsStateTreeTrace(
+                terminalPhysicsNodeType,
+                stateTreePath);
 
             var vsopDataPath = Path.Combine(
                 repositoryRoot,
@@ -41,8 +52,8 @@ namespace Astronometria.ScientificRun.Execution
             {
                 var time = new TTInstant(gtSample.JD);
 
-                var state = GetEngineState(
-                    experiment.Core.Frame.Type,
+                var result = PhysicsStateTreeExecutor.Execute(
+                    stateTreePath,
                     planetId,
                     time,
                     provider,
@@ -53,9 +64,9 @@ namespace Astronometria.ScientificRun.Execution
                     JD = gtSample.JD,
                     Position = new ScientificVector
                     {
-                        X = state.Position.X,
-                        Y = state.Position.Y,
-                        Z = state.Position.Z
+                        X = result.Position.X,
+                        Y = result.Position.Y,
+                        Z = result.Position.Z
                     },
                     Velocity = new ScientificVector
                     {
@@ -74,20 +85,15 @@ namespace Astronometria.ScientificRun.Execution
                 samples);
         }
 
-        private static StateVector GetEngineState(
-            string frameType,
-            PlanetId planetId,
-            TTInstant time,
-            VsopProvider provider,
-            PlanetPositionService positionService)
+        private static void PrintPhysicsStateTreeTrace(
+            PhysicsStateNodeType terminalPhysicsNodeType,
+            PhysicsStateTreePath stateTreePath)
         {
-            return frameType switch
-            {
-                "HelioEcliptic" => provider.GetHeliocentricState(planetId, time),
-                "GeoEcliptic" => positionService.GetGeocentricEclipticState(planetId, time),
-                _ => throw new NotSupportedException(
-                    $"Unsupported frame type for ScientificRun execution: '{frameType}'.")
-            };
+            Console.WriteLine("=== PhysicsStateTree ===");
+            Console.WriteLine($"TerminalNodeType : {terminalPhysicsNodeType.Value}");
+            Console.WriteLine($"Path             : {string.Join(" -> ", stateTreePath.Nodes.Select(node => node.Value))}");
+            Console.WriteLine("Executor         : PhysicsStateTreeExecutor");
+            Console.WriteLine();
         }
 
         private static ScientificSimulationData BuildSimulationData(

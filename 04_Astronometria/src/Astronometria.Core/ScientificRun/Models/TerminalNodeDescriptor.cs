@@ -10,6 +10,8 @@
 
         public string NodeType { get; init; } = string.Empty;
 
+        public string PhysicsNodeType { get; init; } = string.Empty;
+
         public string NodeRole { get; init; } = "TerminalNode";
 
         public string Status { get; init; } = "Planned";

@@ -1,3 +1,142 @@
+## 1. Experiments
+
+### 1.1 Mercury transits 
+Data from https://eco.mtk.nao.ac.jp/cgi-bin/koyomi/transitx_en.cgi
+National Astronomical Observatory of Japan (NAOJ)
+
+#### 2032
+Geocentric Circumstances
+LST:UT+9h
+Planet lies in zenith
+
+| Description | 	Date         | 	Time      | 	Dist.|  Lon.  | 	Lat.  | 
+| ----        | ----           | ---        | --     | --     | ---     |
+| 1st contact | 	2032-11-13   |	15h41.1m 	| 975 	 | 76°04' |	-18°03'
+2nd contact 	 |   2032-11-13 |	15h43.2m 	|965 |	75°33' |	-18°03' |
+least angular distance |	2032-11-13 |		17h54.2m |		572 |		42°35'|	 	-18°00'|
+3rd contact |		2032-11-13 	|	20h05.3m |		965|		9°37' 	|	-17°56'|	
+4th contact 	|	2032-11-13 |		20h07.4m |	 	975 |		9°06' |		-17°56'|	
+
+#### 2019
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+|	Description |		Date |		Time |		Dist. |		Lon. |		Lat.
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact 	 | 2019-11-11  | 	21:35:26  | 	974 	 | -12°36' |  	-17°31'
+2nd contact 	 | 2019-11-11  | 	21:37:08  | 	964  | -13°01'  | 	-17°30'
+least angular distance  | 	2019-11-12  | 	0:19:43  | 	76  | 	-53°55' 	 | -17°26'
+3rd contact 	 | 2019-11-12  | 	3:02:32  | 	964  | 	-94°53' 	 | -17°21'
+4th contact  | 2019-11-12  | 	3:04:14  | 	974 	 | -95°18'  | 	-17°21'
+
+#### 2016
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+Description 	 | Date  |	Time | 	Dist.  |	Lon. 	 |Lat. |
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact 	 | 2016-05-09  | 	20:12:18  | 	956  | 	11°19' |  	17°34'
+2nd contact 	 | 2016-05-09  | 	20:15:30  | 	944  | 	10°30'  | 	17°34'
+least angular distance |  	2016-05-09  | 	23:57:25  | 	319  | 	-45°13'  | 	17°30'
+3rd contact 	 | 2016-05-10  | 	3:39:13  | 	944  | 	-100°54' |  	17°26'
+4th contact 	 | 2016-05-10  | 	3:42:25  | 	956  | 	-101°42'  | 	17°26'
+
+#### 2012
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+Description  |	Date  |	Time | 	Dist.  |	Lon. 	 |Lat. |
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact 	|2012-06-06 |	7:09:41 |	975 |	-152°34' |	22°52'
+2nd contact 	|2012-06-06 |	7:27:29 |	917 |	-157°02' |	22°52'
+least angular distance |	2012-06-06 |	10:29:36 |	554 	|157°13' |	22°49'
+3rd contact 	|2012-06-06 |	13:31:43 |	917 |	111°29'| 	22°47'
+4th contact 	|2012-06-06 |	13:49:31 |	975 |	107°01'| 	22°47'
+
+#### 2006
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+Description  |	Date  |	Time | 	Dist.  |	Lon. 	 |Lat. |
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact |	2006-11-09|	4:12:04 |	974 |	-111°54' |	-16°54'
+2nd contact |	2006-11-09|	4:13:57 |	964 |	-112°22' |	-16°54'
+least angular distance | 	2006-11-09 |	6:41:04 |	423 	|-149°23' |	-16°50'
+3rd contact |	2006-11-09 |	9:08:16 |	964 |	173°36' 	|-16°46'
+4th contact |	2006-11-09 |	9:10:09 |	974 |	173°07' 	|-16°46'
+
+#### 2004
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+Description  |	Date  |	Time | 	Dist.  |	Lon. 	 |Lat. |
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact |	2004-06-08|	14:13:33 	|974 |	101°38'| 	22°45'
+2nd contact |	2004-06-08|	14:32:50 	|917 |	96°47' |	22°45'
+least angular | distance |	2004-06-08 |	17:19:44 |	627 |	54°53' |	22°43'
+3rd contact |	2004-06-08 	|20:06:38 	|916 |	12°58' |	22°41'
+4th contact| 	2004-06-08 |	20:25:54 |	974| 	8°07' |	22°41'
+
+#### 2003
+Geocentric Circumstances
+LST:UT+9h
+ 	Planet lies in zenith
+Description  |	Date  |	Time | 	Dist.  |	Lon. 	 |Lat. |
+| ----        | ----           | ---        | --     | --     | ---     |
+1st contact |	2003-05-07 |14:12:55|	957 |	100°59' |	16°57'
+2nd contact |	2003-05-07 |14:17:23|	945 |	99°52' 	|16°57'
+least angular distance |	2003-05-07 	|16:52:24 |	708 |	60°57' |	16°54'|
+3rd contact 	|2003-05-07| 	19:27:19| 	945 |22°04' 	|16°51'
+4th contact 	|2003-05-07| 	19:31:47| 	957 |20°56' 	|16°51'
+
+
+### 1.2 Enge Konjunktionen REGULUS, Aldebaran
+-SuW 6/26, S.8
+
+
+## 2. Ground Truth
+
+## 2.1 Horizons Modell (pptx-Bild)
+
+Diskussion aus M2.4:
+- War ursprünglich zweidimensional ein Rechteck
+- Müsste nach Einführung des Time-Scale Gedanken am 2026-05-17 eigentlich ein Quader sein (dritte Dimension)
+- berücksichtigt die Dimension des Observers aber nicht explizit: formal ist der Observer die vierte Dimension, die wir uns aber besser als parallelen, mit dem pyhsikalischen Quader nicht interagierenden Quader vorstellen sollten
+- der Beobachter-Parallelquader geht aus dem Physikalischen Quader hervor. Leider muss er auch die Korrekturphysik (L1, L2) parallel zum Physikquader rechnen, um nicht mit ihm zu interagieren.
+
+Die Idee des Parallelquaders darf nicht Bestandteil von M2.4 sein, sondern muss wieder aufgegriffen werden, wenn wir die Beobachterwelt in Level1 oder Level2 rein entwickeln. Wir sollten dann aber überelegen, ob das Pendant zu dem abstrakten Parallel-Quader tatsächlich ein separater, nicht interagierenden StateTree für Observer ist, der lediglich existierende Transitions-Methoden mitverwenden kann.
+
+Candidate architecture:
+Observer outputs may later be modeled as a separate derived StateTree domain.
+The ObserverStateTree consumes frozen outputs from the PhysicalStateTree but must not feed back into it.
+Shared transition methods are allowed; shared state semantics are not.
+
+## 2.2 Weitere Ground Truth Daten
+
+https://aa.usno.navy.mil/data/api
+USNO API Beschreibung
+
+- Referenzdaten für Julian Date (API!)
+- Referenzdaten für Siderial Time (API!) - analog Horizons, super als Referenz für TOPO Implementierung des Beobachters
+- Analog Experiment jetzt ein json Beobachter. Für den Experimentzeitraum dann am Beobachtungsort die Siderial Time holen. Siderial Ground Truth dann zweite GT-Komponente
+- Beobachtersituation dann in Astronometria simulieren mit Daten aus 
+1) Experiment
+2) Target Ground Truth
+3) Observer Ground Truth (Siderial Time)
+4) ggf. separat, sonst in 3) Observerbeschreibung analog Experiment
+
+
+
+## Precision Policy
+
+ausgehend von 
+CORE_JD-PrecisionBackgroundAndAstronoPrecisionAudit.md
+und
+CORE_Precision+Rounding+TruncationPolicy.md
+
+ein echtes CanonicalPrecision-Core-Dokument erstellen.
+
+
 ## Provenance und Citation
 
 In ca. M3.X, wenn Provenance stabilisiert wird: ergänzen in Experiments, GroundTruth
@@ -145,10 +284,6 @@ Extension to topocentric and horizontal coordinate states will introduce observe
 - Zentraler Sammler/Logger für alle erzeugten oder nicht erzeugten Files zum späteren Debugging
 - zentrale Schnittstelle über AstronoData.IO?
 
-# Enge Konjunktionen REGULUS, Aldebaran
--SuW 6/26, S.8
-
-
 
 
 ## Rauschanalyse
@@ -209,9 +344,13 @@ Genau so arbeitet man sauber durch die Milestones.
 ## Naming
 - die GroundTruth-Daten könnten auch ein Prefix mit dem Experiment gebrauchen. Könnte man am Ende dann konsistent durchziehen, und die Pipeline von Anfang bis Ende rennen lassen. Run == LastRun wäre dann der BackToBack Test
 
+## AstronoDiag
+
+- FMI-defintiions in 030 and 040 inconsistent -> need clean up
+
 ## Astronometria
 
-## 2.2 M2.4 Excludes
+### 2.2 M2.4 Excludes
 
 M2.4 excludes:
 
@@ -225,166 +364,215 @@ M2.4 excludes:
 * Astronolysis interpretation
 * seed generation
 * L1/L2 implementation
+* GEO-EQU!!!
 
+### Frame Definition
 
-# Annex: Post M2.4 topics
+Later than M2.4, in M2.4.1:
 
-IGNORE THIS ANNEX DURING M2.3 AND M2.4 DEVELOPMENT
+Change from:
 
-# 6. Multi-Target Semantics
+```text
+{
+  "Origin": "HELIO",
+  "Plane": "ECL",
+  "Type": "HelioEcliptic",
+  "Epoch": "J2000",
+  "RefSystem": "J2000"
+}
+```
 
-Multi-target scenes are not part of M2.3 and M2.4.
+ändern nach 
 
-## 6.1 Principle
-
-Later after M2.4, multiple planets may be represented inside one ObservationScene.
-
-Example:
-
-ObservationScene:
-Observer = Earth
-ObservationTimeJD = 2451545.0
-Targets = Venus, Jupiter
-
-Each target receives its own StateNodes and StateHashes.
-
----
-
-## 6.2 Same Scene, Different Target States
-
-Targets share the same SceneContext.
-
-However, target identity is part of State.
-
-Therefore:
-
-Venus StateHash != Jupiter StateHash
-
-even if all other parameters are identical.
-
-The common relation is expressed by the shared ObservationScene and SceneContext, not by equal StateHashes.
+```text
+{
+  "Origin": "HELIO",
+  "Plane": "ECL",
+  "Epoch": "J2000"
+}
+```
 
 ---
 
-## 6.3 Comparison Cases Supported after M2.4
+# AstronoSphere – Backlog (M1.9) - What's in, what's out of M1.9
 
-M2.4 must support the following modelable cases:
+## Status
+Active backlog for M1.9 implementation phase  
+Focus: deterministic pipeline, architecture stability, zero scientific change
 
-### Case 1: Same target, different levels
 
->Venus L0 vs Venus L1
+# 1. CORE IDENTITY & DETERMINISM (CRITICAL)
 
-Semantics:
+## NOW
 
-* different StateNodes or graph paths
-* same target
-* different measurement level
-* different StateHashes
+- Implement **Experiment Hash Index**
+  - Key: CoreHash
+  - Scope: 02_Experiments (Created + Released)
+  - Purpose: duplicate detection, fast lookup
 
-L1 implementation itself is not part of M2.4.
+- Implement **Dataset Hash Index**
+  - Key: RequestHash / DatasetHash
+  - Scope: GroundTruth
+  - Purpose: avoid duplicate GT generation
 
-The structure must be prepared for it.
+- Canonicalization Debug Output
+  - Output canonical string to console before hashing
+  - Required for SHA256 external verification
 
----
+## NEXT
 
-### Case 2: Different targets, same graph point and level
+- SnapshotHash implementation (Astronolysis)
+  - canonical(sorted(inputs)) → SHA256
 
->Venus L1 vs Jupiter L1
-
-Semantics:
-
-* same conceptual graph node type
-* different target instances
-* different StateHashes
-* same ObservationScene
-
----
-
-### Case 3: Different targets, different levels
-
->Venus L0 vs Jupiter L1
-
-Semantics:
-
-* same ObservationScene
-* different targets
-* different levels
-* different StateHashes
+- Hash collision policy (definition only, no implementation)
 
 ---
 
-# 7. Temporal Scope
+# 2. PIPELINE & ORCHESTRATION
 
-## 7.1 M2.4 Temporal Mode
+## NOW
 
-M2.4 supports only:
+- Define **AstronoPipe Orchestrator (CLI)**
+  - Single entry point
+  - Runs full pipeline end-to-end
 
-TemporalMode = ObservationTime
+- Enforce **Full Deterministic Run Mode**
+  - Always generate all datasets
+  - No SOLL/IST branching (KISS)
 
-All targets in the ObservationScene are referenced to the same observer observation time.
+## NEXT
 
----
+- Allow AstronoLab to trigger pipeline (optional hook)
 
-## 7.2 Deferred Temporal Modes
+## LATER
 
-The following are deferred:
-
-* TargetEmissionTime
-* ReferenceTargetEmissionTime
-* CustomTime
-* cross-target temporal synchronization
-
-Example deferred use case:
-
-Display Jupiter and Venus at the time when the light left Venus.
-
-Reason for deferral:
-
-Advanced temporal anchoring depends on L1 semantics and must not be introduced before L1 is stable.
+- Partial Run Mode (selective execution)
 
 ---
 
-# 8. GroundTruth Resolution
+# 3. DATA ACCESS & UX
 
-Ground Truth validation does not happen in M2.4 but at a later milestone.
+## NOW
 
-## 8.1 Principle
+- Seed editing capability in AstronoLab
+  - Load → modify → save as new Seed
 
-This means a TerminalNode can be mapped to a GroundTruth request pattern.
+## NEXT
 
-For Horizons, this requires:
+- Experiment Explorer
+- Dataset Explorer
+- "Clone Experiment → Seed" feature
 
-* a mapping from TerminalNode semantics to Horizons API parameters
-* a canonical Horizons request
-* a GroundTruth dataset reference
-* comparison of TerminalNode Data against GroundTruth Data
+## LATER
 
----
-
-## 8.2 TruthMappingRef
-
-StateNodes should not embed provider-specific API details directly.
-
-Instead, TerminalNodes may reference a TruthMappingRef.
-
-Example:
-
-TruthMappingRef = HORIZONS.EPHEM.VECTORS.L0.GEOCENTRIC
-
-The mapping service resolves this reference to provider-specific request parameters.
+- Advanced search (hash-based, metadata-based)
 
 ---
 
-## 8.3 Accuracy Evaluation
+# 4. TOOL RESPONSIBILITIES (STRICT)
 
-Accuracy evaluation is performed for TerminalNodes only by default.
+## FROZEN RULES
 
-A TerminalNode may contain validation metadata such as:
+- AstronoLab → Seeds only  
+- AstronoCert → Experiments only  
+- AstronoTruth → GroundTruth only  
+- Astronolysis → Analysis + Seeds  
 
-* GroundTruthProvider
-* GroundTruthDatasetId
-* RequestHash
-* Delta metrics
-* AccuracyStatus
+## NOW
 
-Intermediate nodes are not accuracy-rated unless explicitly requested in a future debug or research mode.
+- Enforce boundaries in code (fail fast if violated)
+
+---
+
+# 5. SELF-EXTENDING SYSTEM
+
+## NOW
+
+- Ensure Astronolysis can write Seeds (Incoming)
+
+## NEXT
+
+- Duplicate detection for Seeds (CoreHash)
+- Seed prioritization (Metadata.Priority)
+
+## LATER
+
+- Automated Seed filtering / clustering
+
+---
+
+# 6. VALIDATION & REGRESSION
+
+## NOW
+
+- Define Golden Sample Set
+- Standardize Compare Scripts
+
+## NEXT
+
+- Centralize tolerance definitions
+
+## LATER
+
+- Automated validation reports
+
+---
+
+# 7. GUI / UX STRATEGY
+
+## NOW
+
+- Define UI baseline (WPF or MAUI)
+
+## NEXT
+
+- Shared Design System
+- Align AstronoLab + Astronolysis UI
+
+## LATER
+
+- Unified application shell
+
+---
+
+# 8. FUTURE EXTENSIONS (OUT OF SCOPE M1.9)
+
+- ALTAZ Instrument
+- Multi-provider GroundTruth
+- MeasurementDefinition (M2)
+- Visualization (Astronometria UI)
+- Telescope integration (INDI)
+
+---
+
+# 9. KEY PRINCIPLES
+
+- Determinism first
+- No hidden logic
+- Strict separation of responsibilities
+- KISS
+
+---
+
+# 10. PRIORITY SUMMARY
+
+## NOW
+- Hash Index
+- Canonicalization output
+- Orchestrator
+- Boundary enforcement
+- Golden samples
+
+## NEXT
+- Explorers
+- SnapshotHash
+- Seed deduplication
+
+## LATER
+- Partial runs
+- Automation
+- Multi-provider
+
+---
+
+# End of Backlog

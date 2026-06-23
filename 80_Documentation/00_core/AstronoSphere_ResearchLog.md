@@ -1,8 +1,129 @@
 # AstronoSphere Research Log
 
-## 2026
+# 2026
+
+## June 2026
+
+
+### 2026-06-22
+
+### 2026-06-22
+
+- Today's target was to add GEO-EQU. After 5 minutes it became clear that no matching GroundTruth data exists yet. Investigation showed that enabling GEO-EQU would require changes in AstronoTruth first, thereby opening a second development frontier.
+
+- Decision: GEO-EQU was deferred from M2.4 and moved into a dedicated later milestone together with the required AstronoTruth and AstronoMeasurement work.
+
+- Result:
+  - StateMachine scope became cleaner.
+  - M2.4 Spec and Validation Spec were aligned accordingly.
+  - The overall M2.x milestone plan was updated.
+  - The OneDimension Rule from the Stealth Manifest was preserved.
+
+- No visible implementation progress was achieved today. However, a potentially dangerous cross-project dependency was identified before development started, preventing scope creep and additional validation effort.
+
+-> Slightly dissatisfying session from a feature perspective, but likely the correct engineering decision.
+
+
+### 2026-06-21
+
+- 45min speed session: prove, that M2.4 state machine is computed
+- BC5 of Run/LastRun shows no differences in all (~200 !) simulations. Seems as we had switche to state machine computation successfully!
+
+### 2026-06-19
+
+- Found Beyond Compare 5 settings which allow rule based exceptions. This is a game changer, because it allow in the future, to conduct automatic evaluations of Run/LastRun by defining proven excetions. Hence it will reduce validation in the future substantially. One of these great achievements which accelerate the flow in every future session!
+
+
+### 2026-06-18
+
+- M2.4 W1-6 implemented, in 1.5 hours instead of 4 estimated hours
+- Only problem is to activate RuleBased Compare in BeyondCompare. I fear I must read the manual - neither MetaAI nor CGPT can help here. MetaAI really did a poor job in defining the rules.
+- Nevertheless satisfied: Astronometria State Machine calculates results and writes JSONS now like before.
+
+### 2026-06-17
+
+- getting started again took an evening
+- we identified some major architectural gaps, which I did not expect. But now we are ready for implementation.
+- honestly: I had thought it would become more difficult to get up to speed again. That is a good sign.
 
 ## May 2026
+ 
+ 
+### 2026-05-19...2026-06-17
+
+long break due to vacation and business trips. No progress.
+
+### 2026-05-18
+
+- Today just research, no programming or specifying.
+- Found old Sterne und Weltraum (SuW) journals with Events of the Month.
+- Took Picture of the tables, CGPT digitalized the table without information loss
+- Huge field of certified experiments for enhancing the experiment data base
+- Scanned Ground Truth providers in the evening: found USNO as a GT for Sidereal Time, USNO also for Julian Date (nice opportunity to get test data), Miriade for Ephemeris (INPOP), but also for Rise,Transit,Set and Visibility (!). THis is huge, because it ideally combines celestial observation planning with Astronometria.
+- IERS is a universal GT provider for time and Earth Rotation
+
+With these GT providers, certification of an ObservationScene (Observer -> Target, at time) is possible. I would say: for all necessary quantities there are GroundTruth Providers which we can combine in AstronoSphere to get trustworthy, certified astronomical data.
+
+```text
+ObservationScene
+=
+Target dynamics
++
+Observer dynamics
++
+Time/Earth rotation truth
++
+Measurement semantics
+```
+
+Basic essence of today:
+
+> **AstronoSphere can become
+a deterministic orchestration layer
+for independent astronomical truth systems.**
+
+
+### 2026-05-17
+
+Intensive Architecture Session about TDB/TT Mapping, MeasurementDefinition for GroundTruth and Astronometria - very strong. Very long. Very happy. :-)
+
+Vor allem, weil heute mehrere echte Architektur-Knoten geplatzt sind:
+
+MeasurementDefinition als kanonische Semantikschicht
+klare Trennung:
+Measurement
+Mapping
+SimulationModel
+StateTree
+GEO-EQU sauber integriert
+TimeScale vs TimeDomain endlich konsistent
+PhysicsStateTree stabilisiert
+ObserverWorld architektonisch vorbereitet
+deterministische TerminalNode-Auflösung
+SinglePath-Regel
+KISS-first Runtime-Modell
+
+Und der wichtigste Punkt:
+
+MeasurementDefinition
+→ gemeinsame Sprache zwischen
+GroundTruth und Simulation
+
+Das war heute vermutlich der eigentliche Durchbruch.
+
+### 2026-05-16
+
+- Even more extreme Promotion procedure to promote simulations from Run to Baseline
+- very well structured and documented
+- but again high accuracy level cost a lot of energy
+- very accurate cleanup and milestone preparation, also GIT commit, tag, merge and new feature branch very diligently
+- FINALIZED M2.3 - very happy with the result :-)
+
+### 2026-05-15
+
+- Extremely diligent and fruitful validation session for M2.3
+- a lot of findings, everything explainable, everything finally resolved.
+- very exhausting session, but happy having succeeded :-)
 
 ### 2026-05-14
 

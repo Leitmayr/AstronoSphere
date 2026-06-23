@@ -1,0 +1,16 @@
+21.06.2026 21:02:17  >> # AstronoSphere Simulation Run/LastRun comparison
+21.06.2026 21:02:17  >> # The saved BC5 session contains all comparison and importance rules.
+21.06.2026 21:02:17  >> 
+21.06.2026 21:02:17  >> log verbose "C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\AS-Simulation_RunLastRun_Log.txt"
+21.06.2026 21:02:17  >> 
+21.06.2026 21:02:17  >> load "AS-Simulation_RunLastRun"
+21.06.2026 21:02:23  Vergleich laden: C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\04_Simulations\Scientific\Ephemeris\Run <-> C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\04_Simulations\Scientific\Ephemeris\LastRun
+21.06.2026 21:02:23  >> 
+21.06.2026 21:02:23  >> expand all
+21.06.2026 21:02:23  >> 
+21.06.2026 21:02:23  >> folder-report layout:side-by-side &
+21.06.2026 21:02:23  >> options:display-mismatches &
+21.06.2026 21:02:23  >> title:"AstronoSphere Simulation Run vs LastRun" &
+21.06.2026 21:02:23  >> output-to:"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\AS-Simulation_RunLastRun_Report.html" &
+21.06.2026 21:02:23  >> output-options:html-color
+21.06.2026 21:02:23  Skript in 6,75 Sekunden beendet

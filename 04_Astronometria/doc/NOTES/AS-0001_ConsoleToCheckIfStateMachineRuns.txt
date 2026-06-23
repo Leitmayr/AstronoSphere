@@ -1,0 +1,287 @@
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\src\Astronometria.Desktop> dotnet run -- --catalog AS-000001
+C:\Program Files\dotnet\sdk\10.0.203\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0-windows" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+C:\Program Files\dotnet\sdk\10.0.203\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0-windows" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+C:\Program Files\dotnet\sdk\10.0.203\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: Das Zielframework "net6.0-windows" wird nicht mehr unterstützt und erhält in Zukunft keine Sicherheitsupdates mehr. Weitere Informationen zur Supportrichtlinie finden Sie unter "https://aka.ms/dotnet-core-support".
+=== Astronometria ScientificRun ===
+GitCommit : 52312e9
+GitBranch : feature/M2.4-astronometria-state-machine-L0
+Root      : C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere
+
+Mode      : Single Experiment
+Catalog   : AS-000001
+
+=== Experiment loaded ===
+CatalogNumber : AS-000001
+ExperimentID  : GEO-J2000-TDB-2449296-2449298-1H
+CoreHash      : DB57A963
+SourceFile    : AS-000001__PLANET-MERCURY-INC__GEO-J2000-TDB-2449296-2449298-1H.json
+Target        : Mercury
+Frame         : GeoEcliptic
+Epoch         : J2000
+TimeScale     : TDB
+StartJD       : 2449296.644
+StopJD        : 2449298.644
+Step          : 1H
+
+=== GroundTruth resolved ===
+Provider      : Horizons
+DatasetID     : GEO-J2000-TDB-2449296-2449298-1H__EPH-HORIZONS-VEC-L0
+RequestHash   : 92A5827CC2E1017AB54B7546BFDFD9E4BB6B94D7D7AEB670BE5CB37EF446896A
+SourceFile    : PLANET-MERCURY-INC__GEO-J2000-TDB-2449296-2449298-1H__EPH-HORIZONS-VEC-L0.json
+Samples       : 49
+FirstJD       : 2449296.644
+LastJD        : 2449298.644
+
+=== TerminalNode derived ===
+Target        : Mercury
+Abbreviation  : MER
+NodeId        : MER_NODE_001
+NodeType      : VSOP87.L0.GEO.ECL.J2000.TDB.VEC
+NodeRole      : TerminalNode
+Status        : Planned
+Origin        : GEO
+Plane         : ECL
+RefSystem     : J2000
+TimeScale     : TDB
+Output        : VEC
+Level         : L0
+
+=== PhysicsStateTree ===
+TerminalNodeType : PHYS.L0.GEO.ECL.J2000.VEC
+Path             : PHYS.L0.HELIO.ECL.J2000.VEC -> PHYS.L0.GEO.ECL.J2000.VEC
+Executor         : PhysicsStateTreeExecutor
+
+=== CANONICAL STRING ===
+CorrectionLevel=L0
+EngineName=Astronometria
+FrameEpoch=J2000
+FrameOrigin=GEO
+FramePlane=ECL
+FrameType=GeoEcliptic
+NodeId=MER_NODE_001
+NodeType=VSOP87.L0.GEO.ECL.J2000.TDB.VEC
+NumericalPolicy=STRICT_9_TRUNCATE
+ObserverBody=Earth
+ObserverType=Geocentric
+Output=VEC
+RefSystem=J2000
+SimulationFamily=VSOP
+SimulationTimeDomain=TT
+SimulationTruncation=none
+SimulationType=VSOP87A
+StartJD=2449296.644000000
+Step=1H
+StopJD=2449298.644000000
+TargetAbbreviation=MER
+TargetBodyClass=Planet
+TargetName=Mercury
+TemporalMode=ObservationTime
+TimeScale=TDB
+========================
+=== CANONICAL STRING ===
+Samples[0].JD=2449296.644000000
+Samples[0].X=-0.474912220
+Samples[0].Y=-0.477144223
+Samples[0].Z=-0.007108203
+Samples[10].JD=2449297.060666670
+Samples[10].X=-0.479614261
+Samples[10].Y=-0.472764483
+Samples[10].Z=-0.005433564
+Samples[11].JD=2449297.102333330
+Samples[11].X=-0.480103743
+Samples[11].Y=-0.472342275
+Samples[11].Z=-0.005265584
+Samples[12].JD=2449297.144000000
+Samples[12].X=-0.480596690
+Samples[12].Y=-0.471923010
+Samples[12].Z=-0.005097519
+Samples[13].JD=2449297.185666670
+Samples[13].X=-0.481093092
+Samples[13].Y=-0.471506708
+Samples[13].Z=-0.004929373
+Samples[14].JD=2449297.227333330
+Samples[14].X=-0.481592938
+Samples[14].Y=-0.471093388
+Samples[14].Z=-0.004761148
+Samples[15].JD=2449297.269000000
+Samples[15].X=-0.482096218
+Samples[15].Y=-0.470683069
+Samples[15].Z=-0.004592848
+Samples[16].JD=2449297.310666670
+Samples[16].X=-0.482602920
+Samples[16].Y=-0.470275770
+Samples[16].Z=-0.004424473
+Samples[17].JD=2449297.352333330
+Samples[17].X=-0.483113034
+Samples[17].Y=-0.469871509
+Samples[17].Z=-0.004256028
+Samples[18].JD=2449297.394000000
+Samples[18].X=-0.483626550
+Samples[18].Y=-0.469470308
+Samples[18].Z=-0.004087514
+Samples[19].JD=2449297.435666670
+Samples[19].X=-0.484143454
+Samples[19].Y=-0.469072183
+Samples[19].Z=-0.003918935
+Samples[1].JD=2449296.685666670
+Samples[1].X=-0.475366507
+Samples[1].Y=-0.476693640
+Samples[1].Z=-0.006941199
+Samples[20].JD=2449297.477333330
+Samples[20].X=-0.484663738
+Samples[20].Y=-0.468677154
+Samples[20].Z=-0.003750292
+Samples[21].JD=2449297.519000000
+Samples[21].X=-0.485187388
+Samples[21].Y=-0.468285240
+Samples[21].Z=-0.003581589
+Samples[22].JD=2449297.560666670
+Samples[22].X=-0.485714394
+Samples[22].Y=-0.467896460
+Samples[22].Z=-0.003412829
+Samples[23].JD=2449297.602333330
+Samples[23].X=-0.486244744
+Samples[23].Y=-0.467510833
+Samples[23].Z=-0.003244013
+Samples[24].JD=2449297.644000000
+Samples[24].X=-0.486778426
+Samples[24].Y=-0.467128377
+Samples[24].Z=-0.003075144
+Samples[25].JD=2449297.685666670
+Samples[25].X=-0.487315428
+Samples[25].Y=-0.466749111
+Samples[25].Z=-0.002906226
+Samples[26].JD=2449297.727333330
+Samples[26].X=-0.487855738
+Samples[26].Y=-0.466373054
+Samples[26].Z=-0.002737260
+Samples[27].JD=2449297.769000000
+Samples[27].X=-0.488399345
+Samples[27].Y=-0.466000225
+Samples[27].Z=-0.002568250
+Samples[28].JD=2449297.810666670
+Samples[28].X=-0.488946235
+Samples[28].Y=-0.465630641
+Samples[28].Z=-0.002399198
+Samples[29].JD=2449297.852333330
+Samples[29].X=-0.489496397
+Samples[29].Y=-0.465264323
+Samples[29].Z=-0.002230108
+Samples[2].JD=2449296.727333330
+Samples[2].X=-0.475824356
+Samples[2].Y=-0.476245807
+Samples[2].Z=-0.006774087
+Samples[30].JD=2449297.894000000
+Samples[30].X=-0.490049817
+Samples[30].Y=-0.464901288
+Samples[30].Z=-0.002060980
+Samples[31].JD=2449297.935666670
+Samples[31].X=-0.490606483
+Samples[31].Y=-0.464541554
+Samples[31].Z=-0.001891819
+Samples[32].JD=2449297.977333330
+Samples[32].X=-0.491166383
+Samples[32].Y=-0.464185141
+Samples[32].Z=-0.001722627
+Samples[33].JD=2449298.019000000
+Samples[33].X=-0.491729504
+Samples[33].Y=-0.463832066
+Samples[33].Z=-0.001553407
+Samples[34].JD=2449298.060666670
+Samples[34].X=-0.492295832
+Samples[34].Y=-0.463482348
+Samples[34].Z=-0.001384161
+Samples[35].JD=2449298.102333330
+Samples[35].X=-0.492865354
+Samples[35].Y=-0.463136005
+Samples[35].Z=-0.001214893
+Samples[36].JD=2449298.144000000
+Samples[36].X=-0.493438058
+Samples[36].Y=-0.462793055
+Samples[36].Z=-0.001045605
+Samples[37].JD=2449298.185666670
+Samples[37].X=-0.494013929
+Samples[37].Y=-0.462453517
+Samples[37].Z=-0.000876299
+Samples[38].JD=2449298.227333330
+Samples[38].X=-0.494592954
+Samples[38].Y=-0.462117408
+Samples[38].Z=-0.000706979
+Samples[39].JD=2449298.269000000
+Samples[39].X=-0.495175120
+Samples[39].Y=-0.461784747
+Samples[39].Z=-0.000537647
+Samples[3].JD=2449296.769000000
+Samples[3].X=-0.476285757
+Samples[3].Y=-0.475800744
+Samples[3].Z=-0.006606868
+Samples[40].JD=2449298.310666670
+Samples[40].X=-0.495760412
+Samples[40].Y=-0.461455552
+Samples[40].Z=-0.000368306
+Samples[41].JD=2449298.352333330
+Samples[41].X=-0.496348818
+Samples[41].Y=-0.461129841
+Samples[41].Z=-0.000198959
+Samples[42].JD=2449298.394000000
+Samples[42].X=-0.496940322
+Samples[42].Y=-0.460807630
+Samples[42].Z=-0.000029609
+Samples[43].JD=2449298.435666670
+Samples[43].X=-0.497534911
+Samples[43].Y=-0.460488940
+Samples[43].Z=0.000139741
+Samples[44].JD=2449298.477333330
+Samples[44].X=-0.498132570
+Samples[44].Y=-0.460173786
+Samples[44].Z=0.000309090
+Samples[45].JD=2449298.519000000
+Samples[45].X=-0.498733285
+Samples[45].Y=-0.459862187
+Samples[45].Z=0.000478433
+Samples[46].JD=2449298.560666670
+Samples[46].X=-0.499337042
+Samples[46].Y=-0.459554160
+Samples[46].Z=0.000647769
+Samples[47].JD=2449298.602333330
+Samples[47].X=-0.499943825
+Samples[47].Y=-0.459249723
+Samples[47].Z=0.000817094
+Samples[48].JD=2449298.644000000
+Samples[48].X=-0.500553621
+Samples[48].Y=-0.458948894
+Samples[48].Z=0.000986405
+Samples[4].JD=2449296.810666670
+Samples[4].X=-0.476750703
+Samples[4].Y=-0.475358470
+Samples[4].Z=-0.006439546
+Samples[5].JD=2449296.852333330
+Samples[5].X=-0.477219183
+Samples[5].Y=-0.474919005
+Samples[5].Z=-0.006272121
+Samples[6].JD=2449296.894000000
+Samples[6].X=-0.477691188
+Samples[6].Y=-0.474482368
+Samples[6].Z=-0.006104598
+Samples[7].JD=2449296.935666670
+Samples[7].X=-0.478166708
+Samples[7].Y=-0.474048577
+Samples[7].Z=-0.005936978
+Samples[8].JD=2449296.977333330
+Samples[8].X=-0.478645733
+Samples[8].Y=-0.473617654
+Samples[8].Z=-0.005769264
+Samples[9].JD=2449297.019000000
+Samples[9].X=-0.479128254
+Samples[9].Y=-0.473189616
+Samples[9].Z=-0.005601459
+========================
+=== Hashes ===
+StateHash    : 4C3B10F88A62D7D915EBDF292B37B84F26D9E89C8AE12A59CAB44256D7D9D444
+DataHash     : 00252F7847AB680E8AE245B8591BBD599237129ACEFEB114CD4B744CAAC3F192
+
+=== SimulationData written ===
+OutputFile    : C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\04_Simulations\Scientific\Ephemeris\Run\AS-000001__PLANET-MERCURY-INC__GEO-ECL-J2000-TDB-2449296-2449298-1H__VSOP87-VEC-L0.json
+Samples       : 49
+
+PS C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\src\Astronometria.Desktop>
