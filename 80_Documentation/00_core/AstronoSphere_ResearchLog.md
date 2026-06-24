@@ -5,7 +5,17 @@
 ## June 2026
 
 
-### 2026-06-22
+### 2026-06-24
+
+- M2.4.1 changes validated with adapted BC5 Script.
+- M2.4.2 implemented. 
+- M2.4.2 changes validated with adapted BC5 Script.
+BC5 rule set defintion now understood. Powerful for future comparison sessions.
+
+### 2026-06-23
+
+- M2.4.0 finalized, committed
+- M2.4.1 changes made. BC5 Script not yet adapted.
 
 ### 2026-06-22
 

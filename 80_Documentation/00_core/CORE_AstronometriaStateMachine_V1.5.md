@@ -20,13 +20,13 @@ Needs extension for M2.4+
 | V1.3 | - replaced VSOP87 (EngineModel/SimulationModel) by PHYS (domain)| 2026-06-17
 |  | - removed time base in node name | 2026-06-17
 | V1.4 | GEO-EQU deferred for M2.4: no Ground Truth Data available from AstronoTruth. Change in AstronoTruth at a later point of time | 2026-06-22
-
+| V1.5 | ✓ PHYS persistence, ✓ Frame cleanup,  ✓ RefSystem removal, ✓ Type removal| 2026-06-24
 
 ---
 
 # 0. Current Milestone Freeze
 
-Current Milestone = M2.4
+Current Milestone = M2.4.2
 
 ✓ StateNodeType infrastructure  
 ✓ PHYS.* as internal canonical nodes  
@@ -34,16 +34,15 @@ Current Milestone = M2.4
 ✓ Ordered Path Resolution  
 ✓ StateHash/DataHash  
 ✓ Run == LastRun  
+✓ PHYS persistence  
+✓ Frame cleanup  
+✓ RefSystem removal  
+✓ Type removal
 
 ✗ GEO-EQU Branch — DEFERRED  
   GEO-EQU is not part of the accepted M2.4 scope because matching Horizons GroundTruth is not available yet.
   All GEO-EQU-related sections in this specification are retained as architectural preparation only.
   They are non-acceptance-relevant for M2.4 and must not be used as proof of scientific validation.
-
-✗ PHYS persistence  
-✗ Frame cleanup  
-✗ RefSystem removal  
-✗ Type removal
 
 >**This section defines the currently implemented subset of the StateMachine.
 It shall be updated whenever new StateMachine capabilities are added or existing milestone restrictions are removed.**
@@ -552,9 +551,7 @@ For M2.3 and M2.4 SceneContext includes:
       "Frame": {
         "Origin": "HELIO",
         "Plane": "ECL",
-        "Type": "HelioEcliptic",
-        "Epoch": "J2000",
-        "RefSystem": "J2000"
+        "Epoch": "J2000"
       },
    }
 ```
@@ -583,7 +580,7 @@ Example: Venus
 ##### 4.3.2.2 Terminal Node:
 
 For M2.4, internal TerminalNodeType uses PHYS.*.
-Persisted ScientificRun JSON may keep the legacy M2.3 NodeType format for baseline compatibility.
+Persisted ScientificRun JSON uses the canonical PHYS.* NodeType format.
 
 * NodeId
 * NodeType
@@ -987,13 +984,13 @@ It does not mandate the persisted JSON representation in M2.4.
 ## 8.1 Node Type
 
 ```text
-Domain.Physics_Correction.Origin.Plane.RefSystem.Output
+Domain.Physics_Correction.Origin.Plane.Epoch.Output
 ```
 
 - Domain, e.g. PHYS, OBS: which physical state is ist (geometric or observer)
 - Physics_Correction, e.g. L0: describes which row in the StateGraph
 - Origin+Plane, e.g. HELIO-ECL, GEO-EQU: define, that the left column in the picture is taken
-- RefSystem, e.g. J2000 or OfDate: time reference, potential side branch
+- Epoch, e.g. J2000 or OfDate: time reference, potential side branch
 - Output-Format, e.g. VEC or RA/DEC: describes the output format
 
 Standard main branch is J2000. 
@@ -1238,9 +1235,7 @@ Note that only the first and the last calculated data set is displayed, indicate
       "Frame": {
         "Origin": "HELIO",
         "Plane": "ECL",
-        "Type": "HelioEcliptic",
-        "Epoch": "J2000",
-        "RefSystem": "J2000"
+        "Epoch": "J2000"
       }
     },
     "TargetSimulations": [
@@ -1252,7 +1247,7 @@ Note that only the first and the last calculated data set is displayed, indicate
         },
         "TerminalNode": {
           "NodeId": "VEN_NODE_001",
-          "NodeType": "VSOP87.L0.HELIO.ECL.J2000.TDB.VEC",
+          "NodeType": "PHYS.L0.HELIO.ECL.J2000.VEC",
           "NodeRole": "TerminalNode",
           "Status": "Completed",
           "StateHash": "<TO_BE_COMPUTED>",

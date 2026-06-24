@@ -31,7 +31,7 @@
       "TimeDomain": "TT"
     },
     "Build": {
-      "GitCommit": "2e4412e",
+      "GitCommit": "34ad109",
       "GitBranch": "feature/M2.4-astronometria-state-machine-L0"
     }
   },
@@ -61,9 +61,7 @@
       "Frame": {
         "Origin": "HELIO",
         "Plane": "ECL",
-        "Type": "HelioEcliptic",
-        "Epoch": "J2000",
-        "RefSystem": "J2000"
+        "Epoch": "J2000"
       }
     },
     "TargetSimulations": [
@@ -78,7 +76,7 @@
           "NodeType": "PHYS.L0.HELIO.ECL.J2000.VEC",
           "NodeRole": "TerminalNode",
           "Status": "Completed",
-          "StateHash": "59172F14CCB8C5F998C770DC16B81848E2A5C472B56D5A62A28BD6C0F3153015",
+          "StateHash": "514E2E972CBB2C7FD7BFF8C02AA1DC9FB3FACEAF491D39F6C9C97B03945856DA",
           "DataHash": "6BF7B205E3DEA1DB897509A123596A5593E24CA3C427D30EB26AE85AC723847A",
           "Data": [
             {

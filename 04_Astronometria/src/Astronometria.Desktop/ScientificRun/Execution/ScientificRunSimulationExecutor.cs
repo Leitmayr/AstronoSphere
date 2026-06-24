@@ -185,9 +185,7 @@ namespace Astronometria.ScientificRun.Execution
                         {
                             Origin = terminalNode.Origin,
                             Plane = terminalNode.Plane,
-                            Type = experiment.Core.Frame.Type,
-                            Epoch = experiment.Core.Frame.Epoch,
-                            RefSystem = terminalNode.RefSystem
+                            Epoch = experiment.Core.Frame.Epoch
                         }
                     },
                     TargetSimulations =

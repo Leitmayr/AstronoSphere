@@ -68,13 +68,17 @@ Reference: COLLAB_AstronoSphere_Level1-3_Milestones2x_V1.1.md
 
 ---
 
-## M2.4.0 — System State (Reproducibility)
+## M2.4.0 — System State (Reproducibility)  
+
+Change closed 2026-06-22
 
 **Objective:** Simulation run with State Machine
 
 **Duration:** 5–7 days
 
-## M2.4.1 — System State
+## M2.4.1 — System State - 
+
+Change closed 2026-06-23
 
 **Objective:** 
 Persist internal PHYS.* node types
@@ -85,6 +89,8 @@ Validation:
 - Beyond Compare with rule based exception
 
 ## M2.4.2 — System State
+
+Change closed 2026-06-24
 
 **Objective:** Clean Up of Frame Definition in json
 

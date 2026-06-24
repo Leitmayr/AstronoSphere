@@ -37,9 +37,7 @@ namespace Astronometria.Core.ScientificRun.Hashing
 
                 FrameOrigin = simulationData.ObservationScene.SceneContext.Frame.Origin,
                 FramePlane = simulationData.ObservationScene.SceneContext.Frame.Plane,
-                FrameType = simulationData.ObservationScene.SceneContext.Frame.Type,
                 FrameEpoch = simulationData.ObservationScene.SceneContext.Frame.Epoch,
-                RefSystem = simulationData.ObservationScene.SceneContext.Frame.RefSystem,
 
                 TargetBodyClass = targetSimulation.Target.BodyClass,
                 TargetName = targetSimulation.Target.Name,
