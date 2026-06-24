@@ -82,6 +82,7 @@ namespace Astronometria.ScientificRun.Execution
                 experiment,
                 groundTruth,
                 terminalNode,
+                terminalPhysicsNodeType,
                 samples);
         }
 
@@ -101,6 +102,7 @@ namespace Astronometria.ScientificRun.Execution
             ExperimentInputModel experiment,
             GroundTruthInputModel groundTruth,
             TerminalNodeDescriptor terminalNode,
+            PhysicsStateNodeType terminalPhysicsNodeType,
             List<ScientificDataSample> samples)
         {
             return new ScientificSimulationData
@@ -201,7 +203,7 @@ namespace Astronometria.ScientificRun.Execution
                             TerminalNode = new ScientificTerminalNode
                             {
                                 NodeId = terminalNode.NodeId,
-                                NodeType = terminalNode.NodeType,
+                                NodeType = terminalPhysicsNodeType.Value,
                                 NodeRole = terminalNode.NodeRole,
                                 Status = "Completed",
                                 StateHash = string.Empty,

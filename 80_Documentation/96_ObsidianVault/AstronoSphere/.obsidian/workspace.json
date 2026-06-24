@@ -11,17 +11,14 @@
             "id": "d2f90a87c5c8c130",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "AstronoSphere.canvas",
-                "viewState": {
-                  "x": -107.93495934959346,
-                  "y": 315.1942974803893,
-                  "zoom": -0.7393095346345055
-                }
+                "file": "03_AstronSphere__WorkflowDescription.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "AstronoSphere"
+              "icon": "lucide-file",
+              "title": "03_AstronSphere__WorkflowDescription"
             }
           }
         ]
@@ -186,7 +183,7 @@
       "bases:Neue Base erstellen": false
     }
   },
-  "active": "186646f7b9d30ff5",
+  "active": "d2f90a87c5c8c130",
   "lastOpenFiles": [
     "AstronoSphere.canvas",
     "Unbenannt.canvas",

@@ -1,0 +1,11 @@
+{
+  "Code": "040.009",
+  "Severity": "Warning",
+  "SourceSystem": "Astronometria",
+  "SubSourceSystem": "ScientificRun",
+  "CatalogNumber": "AS-000033",
+  "ExperimentID": "HELIO-J2000-TDB-2460835-2460837-1H",
+  "CoreHash": "85206757",
+  "Message": "No matching GroundTruth baseline found for CatalogNumber 'AS-000033' and CoreHash '85206757'.",
+  "MatchingFiles": []
+}
