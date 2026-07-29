@@ -131,9 +131,7 @@ namespace Astronometria.Core.ScientificRun.IO
             sb.AppendLine("      \"Frame\": {");
             JsonProp(sb, 8, "Origin", scene.SceneContext.Frame.Origin, comma: true);
             JsonProp(sb, 8, "Plane", scene.SceneContext.Frame.Plane, comma: true);
-            JsonProp(sb, 8, "Type", scene.SceneContext.Frame.Type, comma: true);
-            JsonProp(sb, 8, "Epoch", scene.SceneContext.Frame.Epoch, comma: true);
-            JsonProp(sb, 8, "RefSystem", scene.SceneContext.Frame.RefSystem, comma: false);
+            JsonProp(sb, 8, "Epoch", scene.SceneContext.Frame.Epoch, comma: false);
             sb.AppendLine("      }");
             sb.AppendLine("    },");
 

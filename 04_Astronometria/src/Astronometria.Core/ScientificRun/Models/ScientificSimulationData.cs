@@ -120,9 +120,7 @@ namespace Astronometria.Core.ScientificRun.Models
     {
         public string Origin { get; init; } = string.Empty;
         public string Plane { get; init; } = string.Empty;
-        public string Type { get; init; } = string.Empty;
         public string Epoch { get; init; } = string.Empty;
-        public string RefSystem { get; init; } = string.Empty;
     }
 
     public sealed class ScientificTargetSimulation

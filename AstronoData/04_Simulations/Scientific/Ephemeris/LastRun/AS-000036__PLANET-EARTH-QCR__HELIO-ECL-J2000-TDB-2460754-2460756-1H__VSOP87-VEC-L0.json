@@ -31,8 +31,8 @@
       "TimeDomain": "TT"
     },
     "Build": {
-      "GitCommit": "7bbceea",
-      "GitBranch": "feature/M2.3-SimulationIntegration-L0"
+      "GitCommit": "34ad109",
+      "GitBranch": "feature/M2.4-astronometria-state-machine-L0"
     }
   },
   "EngineCitation": {
@@ -61,9 +61,7 @@
       "Frame": {
         "Origin": "HELIO",
         "Plane": "ECL",
-        "Type": "HelioEcliptic",
-        "Epoch": "J2000",
-        "RefSystem": "J2000"
+        "Epoch": "J2000"
       }
     },
     "TargetSimulations": [
@@ -75,10 +73,10 @@
         },
         "TerminalNode": {
           "NodeId": "EAR_NODE_001",
-          "NodeType": "VSOP87.L0.HELIO.ECL.J2000.TDB.VEC",
+          "NodeType": "PHYS.L0.HELIO.ECL.J2000.VEC",
           "NodeRole": "TerminalNode",
           "Status": "Completed",
-          "StateHash": "623B8E93C11D0D4DB89099ABA55F9518D72C7D08685D5B85B25CD58E32AE56D3",
+          "StateHash": "A1138D840DE66105D8C85E2457537FEA49F9D2E34E275D919F92A352C9C4B9E7",
           "DataHash": "038FBC01D5A5948744A4DE3AAE104BFC24DD3ACBB16A0BF182CDA94ACBA27187",
           "Data": [
             {

@@ -49,6 +49,8 @@ Reference: COLLAB_AstronoSphere_Level1-3_Milestones2x_V1.1.md
 - experiment-based execution
 - all L0 tests green within tolerance
 
+--> took shorter. Done in 1-2 days.
+
 ---
 
 ## M2.3 — Simulation Results in Pipeline
@@ -62,25 +64,82 @@ Reference: COLLAB_AstronoSphere_Level1-3_Milestones2x_V1.1.md
 - write: 04_Simulations/{Run, LastRun, Baseline}
 - structure aligned with GroundTruth (including DatasetHeader)
 
+--> took longer. Rather 6-8 days. Extensive Spec and Validation was needed to keep the Milestone stable.
+
 ---
 
-## M2.4 — System State (Reproducibility)
+## M2.4.0 — System State (Reproducibility)  
 
-**Objective:** Full deterministic state reconstruction
+Change closed 2026-06-22
+
+**Objective:** Simulation run with State Machine
 
 **Duration:** 5–7 days
 
-- reconstruct complete canonical request (bit-identical)
-- include:
-  - Experiment Core
-  - Instrument (L0/L1/L2)
-  - TimeScale (TT)
-  - Frame
-  - Provider mapping
-- validate deterministic replay
+## M2.4.1 — System State - 
+
+Change closed 2026-06-23
+
+**Objective:** 
+Persist internal PHYS.* node types
+instead of legacy VSOP87.* node types
+
+Validation:
+- manual calculation of Hashes with Web-Tool for selected samples
+- Beyond Compare with rule based exception
+
+## M2.4.2 — System State
+
+Change closed 2026-06-24
+
+**Objective:** Clean Up of Frame Definition in json
+
+Validation:
+Beyond Compare with rule based exception
 
 ---
 
+## M2.4.5 — Time Domain 
+
+Contents:
+
+Canonical Time Definition
+AstronoSphere global astro time: TDB
+Experiments: TDB
+GroundTruth: TDB-aligned
+SimulationModel.NativeTimeScale: TT/TDB/...
+Engine must perform conversion prior to model evaluation
+Astronometria implementation
+Input remains TDB (from Experiment/GroundTruth)
+
+Prior to VSOP87 evaluation:
+
+TT = f(TDB)
+VSOP87 proceeds natively in TT
+This native time base is explicitly specified in SimulationModel.TimeScale
+Validation
+Results change slightly
+No longer a strict M2.3 byte-for-byte identity
+Plausibility check of the deltas
+Subsequently, pragmatic promotion to a new baseline
+
+This approach is sensible because it prevents L1 LightTime from being implemented on an undefined time base.
+
+## M2.4.9 — AstronoDiatg Consolidation
+
+**Objective**: 
+Cleanup and standardization of AstronoSphere Diagnostic
+
+**Content:**
+- FMI-defintiions in 030 and 040 inconsistent -> need clean up
+- Reviews and standardization of Severiy, Priority, Persistance and Run/LastRUn Rules
+- clean up of local Diag specs
+- overwriting policy in Chapter 8
+
+**Target:** 
+first version of a FREEZE Core Diagnostic Documentation
+
+---
 ## M2.5 — Light-Time (L1)
 
 **Objective:** Introduce physical correction (time-domain)
@@ -88,7 +147,7 @@ Reference: COLLAB_AstronoSphere_Level1-3_Milestones2x_V1.1.md
 **Duration:** 6–10 days
 
 - iterative Light-Time solver
-- operates strictly in TT domain
+- operates on models natively evaluated in TT
 - validate against 03_GroundTruth/Baseline
 - EDGE validation:
   - Neptune (distance)
@@ -109,9 +168,41 @@ Reference: COLLAB_AstronoSphere_Level1-3_Milestones2x_V1.1.md
 
 ---
 
-## M2.7 — Miriade Integration (Ground Truth #2)
+## M2.6.5 — TDB Branch in Physics StateTree
 
-**Objective:** Second deterministic TruthFactory
+M2.6.5 = optional TimeDomain branch / TDB-native node layer
+
+Horizons StateTree Image: 
+States 1b, 2b, 3b, 5b, 6b, 7b, 9b, 10b, 11b 
+for models, which are running in TDB natively or for dedicated VSOP-TDB-Analysis.
+
+---
+
+## M2.7.0 — AstronoTruth EQU with Horizons 
+
+**Objective:** Add Equatorial Coordinates to enable processing of AS-000059 to AS-000072 Experiments -> Completion of the prepratations made in M2.4
+
+### Sub-steps (strictly sequential):
+
+1. Remove existing ECL/EQU Bug for AS-000059 to AS-000072
+2. Generate AS-000059 to AS-000072
+3. Adapt File names to AS-000XXX-...json in accordance with Astronometria and Experiment Naming
+
+- deterministic request generation
+- Run == LastRun validation of existing GroundTruth
+- Comparison with manual Horizons Calls for EQU-Experiments
+
+## M2.7.1 — Connect AstronoTruth Horizons with AstronoMeasurement
+
+**Objective:** Define Horizons Call parameters with AstornoMeasurement
+
+1. To Disuss once MS starts: include AstronoMeasurement for the definiton of the Ground Truth Request  (later also neede in Miriade)
+
+- Run == LastRun validation against M2.7.0 results
+
+## M2.7.5 — Miriade Integration (Ground Truth #2)
+
+**Objective:** Second deterministic TruthFactory. Calls with AstronoMeasurement
 
 **Duration:** 10–20 days
 

@@ -31,8 +31,8 @@
       "TimeDomain": "TT"
     },
     "Build": {
-      "GitCommit": "7bbceea",
-      "GitBranch": "feature/M2.3-SimulationIntegration-L0"
+      "GitCommit": "34ad109",
+      "GitBranch": "feature/M2.4-astronometria-state-machine-L0"
     }
   },
   "EngineCitation": {
@@ -61,9 +61,7 @@
       "Frame": {
         "Origin": "GEO",
         "Plane": "ECL",
-        "Type": "GeoEcliptic",
-        "Epoch": "J2000",
-        "RefSystem": "J2000"
+        "Epoch": "J2000"
       }
     },
     "TargetSimulations": [
@@ -75,10 +73,10 @@
         },
         "TerminalNode": {
           "NodeId": "NEP_NODE_001",
-          "NodeType": "VSOP87.L0.GEO.ECL.J2000.TDB.VEC",
+          "NodeType": "PHYS.L0.GEO.ECL.J2000.VEC",
           "NodeRole": "TerminalNode",
           "Status": "Completed",
-          "StateHash": "97E28CB62C6115DD278DA6B4228C3CC72AEAE96BBD0AC2FBE507CE13D3FD382C",
+          "StateHash": "6910E9E1688200139472865F90CEF7A7EAE49E0DA16A4A2170BBE1718A961FFD",
           "DataHash": "9532C9776688E31C7499C192782D18476982B49041ED6457AABDE71DACE77BF5",
           "Data": [
             {

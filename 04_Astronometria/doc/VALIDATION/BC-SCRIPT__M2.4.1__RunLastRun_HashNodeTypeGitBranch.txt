@@ -1,0 +1,14 @@
+# AstronoSphere Simulation Run/LastRun comparison: M2.4.1 - ignore changes in NodeType, StateHash and GitBranch
+# The saved BC5 session contains all comparison and importance rules.
+
+log verbose "C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\M2.4.1_R-LR_HashNodeTypeGitBranch_Log.txt"
+
+load "Run <--> LastRun_Hash"
+
+expand all
+
+folder-report layout:side-by-side &
+options:display-mismatches &
+title:"AstronoSphere Simulation Run vs LastRun" &
+output-to:"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\M2.4.1_R-LR_HashNodeTypeGitBranch_Report.html" &
+output-options:html-color

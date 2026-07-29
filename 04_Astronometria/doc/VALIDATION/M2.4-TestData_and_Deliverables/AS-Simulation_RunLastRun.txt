@@ -1,0 +1,14 @@
+# AstronoSphere Simulation Run/LastRun comparison
+# The saved BC5 session contains all comparison and importance rules.
+
+log verbose "C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\AS-Simulation_RunLastRun_Log.txt"
+
+load "AS-Simulation_RunLastRun"
+
+expand all
+
+folder-report layout:side-by-side &
+options:display-mismatches &
+title:"AstronoSphere Simulation Run vs LastRun" &
+output-to:"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\AS-Simulation_RunLastRun_Report.html" &
+output-options:html-color

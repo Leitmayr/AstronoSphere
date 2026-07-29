@@ -17,7 +17,30 @@ Needs extension for M2.4+
 | V1.1 | EngineCitation and Provenance added in Sections 4.1, 4.2.6, 4.2.7 and 10.3 | 2026-05-15
 | V1.2 | - Section 5.7 adapted: how to determine Experiment from GroundTruth (and not vice versa as before)| 2026-05-15
 |  | - Section 9 adapted: how to record multiple files, DiagRecords: Folder-Structure, Run/LastRun handling, DiagPriorities adapted | 2026-05-15
+| V1.3 | - replaced VSOP87 (EngineModel/SimulationModel) by PHYS (domain)| 2026-06-17
+|  | - removed time base in node name | 2026-06-17
+
 ---
+
+# 0. Current Milestone Freeze
+
+Current Milestone = M2.4
+
+✓ StateNodeType Infrastruktur
+✓ PHYS.* als interne kanonische Knoten
+✓ StateTreeRegistry
+✓ Ordered Path Resolution
+✓ GEO-EQU Branch
+✓ StateHash/DataHash
+✓ Run == LastRun
+
+✗ PHYS-Persistierung
+✗ Frame Cleanup
+✗ RefSystem Removal
+✗ Type Removal
+
+>**This section defines the currently implemented subset of the StateMachine.
+It shall be updated whenever new StateMachine capabilities are added or existing milestone restrictions are removed.**
 
 # 1. Motivation
 
@@ -553,6 +576,9 @@ Example: Venus
 
 ##### 4.3.2.2 Terminal Node:
 
+For M2.4, internal TerminalNodeType uses PHYS.*.
+Persisted ScientificRun JSON may keep the legacy M2.3 NodeType format for baseline compatibility.
+
 * NodeId
 * NodeType
 * State
@@ -714,7 +740,7 @@ For Multi Target Run (> M2.4):
 
 All simulation outputs are target-major. That means, all time points of one target are processed and outputs are calculated. Then all points are calculated with the next target, etc.
 
-Rational: 
+Rationale: 
 - standardized for Scientific, Exploration and Statistical
 - similar to Horizons
 - better in terms of simulation duration
@@ -949,26 +975,28 @@ to be specified.
 
 # 8. Node Naming
 
+NodeType naming defines the internal canonical StateTree identity.
+It does not mandate the persisted JSON representation in M2.4.
+
 ## 8.1 Node Type
 
 ```text
-EngineConfig.Physics_Correction.Origin.Plane.RefSystem.TimeScale.Output
+Domain.Physics_Correction.Origin.Plane.RefSystem.Output
 ```
 
-- EngineConfig, e.g. VSOP87, MEEUS: which model is it from? In which context is this StateGraphRunning
+- Domain, e.g. PHYS, OBS: which physical state is ist (geometric or observer)
 - Physics_Correction, e.g. L0: describes which row in the StateGraph
 - Origin+Plane, e.g. HELIO-ECL, GEO-EQU: define, that the left column in the picture is taken
 - RefSystem, e.g. J2000 or OfDate: time reference, potential side branch
-- TimeScale, e.g. TT or TDB: potential side branch 
 - Output-Format, e.g. VEC or RA/DEC: describes the output format
 
-Standard main branch is J2000, TDB. 
+Standard main branch is J2000. 
 
 > Note: Alternative time bases or Ref_System can be side branches from the main branch
 
 Example for node naming:
 ```text
-Node 1:  VSOP87.L0.HELIO.ECL.J2000.TDB.VEC
+Node 1:  PHYS.L0.HELIO.ECL.J2000.VEC
 ```
 
 NodeType must not contain a target.
@@ -992,14 +1020,12 @@ NodeID must contain the target.
 
 ## 8.3 List of all relevant nodes vor M2.3/M2.4
 
-NodeTypes:
+Internal canonical M2.4 StateTree node types:
 
-1) VSOP87.L0.HELIO.ECL.J2000.TDB.VEC
-2) VSOP87.L0.GEO.ECL.J2000.TDB.VEC
-3) VSOP87.L1.HELIO.ECL.J2000.TDB.VEC
-4) VSOP87.L1.GEO.ECL.J2000.TDB.VEC
-5) VSOP87.L2.HELIO.ECL.J2000.TDB.VEC
-6) VSOP87.L2.GEO.ECL.J2000.TDB.VEC
+
+1) PHYS.L0.HELIO.ECL.J2000.VEC
+2) PHYS.L0.GEO.ECL.J2000.VEC
+3) PHYS.L0.GEO.EQU.J2000.VEC
 
 
 # 9. Diagnostics
@@ -1055,7 +1081,7 @@ No matching GroundTruth dataset found - Warning
 > Note: for 040.002, all multiple files shall be written to the diag record.
 
 
-## 9.2 Diagnostic Diagnostics evaluation order
+## 9.2 Diagnostics evaluation order
 
 1. 040.003 Invalid ExperimentMaturity
    - evaluated immediately after Experiment load
@@ -1105,7 +1131,7 @@ The example ObservationScene contains:
 * Frame: Ecliptic
 * Epoch: J2000
 * Engine: Astronometria
-* EngineModel: VSOP87
+* SimulationModel: VSOP87
 * Level: L0
 * Instrument: VEC
 

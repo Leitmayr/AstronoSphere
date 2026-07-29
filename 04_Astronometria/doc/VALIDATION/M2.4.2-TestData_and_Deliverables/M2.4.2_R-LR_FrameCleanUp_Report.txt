@@ -1,0 +1,16 @@
+24.06.2026 20:21:23  >> # AstronoSphere Simulation Run/LastRun comparison: M2.4.1 - ignore changes in NodeType, StateHash and GitBranch
+24.06.2026 20:21:23  >> # The saved BC5 session contains all comparison and importance rules.
+24.06.2026 20:21:23  >> 
+24.06.2026 20:21:23  >> log verbose "C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\M2.4.1_R-LR_HashNodeTypeGitBranch_Log.txt"
+24.06.2026 20:21:23  >> 
+24.06.2026 20:21:23  >> load "Run <--> LastRun_Hash"
+24.06.2026 20:21:31  Vergleich laden: C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\04_Simulations\Scientific\Ephemeris\Run <-> C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\AstronoData\04_Simulations\Scientific\Ephemeris\LastRun
+24.06.2026 20:21:31  >> 
+24.06.2026 20:21:31  >> expand all
+24.06.2026 20:21:31  >> 
+24.06.2026 20:21:31  >> folder-report layout:side-by-side &
+24.06.2026 20:21:31  >> options:display-mismatches &
+24.06.2026 20:21:31  >> title:"AstronoSphere Simulation Run vs LastRun" &
+24.06.2026 20:21:31  >> output-to:"C:\Users\Marcu\source\repos\AstroWorkspace\AstronoSphere\04_Astronometria\doc\VALIDATION\M2.4.1_R-LR_HashNodeTypeGitBranch_Report.html" &
+24.06.2026 20:21:31  >> output-options:html-color
+24.06.2026 20:21:31  Skript in 7,4 Sekunden beendet

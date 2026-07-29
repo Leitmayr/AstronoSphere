@@ -1,5 +1,6 @@
 ﻿using System;
 using Astronometria.Core.ScientificRun.Models;
+using Astronometria.Core.ScientificRun.StateTree;
 
 namespace Astronometria.Core.ScientificRun.Planning
 {
@@ -25,6 +26,12 @@ namespace Astronometria.Core.ScientificRun.Planning
             var output = NormalizeOutput(groundTruth.DatasetHeader.Measurement.Type);
             var correctionLevel = NormalizeCorrectionLevel(groundTruth.DatasetHeader.Measurement.Level);
 
+            var physicsNodeType = MeasurementDefinitionToNodeTypeMapper.Map(
+                experiment,
+                groundTruth);
+
+            PhysicsStateTreeRegistry.ResolvePath(physicsNodeType);
+
             var nodeType =
                 $"VSOP87.{correctionLevel}.{origin}.{plane}.{refSystem}.{timeScale}.{output}";
 
@@ -34,6 +41,7 @@ namespace Astronometria.Core.ScientificRun.Planning
                 TargetAbbreviation = targetAbbreviation,
                 NodeId = $"{targetAbbreviation}_NODE_001",
                 NodeType = nodeType,
+                PhysicsNodeType = physicsNodeType.Value,
                 NodeRole = "TerminalNode",
                 Status = "Planned",
                 Origin = origin,
@@ -72,7 +80,7 @@ namespace Astronometria.Core.ScientificRun.Planning
                 "URANUS" => "URA",
                 "NEPTUNE" => "NEP",
                 _ => throw new NotSupportedException(
-                    $"Unsupported target for M2.3/M2.4 ScientificRun: '{targetName}'.")
+                    $"Unsupported target for M2.4.0 ScientificRun: '{targetName}'.")
             };
         }
 
@@ -82,10 +90,9 @@ namespace Astronometria.Core.ScientificRun.Planning
             {
                 "HelioEcliptic" => "HELIO",
                 "GeoEcliptic" => "GEO",
-                "GeoEquatorial" => throw new NotSupportedException(
-                    "GeoEquatorial ScientificRuns are unsupported in M2.3/M2.4."),
+                "GeoEquatorial" => "GEO",
                 _ => throw new NotSupportedException(
-                    $"Unsupported frame type for M2.3/M2.4 ScientificRun: '{frameType}'.")
+                    $"Unsupported frame type for M2.4.0 ScientificRun: '{frameType}'.")
             };
         }
 
@@ -95,10 +102,9 @@ namespace Astronometria.Core.ScientificRun.Planning
             {
                 "HelioEcliptic" => "ECL",
                 "GeoEcliptic" => "ECL",
-                "GeoEquatorial" => throw new NotSupportedException(
-                    "GeoEquatorial ScientificRuns are unsupported in M2.3/M2.4."),
+                "GeoEquatorial" => "EQU",
                 _ => throw new NotSupportedException(
-                    $"Unsupported frame type for M2.3/M2.4 ScientificRun: '{frameType}'.")
+                    $"Unsupported frame type for M2.4.0 ScientificRun: '{frameType}'.")
             };
         }
 
@@ -108,7 +114,7 @@ namespace Astronometria.Core.ScientificRun.Planning
             {
                 "J2000" => "J2000",
                 _ => throw new NotSupportedException(
-                    $"Unsupported reference system for M2.3/M2.4 ScientificRun: '{epoch}'.")
+                    $"Unsupported reference system for M2.4.0 ScientificRun: '{epoch}'.")
             };
         }
 
@@ -119,7 +125,7 @@ namespace Astronometria.Core.ScientificRun.Planning
                 "VEC" => "VEC",
                 "VECTORS" => "VEC",
                 _ => throw new NotSupportedException(
-                    $"Unsupported measurement type for M2.3/M2.4 ScientificRun: '{measurementType}'.")
+                    $"Unsupported measurement type for M2.4.0 ScientificRun: '{measurementType}'.")
             };
         }
 
@@ -128,10 +134,8 @@ namespace Astronometria.Core.ScientificRun.Planning
             return level switch
             {
                 "L0" => "L0",
-                "L1" => "L1",
-                "L2" => "L2",
                 _ => throw new NotSupportedException(
-                    $"Unsupported correction level for M2.3/M2.4 ScientificRun: '{level}'.")
+                    $"Unsupported correction level for M2.4.0 ScientificRun: '{level}'.")
             };
         }
     }
